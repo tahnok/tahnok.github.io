@@ -1,0 +1,78 @@
+---
+layout: post
+title: SHELL SHOCKED
+---
+
+<div>There's a lot of chatter right now about this new bash env bug, affectionately known as <a href="https://access.redhat.com/node/1200223">CVE-2014-6271</a>. I'm going to try and explain for your (but mostly my own) benefit.<br>
+</div>
+<div>
+<div><br></div>
+</div>
+<div><span style="font-size: 18px;"><b>BACKGROUND</b></span></div>
+<div>
+<div><br></div>
+<div>The primary way that programmers interact with a (un|l)inux system is via the shell, aka THE COMMAND LINE (cue thunder clap)</div>
+<div><br></div>
+<div>Now, like everything on a computer, the shell is a program. It's kinda special since it runs OTHER programs. It's not just users who use it, but also other commands.</div>
+<div><br></div>
+<div>In bash, there's these things called **environment variables**, which is a way to declare values which can be used by scripts/programs to store variables. A common shell variable is LANG, which contains the current users language. A program launched from the shell can use this information to display output in the correct language.</div>
+<div><br></div>
+<div>Bash is also a self contained programming language, and like any good programming languge it has functions. You can declare functions in bash like so</div>
+<div><br></div>
+</div>
+<div><span style="font-family: 'Andale Mono';">       foo() {</span></div>
+<div><span style="font-family: 'Andale Mono';">         echo 'bar';</span></div>
+<div><span style="font-family: 'Andale Mono';">       }</span></div>
+<div>
+<div><br></div>
+<div>Seems pretty straight forward right? The key is that bash stores functions that it is exporting to another bash shell using environment variables.</div>
+<div><br></div>
+<div>Only there's a bug in bash which means that once a function is parsed, bash happily keeps executing the rest of the environment variable.</div>
+</div>
+<div><br></div>
+<div><span style="font-size: 18px;"><b>THE ACTUAL PROBLEM</b></span></div>
+<div>
+<div><br></div>
+<div>Ok, so what does that look like? You can normally declare an env variable like so:</div>
+<div><br></div>
+</div>
+<div><span style="font-family: 'Andale Mono';">       bar='something important'</span></div>
+<div>
+<div><br></div>
+<div>You can declare a function in an environment variable like so:</div>
+<div><br></div>
+</div>
+<div><span style="font-family: 'Andale Mono';">       foo='() { echo 1;};'</span></div>
+<div>
+<div><br></div>
+<div><br></div>
+<div>And the exploitable version is like this:</div>
+<div><br></div>
+</div>
+<div><span style="font-family: 'Andale Mono';">       x='() { ignored;}; echo vulnerable' bash</span></div>
+<div>
+<div><br></div>
+<div>The x='() { :;}; bit is just to ensure that bash parses this environment variable like a function. After the second semi-colon, you can execute any bash you want.</div>
+</div>
+<div><br></div>
+<div><b><span style="font-size: 18px;">WHY THIS IS BAD</span></b></div>
+<div>
+<div><br></div>
+<div>What's the big deal you ask? I don't let random internet strangers set environment variables! Well, you might be doing it without realizing it. The first series of exploits that can be taken advantage of right now is CGI.</div>
+<div><br></div>
+<div>CGI lets you execute a shell script of any kind to respond to a web request. The problem is that if you are using a bash script, cgi helpfully sets the user agent of the request it is trying to process to an environment variable! This means that by doing</div>
+</div>
+<div><br></div>
+<div><span style="font-family: 'Andale Mono';">       curl -A "() { :;}; whoami" http://some.vulnerable.computer/cgi-script</span></div>
+<div>
+<div><br></div>
+<div>You can execute code</div>
+<div><br></div>
+<div>The second class of attacks that is interesting is that there are lots of ssh systems that provide access, but don't give the end user a shell. The most common case of this is with git, where users exist on a system for execution, but ssh is configured not to respond with a shell. A user without a shell account (but with access) can login to ssh like so:</div>
+<div><br></div>
+<div><span style="font-family: 'Andale Mono';">  ssh -o 'rsaauthentication yes' user@host.me '() { ignored; }; /usr/bin/whoami'</span></div>
+<div><br></div>
+<div>The final interesting class of attacks is with dhclient. <span style="line-height: 1.45;">Now, when you connect your computer to a network, it sends a request out to EVERY computer asking for an IP address. Normally a DHCP server would respond to this request, and this response is used to set some environment variable before a shell script is run on the requester's machine to set ip addresses and such what. The problem here is that a malicious user could respond faster than a real DHCP server with a response that contained fields which would be put into environment variables and then GAME OVER.</span>
+</div>
+</div>
+<div><br></div>

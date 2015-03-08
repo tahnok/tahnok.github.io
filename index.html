@@ -1,0 +1,18 @@
+---
+layout: default
+---
+
+<div class="home">
+
+  {% for post in site.posts %}
+  <div class="post-container">
+    <h1>{{ post.title }}</h1>
+    <article class="post-content">
+      {{ post.content }}
+    </article>
+  </div>
+  {% endfor %}
+
+  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
+
+</div>

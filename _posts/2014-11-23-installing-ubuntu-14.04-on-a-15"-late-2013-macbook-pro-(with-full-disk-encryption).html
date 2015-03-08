@@ -1,0 +1,48 @@
+---
+layout: post
+title: Installing Ubuntu 14.04 on a 15" late 2013 Macbook Pro (with Full Disk Encryption)
+---
+
+<div>
+<img src="../images/w600_34605f2250c33f03d2938e26e91a3a02.png" alt="http://www.tejasbarot.com/wp-content/uploads//eIUaGXc.png" style="height: auto;"><br>
+</div>
+<div><br></div>
+<div><span>SO I've been looking but I have yet to find a sufficiently detailed guide for getting Ubuntu running on a retina macbook pro, especially one that has full disk encryption enabled. Hopefully this document will help others looking to dual boot as well as serve as a reference for me in the future when I inevitably forget all of this.</span></div>
+<div><br></div>
+<div>
+<b>BEFORE YOU DO ANYTHING YOU NEED TO HAVE A BACKUP!</b><br>
+</div>
+<div><br></div>
+<div>The first step was installing a better EFI boot loader (although I'm not sure if this step is strictly necessary anymore). In the past that would involve rEFIt, but it seems to have lots its maintainers. Instead I've gone with <a href="http://www.rodsbooks.com/refind/">rEFInd</a>. Their site is pretty 1990s, but the software itself is pretty good. I mostly just followed the instructions on their <a href="http://www.rodsbooks.com/refind/installing.html">installation page</a> and their <a href="http://www.rodsbooks.com/refind/yosemite.html">page on Yosemite</a>, although I did have to make a few changes so that booting wouldn't take 30 extra seconds. Note, I had to install rEFInd to my <a href="https://en.wikipedia.org/wiki/EFI_System_partition">ESP partition</a>
+</div>
+<div><br></div>
+<ol>
+<li>First step is to download <a href="http://sourceforge.net/projects/refind/files/0.8.3/refind-bin-0.8.3.zip/download">rEFInd</a> (version 0.8.3 as of this article) and unzip it somewhere.</li>
+<li>Now mount the ESP partition by making a new directory ( <span style="font-family: 'Andale Mono';">mkdir /Volumes/esp </span>) and then running: <span style="font-family: 'Andale Mono';">sudo mount -t msdos /dev/disk0s1 /Volumes/esp</span>
+</li>
+<li>Next cd into the directory you unzipped rEFInd and run <span style="font-family: 'Andale Mono';">./install.sh --esp</span>
+</li>
+<li>Now edit /Volumes/esp/EFI/refind/refind.conf and uncomment the line about <tt>dont_scan_volumes</tt> and change it to be <span style="font-family: 'Andale Mono';">dont_scan_volumes "foo,bar"</span>
+</li>
+<li>Next move /Volumes/esp/EFI/refind to /Volumes/esp/EFI/BOOT</li>
+<li>Finally move /Volumes/esp/EFI/BOOT/refindx64.efi (I think) to /Volumes/esp/EFI/BOOT/bootx64.efi</li>
+<li>REBOOT and enjoy your shiny FOSS boot manager</li>
+</ol>
+<div><br></div>
+<div>The next step is to format your hard drive so that it has 3 new partitions for Ubuntu. I like to use full disk encryption in linux too which means that I need a separate /boot partition in addition to / and swap (although frankly I'm not sure I need swap when I have 16GB of RAM)</div>
+<div><br></div>
+<div>BE CAREFUL HERE. I managed to bork my Mac installation by trying format my disk from the ubuntu live CD. Thankfuly I had a time machine backup.</div>
+<div><br></div>
+<div>I ended up formatting my disk to my liking by booting in to OS X's recovery mode and creating 3 new partitions. My /boot was only 1GB, swap was 16GB and I set aside about 90GB for the main installation.</div>
+<div><br></div>
+<div>Next you need to format a USB stick with the ubuntu installation image. The instructions I followed are from here: <a href="http://www.ubuntu.com/download/desktop/create-a-usb-stick-on-mac-osx">http://www.ubuntu.com/download/desktop/create-a-usb-stick-on-mac-osx</a>
+</div>
+<div><br></div>
+<div>Reboot with your newly formatted USB and select it from the options presented.</div>
+<div><br></div>
+<div>Choose 'Something else' when asked how to install ubuntu. Click on the 1 GB partition and use it as /boot. Next choose the large partition you created for linux and choose the option "use as physical volume for encryption"</div>
+<div><br></div>
+<div>Also, make sure you choose the partition you have as /boot for the installation of the boot loader. <b>YOU DO NOT WANT TO LEAVE IT AT ITS DEFAULT</b>
+</div>
+<div><br></div>
+<div>Next post I'll include information on how to configure your new dual boot computer!</div>

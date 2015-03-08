@@ -1,0 +1,24 @@
+---
+layout: post
+title: NIXIE TUBES!!
+---
+
+<div>So approximately 2000 years ago I got a set of 6 nixie tubes as a gift. WTF is a nixie tube you ask? This is a nixie tube:</div>
+<div><br></div>
+<div><img src="../images/w600_85f1d5be037e617d9641ca65c119a813.jpg" alt="File:ZM1210-operating edit2.jpg" height="600" width="187" style="height:auto;"></div>
+<div><br></div>
+<div>It’s an device for displaying all ten digits (0 through 9) using “glow discharge" (that thing that makes old incandescent lightbulb works), while looking really really cool.</div>
+<div><br></div>
+<div>The tubes I have are IN-17s and they operate at <b>180V</b>. That is a lot of volts and it was pretty scary for me putting the circuit together since I’ve never worked with such high voltages. Fortunately, these works at relatively low amperages so I only have to worry about pain, not death.</div>
+<div><br></div>
+<div>Now, you might be wondering what I need to drive these things. The answer would be a <font face="Arial"><b>Russian K155NA1 Driver Chip</b>, which is basically a high voltage <a href="https://en.wikipedia.org/wiki/Binary-coded_decimal">Binary-Coded Decimal</a> decoder and a circuit to step up wall wart DC voltage (9V at 1a) to 180V. Thankfully <a href="http://www.robotpirate.com/">a nice person</a> on the internet made an arduino shield to do all this called the <a href="http://arduinix.com/">ArduiNIX</a> </font>
+</div>
+<div><br></div>
+<div>Here’s my completed display:</div>
+<div><br></div>
+<div><img src="../images/w600_2dacf7a38ca97348b6cc9b433a8b493f.jpg" style="height:auto;" width="475"></div>
+<div><br></div>
+<div>I’m still trying to understand how the circuit works. There are 20 pins and 4 grounds, so I can apparently control a total of 80 digits. I’m only using 60 digits in this setup (10 digits per tube times 6 tubes), but I’m still pretty lost when reading the <a href="http://arduinix.com/Main/Code/ANX-6Tube-Clock-Crossfade.txt">demo code</a>
+</div>
+<div><br></div>
+<div>My current understanding is that I have 2 BCDs which I can control with 8 pins (4 each, which makes sense since 2^4 = 16 &gt; 10 digits), and I can control the 4 anode (aka ground) pins. From the code it seems I have to display 2 digits at a time, but I’m not at all clear how the digits are split up. That will be the subject for my next post!</div>

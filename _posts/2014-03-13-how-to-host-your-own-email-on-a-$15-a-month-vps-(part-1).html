@@ -1,0 +1,74 @@
+---
+layout: post
+title: How to host your own email on a $15 a month vps (Part 1)
+---
+
+<p><img src="../images/w600_21d5fc5797d1e3daa94cb208976a7ed8.jpg"></p>
+<h1>Intro</h1>
+<p>Every now and then my paranoia will take over and I’ll have an urge to break free of all 3rd parties that I depend on for my life on the internet. The last time it struck I decided to set up my own mail server. I’m going to walk you through what I did in order to get it working</p>
+<h2>Important Acronym List (IAL)</h2>
+<p><strong>Mail Transfer Agent: MTA</strong> This is the piece of software that handles incoming AND outgoing email. It receives email and then decides whether or not the message is for one of the users it knows about. It also decides who gets to send email and handles the delivery. In this tutorial we’re going to be using <em>Postfix</em>. The primary protocol that it speaks is SMTP</p>
+<p><strong>Internet Message Access Protocol: IMAP</strong> By default, postfix will deliver email messages to a folder on the computer it’s running on and the only way to access the messages is when you are logged into that box. Since this is kind of impractical, there are a ton of protocols that have been created to make accessing email messages on a remote server easy. We’re going to use <em>dovecot</em> and IMAP (the protocol) to access our messages on the server. You can also get dovecot to work with POP3, but this guide doesn’t cover getting it set up since it’s an older and less useful protocol.</p>
+<h2>What you need</h2>
+<ul>
+<li>A domain</li>
+<li>I use <a href="https://www.namecheap.com/">namecheap</a>, but I hear good things about hover.com</li>
+<li>A server</li>
+<li>Preferably running debian or ubuntu. It will be helpful for preventing your mail from being marked as spam if you can set the <a href="https://en.wikipedia.org/wiki/Reverse_DNS_lookup">PTR / reverse DNS</a> for this server’s IP address. Sadly, this means that you probably can’t run this on a server you have in your house. If you need a server, I recommend <a href="http://buyvm.net/">BuyVM</a> since they have a $15 a year VPS that is perfectly adequate for this purpose.</li>
+<li>An SSL certificate</li>
+<li>You can get one for free from <a href="https://www.startssl.com/">StartSSL</a>
+</li>
+</ul>
+<h2>Directions</h2>
+<p>We’re mostly going to follow along with <a href="https://library.linode.com/email/postfix/postfix2.9.6-dovecot2.0.19-mysql">this guide from linode</a> except for the bits about MySQL [1]. I don’t understand why they would use MySQL here since it’s huge overkill unless you are dealing with a very large number of users. Instead of MySQL we’re going to use sqlite since it doesn’t require any processes to be running and eating up  the limited RAM available on the VPS.</p>
+<p>You should follow the linode guide, except when they start talking about MySQL in which case you should come back here and see how to do it with SQLite. I’ve tried to match up the section/numbering so that it’s easy to figure out what to do differently.</p>
+<h3>Installing Packages</h3>
+<h4>Step 3</h4>
+<p>Install these packages instead: <code>sudo apt-get install postfix postfix-mysql dovecot-core dovecot-imapd dovecot-lmtpd dovecot-sqlite sqlite</code></p>
+<h4>Step 4 and 5</h4>
+<p>Ignore</p>
+<h3>SQLite instead of MySQL</h3>
+<h4>Creating the database</h4>
+<p>Download <a href="https://tahnok.me/cdn/mailbox.sqlite">this empty mailbox.sqlite</a> and put it in /etc/mailbox.sqlite or if you don’t trust me you can create you’re own with this schema:</p>
+<p><script src="https://gist.github.com/tahnok/9718301.js"></script></p>
+<p>This will create our tables</p>
+<h4>Adding data</h4>
+<p>You can add data to sqlite database with the same syntax as MySQL, but interact with the database using the <code>sqlite</code> or <code>sqlite3</code> command instead of mysql</p>
+<h3>Postfix</h3>
+<h4>Step 8</h4>
+<p>Use the following instead of the one in the guide</p>
+<p><script src="https://gist.github.com/tahnok/9718346.js"></script></p>
+<p>We’ll be using these file names later as well</p>
+<h4>Step 11</h4>
+<p>Use this instead: nano /etc/postfix/sqlite-virtual-mailbox-domains.cf</p>
+<h4>Step 12</h4>
+<p><script src="https://gist.github.com/tahnok/9718380.js"></script></p>
+<h4>Step 15</h4>
+<p>You can test the set up by referencing your sqlite file instead of the mysql one. eg: postmap -q example.com sqlite:/etc/postfix/sqlite-virtual-mailbox-domains.cf</p>
+<h4>Step 16</h4>
+<p>Use this instead: nano /etc/postfix/sqlite-virtual-mailbox-maps.cf</p>
+<h4>Step 17</h4>
+<p><script src="https://gist.github.com/tahnok/9718421.js"></script></p>
+<h4>Step 20</h4>
+<p>Test with: postmap -q email1@example.com sqlite:/etc/postfix/sqlite-virtual-mailbox-maps.cf</p>
+<h4>Step 21</h4>
+<p>Use this instead: nano /etc/postfix/sqlite-virtual-alias-maps.cf</p>
+<h4>Step 22</h4>
+<p><script src="https://gist.github.com/9718440.js"></script></p>
+<h4>Step 25</h4>
+<p>Test with: postmap -q alias@example.com sqlite:/etc/postfix/sqlite-virtual-alias-maps.cf (You get the idea at this point I hope)</p>
+<h4>Step 28</h4>
+<p>I skipped this bit entirely without any ill effects</p>
+<h3>Dovecot</h3>
+<h4>Step 25 to Step 28</h4>
+<p>Please use the following as the contents of <em>dovecot-sql.conf.ext</em></p>
+<p><script src="https://gist.github.com/9718496.js"></script></p>
+<h2>Conclusions</h2>
+<p>If all went well then you should be able to connect successfully to your new email server with your email client to both receive and send email! It’s amazing, I know.</p>
+<p>In the next installment I’ll walk through the process of signing your email with DKIM so that it won’t get marked as spam by pretty much every email provider in existence</p>
+<h1>Sources</h1>
+<p><a href="https://library.linode.com/email/postfix/postfix2.9.6-dovecot2.0.19-mysql">https://library.linode.com/email/postfix/postfix2.9.6-dovecot2.0.19-mysql</a></p>
+<p><a href="http://sealedabstract.com/code/nsa-proof-your-e-mail-in-2-hours/">http://sealedabstract.com/code/nsa-proof-your-e-mail-in-2-hours/</a></p>
+<p><a href="http://blog.codinghorror.com/so-youd-like-to-send-some-email-through-code/">http://blog.codinghorror.com/so-youd-like-to-send-some-email-through-code/</a></p>
+<h1>Notes</h1>
+<p>[1] I would have liked to reproduce most of the guide here since it IS published under a creative commons license, but it specifies no derivatives so I can’t actually modify it at all...</p>

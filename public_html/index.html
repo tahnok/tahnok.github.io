@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>(Fake) Markov Chains</title>
+  <meta name="description" content="WARNING: The content contained herein may or may not be sensical. Side effects may include laughter, anger, shallow thoughts, deep thoughts and blindness. Reader discretion is advised"
+">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://blog.tahnok.me/">
+  <link rel="alternate" type="application/rss+xml" title="(Fake) Markov Chains" href="http://blog.tahnok.me/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">(Fake) Markov Chains</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+        
+          
+          <a class="page-link" href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="home">
+
+  
+  <div class="post-container">
+    <h1>Making a clock</h1>
+    <article class="post-content">
+      <p>Approximately 2 years ago I ordered an <a href="https://www.sparkfun.com/products/10160">RTC clock module</a> from Sparkfun with the intention of building a clock of some kind.</p>
+<p>FINALLY, I've gotten around to hooking everything up! Here's a picture of my amazing setup (if you wiring things for a living, please don't kill me)</p>
+<p><img src="../images/w600_0af6afc4018ec642790f0fcba6b248dd.jpg" width="581" style="height:auto;"><img src="../images/w600_1dac1694da3c5fc7a23fa730ec211b3e.jpg" width="581" style="height:auto;"></p>
+<p>The goal is to help my wake up in the morning by turning on a SAD lamp. If you've ever seen one of these faux sunlight lamps before you will wonder why I'm doing this. If you have seen one of these, you'll understand because these things are REALLY FREAKING BRIGHT.</p>
+<h2>PARTS</h2>
+<p>Here's the part list</p>
+<ul>
+<li>Arduino Uno</li>
+<li><a href="https://www.sparkfun.com/products/10160">DeadOn RTC</a></li>
+<li><a href="https://www.sparkfun.com/products/337">Coin cell battery</a></li>
+<li><a href="https://www.adafruit.com/products/399">RGB LCD 16x2</a></li>
+<li><a href="https://www.adafruit.com/products/268">Powerswitch Tail</a></li>
+</ul>
+<p>Getting all these parts together was actually surprisingly difficult. I ordered the RTC, but I didn't order a battery since I thought I could find one locally. I was wrong, so I ordered one online. Don't do that unless you have lots of time to wait. It took like 2 months to ship that tiny coin cell battery across the border to me here in Canada since it has lithium in it.</p>
+<p>The RGB LCD was actually part of a kit from Adafruit which is all supposed to be controllable over I2C. I assembled almost all of the kit successfully, but the last piece I put on backwards. And of course, it was the 40pin chip which has proven to be resistant to my efforts to desolder it. <em>sigh</em>. Thankfully I was able to salvage the LCD part.</p>
+<h2>ASSEMBLY</h2>
+<p>So the first thing I tried to do was get the the RTC module working. This proved to be quite frustrating. I wired everything up, but I was getting garbage data back from the module. It was counting up (sorta), but random extra bits were getting set and unset. So it would go 0:0:59, 0:1:0, 1:1:1, 0:1:2. WTF. Eventually it turned out that the problem was the way I was grounding the module. I'm not entirely sure what was happening, but eventually I got the right wire connected to the ground on the arduino, bypassing the breadboard.</p>
+<p>Everything else was relatively easy to set up. Adafruit has an excellent guide on their <a href="https://learn.adafruit.com/character-lcds/wiring-a-character-lcd">LCD Shield</a>. The powerswitch tail  is controlled by setting a single pin high or low.</p>
+<h2>CODE</h2>
+<p>Here's the whole thing below. Most of the code for interacting over SPI to the RTC module is from <a href="https://github.com/sparkfun/DeadOn_RTC/blob/v1.1/Libraries/DeadOn_RTC/examples/set_and_read_time/set_and_read_time.ino">Sparkfun</a>.</p>
+<p>
+<script src="https://gist.github.com/c2e2afb76edde4905fcc.js"> </script>
+</p>
+<p>I had some fun messing around with sprinf (it's like printf, but it fills a char array!) You can set the alarm time by modifying the values in the Alarm int array.</p>
+<h2>BUGS</h2>
+<p>For some reason there are 2 garbage characters left on the LCD after the end of my screen. I "fixed" this by just appending more space characters than will fit in a 16 char line.</p>
+<h2>FUTURE WORK</h2>
+<p>It would be nice to have multiple alarm</p>
+
+    </article>
+  </div>
+  
+  <div class="post-container">
+    <h1>How to read a texbook</h1>
+    <article class="post-content">
+      <p><img src="../images/w600_1d3087794299ca75d555e85d7c8ce1bf.jpg" border="0" width="236" style="height:auto;"><img src="../images/w600_7d5fb7a62ced7936b1df39191d17ddea.jpg" style="height: auto;"></p>
+<p>So I really like learning things. It was one of my favourite parts of university (and high school before that), so I was really missing it when I started working. I tried for a while to read things when I felt the urge, but this rarely happened. I tried enrolling in a cousera course, but it felt a bit too much like the shitty parts of school, namely I can't move at my own pace.</p>
+<p>My current system involves <a href="https://www.beeminder.com/overview">BEEMINDER</a> which is a pretty amazing tool for people like me who suck at motivating themselves. The basic idea is that you commit to some goal and beeminder makes sure that you reach it by forcing you to do a minimum amount of your goal everyday. You can do more than your goal and let it ride for a few days, but eventually you'll have to do work. If you fail, you have to pay beeminder money.</p>
+<p>I use it to make sure I do an hour a week worth of reading / working of each of my texbooks. Currently I am reading the <a href="https://mitpress.mit.edu/sicp/full-text/book/book.html">Structure and Interpretation of Programming Languages</a> (available as a <a href="https://github.com/sarabander/sicp-pdf">PDF</a> and the <a href="http://cm.bell-labs.com/cm/cs/cbook/">The C Programming Language</a>. I wanted to make sure that I really got the fundamentals of computers. C and Scheme are both early programming languages with very different philosophies. (I know that just made some of you feel old)</p>
+<p>As I go through these books, I am working through the exercises (You can follow my progress <a href="https://github.com/tahnok/c-book">here</a> and <a href="https://github.com/tahnok/sicp">here</a>). Writing actual code feels like the most important part of my attempts to learn so far. It's not enough (for me at least) to just read the information. I need to process it somehow, but I find working without direction (or feedback) tough. Thankfully you can find solutions to both SICP and the C programming language book on the web.</p>
+<p><img src="../images/w600_355cd2bd4717ead88e1b3b3a5d6865b2.jpg" style="max-width: 260px; max-height: 343px; top: 0px; left: 0px; height: auto;"></p>
+<p>So far I've only finished one book this way is <a href="http://www.nostarch.com/hacking2.htm">Hacking: the Art of Exploitation</a> which I highly recommend, even if you don't want to hack anything.</p>
+
+    </article>
+  </div>
+  
+  <div class="post-container">
+    <h1>Architecting Android Apps</h1>
+    <article class="post-content">
+      <div><br></div>
+<div>
+<img src="../images/w600_3a33d24cd59060ce1bc459492532691d.png" style="height:auto;" width="436"><br>
+</div>
+<p><br></p>
+<div><br></div>
+<div>So my first experiencing really writing code was on Shopify using Ruby on Rails. Rails adheres very strongly to the idea of Covention over Configuration. That is, frameworks should make choices about how things should be structured. For example, rails is an MVC framework which means you have models (which go in app/models), controllers (app/controllers), and views (app/views). Of course, you can mess with this but the point is that there is an expected place to put things.</div>
+<div><br></div>
+<div>Android is part of the Java ecosystem, and it doesn't seem to make any choices about how to structure... anything. This. Drives. Me. Nuts. You can put any code for anything anywhere. And there really doesn't seem to be a good reason for this. I'm currently working on Shopify for Android and our code doesn't really have a good structure at the moment. We have some folders that contain code grouped by feature, like orders and we have other folders that contain code based on function (views).</div>
+<div><br></div>
+<div>I feel that the job of a framework, (which admitedly Android... kind of is) is to make the job of a programmer easier. The hardest part of being a programmer is managing complexity. Configuration introduces compleity. Convention removes it</div>
+<p>Our team is probably going to move to something like this: <a href="https://github.com/codepath/android_guides/wiki/Organizing-your-Source-Files">https://github.com/codepath/android_guides/wiki/Organizing-your-Source-Files</a>, but it doesn't quite feels as nice as rails.</p>
+
+    </article>
+  </div>
+  
+  <div class="post-container">
+    <h1>My First Experience being a Dungeon Master</h1>
+    <article class="post-content">
+      <div>So recently a few of my friends decided that we wanted to get into Dungeons and Dragons. This was mostly due to enjoying <a href="http://www.worldofmunchkin.com/game/">Munchkin</a> a lot.</div>
+<div><br></div>
+<div><br></div>
+<div>I started doing some research on the best way to get into D&amp;D. First I needed to pick an edition. 3.5e seems to be a clear favourite in the past, but I had heard that 5e was simpler than any previous version. Finally I found a glowing review of the <a href="http://io9.com/the-d-d-starter-set-is-a-great-way-to-introduce-newbies-1602583516">DnD Starter Kit</a> </div>
+<div><br></div>
+<div><img src="../images/w600_046b6430af30ed808cbc7d8bc438199d.jpg" alt="The D&amp;D Starter Set is a Great Way to Introduce Newbies to RPGs" height="354" width="636" style="height: auto;"></div>
+<div><br></div>
+<div>Turns out to have been a great choice. The kit includes a full set of dice, 5 pre-made characters, a rule book and campaign book and it was like 20$.</div>
+<div><br></div>
+<div><b>First time DM</b></div>
+<div><b><br></b></div>
+<div>I'm really glad the characters were pre-made. The rules are complicated enough for a first time group without having to deal with making a characters.<b><br></b>
+</div>
+<div><b><br></b></div>
+<div>The campaign book was very helpful to me as a DM. I was really worried I would be able to improvise fast enough or well enough to keep the game flowing, but that turned out to be a bit of an over reaction.</div>
+<div><br></div>
+<div>Knowing all the rules is hard! I had to constantly check to see what actions a player could take, how ranged combat works and what kind of bonuses people would get.</div>
+<div><br></div>
+<div>All in all though, I had a really fun time and I think the rest of the party did too!</div>
+
+    </article>
+  </div>
+  
+  <div class="post-container">
+    <h1>Book Recommendations from 2014</h1>
+    <article class="post-content">
+      <div>Since I enjoy reading and I enjoy hearing about what others are reading, I figured I should probably put up a list somewhere of the books that I enjoyed reading during 2014. If you have any recommendations, please post them in the comments! One can never have too many books on one's list of books to read.</div>
+<div><br></div>
+<div><b>The Martian</b></div>
+<div><b><br></b></div>
+<div>
+<img src="../images/w600_f30aa7388f00b48324af45078f04b13d.jpg" alt="The Martian 2014.jpg" height="304" width="200" style="height: auto;"><b><br></b>
+</div>
+<div><b><br></b></div>
+<div>If you have to read one book from my list, I recommend it be this one. It only took me 2 days (and 2 rather sleepless nights) to get through it. It's a fantastic thriller and as a bonus you get to learn about Mars since most of the science is accurate. The book is about the first manned mission to Mars, and as you might imagine Something Goes Wrong.</div>
+<div><br></div>
+<div><b>The Laundry Files (Series)</b></div>
+<div><b><br></b></div>
+<div>
+<img src="../images/w600_827adaa3db6d4b2669781c7c5956fb99.jpg" alt="TAA-cover.jpg" height="340" width="220" style="height: auto;"><b><br></b>
+</div>
+<div><b><br></b></div>
+<div>This series is so freakin' good. It's basically James Bond + Lovecraftian Horrors + Comedy and it's pure gold. You follow around Bob Oliver Francis Howard (aka <a href="https://en.wikipedia.org/wiki/Bastard_Operator_From_Hell">B.O.F.H</a>) who lives in a world where the right piece of code can be used to summon Eldritch horrors from the deep. But of course there's a government agency tasked with protecting us all from having our brains eaten out.</div>
+<div><br></div>
+<div><b>The Coming Swarm</b></div>
+<div><b><br></b></div>
+<div>
+<img src="../images/w600_d3f79b12cfd5015c00a451a456671796.jpg" style="max-width: 231px; max-height: 346px; top: 0px; left: 0px; height: auto;"><b><br></b>
+</div>
+<div><b><br></b></div>
+<div>I'm not finished this one yet, but it's been a very interesting read so far. The author make a compelling argument that DDoS actions should be considered a political act just like a sit in or a blockade.</div>
+<div><br></div>
+<div><b>The Girl With the Dragon Tattoo</b></div>
+<div><b><br></b></div>
+<div>
+<img src="../images/w600_c69e304b967f30414d494548b51138ca.jpg" height="530" width="299" style="height: auto;"><b><br></b>
+</div>
+<div><b><br></b></div>
+<div>This book was very slow to start, but it quickly got hard to put down. There are some pretty disturbing scenes, so if that's not your thing I don't recommend it. If you can stomach it though, it's a pretty good read with lots of really good twists.</div>
+<div><br></div>
+<div><b>Sufrace Detail</b></div>
+<div><b><br></b></div>
+<div>
+<img src="../images/w600_b4c00f22e47a2e5c36f52fe867d05d11.jpg" alt="Bankssurfacedetailcover.jpg" height="308" width="200" style="height: auto;"><b><br></b>
+</div>
+<div><b><br></b></div>
+<div>I love Iain M Banks. All of The Culture novels are fantastic, and this one is no exception. The plots are too numerous to list, but one of the fascinating ideas in this book is that of a Virtual Hell. If you suppose that minds can be simulated and run on computers, there's no reason why you couldn't digitize someone's mind before they die and then upload it to a virtual hell if they had failed to live a good life. If you've read any of other culture novels, you'll enjoy getting a look at what a Mind with some severe psychopathic tendencies looks like and how it can exist in the Culture.</div>
+<div><br></div>
+<div><b>Count Zero</b></div>
+<div><b><br></b></div>
+<div>
+<img src="../images/w600_1436e5f7333df36818fe62d452aa8185.jpg" alt="CountZero(1stEd).jpg" height="339" width="200" style="height: auto;"><b><br></b>
+</div>
+<div><b><br></b></div>
+<div>This is a sequel (kind of) to Neuromancer, but all of the characters are different. I found this book much easier to follow compared to Neuromancer, but Gibson still writes in a way that I find very difficult to follow. My friend said it best when he described it as "poetry"</div>
+<div><br></div>
+
+    </article>
+  </div>
+  
+  <div class="post-container">
+    <h1>How to propose to an engineer</h1>
+    <article class="post-content">
+      <div>So several months ago I had decided that I was going to ask my girlfriend to marry me. BUT we have been together for 6.5 years at this point so I needed to make sure it was really memorable. The first step was to pick a ring. Thankfully I met a jeweller at <a href="http://www.artengine.ca/community/modlab-en.php">Modlab</a> who 3D prints rings: <a href="http://fusedelements.ca/">Fused Elements</a>. Well, sort of. She 3D prints the ring in wax and then uses that to make a mould which she fills with molten metal. Upon hearing that I KNEW that's where I would get the ring. (Bonus: I can get the ring re-made in the event of catastrophic failures)</div>
+<div><br></div>
+<div style="text-align: center"><img src="../images/w600_fd2ef08091f1a232ba65c223037d34e2.jpg" style="height: auto;"></div>
+<div><i>The ring!</i></div>
+<div><br></div>
+<div>One day on reddit I saw this really fantastic ring box that someone had made involving a <a href="http://hackaday.com/2014/03/24/mechanical-iris-will-make-you-want-a-laser-cutter-even-more">mechanical iris</a> that looked fantastic. You can check out the whole album of the build process here: <a href="https://imgur.com/a/3Mu8J">https://imgur.com/a/3Mu8J</a>
+</div>
+<div><br></div>
+<div>After humming and hawing for a bit I came up with a plan to build a series of boxes to hold the ring. My fiancé likes unwrapping things so having many layers was essential. This was my first plan</div>
+<ul>
+<li>
+<b>Stage 1</b>: Original ring box (they are so iconic)</li>
+<li>
+<b>Stage 2</b>: 3d printed iris box like this one: <a href="http://www.thingiverse.com/thing:140048">http://www.thingiverse.com/thing:140048</a>
+</li>
+<li>
+<b>Stage 3</b>: Laser cut acrylic iris box like this one: <a href="http://www.instructables.com/files/orig/FVO/YGOP/HSICZZ6P/FVOYGOPHSICZZ6P.pdf">http://www.instructables.com/files/orig/FVO/YGOP/HSICZZ6P/FVOYGOPHSICZZ6P.pdf</a> but in the shape of a heart</li>
+<li>
+<b>Stage 4</b>: Wooden box containing a USB key with all the design files</li>
+</ul>
+<div>But like all plans it fell apart as soon as it encountered reality.</div>
+<div><br></div>
+<div><b>STAGE 1.0</b></div>
+<div><br></div>
+<div>This is the only part of the plan that went off without a hitch! Working with Fused Elements was really easy and the ring turned out beautifully.</div>
+<div><br></div>
+<div><b>STAGE 2.0</b></div>
+<div><br></div>
+<div>The first problem I encountered was modifying the existing 3d designs for the iris box so that the original ring box would fit. (A secondary problem was gaining access to a 3d printer, but thankfully a good friend of mine had recently acquired one). I had to enlarge the designs by close to 200% so that the box would fit through the inner ring of the iris. But in doing this I ended up with a box that had a truly gigantic outer diameter. It was getting close to 20cm and what was just stage 2!</div>
+<div style="text-align: center"><img src="../images/w600_05d8418dbba63b994a165c7fa6bc2142.jpg" style="height: auto;"></div>
+<div><i>Photo of the iris box I wanted to use at first.</i></div>
+<div><br></div>
+<div style="text-align: center"><img src="../images/w600_d53be1e891834c04dd7948af1903a19f.png" style="width: 512px; height: auto;"></div>
+<div><i>TinkerCAD</i></div>
+<div><br></div>
+<div>(insert picture here)</div>
+<div><br></div>
+<div><b>STAGE 2.1</b></div>
+<div><br></div>
+<div>After many months of searching through thingiverse (I may be embellishing) I found this really cool looking <a href="http://www.thingiverse.com/thing:28827">parametric twisted star box</a> which had some openscad files I could modify and use.</div>
+<div><br></div>
+<div>Printing this turned out to be quite an ordeal. My girlfriend was away for a weekend so I signed out the Ultimaker from Art Engine (my local makerspace) and started printing. But this box was actually pretty big and as anyone who's done any 3d printing will tell you, printers can be finicky. Here are the 3d aborted bases I have. Only one was intentional. The other too failed when the filament got twisted and stopped feeding properly.</div>
+<div><br></div>
+<div><br></div>
+<div style="text-align: center">
+<img src="../images/w600_9cce8b72fe34280eadb4da3ab5b198e5.jpg" style="height: auto;"><br>
+</div>
+<div><br></div>
+<div>But 4th times the charm! You can see the finished box below</div>
+<div><br></div>
+<div style="text-align: center"><img src="../images/w600_93578620063dc5206126c3b5af9e72de.jpg" style="height: auto;"></div>
+<div style="text-align: center"><br></div>
+<div style="text-align: center"><img src="../images/w600_87a057b4c95d59484871208dc5680050.jpg" style="height: auto;"></div>
+<div><br></div>
+<div>The ring box fits! I messed up a tiny bit in modifying the box. The lid should have had a slightly smaller opening at the top since where the twists meet there's a tiny bit of a gap.</div>
+<div><br></div>
+<div><b>STAGE 3.0</b></div>
+<div><br></div>
+<div>My initial plan was to have a second box with an mechanical iris based on this cool design I had found on Instructables (<a href="http://www.instructables.com/id/Mechanical-iris-v20/?ALLSTEPS">http://www.instructables.com/id/Mechanical-iris-v20/?ALLSTEPS</a>). That would make the lid and the rest of the box would be made by stacking sheets of material that I would cut into shape on a laser cutter and hold together with nuts and bolts.</div>
+<div><br></div>
+<div><br></div>
+<div style="text-align: center"><img src="../images/w600_8bfdb181b1bc1cbb2dcdda08afccb3a3.jpg" alt="Picture of Mechanical iris v2.0" style="height: auto;"></div>
+<div><br></div>
+<div>But once again I completely under estimated how large this would end up making my box. Stage 2 had to fit through that inner hole and once I'd scaled up the design it wouldn't fit on the bed of the laser cutter any more...</div>
+<div><br></div>
+<div><b>STAGE 3.1</b></div>
+<div><br></div>
+<div>I needed to make this piece just as special as the other stages so I ended up choosing to make the box heart shaped. Not just regular heart shaped, but a heart based on the equation y=|x|+sqrt(1-x²) and y=|x|-sqrt(1-x²) from -1 to 1 (graphed on <a href="http://www.wolframalpha.com/input/?i=y%3D%7Cx%7C%2Bsqrt%281-x%C2%B2%29+and+y%3D%7Cx%7C-sqrt%281-x%C2%B2%29+from+-1+to+1&amp;h=1">Wolfram Alpha</a>). When my fiancé and I first started dating I liked to show off so I had sent her that equation. She liked it enough to have a large poster of it made for her bedroom.</div>
+<div><br></div>
+<div>With a shaped picked out I started designing the box itself in inkscape. You can see the end result below.</div>
+<div><br></div>
+<div style="text-align: center"><img src="../images/w600_c63f8c8fe675ea3efdeb9315f6961d1e.png" style="width: 717px; height: auto;"></div>
+<div>As I was working on the design I needed to pick the material I wanted to use. I ended up choosing 1/8" opaque red acrylic. I probably should have figured out where to get some before setting my heart on it though... I ended up calling a the following places in Ottawa that sell acrylic to try and find some:</div>
+<ul>
+<li>Canus Plastics</li>
+<li>Laird Plastics</li>
+<li>Plastics &amp; Signs of Ottawa</li>
+</ul>
+<div>I ended up going with Laird because they could get it for me in a week. The only problem I ran into here was that I had to order an entire 4' x 8' sheet of red acrylic... Thankfully Laird cut it into 2' x 1' sheets for me. Transporting a sheet of material that huge is difficult on a bike and I can only fit a 2' x 1' sheet in the laser cutter anyway.</div>
+<div><br></div>
+<div>After picking up the sheets I started prototyping my final design in cardboard. I cut out 5 hearts in cardboard and checked that the holes I had cut fit the screws, and that stage 2 would fit in the whole properly. Everything seemed to be perfect so I cut out a single heart in acrylic. It fit the box and the screws slid through the holes. So I cut out the rest of the hearts I could on that first sheet of acrylic and...</div>
+<div><br></div>
+<div>They didn't fit together. This is the first time I learned about the importance of <b>tolerances</b>. The bolt holes needed to have more clearance. So I modified the designs to add an extra few mm of clearance. I cut out another sheet of hearts and tried putting them together. They fit together perfectly! So I cut another sheet and... promptly ran into problems with tolerances again. Thankfully I was able to wiggle the second sheet worth of hearts down so at least I didn't waste any hearts, but for the next couple batches I increased the bolt hole size again.</div>
+<div><br></div>
+<div>The last part of this stage was to come up with a lid. Initially, I envisioned using a gear shape for the lid and having a second lower layer that was that had a hole same upper gear shape except cut out again after having been rotated a bit. This way the lid would slide down a layer and could rotate about a gear tooth's worth.</div>
+<div><br></div>
+<div>Turns out doing that is hard. Most of the gears that I could generate were meant to be used as actual gears, I needed something more aesthetically pleasing. I ended up going with a simplified version of the above design. I had a circle with two small tabs offset by 180 degrees. Below it I had a circular whole with two quarters of a larger circle cut out so that the tabs of the lid could rotate.</div>
+<div><br></div>
+<div style="text-align: center"><img src="../images/w600_7e884815e294e3b77eae3281f335b982.png" style="width: 975px; height: auto;"></div>
+<div><br></div>
+<div>This is the design I went with, but it suffers from a few... problems. The second layer cut out should be a bit bigger so that the lid can rotate better. Also the lid needs to be a bit smaller. I also went with an acrylic handle that I cut out, but I think a set of finger sized holes in the lid would work even better.</div>
+<div><br></div>
+<div>Anyway, here's the final product:</div>
+<div style="text-align: center"><img src="../images/w600_52ececd0db2b19ed77dd915b643fed3d.jpg" style="height: auto;"></div>
+<div style="text-align: center"><br></div>
+<div style="text-align: center"><img src="../images/w600_6262c5107b4a390992ca27750ba3bce5.jpg" style="height: auto;"></div>
+<div><br></div>
+<div><b>STAGE 4.0</b></div>
+<div><br></div>
+<div>Now that I had dimensions from stage 3.1 I could try and come up with a box that would fit it. I wanted something wooden, but it turns out that finding a large wooden box in Ottawa is kinda hard. I ended up going with the largest one that they had at Michael's and painting Tardis blue.</div>
+<div><br></div>
+<div>A few months earlier I had given my girlfriend a key in order to get her excited. I needed some way to attach a latch to the box. I was super concerned that I wouldn't be able to find something that would work, but I got lucky and they had one that worked perfectly at the hardware store.</div>
+<div><br></div>
+<div>I also wanted to use some of the design files I had gotten from Fused Elements, so I decided to engrave them with the laser cutter on the lid of stage 4. It turned out really well, although I did have to come up with a way to have the lid stay flat while still attached to the base.</div>
+<div><br></div>
+<div style="text-align: center"><img src="../images/w600_7bcb84ebfb49b98f24ec537ddc7622b9.jpg" style="height: auto;"></div>
+<div style="text-align: center"><br></div>
+<div style="text-align: center"><img src="../images/w600_168a2ed90c6dc2a8a0deb5309e9fc97a.jpg" style="height: auto;"></div>
+<div><br></div>
+<div><br></div>
+<div>I hope you dear reader might be inspired in your own proposals (if that's your thing) just as I was when I saw the CNC'd Iris box.</div>
+
+    </article>
+  </div>
+  
+  <div class="post-container">
+    <h1>Installing Ubuntu 14.04 on a 15" late 2013 Macbook Pro (with Full Disk Encryption)</h1>
+    <article class="post-content">
+      <div>
+<img src="../images/w600_34605f2250c33f03d2938e26e91a3a02.png" alt="http://www.tejasbarot.com/wp-content/uploads//eIUaGXc.png" style="height: auto;"><br>
+</div>
+<div><br></div>
+<div><span>SO I've been looking but I have yet to find a sufficiently detailed guide for getting Ubuntu running on a retina macbook pro, especially one that has full disk encryption enabled. Hopefully this document will help others looking to dual boot as well as serve as a reference for me in the future when I inevitably forget all of this.</span></div>
+<div><br></div>
+<div>
+<b>BEFORE YOU DO ANYTHING YOU NEED TO HAVE A BACKUP!</b><br>
+</div>
+<div><br></div>
+<div>The first step was installing a better EFI boot loader (although I'm not sure if this step is strictly necessary anymore). In the past that would involve rEFIt, but it seems to have lots its maintainers. Instead I've gone with <a href="http://www.rodsbooks.com/refind/">rEFInd</a>. Their site is pretty 1990s, but the software itself is pretty good. I mostly just followed the instructions on their <a href="http://www.rodsbooks.com/refind/installing.html">installation page</a> and their <a href="http://www.rodsbooks.com/refind/yosemite.html">page on Yosemite</a>, although I did have to make a few changes so that booting wouldn't take 30 extra seconds. Note, I had to install rEFInd to my <a href="https://en.wikipedia.org/wiki/EFI_System_partition">ESP partition</a>
+</div>
+<div><br></div>
+<ol>
+<li>First step is to download <a href="http://sourceforge.net/projects/refind/files/0.8.3/refind-bin-0.8.3.zip/download">rEFInd</a> (version 0.8.3 as of this article) and unzip it somewhere.</li>
+<li>Now mount the ESP partition by making a new directory ( <span style="font-family: 'Andale Mono';">mkdir /Volumes/esp </span>) and then running: <span style="font-family: 'Andale Mono';">sudo mount -t msdos /dev/disk0s1 /Volumes/esp</span>
+</li>
+<li>Next cd into the directory you unzipped rEFInd and run <span style="font-family: 'Andale Mono';">./install.sh --esp</span>
+</li>
+<li>Now edit /Volumes/esp/EFI/refind/refind.conf and uncomment the line about <tt>dont_scan_volumes</tt> and change it to be <span style="font-family: 'Andale Mono';">dont_scan_volumes "foo,bar"</span>
+</li>
+<li>Next move /Volumes/esp/EFI/refind to /Volumes/esp/EFI/BOOT</li>
+<li>Finally move /Volumes/esp/EFI/BOOT/refindx64.efi (I think) to /Volumes/esp/EFI/BOOT/bootx64.efi</li>
+<li>REBOOT and enjoy your shiny FOSS boot manager</li>
+</ol>
+<div><br></div>
+<div>The next step is to format your hard drive so that it has 3 new partitions for Ubuntu. I like to use full disk encryption in linux too which means that I need a separate /boot partition in addition to / and swap (although frankly I'm not sure I need swap when I have 16GB of RAM)</div>
+<div><br></div>
+<div>BE CAREFUL HERE. I managed to bork my Mac installation by trying format my disk from the ubuntu live CD. Thankfuly I had a time machine backup.</div>
+<div><br></div>
+<div>I ended up formatting my disk to my liking by booting in to OS X's recovery mode and creating 3 new partitions. My /boot was only 1GB, swap was 16GB and I set aside about 90GB for the main installation.</div>
+<div><br></div>
+<div>Next you need to format a USB stick with the ubuntu installation image. The instructions I followed are from here: <a href="http://www.ubuntu.com/download/desktop/create-a-usb-stick-on-mac-osx">http://www.ubuntu.com/download/desktop/create-a-usb-stick-on-mac-osx</a>
+</div>
+<div><br></div>
+<div>Reboot with your newly formatted USB and select it from the options presented.</div>
+<div><br></div>
+<div>Choose 'Something else' when asked how to install ubuntu. Click on the 1 GB partition and use it as /boot. Next choose the large partition you created for linux and choose the option "use as physical volume for encryption"</div>
+<div><br></div>
+<div>Also, make sure you choose the partition you have as /boot for the installation of the boot loader. <b>YOU DO NOT WANT TO LEAVE IT AT ITS DEFAULT</b>
+</div>
+<div><br></div>
+<div>Next post I'll include information on how to configure your new dual boot computer!</div>
+
+    </article>
+  </div>
+  
+  <div class="post-container">
+    <h1>Intro to Kerbal Space Program!</h1>
+    <article class="post-content">
+      <div>So I’ve discovered an another awesome sandbox game! I really thought I didn’t like them, but I was wrong. Trying to build space ships is fun! If you succeed, you get to go to space! If you fail things explode in amusing ways! Bonus, you’re some kind of magic god in the game so you can roll back time and make the explosion never happen!</div>
+<div><br></div>
+<div>My only complaint so far has been just how obscure the UI can be… obscure. You have to click or double click or right click or possibly even double right click on exactly the right part of your ship in order to get a menu to show up...</div>
+<div><br></div>
+<div>The best guide I’ve read so far is found here: <a href="http://mykspcareer.com/2014/07/volume1/">http://mykspcareer.com/2014/07/volume1/</a>
+</div>
+<div><br></div>
+<div>The best part of this game though is just how cool I feel while playing! Who doesn’t want to feel like a rocket scientist? It feels really cool to understand how orbital mechanics work.</div>
+<div><br></div>
+<div>BONUS: <span style="line-height: 1.45;">Awesome ships I’ve made!</span>
+</div>
+<div><br></div>
+<div><img src="../images/w600_5bdcec232177a865bf584023af10aef4.png" style="width: 651px; height: auto;"></div>
+<div><br></div>
+<div>I found it is IS possible to build a plane capable of taking off without wheels</div>
+<div><br></div>
+<div>
+<img src="../images/w600_c7765a0ba58ea447bc8e4139ba5fd48b.png" style="width: 368px; height: auto;"><br>
+</div>
+
+    </article>
+  </div>
+  
+  <div class="post-container">
+    <h1>Solution to 1o57's Hackaday Challenge</h1>
+    <article class="post-content">
+      <div>So on October 6th 1o57 (who creates <a href="http://blog.tahnok.me/defcon-22-badge-challenge-walkthrough">the DEF CON badge challenge</a>) gave a fantastic talk at the <a href="http://hackaday.com/2014/10/06/hackaday-10th-anniversary-1o57-and-the-art-of-encryption/">hackaday 10th anniversary</a> which you should totally watch:</div>
+<div><br></div>
+<div><iframe width="500" height="281" src="http://www.youtube.com/embed/-hCL7dE-nqg?feature=oembed" frameborder="0" allowfullscreen></iframe></div>
+<div><br></div>
+<div>(go ahead, I’ll wait)</div>
+<div><br></div>
+<div>You might have noticed some random text in the slides, but you might not have. Anyway here are the slides</div>
+<div><br></div>
+<div>
+<blockquote class="twitter-tweet">
+<p><a href="https://twitter.com/hackaday">@hackaday</a> <a href="http://t.co/YNNoeJDeSU">pic.twitter.com/YNNoeJDeSU</a></p>— LosT/李智上 (@1o57) <a href="https://twitter.com/1o57/status/518582899558215680">October 5, 2014</a>
+</blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<div>
+<blockquote class="twitter-tweet">
+<p><a href="https://twitter.com/hackaday">@hackaday</a> <a href="http://t.co/YNNoeJDeSU">pic.twitter.com/YNNoeJDeSU</a></p>— LosT/李智上 (@1o57) <a href="https://twitter.com/1o57/status/518582899558215680">October 5, 2014</a>
+</blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<div>
+<blockquote class="twitter-tweet">
+<p><a href="https://twitter.com/hackaday">@hackaday</a> <a href="http://t.co/ss3WEzndR9">pic.twitter.com/ss3WEzndR9</a></p>— LosT/李智上 (@1o57) <a href="https://twitter.com/1o57/status/518582806134267904">October 5, 2014</a>
+</blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<div>
+<blockquote class="twitter-tweet">
+<p><a href="https://twitter.com/hackaday">@hackaday</a> <a href="http://t.co/NVxwlBEe2y">pic.twitter.com/NVxwlBEe2y</a></p>— LosT/李智上 (@1o57) <a href="https://twitter.com/1o57/status/518582628450959362">October 5, 2014</a>
+</blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<div>
+<blockquote class="twitter-tweet">
+<p><a href="https://twitter.com/hackaday">@hackaday</a> <a href="http://t.co/oE64HPUqtx">pic.twitter.com/oE64HPUqtx</a></p>— LosT/李智上 (@1o57) <a href="https://twitter.com/1o57/status/518582497672589312">October 5, 2014</a>
+</blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<div>
+<blockquote class="twitter-tweet">
+<p><a href="https://twitter.com/hackaday">@hackaday</a> <a href="http://t.co/LMXhiJj5mu">pic.twitter.com/LMXhiJj5mu</a></p>— LosT/李智上 (@1o57) <a href="https://twitter.com/1o57/status/518582419717226496">October 5, 2014</a>
+</blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<div>
+<blockquote class="twitter-tweet">
+<p><a href="https://twitter.com/hackaday">@hackaday</a> <a href="http://t.co/Tb42KBb8bl">pic.twitter.com/Tb42KBb8bl</a></p>— LosT/李智上 (@1o57) <a href="https://twitter.com/1o57/status/518582291027595264">October 5, 2014</a>
+</blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<div>
+<blockquote class="twitter-tweet">
+<p><a href="https://twitter.com/hackaday">@hackaday</a> <a href="http://t.co/UhXCk0tyLX">pic.twitter.com/UhXCk0tyLX</a></p>— LosT/李智上 (@1o57) <a href="https://twitter.com/1o57/status/518582190322356226">October 5, 2014</a>
+</blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<div>
+<blockquote class="twitter-tweet">
+<p><a href="https://twitter.com/hackaday">@hackaday</a> <a href="http://t.co/bIDNsV3D5g">pic.twitter.com/bIDNsV3D5g</a></p>— LosT/李智上 (@1o57) <a href="https://twitter.com/1o57/status/518581972914819072">October 5, 2014</a>
+</blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+</div>
+<div>
+<blockquote class="twitter-tweet">
+<p><a href="https://twitter.com/hackaday">@hackaday</a> <a href="http://t.co/zqarmBmwNd">pic.twitter.com/zqarmBmwNd</a></p>— LosT/李智上 (@1o57) <a href="https://twitter.com/1o57/status/518581836297936897">October 5, 2014</a>
+</blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<div><br></div>
+<div>And here is a copy of all the letters on each of the slides</div>
+<div><br></div>
+<div>DO
+<div>XIYL</div>
+<div>DCYV</div>
+<div>DKIK</div>
+<div>NKUM</div>
+<div>KRYD</div>
+<div>NBYG</div>
+<div>ONYM</div>
+</div>
+<div>NXOC</div>
+<div><br></div>
+<div>on one line:</div>
+<div><br></div>
+<div>DOXIYLDCYVDKIKNKUMKRYDNBYGONYMNXOC</div>
+<div><br></div>
+<div>Hrmmm, well the first thing you might try is a Caesar cipher. In the video you’ll notice that 1o57 repeatedly mentions that it’s Hackaday’s TENTH anniversary, so we should try decrypting the above string with a key of 10. (here’s <a href="http://web.forret.com/tools/rot13.asp?rot=10&amp;cipher=DOXIYLDCYVDKIKNKUMKRYDNBYGONYMNXOC&amp;dir=decrypt">a tool do to that</a>)</div>
+<div><br></div>
+<div>TENYOBTSOLTAYADAKCAHOTDROWEDOCDNES</div>
+<div><br></div>
+<div>(side note: I cheated on this step by using an automated caesar cipher breaker)</div>
+<div><br></div>
+<div>Hrmmm that still looks like nonsense, but it does start with the word ten, so we’re probably close...</div>
+<div><br></div>
+<div>Wait a second! The string is backwards! It’s not ten it’s net!</div>
+<div><br></div>
+<div>SENDCODEWORDTOHACKADAYATLOSTBOYNET</div>
+<div><br></div>
+<div>or cleaned up</div>
+<div><br></div>
+<div>Send codeword to hackaday@lostboy.net</div>
+<div><br></div>
+<div>Ok, well now we know where to send the codewords. The only unsolved part of the puzzle is this last slide</div>
+<div><br></div>
+<div>
+<blockquote class="twitter-tweet">
+<p><a href="https://twitter.com/hackaday">@hackaday</a> <a href="http://t.co/01Magsvu1u">pic.twitter.com/01Magsvu1u</a></p>— LosT/李智上 (@1o57) <a href="https://twitter.com/1o57/status/518581720312856577">October 5, 2014</a>
+</blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<div><br></div>
+<div><br></div>
+<div><img src="../images/w600_9f8bf4c63dee3f082eb17cc37a1f4292.png" style="width: 872px; height: auto;"></div>
+<div><br></div>
+<div>WTF are those things?! Now fans of Sherlock Holmes may recognize these, but at the time I did not, so I went to my best friend Google to try and figure it out. I tried lots of search terms like “stickman code" (and variants on that) and “semaphore" (since I thought maybe the positions on the flags was significant), until I came across this page:</div>
+<div><br></div>
+<div>http://www.geocachingtoolbox.com/index.php?lang=en&amp;page=dancingMen</div>
+<div><br></div>
+<div>which features a code called the Dancing Men!</div>
+<div><br></div>
+<div>This code comes from a Sherlock Holmes novel called <a href="https://en.wikipedia.org/wiki/The_Adventure_of_the_Dancing_Men">The Adventure of the Dancing Men</a>
+</div>
+<div><br></div>
+<div>
+<img src="../images/w600_2aa8c86d7c01e076f23d0d3b19718c10.png" style="width: 825px; height: auto;"><br>
+</div>
+<div><br></div>
+<div>And we can use the above image to decrypt the band, which decrypts to:</div>
+<div><br></div>
+<div>codeword psychobilly ciphers</div>
+<div><br></div>
+<div>Thanks for the fun puzzle 1o57!</div>
+
+    </article>
+  </div>
+  
+  <div class="post-container">
+    <h1>NIXIE TUBES!!</h1>
+    <article class="post-content">
+      <div>So approximately 2000 years ago I got a set of 6 nixie tubes as a gift. WTF is a nixie tube you ask? This is a nixie tube:</div>
+<div><br></div>
+<div><img src="../images/w600_85f1d5be037e617d9641ca65c119a813.jpg" alt="File:ZM1210-operating edit2.jpg" height="600" width="187" style="height:auto;"></div>
+<div><br></div>
+<div>It’s an device for displaying all ten digits (0 through 9) using “glow discharge" (that thing that makes old incandescent lightbulb works), while looking really really cool.</div>
+<div><br></div>
+<div>The tubes I have are IN-17s and they operate at <b>180V</b>. That is a lot of volts and it was pretty scary for me putting the circuit together since I’ve never worked with such high voltages. Fortunately, these works at relatively low amperages so I only have to worry about pain, not death.</div>
+<div><br></div>
+<div>Now, you might be wondering what I need to drive these things. The answer would be a <font face="Arial"><b>Russian K155NA1 Driver Chip</b>, which is basically a high voltage <a href="https://en.wikipedia.org/wiki/Binary-coded_decimal">Binary-Coded Decimal</a> decoder and a circuit to step up wall wart DC voltage (9V at 1a) to 180V. Thankfully <a href="http://www.robotpirate.com/">a nice person</a> on the internet made an arduino shield to do all this called the <a href="http://arduinix.com/">ArduiNIX</a> </font>
+</div>
+<div><br></div>
+<div>Here’s my completed display:</div>
+<div><br></div>
+<div><img src="../images/w600_2dacf7a38ca97348b6cc9b433a8b493f.jpg" style="height:auto;" width="475"></div>
+<div><br></div>
+<div>I’m still trying to understand how the circuit works. There are 20 pins and 4 grounds, so I can apparently control a total of 80 digits. I’m only using 60 digits in this setup (10 digits per tube times 6 tubes), but I’m still pretty lost when reading the <a href="http://arduinix.com/Main/Code/ANX-6Tube-Clock-Crossfade.txt">demo code</a>
+</div>
+<div><br></div>
+<div>My current understanding is that I have 2 BCDs which I can control with 8 pins (4 each, which makes sense since 2^4 = 16 &gt; 10 digits), and I can control the 4 anode (aka ground) pins. From the code it seems I have to display 2 digits at a time, but I’m not at all clear how the digits are split up. That will be the subject for my next post!</div>
+
+    </article>
+  </div>
+  
+  <div class="post-container">
+    <h1>SHELL SHOCKED</h1>
+    <article class="post-content">
+      <div>There's a lot of chatter right now about this new bash env bug, affectionately known as <a href="https://access.redhat.com/node/1200223">CVE-2014-6271</a>. I'm going to try and explain for your (but mostly my own) benefit.<br>
+</div>
+<div>
+<div><br></div>
+</div>
+<div><span style="font-size: 18px;"><b>BACKGROUND</b></span></div>
+<div>
+<div><br></div>
+<div>The primary way that programmers interact with a (un|l)inux system is via the shell, aka THE COMMAND LINE (cue thunder clap)</div>
+<div><br></div>
+<div>Now, like everything on a computer, the shell is a program. It's kinda special since it runs OTHER programs. It's not just users who use it, but also other commands.</div>
+<div><br></div>
+<div>In bash, there's these things called **environment variables**, which is a way to declare values which can be used by scripts/programs to store variables. A common shell variable is LANG, which contains the current users language. A program launched from the shell can use this information to display output in the correct language.</div>
+<div><br></div>
+<div>Bash is also a self contained programming language, and like any good programming languge it has functions. You can declare functions in bash like so</div>
+<div><br></div>
+</div>
+<div><span style="font-family: 'Andale Mono';">       foo() {</span></div>
+<div><span style="font-family: 'Andale Mono';">         echo 'bar';</span></div>
+<div><span style="font-family: 'Andale Mono';">       }</span></div>
+<div>
+<div><br></div>
+<div>Seems pretty straight forward right? The key is that bash stores functions that it is exporting to another bash shell using environment variables.</div>
+<div><br></div>
+<div>Only there's a bug in bash which means that once a function is parsed, bash happily keeps executing the rest of the environment variable.</div>
+</div>
+<div><br></div>
+<div><span style="font-size: 18px;"><b>THE ACTUAL PROBLEM</b></span></div>
+<div>
+<div><br></div>
+<div>Ok, so what does that look like? You can normally declare an env variable like so:</div>
+<div><br></div>
+</div>
+<div><span style="font-family: 'Andale Mono';">       bar='something important'</span></div>
+<div>
+<div><br></div>
+<div>You can declare a function in an environment variable like so:</div>
+<div><br></div>
+</div>
+<div><span style="font-family: 'Andale Mono';">       foo='() { echo 1;};'</span></div>
+<div>
+<div><br></div>
+<div><br></div>
+<div>And the exploitable version is like this:</div>
+<div><br></div>
+</div>
+<div><span style="font-family: 'Andale Mono';">       x='() { ignored;}; echo vulnerable' bash</span></div>
+<div>
+<div><br></div>
+<div>The x='() { :;}; bit is just to ensure that bash parses this environment variable like a function. After the second semi-colon, you can execute any bash you want.</div>
+</div>
+<div><br></div>
+<div><b><span style="font-size: 18px;">WHY THIS IS BAD</span></b></div>
+<div>
+<div><br></div>
+<div>What's the big deal you ask? I don't let random internet strangers set environment variables! Well, you might be doing it without realizing it. The first series of exploits that can be taken advantage of right now is CGI.</div>
+<div><br></div>
+<div>CGI lets you execute a shell script of any kind to respond to a web request. The problem is that if you are using a bash script, cgi helpfully sets the user agent of the request it is trying to process to an environment variable! This means that by doing</div>
+</div>
+<div><br></div>
+<div><span style="font-family: 'Andale Mono';">       curl -A "() { :;}; whoami" http://some.vulnerable.computer/cgi-script</span></div>
+<div>
+<div><br></div>
+<div>You can execute code</div>
+<div><br></div>
+<div>The second class of attacks that is interesting is that there are lots of ssh systems that provide access, but don't give the end user a shell. The most common case of this is with git, where users exist on a system for execution, but ssh is configured not to respond with a shell. A user without a shell account (but with access) can login to ssh like so:</div>
+<div><br></div>
+<div><span style="font-family: 'Andale Mono';">  ssh -o 'rsaauthentication yes' user@host.me '() { ignored; }; /usr/bin/whoami'</span></div>
+<div><br></div>
+<div>The final interesting class of attacks is with dhclient. <span style="line-height: 1.45;">Now, when you connect your computer to a network, it sends a request out to EVERY computer asking for an IP address. Normally a DHCP server would respond to this request, and this response is used to set some environment variable before a shell script is run on the requester's machine to set ip addresses and such what. The problem here is that a malicious user could respond faster than a real DHCP server with a response that contained fields which would be put into environment variables and then GAME OVER.</span>
+</div>
+</div>
+<div><br></div>
+
+    </article>
+  </div>
+  
+  <div class="post-container">
+    <h1>Make something (or How I learned to stop worrying and love making things)</h1>
+    <article class="post-content">
+      <div>
+<div>I’d like to encourage all of you (myself included) to make more things. I don’t care what kinds of things you make, but make something. You can do it by yourself, or you can work with someone else, or you can make something based on someone else’s work. Here are some suggestions of things you can make:</div>
+<div><br></div>
+<ul>
+<li>A bowl of pasta with homemade sauce and meatballs</li>
+<li>A robot that you can play catch with</li>
+<li>A story about a girl and her pet rat</li>
+<li>A webpage that generates new, exciting, and sometimes nonsensical jokes about noses</li>
+<li>An edit to wikipedia about a topic that interests you</li>
+<li>A quilt for someone you care about like a pet</li>
+</ul>
+<div>I enjoy every part/phase/stage of making.</div>
+<div><br></div>
+<div>There’s the planning stage, where you try and come with ideas, turn them around in your mind and tweak them until you can bring it into the world.</div>
+<div><br></div>
+<div>There’s the scavenging phase where you find and bring together all of the pieces/thoughts/feelings you need to make the thing inside your head(s).</div>
+<div><br></div>
+<div>There’s the doing phase, where you take something like a blank page, an existing project, or a box of parts and transform it into something new/different/better/worse than it was before</div>
+<div><br></div>
+<div>And then it starts over again. The thing you’ve made eventually changes again. Sometimes it’s entropy as it falls apart. Sometimes it’s you, coming back to tweak what you’ve created because you had another idea. Sometimes it’s teeth, because you’ve baked a delicious cake and there’s no point in letting a cake go to waste.</div>
+<div><br></div>
+<div>You’ll be able to look forward to some part of the making process, or think back to the end result and it’ll make you smile or frown or both.</div>
+<div><br></div>
+<div>If you need help making things, or want to share the things you’ve made, or you’re looking for people who like making just as much as you do, you should see if there’s a hackerspace/makerspace/sewing club/quilting mafia/organic food co-op near you and you should get involved. We humans are social creatures.</div>
+<div><br></div>
+<div><br></div>
+<div>PS</div>
+<div><br></div>
+</div>
+<div>
+<span style="font-family: 'Andale Mono';"> ____   ___  _   _ _ _____   ____  _____      _      ____ ___ ____ _  __</span>
+<div><span style="font-family: 'Andale Mono';">|  _ \ / _ \| \ | ( )_   _| | __ )| ____|    / \    |  _ \_ _/ ___| |/ /</span></div>
+<div><span style="font-family: 'Andale Mono';">| | | | | | |  \| |/  | |   |  _ \|  _|     / _ \   | | | | | |   | ' /</span></div>
+<div><span style="font-family: 'Andale Mono';">| |_| | |_| | |\  |   | |   | |_) | |___   / ___ \  | |_| | | |___| . \</span></div>
+<div><span style="font-family: 'Andale Mono';">|____/ \___/|_| \_|   |_|   |____/|_____| /_/   \_\ |____/___\____|_|\_\</span></div>
+</div>
+<div><span style="font-family: 'Andale Mono';">                                                                      </span></div>
+<div><span style="font-family: 'Andale Mono';"><br></span></div>
+<div>
+<i>(This post was also sent to the listserv on 20140908)</i><br>
+</div>
+<div><br></div>
+
+    </article>
+  </div>
+  
+  <div class="post-container">
+    <h1>DEFCON 22 Badge Challenge Walkthrough</h1>
+    <article class="post-content">
+      <p><img src="../images/w600_b7504d23e0b7ac4c424ee7e2d4c7ccba.jpg" style="height: auto;"><br>
+Last week I was lucky enough to attend DEF CON for the first time and it did not disappoint. I've been out of commission for a few days with the con plague, but I'm feeling well enough now to try some blogging.</p>
+<p>This isn't the first write up to appear for the badge challenge. There's the <a href="http://elegin.com/dc22/">winning team's write up</a>, and runner up <a href="http://potatohatsecurity.tumblr.com/post/94565729529/defcon-22-badge-challenge-walkthrough">team potatoe sec's</a> write up.</p>
+<p>Why am I writing another one? Mostly it's because I wanted to make sure I really understood the challenge and it's solution. Additionally, I've noticed that the other two are either missing steps, or contain mistakes.</p>
+<p>Let's start with some background (you can skip this if you know about the badge challenge). DEFCON is a hacker conference, and hackers love puzzles. As a result, for the past 5 years (I think) <a href="https://twitter.com/1o57">1o57</a> has created a series of mind bending puzzles centered around the badges that DEFCON attendees get. It's designed to be solved in 3 days and force people to interact and talk since there are multiple different types of badges.</p>
+<p>My interest in the badge challenge first got piqued when I read through a DC21 walkthrough by <a href="http://elegin.com/dc21/">last year's winning team</a>. I didn't have a team or the willingness to miss all the other things going at DEFCON, so most of this walk through is based off of the two guides I mentioned above and a taxi ride with a member of the runner up team on the way to the airport, and the fine folks who hung around room 1057.</p>
+<p>So, what follows is as legible and clear a walkthrough as I can manage. Please leave comments if you spot any mistakes, or feel I've explained something using an identity like 2+2=5.</p>
+<p>If you want to follow along at home, you can download <a href="https://dl.dropboxusercontent.com/u/9393938/dc22-badge.zip">this archive</a> which contains as much of the badge challenge materials as I could manage to gather together. I'm still missing good photos of the front and back of all the badges, so if you have a one, please send it my way.</p>
+<p>Final note: unless otherwise noted, all materials that follow (include the text) is released under a <a href="https://creativecommons.org/licenses/by/4.0/">creative commons attribution license</a></p>
+<h1>Lanyards</h1>
+<p><img src="../images/w600_4e3fcbe36a0e25335a584131b800e7f9.jpg" style="height: auto;"><br>
+(source: me)</p>
+<p>This is the lanyard. There are 3 important parts to it.</p>
+<p>First, there's the Chinese numbers on the left, which you can read with this handy chart:</p>
+<p>一      1<br>
+二      2<br>
+三      3<br>
+四      4<br>
+五      5<br>
+六      6<br>
+七      7<br>
+八      8<br>
+九      9<br>
+十      10</p>
+<p>Then, here are the weird symbols in the middle. Those are 4 digit numbers written using the Cistercian cipher from <a href="https://en.wikipedia.org/wiki/The_Ciphers_of_the_Monks">The Ciphers of the Monks</a>. You can decode them with:</p>
+<p><img src="../images/w600_8961555d5c208beae2f558ecc3b78756.png" style="height: auto;"><br>
+(source: <a href="http://www.davidaking.org/Ciphers.htm">The Ciphers of the Monks</a>)</p>
+<p>The last part is a Korean word, saying either vertical or horizontal</p>
+<p>수직 (sujig): vertical</p>
+<p>수평 (supyeong): horizontal</p>
+<p>Big thanks to 1o57, who showed up at one point with a full set of EIGHT lanyards, pictured below</p>
+<p><img src="../images/w600_3bc1fe47e97da94a9d767b55aef501bb.jpg" style="height: auto;"><br>
+(source: me)</p>
+<p>It was pretty tough trying to gather all of them. Initially, the total number of lanyards was unclear.</p>
+<p>We had a hell of a time trying to gather all of the lanyards before 1o57, since we assumed the numerals were unique and didn't look for the other 4 and we thought there might be a lanyard with a Chinese 1 or 3. Also, we thought there might even be 9 lanyards, since there were 3 "suits" in the DEFCON iconography: (the happy skull and cross-bones, the rotary dial and the floppy disk).</p>
+<p>Anyway, how do you decode these?? It turns out the Cistercian numbers are all in the range of upper case decimal ASCII, but without an ordering it's gibberish.</p>
+<p>First, you have to divide the lanyards into vertical and horizontal.</p>
+<p>At one point LoST mentioned that he really loved weaving potholders as a kid, so clearly the lanyards need to be woven together in some fashion.</p>
+<p>Next, it turns out that all of the lanyards are less than 15, so they can be written in binary using only 4 bits.</p>
+<p>Horizontal</p>
+<pre><code> 3 | 0 0 1 1
+ 4 | 0 1 0 0
+ 4 | 0 1 0 0
+ 9 | 1 0 0 1
+</code></pre>
+<p>Vertical</p>
+<pre><code> 5 10 11 14
+ </code></pre>
+    </article>
+  </div>
+  
+  <div class="post-container">
+    <h1>Laser Cut Dominion Playing Field</h1>
+    <article class="post-content">
+      <p><a href="http://postachio-images.s3-website-us-east-1.amazonaws.com/f72f124e988b45f2872e5594525091e5/f6c3a7ded1001d1f6ac1a68d0ee1fed4/w600_6c173167f119c2f8fb3d649fa32fcbe7.jpg"><img src="../images/w600_6c173167f119c2f8fb3d649fa32fcbe7.jpg"></a><br>
+<a href="http://postachio-images.s3-website-us-east-1.amazonaws.com/f72f124e988b45f2872e5594525091e5/f6c3a7ded1001d1f6ac1a68d0ee1fed4/w600_95f43c2cd779254f334290665aa68a61.jpg"><img src="../images/w600_95f43c2cd779254f334290665aa68a61.jpg"></a><br>
+<a href="http://postachio-images.s3-website-us-east-1.amazonaws.com/f72f124e988b45f2872e5594525091e5/f6c3a7ded1001d1f6ac1a68d0ee1fed4/w600_324da83881e57af0bdbc19a9a37426be.jpg"><img src="../images/w600_324da83881e57af0bdbc19a9a37426be.jpg"></a><br>
+It’s my girlfriend’s birthday this week, so I decided to try and improve our experience while playing dominion. If you’ve ever played before, you know that you need quite a bit of space to lay out the 15 (at least) cards. I found these designs on thingiverse for a pretty sweet looking board (which you can find here <a href="http://www.thingiverse.com/thing:19144">http://www.thingiverse.com/thing:19144</a>). I have access to a Epilog Zing laser cutter through <a href="http://artengine.ca/">Artengine</a>. It’s a pretty cool machine, with a bed size of 24" by 12" and it can cut through 1/4" MDF with no problem. The problem was that the 2 file formats included wouldn’t open in inkscape! I have to open them in order to ensure that the lines are 0.001" thick if I want a vector (cut), rather than a raster (engraving) to come out of the laser.<br>
+First attempt to check the DXF files was with Inkscape, which complained about libxml2 missing when I tried using the Mac version. Next, I tried opening them in Autocad, Qcad, Inventor Fusion and DraftSight. Some of the programs worked, but I couldn’t set the line width that was used when creating a PDF. Finally, I gave up and set up Ubuntu 14.04 inside virtual box and installed Inkscape there. Success! I was able to create both SVG and PDF versions of the DXF files with the appropriate linewidths and document size.<br>
+You can download the altered things here: <a href="http://www.thingiverse.com/thing:363426">http://www.thingiverse.com/thing:363426</a><br>
+Big thanks to <a href="http://www.thingiverse.com/flomo/designs">flomo</a> for the initial designs.</p>
+
+    </article>
+  </div>
+  
+  <div class="post-container">
+    <h1>A Noob's attempt at the 2014 DEF CON CTF Qualifiers</h1>
+    <article class="post-content">
+      <p><img src="../images/w600_c29d8b9a02381da1d1e2a44176f43605.png" style="height: auto;"></p>
+<p>By a happy coincidence, the DEF CON Capture the Flag Qualifiers were 2 weekends ago, the same weekend I was cooped up and doped up after my wisdom teeth removal. Figuring that I had nothing to loose by at least checking out the challenges. I signed myself up as team TTT</p>
+<h2>What went down</h2>
+<p>I managed to score myself 2 whole points! That’s almost 40 points behind the winner, but they had like way more people and I figure 2 points isn’t too shabby given that I was a single person, on codeine with about zero  relevant experience.</p>
+<h3>Routarded</h3>
+<p>The challenge consisted of a url that led to an unsecured router. Step 1 was to guess the default password. I tried admin / admin, admin / password and admin / (nothing) without any luck. This led me to http://www.routerpasswords.com/ which contains the default passwords for most routers. I figured I would work my way through the list. Thankfully I got lucky, the first new combo I treid was (blank) / admin. Now to look for the flags…</p>
+<p>I poked around a bit, tried changing the password (it reset) and a few other things. I settled on the utitlies tab, which let you ping an ip address / host. It seemed like the output was exactly the output of ping on the command line… I wonder if they sanitize their input? Checking the HTML for the page shows that there’s a js function that’s called on form submission that strips characters. At first, I tried using curl to post data directly, but I couldn’t get the cookie jar working quite right. Instead, I just replaced the sanitization function with an identity function and tried submitting ‘; ls’ and voila! I got a directory listing! Oh hey, there’s a file called flag. Next up submitting ‘; cat ./flag’ and I had my first flag!</p>
+<h3>Hackertool</h3>
+<p>This next one asked you to submit the MD5 for a file and contained a link to a torrent. The file in the torrent was called EVERY_IP_ADDRESS.txt. My first guess was that I might be able to extract the hash directly from the torrent file, since I’m pretty sure you have to be able to compare the hash of the file you torrent to what it should be. Sadly I didn’t have any luck in this approach, probably due to my incompetence, but also because the spec uses SHA1…</p>
+<p>Next thought, why not just generate every ip address myself? I wrote a ruby script, and then a go script to do this since it took nearly 40 minutes. </p>
+<p><script src="https://gist.github.com/93458b0f4371f9b53c00.js"></script></p>
+<p><script src="https://gist.github.com/f65b9f9f98d938c095ef.js"></script></p>
+<p>After the game was over, I realized I didn’t actually have to create the 65GB txt file, I could have just fed the input into a MD5 hash function without finalizing the hash.</p>
+<h3>3DTTT</h3>
+<p>This one was fun! I banged my head against it for much too long though and I never got the point for it… You were given an address that you could telnet into a play a game of 3d tic tac toe against an AI. But you had to write a script to do it for you, since if you took too long, the connection closed.</p>
+<p><script src="https://gist.github.com/824e016cddcd4fb87651.js"></script></p>
+<p>Here’s the source for my bot… It doesn’t do especially well. Sometimes I’d get lucky and win more than I lost, but generally I’d loose too many and I’d have to start over.</p>
+<p>Except once! One time I got lucky and I won a bunch of games in a row, but I didn’t have any code written to deal with a winning state, nor did I output the ordering that led to my miraculous bot wins… I felt like such an idiot</p>
+<h3>Other challenges</h3>
+<p>I tried a few other ones, but they were mostly incomprehensible to me. I need to know more about disassembling programs, which apparently means learning how to use a tool called Ida. Also, I should learn WAY more assembler. If you want to read some solutions to the other challenges, check out http://www.routards.org/2014/05/defcon-22-quals-dosfun4u.html</p>
+
+    </article>
+  </div>
+  
+  <div class="post-container">
+    <h1>Knitting with Paracord!</h1>
+    <article class="post-content">
+      <p>My girlfriend recently finished sewing a bag for me, but it doesn’t have a strap yet!<br>
+At first I tried making <a href="http://web.archive.org/web/20080214132055/http://www.slatts.fsworld.co.uk/slatts-knot.htm">Slatts Rescue Belt</a> by following this instructable on <a href="http://www.instructables.com/id/How-to-make-a-Paracord-Rescue-Belt/?ALLSTEPS">how to make a paracord rescue belt</a>, but I didn’t turn out the way I was hoping at all…<br>
+Instead I figured I would try knitting the strap. I’ve never tried knitting paracord before, but the strap that I end up with would just as well as the other method since I end up with a flat strap that I can unravel quickly.<br>
+If you want to learn how to knit check out this video:<br>
+<iframe width="640" height="360" src="http://www.youtube.com/embed/nWJQvsZ6kT0?feature=oembed" frameborder="0" allowfullscreen></iframe></p>
+<p>or this book: <a href="http://www.amazon.com/Knit-Step-Vikki-Haffenden/dp/0756692717/">Knit: Step by Step</a> It has lots of patterns and is pretty good if you like learning from books.<br>
+The pattern I’m using is one row knit, one row purl and it’s 6 rows wide.</p>
+<p><a href="http://postachio-images.s3-website-us-east-1.amazonaws.com/f72f124e988b45f2872e5594525091e5/b057fc6dd32669b49bfbe5187c748f09/w600_2b2e24c58a917dcad6d4a515ea6447e6.jpg"><img src="../images/w600_2b2e24c58a917dcad6d4a515ea6447e6.jpg"></a></p>
+
+    </article>
+  </div>
+  
+  <div class="post-container">
+    <h1>Why is Minecraft fun?</h1>
+    <article class="post-content">
+      <p><a href="http://postachio-images.s3-website-us-east-1.amazonaws.com/f72f124e988b45f2872e5594525091e5/78a645de933f487f8fbca820da941b17/w600_367c1d07090c721f7fcf846f5936b25a.jpg"><img src="../images/w600_367c1d07090c721f7fcf846f5936b25a.jpg"></a><br>
+When minecraft first came out, I thought I wouldn’t enjoy playing the game because I generally didn’t enjoy open ended games. I had tried playing World of Warcraft before, but the sheer number of options open to a new player put me off. When I was playing a video game, I wanted there to be a plot, with a goal or a story or something!</p>
+<p>My attidude has shifted. Now I really enjoy the lack of structure in minecraft. The fact that it’s almost entirely open ended is pretty fun because I get to decide how to play whenever I play. Do I want to build something? Do I want to mine? Do I want to <a href="https://www.youtube.com/watch?v=7sNge0Ywz-M">construct a cpu inside of my game so I can program in my program</a>? <br>
+But how do you make a game where you can do anything fun? With self imposted limit. I choose to play in survival mode rather than in creative mode. Why would I choose to make something harder? It’s because certain kinds of fun come from doing something hard. I think an integral part of play is the challenge.<br>
+Minecraft illuminates how in all games, we impose limits on our selves. There’s a greater sense of accomplishment that comes from creating something where you had to forage all the materials your self. It's harder but it's more fun.<br>
+My problem initially with minecraft was that making up your own story is hard but because it's hard it's more fun. It forces me to be more active and creative. And I like that</p>
+
+    </article>
+  </div>
+  
+  <div class="post-container">
+    <h1>Adventures in meditation</h1>
+    <article class="post-content">
+      <p><img src="../images/w600_f52670010fd9b28251a6d0334ff8cdce.jpg" style="height: auto;" alt="http://images.fotocommunity.de/bilder/bach-fluss-see/see-teich-tuempel/meditation-c20eccba-2002-4e13-a226-5f2d811abe9c.jpg"><br>
+The first time I meditated I was in high school and it was the night before a big exam. I don’t remember well how I found out about it (probably stumbleupon) but it became an important part of the exam preperation ritual for me. I’d lie in bed before going to sleep and count to 100. I stopped doing it on my own for a long time, although I did some small meditation sessions during the martial arts classes I took in high school and university.</p>
+<p>Finally after getting fed up with my poor concentration at work, I decided that meditation would help me with focus. I also wanted to fix my posture and the good posture you need while meditating seemed like a good way to improve how I sat. This was last summer, but it turned out that sitting was really hard physically. That’s mostly because I was sitting wrong. I gave up for a few months until January of last year rolled around when I decided to make meditating regularly one of my goals. At first I just tried to do it on a best effort basis, with the goal of 3 or 4 times a week. That ended poorly. It was much to easy to find an excuse to not meditate today because I was too tired or too busy.</p>
+<p>Finally I decided to give <a href="">beeminder</a> a try. If you’ve never heard of beeminder you should <a href="https://www.beeminder.com/overview">go read this page post about it</a> but basically it’s a goal tracking with teeth. You can track my progress <a href="https://www.beeminder.com/tahnok/goals/meditate">here</a> (for those of you who are that bored). Having actual money on the line helped a lot. I started meditating considerably more often, but it wasn’t for very long periods, and I struggled a lot with the actual focus bit. My technique at this point was the same one I started out with initially. Counting 100 breaths while sitting cross-legged somewhere dark and quiet.</p>
+<p>After getting frustrated and de-railling from my beeminder a few times, I went into RESEARCH MODE and scoured the internet. Someone from the <a href="http://lesswrong.com/">Less Wrong IRC</a> finally suggested the <a href="http://aromeditation.org/">Aro Meditation course</a>. It’s basically a weekly email that walks you through meditation as if you were a complete beginner. I highly recommend it as a resource if you are just starting out. One of the most useful pieces of information that it introduced was <a href="http://aromeditation.org/how-to-sit-like-a-human.html">how to site like a human</a>. Right now I am on week 13 of the Aro course and I can comfortably meditate for 30 minutes and I aim for 6 times a week. It’s been a pretty successful course I think, but I am starting to run into a wall.</p>
+<p>Currently when I meditate I find it super difficult to quiet my mind and I often end up following trains of thought for quite some time before I realize I’ve let my mind wander. I suspect that this is because I tried to start using the more advanced meditations techniques suggested in the Aro course before I had masted the easy ones. I’m also going to try an experiment and use the meditation technique described <a href="http://lesswrong.com/lw/5jj/meditation_insight_and_rationality_part_2_of_3/">here</a></p>
+<p>Has meditation increased my concentration? I’m not entirely sure. I think it’s helped since I am finding it easier to focus for long-ish periods of time at work, but there are so many other factors that have changed since my initial decision that I can’t in good faith assign a high probability to meditation being the cause of this.</p>
+<p>Will I keep meditating? Yes, I think I will. My goals have shifted a bit towards trying to become more mindful. The most valuable part of regular meditation has been to spend some serious time examing my own mind and my own thoughts. It’s kind of amazing how easy it is to avoid noticing how your brain actually works.</p>
+<h2>Links</h2>
+<ul>
+<li><a href="https://www.beeminder.com/overview">Beeminder</a></li>
+<li><a href="http://lesswrong.com/">Less Wrong</a></li>
+<li><a href="http://aromeditation.org/">Aro meditation course</a></li>
+</ul>
+
+    </article>
+  </div>
+  
+  <div class="post-container">
+    <h1>How to host your own email on a $15 a month vps (Part 1)</h1>
+    <article class="post-content">
+      <p><img src="../images/w600_21d5fc5797d1e3daa94cb208976a7ed8.jpg"></p>
+<h1>Intro</h1>
+<p>Every now and then my paranoia will take over and I’ll have an urge to break free of all 3rd parties that I depend on for my life on the internet. The last time it struck I decided to set up my own mail server. I’m going to walk you through what I did in order to get it working</p>
+<h2>Important Acronym List (IAL)</h2>
+<p><strong>Mail Transfer Agent: MTA</strong> This is the piece of software that handles incoming AND outgoing email. It receives email and then decides whether or not the message is for one of the users it knows about. It also decides who gets to send email and handles the delivery. In this tutorial we’re going to be using <em>Postfix</em>. The primary protocol that it speaks is SMTP</p>
+<p><strong>Internet Message Access Protocol: IMAP</strong> By default, postfix will deliver email messages to a folder on the computer it’s running on and the only way to access the messages is when you are logged into that box. Since this is kind of impractical, there are a ton of protocols that have been created to make accessing email messages on a remote server easy. We’re going to use <em>dovecot</em> and IMAP (the protocol) to access our messages on the server. You can also get dovecot to work with POP3, but this guide doesn’t cover getting it set up since it’s an older and less useful protocol.</p>
+<h2>What you need</h2>
+<ul>
+<li>A domain</li>
+<li>I use <a href="https://www.namecheap.com/">namecheap</a>, but I hear good things about hover.com</li>
+<li>A server</li>
+<li>Preferably running debian or ubuntu. It will be helpful for preventing your mail from being marked as spam if you can set the <a href="https://en.wikipedia.org/wiki/Reverse_DNS_lookup">PTR / reverse DNS</a> for this server’s IP address. Sadly, this means that you probably can’t run this on a server you have in your house. If you need a server, I recommend <a href="http://buyvm.net/">BuyVM</a> since they have a $15 a year VPS that is perfectly adequate for this purpose.</li>
+<li>An SSL certificate</li>
+<li>You can get one for free from <a href="https://www.startssl.com/">StartSSL</a>
+</li>
+</ul>
+<h2>Directions</h2>
+<p>We’re mostly going to follow along with <a href="https://library.linode.com/email/postfix/postfix2.9.6-dovecot2.0.19-mysql">this guide from linode</a> except for the bits about MySQL [1]. I don’t understand why they would use MySQL here since it’s huge overkill unless you are dealing with a very large number of users. Instead of MySQL we’re going to use sqlite since it doesn’t require any processes to be running and eating up  the limited RAM available on the VPS.</p>
+<p>You should follow the linode guide, except when they start talking about MySQL in which case you should come back here and see how to do it with SQLite. I’ve tried to match up the section/numbering so that it’s easy to figure out what to do differently.</p>
+<h3>Installing Packages</h3>
+<h4>Step 3</h4>
+<p>Install these packages instead: <code>sudo apt-get install postfix postfix-mysql dovecot-core dovecot-imapd dovecot-lmtpd dovecot-sqlite sqlite</code></p>
+<h4>Step 4 and 5</h4>
+<p>Ignore</p>
+<h3>SQLite instead of MySQL</h3>
+<h4>Creating the database</h4>
+<p>Download <a href="https://tahnok.me/cdn/mailbox.sqlite">this empty mailbox.sqlite</a> and put it in /etc/mailbox.sqlite or if you don’t trust me you can create you’re own with this schema:</p>
+<p><script src="https://gist.github.com/tahnok/9718301.js"></script></p>
+<p>This will create our tables</p>
+<h4>Adding data</h4>
+<p>You can add data to sqlite database with the same syntax as MySQL, but interact with the database using the <code>sqlite</code> or <code>sqlite3</code> command instead of mysql</p>
+<h3>Postfix</h3>
+<h4>Step 8</h4>
+<p>Use the following instead of the one in the guide</p>
+<p><script src="https://gist.github.com/tahnok/9718346.js"></script></p>
+<p>We’ll be using these file names later as well</p>
+<h4>Step 11</h4>
+<p>Use this instead: nano /etc/postfix/sqlite-virtual-mailbox-domains.cf</p>
+<h4>Step 12</h4>
+<p><script src="https://gist.github.com/tahnok/9718380.js"></script></p>
+<h4>Step 15</h4>
+<p>You can test the set up by referencing your sqlite file instead of the mysql one. eg: postmap -q example.com sqlite:/etc/postfix/sqlite-virtual-mailbox-domains.cf</p>
+<h4>Step 16</h4>
+<p>Use this instead: nano /etc/postfix/sqlite-virtual-mailbox-maps.cf</p>
+<h4>Step 17</h4>
+<p><script src="https://gist.github.com/tahnok/9718421.js"></script></p>
+<h4>Step 20</h4>
+<p>Test with: postmap -q email1@example.com sqlite:/etc/postfix/sqlite-virtual-mailbox-maps.cf</p>
+<h4>Step 21</h4>
+<p>Use this instead: nano /etc/postfix/sqlite-virtual-alias-maps.cf</p>
+<h4>Step 22</h4>
+<p><script src="https://gist.github.com/9718440.js"></script></p>
+<h4>Step 25</h4>
+<p>Test with: postmap -q alias@example.com sqlite:/etc/postfix/sqlite-virtual-alias-maps.cf (You get the idea at this point I hope)</p>
+<h4>Step 28</h4>
+<p>I skipped this bit entirely without any ill effects</p>
+<h3>Dovecot</h3>
+<h4>Step 25 to Step 28</h4>
+<p>Please use the following as the contents of <em>dovecot-sql.conf.ext</em></p>
+<p><script src="https://gist.github.com/9718496.js"></script></p>
+<h2>Conclusions</h2>
+<p>If all went well then you should be able to connect successfully to your new email server with your email client to both receive and send email! It’s amazing, I know.</p>
+<p>In the next installment I’ll walk through the process of signing your email with DKIM so that it won’t get marked as spam by pretty much every email provider in existence</p>
+<h1>Sources</h1>
+<p><a href="https://library.linode.com/email/postfix/postfix2.9.6-dovecot2.0.19-mysql">https://library.linode.com/email/postfix/postfix2.9.6-dovecot2.0.19-mysql</a></p>
+<p><a href="http://sealedabstract.com/code/nsa-proof-your-e-mail-in-2-hours/">http://sealedabstract.com/code/nsa-proof-your-e-mail-in-2-hours/</a></p>
+<p><a href="http://blog.codinghorror.com/so-youd-like-to-send-some-email-through-code/">http://blog.codinghorror.com/so-youd-like-to-send-some-email-through-code/</a></p>
+<h1>Notes</h1>
+<p>[1] I would have liked to reproduce most of the guide here since it IS published under a creative commons license, but it specifies no derivatives so I can’t actually modify it at all...</p>
+
+    </article>
+  </div>
+  
+  <div class="post-container">
+    <h1>Recover password on a headless raspberry pi</h1>
+    <article class="post-content">
+      <p>I hate to admit it, but this is the second, or possibly third time that I’ve forgotten the password for my raspberry pi… I know that there are ways to <a href="https://raspberrypi.stackexchange.com/questions/4409/how-do-i-change-recover-my-password">reset</a> <a href="http://www.raspberrypi.org/phpBB3//viewtopic.php?f=47&amp;t=20397">my</a> <a href="http://rpi.tnet.com/project/faqs/resetpasswd">password</a>, but most of them assume that the pi in question is attached to a monitor, and my pi is <strong>several</strong> feet from the nearest monitor. So, without further ado here is how to reset the password on your raspberry pi.</p>
+<p><img src="../images/w600_9479331e0638efd4742504d30fc3463c.jpg" alt="https://upload.wikimedia.org/wikipedia/commons/9/9c/Raspberry_Pi_Beta_Board.jpg" style="height: auto;"></p>
+<h1>Requirements</h1>
+<ul>
+<li>SD Card reader</li>
+<li>Computer capable of mounting an EXT4 partition</li>
+</ul>
+<h1>Instructions</h1>
+<h2>Step 1</h2>
+<p>Unplug your pi and remove the SD card</p>
+<h2>Step 2</h2>
+<p>Insert the SD card into a working computer that you have root access on</p>
+<h2>Step 3</h2>
+<p><strong>As root</strong> edit the following file on your SD card:</p>
+<p><script src="https://gist.github.com/tahnok/9221769.js"></script></p>
+<p>eg:</p>
+<p><script src="https://gist.github.com/tahnok/9221780.js"></script></p>
+<p>It’s very important that you DON’T EDIT THIS FILE ON YOUR OWN COMPUTER. Things could get messy if you do that</p>
+<h2>Step 4</h2>
+<p>Locate the line that starts with <strong>pi</strong> and replace the text between the first and second : with the output of the following command:</p>
+<p><script src="https://gist.github.com/tahnok/9221808.js"></script></p>
+<p>If you’re lazy you can use the following password hash: </p>
+<p>$1$salty$SzJsU4qDcXp536Acnlp6I.</p>
+<p>This will make the password for the pi user <strong>password</strong></p>
+<h2>Step 5</h2>
+<p>Eject the SD card and put it back in your pi and let it boot up.</p>
+<h2>Step 6</h2>
+<p>ssh into your pi and change the password to something else immediately. You can do this by running:</p>
+<p><script src="https://gist.github.com/tahnok/9221850.js"></script></p>
+<p>and giving it the password you generated in step 4</p>
+<h2>Step 7</h2>
+<p>REMEMBER THE NEW PASSWORD YOU JUST CREATED</p>
+<h1>WTF did you make me do?</h1>
+<p>Well first of all, how do you think your computer knows your password? It would be silly to have it stored somewhere as it is, since that would make it pretty easy for someone to steal if they ever had access to your machine. Instead the computer stores it as a <strong>hash</strong>. That is, it takes the password and mangles it in a specific and repeatable way to produce password hash. The key part of the mangling process is that it’s one way. There’s no figuring out what the input is if your just have the output. When you give your computer the password at login it hashes it to see if it matches the one it has stored. On linux, these password hashes are stored in /etc/shadow. What we’ve done is change the stored password hash to something we new.</p>
+
+    </article>
+  </div>
+  
+  <div class="post-container">
+    <h1>Filter Order in Rails</h1>
+    <article class="post-content">
+      <p>Today I learned a lot about the way that Rails handles filters, that the methods: before_filter, around_filter and after_filter</p>
+<p>I ran into a bug while working on the work to upgrade from rails 3.2 to 4.0 that I thought might be caused by a change in the way that filters are applied. Let’s see if you can guess what the following code would output.</p>
+<p><strong>Sample Controller</strong><br>
+<script src="https://gist.github.com/tahnok/8701664.js"></script> </p>
+<p>I initially thought that filters were sorted into different queues, then processed in the order:</p>
+<ol>
+<li>Around</li>
+<li>Before</li>
+<li>After</li>
+</ol>
+<p>Asking around, some people thought that the ordering was:</p>
+<ol>
+<li>Before </li>
+<li>Around</li>
+<li>After </li>
+</ol>
+<p>(although that may have been because of the way I framed the question)</p>
+<p>It turns out both are wrong.</p>
+<p>The output of that controller would be this:<br>
+<script src="https://gist.github.com/tahnok/8701702.js"></script></p>
+<p><strong>Filters are processed in the order they are defined.</strong></p>
+<p>You can see that this is the intended behaviour in this test for rails: filters_test.rb</p>
+<p>That makes a lot of sense after some thought. You’d want to be able to have some before_filters run before around_filters, but before_filters to run inside of around_filters.</p>
+<p><strong>tl;dr</strong> Filters are processed in the order they are defined</p>
+
+    </article>
+  </div>
+  
+  <div class="post-container">
+    <h1>Hacking the budweiser red light</h1>
+    <article class="post-content">
+      <p><strong>edit</strong>: So it turns out that I found a bug in electric imp’s software. I shouldn’t have been able to register this particular imp to my own account. I will be posting an update soon on how to replace the ID chip that is included.</p>
+<p>Shopify (where I work) happens to host the store that sells the Budweiser red light. In case you are not a hockey nut, the red light is that icon flashing red light they use to mark a goal. Budweiser sells these devices you can put up that will flash whenever a team scores a goal.</p>
+<p><a href="http://postachio-images.s3-website-us-east-1.amazonaws.com/f72f124e988b45f2872e5594525091e5/936d92e927d0845b605602dada1bd94a/w600_fca884a2a78f6e87d0b8d69456e0b9be.jpg"><img src="../images/w600_fca884a2a78f6e87d0b8d69456e0b9be.jpg"></a></p>
+<p>So it turns out that hacking the budweiser red light is remarkably simple. I don’t know if this trick works if you’ve already configured your light, because I tried hacking this one before setting up the way that budweiser recommends</p>
+<p>At the heart of the red light is this little device called an electric imp. It looks like an SD card, but actually it’s a microcontroller + wifi chip. To program the electric imp you have to “blink up" which involves installing an app on your phone and using it to setup wifi and register it to your electric imp dev account.</p>
+<p><a href="http://postachio-images.s3-website-us-east-1.amazonaws.com/f72f124e988b45f2872e5594525091e5/936d92e927d0845b605602dada1bd94a/w600_bb7ce4c568ac7765927d1f0cdac8fcee.png"><img src="../images/w600_bb7ce4c568ac7765927d1f0cdac8fcee.png"></a></p>
+<p>I’m still exploring how the light works, but I got lucky and tried to toggle pin 9, which turns out is exactly the right pin to toggle! I can’t keep the light on, or turn the buzzer on myself, but setting the pin high for 2 seconds, then setting it low again causes the light to turn on and spin for a couple of seconds and buzz (unless you turned down the volume, which I did)</p>
+<p>The electric imp consists of two pieces an “Agent" which lives in the cloud and can respond to http requests and a “device" which is the actual hardware that connects to the real world.</p>
+<p>Here’s my code for the agent:</p>
+<p><script src="https://gist.github.com/tahnok/7343067.js"></script> </p>
+<p>And here’s my code for the device</p>
+<p><script src="https://gist.github.com/tahnok/7343047.js"></script></p>
+<p>I’m probably going to write a script to poke the url whenever something interesting happens, although I’m not sure what yet. I’m also not sure how sleeping on the device works… Will it keep polling forever? Do I have to wake it up?</p>
+<p>Happy hacking! </p>
+
+    </article>
+  </div>
+  
+  <div class="post-container">
+    <h1>On Ownership</h1>
+    <article class="post-content">
+      <p>Recent revelations about the NSA, plus the shut down of my beloved google reader (RIP), have led me to become a lot more uncomfortable trusting my data to someone who isn't me. In light of that I've switched to using <a href="http://labs.bittorrent.com/experiments/sync.html">BitTorrent Sync</a> for my inter computer file syncing instead of dropbox. Setting things up was pretty simple. I have 3 nodes most of the time (my home server, my laptop and my phone) and I'm working on getting a 4th hosted in a VPS somewhere so I have some offsite backup.<br>
+But the main point of this blog post is to talk about ownership. I don't like it when I don't have options as to who to trust with my data when doing something online. Email is a good example of a service that has LOTS of choices. I use gmail, but I don't have to if I don't want to. File syncing is another area that has lots of choice. I've mentioned Dropbox and Bit Torrent Sync, but there is also a ton more.<br>
+Social networking is one area that does NOT have a lot of options. I mean, yes, there are quite a few social networks, but I can't pick one and expect it to be useful unless my friends are there. This isn't the case with email (it's completely inter-operable), or file syncing (it's mostly individuals or small teams). I like the idea of diaspora and tent.io, but I'm concerned that they aren't really seeing much adoption. How come? I wish I new the answer to this. Email is basically a social network, but it is designed form the ground up to be decentralized. Facebook is the opposite of that. Was it just a matter of timing? Email was created when computers were rare, so you couldn't really trust one to be up all the time somewhere else. When facebook was launched dependable servers were not amazing. Is it just a matter of interface? A website is sort of designed to come from a single server, but there's no reason that it couldn't be like blogging.<br>
+Evernote was the cause of this post. I really really like the interface and the syncing abilities (although I REALLY wish they had a linux desktop client), but I dislike that the data has to live on Evernote's servers. I wish I could host the files on my own, or that I could encrypt my notes before they were sent to evernote. I don't mind loosing the ability to have images converted to text, and I don't think that evernote needs to index the notes to do search, since that could easily be done client side.    </p>
+
+    </article>
+  </div>
+  
+  <div class="post-container">
+    <h1>On Blogging</h1>
+    <article class="post-content">
+      <p>﻿<br>
+So it's been quite some time since I've published anything substantive on the the web for others to read, so perhaps it is time to change that. I'd like to document my (very early) blogging setup.<br>
+For a long time now, I've been playing with places to store information. In university I used <a href="http://moinmo.in/">moin moin</a> (a wiki) to take all my class notes and the setup worked pretty well. It worked regardless of internet connection and it was really easy to share with people. I also managed to find a handy little script + exention to take notes pretty effortlessly in emacs.<br>
+But after I graduated I basically stopped using it. This was mostly due to the fact I no longer had take long form structued (and interlinked) notes.<br>
+I've also played with simplenote, but the lack of a good linux client threw me off.<br>
+At present, I am playing with evernote. I really like that they have clients for almost everything (DAMN YOU LACK OF LINUX SUPPORT!) but that is partly mitigated by two tools: <a href="http://geeknote.me/">geeknote</a>, and <a href="https://github.com/nvbn/everpad">everpad</a><br>
+Geeknote is a command line interface for evernote and everpad adds a nice little tray icon to ubuntu and the ability to search notes from the dash. Geeknote lets me write <a href="https://gist.github.com/6772263">a little script</a> to blog from the command line.<br>
+Another awesome tool for evernote I have discovered is called <a href="http://postach.io">Postach.io</a> which is allowing me to blog from evernote and the command line thanks to geeknote.<br>
+Hopefully this is the first of more posts to come on my new blog</p>
+
+    </article>
+  </div>
+  
+
+  <p class="rss-subscribe">subscribe <a href="/feed.xml">via RSS</a></p>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">(Fake) Markov Chains</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col  footer-col-1">
+        <ul class="contact-list">
+          <li>(Fake) Markov Chains</li>
+          <li><a href="mailto:tahnok@gmail.com">tahnok@gmail.com</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/tahnok">
+              <span class="icon  icon--github">
+                <svg viewBox="0 0 16 16">
+                  <path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/>
+                </svg>
+              </span>
+
+              <span class="username">tahnok</span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/tahnok">
+              <span class="icon  icon--twitter">
+                <svg viewBox="0 0 16 16">
+                  <path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809
+                  c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/>
+                </svg>
+              </span>
+
+              <span class="username">tahnok</span>
+            </a>
+          </li>
+          
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-3">
+        <p class="text">WARNING: The content contained herein may or may not be sensical. Side effects may include laughter, anger, shallow thoughts, deep thoughts and blindness. Reader discretion is advised"
+</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

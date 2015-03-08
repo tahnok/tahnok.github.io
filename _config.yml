@@ -1,0 +1,14 @@
+# Site settings
+title: (Fake) Markov Chains
+email: tahnok@gmail.com
+description: > # this means to ignore newlines until "baseurl:"
+  WARNING: The content contained herein may or may not be sensical. Side effects may include laughter, anger, shallow thoughts, deep thoughts and blindness. Reader discretion is advised"
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "http://blog.tahnok.me" # the base hostname & protocol for your site
+twitter_username: tahnok
+github_username:  tahnok
+permalink: /post/:title.html
+
+# Build settings
+markdown: kramdown
+destination: public_html

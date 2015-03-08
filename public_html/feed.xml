@@ -1,0 +1,554 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>(Fake) Markov Chains</title>
+    <description>WARNING: The content contained herein may or may not be sensical. Side effects may include laughter, anger, shallow thoughts, deep thoughts and blindness. Reader discretion is advised&quot;
+</description>
+    <link>http://blog.tahnok.me/</link>
+    <atom:link href="http://blog.tahnok.me/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Sat, 07 Mar 2015 21:37:21 -0500</pubDate>
+    <lastBuildDate>Sat, 07 Mar 2015 21:37:21 -0500</lastBuildDate>
+    <generator>Jekyll v2.5.3</generator>
+    
+      <item>
+        <title>Making a clock</title>
+        <description>&lt;p&gt;Approximately 2 years ago I ordered an &lt;a href=&quot;https://www.sparkfun.com/products/10160&quot;&gt;RTC clock module&lt;/a&gt; from Sparkfun with the intention of building a clock of some kind.&lt;/p&gt;
+&lt;p&gt;FINALLY, I&#39;ve gotten around to hooking everything up! Here&#39;s a picture of my amazing setup (if you wiring things for a living, please don&#39;t kill me)&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;../images/w600_0af6afc4018ec642790f0fcba6b248dd.jpg&quot; width=&quot;581&quot; style=&quot;height:auto;&quot;&gt;&lt;img src=&quot;../images/w600_1dac1694da3c5fc7a23fa730ec211b3e.jpg&quot; width=&quot;581&quot; style=&quot;height:auto;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;The goal is to help my wake up in the morning by turning on a SAD lamp. If you&#39;ve ever seen one of these faux sunlight lamps before you will wonder why I&#39;m doing this. If you have seen one of these, you&#39;ll understand because these things are REALLY FREAKING BRIGHT.&lt;/p&gt;
+&lt;h2&gt;PARTS&lt;/h2&gt;
+&lt;p&gt;Here&#39;s the part list&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Arduino Uno&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/10160&quot;&gt;DeadOn RTC&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/337&quot;&gt;Coin cell battery&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.adafruit.com/products/399&quot;&gt;RGB LCD 16x2&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.adafruit.com/products/268&quot;&gt;Powerswitch Tail&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Getting all these parts together was actually surprisingly difficult. I ordered the RTC, but I didn&#39;t order a battery since I thought I could find one locally. I was wrong, so I ordered one online. Don&#39;t do that unless you have lots of time to wait. It took like 2 months to ship that tiny coin cell battery across the border to me here in Canada since it has lithium in it.&lt;/p&gt;
+&lt;p&gt;The RGB LCD was actually part of a kit from Adafruit which is all supposed to be controllable over I2C. I assembled almost all of the kit successfully, but the last piece I put on backwards. And of course, it was the 40pin chip which has proven to be resistant to my efforts to desolder it. &lt;em&gt;sigh&lt;/em&gt;. Thankfully I was able to salvage the LCD part.&lt;/p&gt;
+&lt;h2&gt;ASSEMBLY&lt;/h2&gt;
+&lt;p&gt;So the first thing I tried to do was get the the RTC module working. This proved to be quite frustrating. I wired everything up, but I was getting garbage data back from the module. It was counting up (sorta), but random extra bits were getting set and unset. So it would go 0:0:59, 0:1:0, 1:1:1, 0:1:2. WTF. Eventually it turned out that the problem was the way I was grounding the module. I&#39;m not entirely sure what was happening, but eventually I got the right wire connected to the ground on the arduino, bypassing the breadboard.&lt;/p&gt;
+&lt;p&gt;Everything else was relatively easy to set up. Adafruit has an excellent guide on their &lt;a href=&quot;https://learn.adafruit.com/character-lcds/wiring-a-character-lcd&quot;&gt;LCD Shield&lt;/a&gt;. The powerswitch tail  is controlled by setting a single pin high or low.&lt;/p&gt;
+&lt;h2&gt;CODE&lt;/h2&gt;
+&lt;p&gt;Here&#39;s the whole thing below. Most of the code for interacting over SPI to the RTC module is from &lt;a href=&quot;https://github.com/sparkfun/DeadOn_RTC/blob/v1.1/Libraries/DeadOn_RTC/examples/set_and_read_time/set_and_read_time.ino&quot;&gt;Sparkfun&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;
+&lt;script src=&quot;https://gist.github.com/c2e2afb76edde4905fcc.js&quot;&gt; &lt;/script&gt;
+&lt;/p&gt;
+&lt;p&gt;I had some fun messing around with sprinf (it&#39;s like printf, but it fills a char array!) You can set the alarm time by modifying the values in the Alarm int array.&lt;/p&gt;
+&lt;h2&gt;BUGS&lt;/h2&gt;
+&lt;p&gt;For some reason there are 2 garbage characters left on the LCD after the end of my screen. I &quot;fixed&quot; this by just appending more space characters than will fit in a 16 char line.&lt;/p&gt;
+&lt;h2&gt;FUTURE WORK&lt;/h2&gt;
+&lt;p&gt;It would be nice to have multiple alarm&lt;/p&gt;
+</description>
+        <pubDate>Sat, 28 Feb 2015 00:00:00 -0500</pubDate>
+        <link>http://blog.tahnok.me/post/making-a-clock.html</link>
+        <guid isPermaLink="true">http://blog.tahnok.me/post/making-a-clock.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>How to read a texbook</title>
+        <description>&lt;p&gt;&lt;img src=&quot;../images/w600_1d3087794299ca75d555e85d7c8ce1bf.jpg&quot; border=&quot;0&quot; width=&quot;236&quot; style=&quot;height:auto;&quot;&gt;&lt;img src=&quot;../images/w600_7d5fb7a62ced7936b1df39191d17ddea.jpg&quot; style=&quot;height: auto;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;So I really like learning things. It was one of my favourite parts of university (and high school before that), so I was really missing it when I started working. I tried for a while to read things when I felt the urge, but this rarely happened. I tried enrolling in a cousera course, but it felt a bit too much like the shitty parts of school, namely I can&#39;t move at my own pace.&lt;/p&gt;
+&lt;p&gt;My current system involves &lt;a href=&quot;https://www.beeminder.com/overview&quot;&gt;BEEMINDER&lt;/a&gt; which is a pretty amazing tool for people like me who suck at motivating themselves. The basic idea is that you commit to some goal and beeminder makes sure that you reach it by forcing you to do a minimum amount of your goal everyday. You can do more than your goal and let it ride for a few days, but eventually you&#39;ll have to do work. If you fail, you have to pay beeminder money.&lt;/p&gt;
+&lt;p&gt;I use it to make sure I do an hour a week worth of reading / working of each of my texbooks. Currently I am reading the &lt;a href=&quot;https://mitpress.mit.edu/sicp/full-text/book/book.html&quot;&gt;Structure and Interpretation of Programming Languages&lt;/a&gt; (available as a &lt;a href=&quot;https://github.com/sarabander/sicp-pdf&quot;&gt;PDF&lt;/a&gt; and the &lt;a href=&quot;http://cm.bell-labs.com/cm/cs/cbook/&quot;&gt;The C Programming Language&lt;/a&gt;. I wanted to make sure that I really got the fundamentals of computers. C and Scheme are both early programming languages with very different philosophies. (I know that just made some of you feel old)&lt;/p&gt;
+&lt;p&gt;As I go through these books, I am working through the exercises (You can follow my progress &lt;a href=&quot;https://github.com/tahnok/c-book&quot;&gt;here&lt;/a&gt; and &lt;a href=&quot;https://github.com/tahnok/sicp&quot;&gt;here&lt;/a&gt;). Writing actual code feels like the most important part of my attempts to learn so far. It&#39;s not enough (for me at least) to just read the information. I need to process it somehow, but I find working without direction (or feedback) tough. Thankfully you can find solutions to both SICP and the C programming language book on the web.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;../images/w600_355cd2bd4717ead88e1b3b3a5d6865b2.jpg&quot; style=&quot;max-width: 260px; max-height: 343px; top: 0px; left: 0px; height: auto;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;So far I&#39;ve only finished one book this way is &lt;a href=&quot;http://www.nostarch.com/hacking2.htm&quot;&gt;Hacking: the Art of Exploitation&lt;/a&gt; which I highly recommend, even if you don&#39;t want to hack anything.&lt;/p&gt;
+</description>
+        <pubDate>Fri, 13 Feb 2015 00:00:00 -0500</pubDate>
+        <link>http://blog.tahnok.me/post/how-to-read-a-texbook.html</link>
+        <guid isPermaLink="true">http://blog.tahnok.me/post/how-to-read-a-texbook.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Architecting Android Apps</title>
+        <description>&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;
+&lt;img src=&quot;../images/w600_3a33d24cd59060ce1bc459492532691d.png&quot; style=&quot;height:auto;&quot; width=&quot;436&quot;&gt;&lt;br&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;So my first experiencing really writing code was on Shopify using Ruby on Rails. Rails adheres very strongly to the idea of Covention over Configuration. That is, frameworks should make choices about how things should be structured. For example, rails is an MVC framework which means you have models (which go in app/models), controllers (app/controllers), and views (app/views). Of course, you can mess with this but the point is that there is an expected place to put things.&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;Android is part of the Java ecosystem, and it doesn&#39;t seem to make any choices about how to structure... anything. This. Drives. Me. Nuts. You can put any code for anything anywhere. And there really doesn&#39;t seem to be a good reason for this. I&#39;m currently working on Shopify for Android and our code doesn&#39;t really have a good structure at the moment. We have some folders that contain code grouped by feature, like orders and we have other folders that contain code based on function (views).&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;I feel that the job of a framework, (which admitedly Android... kind of is) is to make the job of a programmer easier. The hardest part of being a programmer is managing complexity. Configuration introduces compleity. Convention removes it&lt;/div&gt;
+&lt;p&gt;Our team is probably going to move to something like this: &lt;a href=&quot;https://github.com/codepath/android_guides/wiki/Organizing-your-Source-Files&quot;&gt;https://github.com/codepath/android_guides/wiki/Organizing-your-Source-Files&lt;/a&gt;, but it doesn&#39;t quite feels as nice as rails.&lt;/p&gt;
+</description>
+        <pubDate>Thu, 29 Jan 2015 00:00:00 -0500</pubDate>
+        <link>http://blog.tahnok.me/post/architecting-android-apps.html</link>
+        <guid isPermaLink="true">http://blog.tahnok.me/post/architecting-android-apps.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>My First Experience being a Dungeon Master</title>
+        <description>&lt;div&gt;So recently a few of my friends decided that we wanted to get into Dungeons and Dragons. This was mostly due to enjoying &lt;a href=&quot;http://www.worldofmunchkin.com/game/&quot;&gt;Munchkin&lt;/a&gt; a lot.&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;I started doing some research on the best way to get into D&amp;amp;D. First I needed to pick an edition. 3.5e seems to be a clear favourite in the past, but I had heard that 5e was simpler than any previous version. Finally I found a glowing review of the &lt;a href=&quot;http://io9.com/the-d-d-starter-set-is-a-great-way-to-introduce-newbies-1602583516&quot;&gt;DnD Starter Kit&lt;/a&gt; &lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;&lt;img src=&quot;../images/w600_046b6430af30ed808cbc7d8bc438199d.jpg&quot; alt=&quot;The D&amp;amp;D Starter Set is a Great Way to Introduce Newbies to RPGs&quot; height=&quot;354&quot; width=&quot;636&quot; style=&quot;height: auto;&quot;&gt;&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;Turns out to have been a great choice. The kit includes a full set of dice, 5 pre-made characters, a rule book and campaign book and it was like 20$.&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;&lt;b&gt;First time DM&lt;/b&gt;&lt;/div&gt;
+&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;
+&lt;div&gt;I&#39;m really glad the characters were pre-made. The rules are complicated enough for a first time group without having to deal with making a characters.&lt;b&gt;&lt;br&gt;&lt;/b&gt;
+&lt;/div&gt;
+&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;
+&lt;div&gt;The campaign book was very helpful to me as a DM. I was really worried I would be able to improvise fast enough or well enough to keep the game flowing, but that turned out to be a bit of an over reaction.&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;Knowing all the rules is hard! I had to constantly check to see what actions a player could take, how ranged combat works and what kind of bonuses people would get.&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;All in all though, I had a really fun time and I think the rest of the party did too!&lt;/div&gt;
+</description>
+        <pubDate>Sun, 18 Jan 2015 00:00:00 -0500</pubDate>
+        <link>http://blog.tahnok.me/post/my-first-experience-being-a-dungeon-master.html</link>
+        <guid isPermaLink="true">http://blog.tahnok.me/post/my-first-experience-being-a-dungeon-master.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Book Recommendations from 2014</title>
+        <description>&lt;div&gt;Since I enjoy reading and I enjoy hearing about what others are reading, I figured I should probably put up a list somewhere of the books that I enjoyed reading during 2014. If you have any recommendations, please post them in the comments! One can never have too many books on one&#39;s list of books to read.&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;&lt;b&gt;The Martian&lt;/b&gt;&lt;/div&gt;
+&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;
+&lt;div&gt;
+&lt;img src=&quot;../images/w600_f30aa7388f00b48324af45078f04b13d.jpg&quot; alt=&quot;The Martian 2014.jpg&quot; height=&quot;304&quot; width=&quot;200&quot; style=&quot;height: auto;&quot;&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;
+&lt;/div&gt;
+&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;
+&lt;div&gt;If you have to read one book from my list, I recommend it be this one. It only took me 2 days (and 2 rather sleepless nights) to get through it. It&#39;s a fantastic thriller and as a bonus you get to learn about Mars since most of the science is accurate. The book is about the first manned mission to Mars, and as you might imagine Something Goes Wrong.&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;&lt;b&gt;The Laundry Files (Series)&lt;/b&gt;&lt;/div&gt;
+&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;
+&lt;div&gt;
+&lt;img src=&quot;../images/w600_827adaa3db6d4b2669781c7c5956fb99.jpg&quot; alt=&quot;TAA-cover.jpg&quot; height=&quot;340&quot; width=&quot;220&quot; style=&quot;height: auto;&quot;&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;
+&lt;/div&gt;
+&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;
+&lt;div&gt;This series is so freakin&#39; good. It&#39;s basically James Bond + Lovecraftian Horrors + Comedy and it&#39;s pure gold. You follow around Bob Oliver Francis Howard (aka &lt;a href=&quot;https://en.wikipedia.org/wiki/Bastard_Operator_From_Hell&quot;&gt;B.O.F.H&lt;/a&gt;) who lives in a world where the right piece of code can be used to summon Eldritch horrors from the deep. But of course there&#39;s a government agency tasked with protecting us all from having our brains eaten out.&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;&lt;b&gt;The Coming Swarm&lt;/b&gt;&lt;/div&gt;
+&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;
+&lt;div&gt;
+&lt;img src=&quot;../images/w600_d3f79b12cfd5015c00a451a456671796.jpg&quot; style=&quot;max-width: 231px; max-height: 346px; top: 0px; left: 0px; height: auto;&quot;&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;
+&lt;/div&gt;
+&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;
+&lt;div&gt;I&#39;m not finished this one yet, but it&#39;s been a very interesting read so far. The author make a compelling argument that DDoS actions should be considered a political act just like a sit in or a blockade.&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;&lt;b&gt;The Girl With the Dragon Tattoo&lt;/b&gt;&lt;/div&gt;
+&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;
+&lt;div&gt;
+&lt;img src=&quot;../images/w600_c69e304b967f30414d494548b51138ca.jpg&quot; height=&quot;530&quot; width=&quot;299&quot; style=&quot;height: auto;&quot;&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;
+&lt;/div&gt;
+&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;
+&lt;div&gt;This book was very slow to start, but it quickly got hard to put down. There are some pretty disturbing scenes, so if that&#39;s not your thing I don&#39;t recommend it. If you can stomach it though, it&#39;s a pretty good read with lots of really good twists.&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;&lt;b&gt;Sufrace Detail&lt;/b&gt;&lt;/div&gt;
+&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;
+&lt;div&gt;
+&lt;img src=&quot;../images/w600_b4c00f22e47a2e5c36f52fe867d05d11.jpg&quot; alt=&quot;Bankssurfacedetailcover.jpg&quot; height=&quot;308&quot; width=&quot;200&quot; style=&quot;height: auto;&quot;&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;
+&lt;/div&gt;
+&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;
+&lt;div&gt;I love Iain M Banks. All of The Culture novels are fantastic, and this one is no exception. The plots are too numerous to list, but one of the fascinating ideas in this book is that of a Virtual Hell. If you suppose that minds can be simulated and run on computers, there&#39;s no reason why you couldn&#39;t digitize someone&#39;s mind before they die and then upload it to a virtual hell if they had failed to live a good life. If you&#39;ve read any of other culture novels, you&#39;ll enjoy getting a look at what a Mind with some severe psychopathic tendencies looks like and how it can exist in the Culture.&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;&lt;b&gt;Count Zero&lt;/b&gt;&lt;/div&gt;
+&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;
+&lt;div&gt;
+&lt;img src=&quot;../images/w600_1436e5f7333df36818fe62d452aa8185.jpg&quot; alt=&quot;CountZero(1stEd).jpg&quot; height=&quot;339&quot; width=&quot;200&quot; style=&quot;height: auto;&quot;&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;
+&lt;/div&gt;
+&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;
+&lt;div&gt;This is a sequel (kind of) to Neuromancer, but all of the characters are different. I found this book much easier to follow compared to Neuromancer, but Gibson still writes in a way that I find very difficult to follow. My friend said it best when he described it as &quot;poetry&quot;&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+</description>
+        <pubDate>Mon, 29 Dec 2014 00:00:00 -0500</pubDate>
+        <link>http://blog.tahnok.me/post/book-recommendations-from-2014.html</link>
+        <guid isPermaLink="true">http://blog.tahnok.me/post/book-recommendations-from-2014.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>How to propose to an engineer</title>
+        <description>&lt;div&gt;So several months ago I had decided that I was going to ask my girlfriend to marry me. BUT we have been together for 6.5 years at this point so I needed to make sure it was really memorable. The first step was to pick a ring. Thankfully I met a jeweller at &lt;a href=&quot;http://www.artengine.ca/community/modlab-en.php&quot;&gt;Modlab&lt;/a&gt; who 3D prints rings: &lt;a href=&quot;http://fusedelements.ca/&quot;&gt;Fused Elements&lt;/a&gt;. Well, sort of. She 3D prints the ring in wax and then uses that to make a mould which she fills with molten metal. Upon hearing that I KNEW that&#39;s where I would get the ring. (Bonus: I can get the ring re-made in the event of catastrophic failures)&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div style=&quot;text-align: center&quot;&gt;&lt;img src=&quot;../images/w600_fd2ef08091f1a232ba65c223037d34e2.jpg&quot; style=&quot;height: auto;&quot;&gt;&lt;/div&gt;
+&lt;div&gt;&lt;i&gt;The ring!&lt;/i&gt;&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;One day on reddit I saw this really fantastic ring box that someone had made involving a &lt;a href=&quot;http://hackaday.com/2014/03/24/mechanical-iris-will-make-you-want-a-laser-cutter-even-more&quot;&gt;mechanical iris&lt;/a&gt; that looked fantastic. You can check out the whole album of the build process here: &lt;a href=&quot;https://imgur.com/a/3Mu8J&quot;&gt;https://imgur.com/a/3Mu8J&lt;/a&gt;
+&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;After humming and hawing for a bit I came up with a plan to build a series of boxes to hold the ring. My fiancé likes unwrapping things so having many layers was essential. This was my first plan&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;b&gt;Stage 1&lt;/b&gt;: Original ring box (they are so iconic)&lt;/li&gt;
+&lt;li&gt;
+&lt;b&gt;Stage 2&lt;/b&gt;: 3d printed iris box like this one: &lt;a href=&quot;http://www.thingiverse.com/thing:140048&quot;&gt;http://www.thingiverse.com/thing:140048&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;b&gt;Stage 3&lt;/b&gt;: Laser cut acrylic iris box like this one: &lt;a href=&quot;http://www.instructables.com/files/orig/FVO/YGOP/HSICZZ6P/FVOYGOPHSICZZ6P.pdf&quot;&gt;http://www.instructables.com/files/orig/FVO/YGOP/HSICZZ6P/FVOYGOPHSICZZ6P.pdf&lt;/a&gt; but in the shape of a heart&lt;/li&gt;
+&lt;li&gt;
+&lt;b&gt;Stage 4&lt;/b&gt;: Wooden box containing a USB key with all the design files&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div&gt;But like all plans it fell apart as soon as it encountered reality.&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;&lt;b&gt;STAGE 1.0&lt;/b&gt;&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;This is the only part of the plan that went off without a hitch! Working with Fused Elements was really easy and the ring turned out beautifully.&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;&lt;b&gt;STAGE 2.0&lt;/b&gt;&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;The first problem I encountered was modifying the existing 3d designs for the iris box so that the original ring box would fit. (A secondary problem was gaining access to a 3d printer, but thankfully a good friend of mine had recently acquired one). I had to enlarge the designs by close to 200% so that the box would fit through the inner ring of the iris. But in doing this I ended up with a box that had a truly gigantic outer diameter. It was getting close to 20cm and what was just stage 2!&lt;/div&gt;
+&lt;div style=&quot;text-align: center&quot;&gt;&lt;img src=&quot;../images/w600_05d8418dbba63b994a165c7fa6bc2142.jpg&quot; style=&quot;height: auto;&quot;&gt;&lt;/div&gt;
+&lt;div&gt;&lt;i&gt;Photo of the iris box I wanted to use at first.&lt;/i&gt;&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div style=&quot;text-align: center&quot;&gt;&lt;img src=&quot;../images/w600_d53be1e891834c04dd7948af1903a19f.png&quot; style=&quot;width: 512px; height: auto;&quot;&gt;&lt;/div&gt;
+&lt;div&gt;&lt;i&gt;TinkerCAD&lt;/i&gt;&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;(insert picture here)&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;&lt;b&gt;STAGE 2.1&lt;/b&gt;&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;After many months of searching through thingiverse (I may be embellishing) I found this really cool looking &lt;a href=&quot;http://www.thingiverse.com/thing:28827&quot;&gt;parametric twisted star box&lt;/a&gt; which had some openscad files I could modify and use.&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;Printing this turned out to be quite an ordeal. My girlfriend was away for a weekend so I signed out the Ultimaker from Art Engine (my local makerspace) and started printing. But this box was actually pretty big and as anyone who&#39;s done any 3d printing will tell you, printers can be finicky. Here are the 3d aborted bases I have. Only one was intentional. The other too failed when the filament got twisted and stopped feeding properly.&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div style=&quot;text-align: center&quot;&gt;
+&lt;img src=&quot;../images/w600_9cce8b72fe34280eadb4da3ab5b198e5.jpg&quot; style=&quot;height: auto;&quot;&gt;&lt;br&gt;
+&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;But 4th times the charm! You can see the finished box below&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div style=&quot;text-align: center&quot;&gt;&lt;img src=&quot;../images/w600_93578620063dc5206126c3b5af9e72de.jpg&quot; style=&quot;height: auto;&quot;&gt;&lt;/div&gt;
+&lt;div style=&quot;text-align: center&quot;&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div style=&quot;text-align: center&quot;&gt;&lt;img src=&quot;../images/w600_87a057b4c95d59484871208dc5680050.jpg&quot; style=&quot;height: auto;&quot;&gt;&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;The ring box fits! I messed up a tiny bit in modifying the box. The lid should have had a slightly smaller opening at the top since where the twists meet there&#39;s a tiny bit of a gap.&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;&lt;b&gt;STAGE 3.0&lt;/b&gt;&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;My initial plan was to have a second box with an mechanical iris based on this cool design I had found on Instructables (&lt;a href=&quot;http://www.instructables.com/id/Mechanical-iris-v20/?ALLSTEPS&quot;&gt;http://www.instructables.com/id/Mechanical-iris-v20/?ALLSTEPS&lt;/a&gt;). That would make the lid and the rest of the box would be made by stacking sheets of material that I would cut into shape on a laser cutter and hold together with nuts and bolts.&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div style=&quot;text-align: center&quot;&gt;&lt;img src=&quot;../images/w600_8bfdb181b1bc1cbb2dcdda08afccb3a3.jpg&quot; alt=&quot;Picture of Mechanical iris v2.0&quot; style=&quot;height: auto;&quot;&gt;&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;But once again I completely under estimated how large this would end up making my box. Stage 2 had to fit through that inner hole and once I&#39;d scaled up the design it wouldn&#39;t fit on the bed of the laser cutter any more...&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;&lt;b&gt;STAGE 3.1&lt;/b&gt;&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;I needed to make this piece just as special as the other stages so I ended up choosing to make the box heart shaped. Not just regular heart shaped, but a heart based on the equation y=|x|+sqrt(1-x²) and y=|x|-sqrt(1-x²) from -1 to 1 (graphed on &lt;a href=&quot;http://www.wolframalpha.com/input/?i=y%3D%7Cx%7C%2Bsqrt%281-x%C2%B2%29+and+y%3D%7Cx%7C-sqrt%281-x%C2%B2%29+from+-1+to+1&amp;amp;h=1&quot;&gt;Wolfram Alpha&lt;/a&gt;). When my fiancé and I first started dating I liked to show off so I had sent her that equation. She liked it enough to have a large poster of it made for her bedroom.&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;With a shaped picked out I started designing the box itself in inkscape. You can see the end result below.&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div style=&quot;text-align: center&quot;&gt;&lt;img src=&quot;../images/w600_c63f8c8fe675ea3efdeb9315f6961d1e.png&quot; style=&quot;width: 717px; height: auto;&quot;&gt;&lt;/div&gt;
+&lt;div&gt;As I was working on the design I needed to pick the material I wanted to use. I ended up choosing 1/8&quot; opaque red acrylic. I probably should have figured out where to get some before setting my heart on it though... I ended up calling a the following places in Ottawa that sell acrylic to try and find some:&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;Canus Plastics&lt;/li&gt;
+&lt;li&gt;Laird Plastics&lt;/li&gt;
+&lt;li&gt;Plastics &amp;amp; Signs of Ottawa&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div&gt;I ended up going with Laird because they could get it for me in a week. The only problem I ran into here was that I had to order an entire 4&#39; x 8&#39; sheet of red acrylic... Thankfully Laird cut it into 2&#39; x 1&#39; sheets for me. Transporting a sheet of material that huge is difficult on a bike and I can only fit a 2&#39; x 1&#39; sheet in the laser cutter anyway.&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;After picking up the sheets I started prototyping my final design in cardboard. I cut out 5 hearts in cardboard and checked that the holes I had cut fit the screws, and that stage 2 would fit in the whole properly. Everything seemed to be perfect so I cut out a single heart in acrylic. It fit the box and the screws slid through the holes. So I cut out the rest of the hearts I could on that first sheet of acrylic and...&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;They didn&#39;t fit together. This is the first time I learned about the importance of &lt;b&gt;tolerances&lt;/b&gt;. The bolt holes needed to have more clearance. So I modified the designs to add an extra few mm of clearance. I cut out another sheet of hearts and tried putting them together. They fit together perfectly! So I cut another sheet and... promptly ran into problems with tolerances again. Thankfully I was able to wiggle the second sheet worth of hearts down so at least I didn&#39;t waste any hearts, but for the next couple batches I increased the bolt hole size again.&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;The last part of this stage was to come up with a lid. Initially, I envisioned using a gear shape for the lid and having a second lower layer that was that had a hole same upper gear shape except cut out again after having been rotated a bit. This way the lid would slide down a layer and could rotate about a gear tooth&#39;s worth.&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;Turns out doing that is hard. Most of the gears that I could generate were meant to be used as actual gears, I needed something more aesthetically pleasing. I ended up going with a simplified version of the above design. I had a circle with two small tabs offset by 180 degrees. Below it I had a circular whole with two quarters of a larger circle cut out so that the tabs of the lid could rotate.&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div style=&quot;text-align: center&quot;&gt;&lt;img src=&quot;../images/w600_7e884815e294e3b77eae3281f335b982.png&quot; style=&quot;width: 975px; height: auto;&quot;&gt;&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;This is the design I went with, but it suffers from a few... problems. The second layer cut out should be a bit bigger so that the lid can rotate better. Also the lid needs to be a bit smaller. I also went with an acrylic handle that I cut out, but I think a set of finger sized holes in the lid would work even better.&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;Anyway, here&#39;s the final product:&lt;/div&gt;
+&lt;div style=&quot;text-align: center&quot;&gt;&lt;img src=&quot;../images/w600_52ececd0db2b19ed77dd915b643fed3d.jpg&quot; style=&quot;height: auto;&quot;&gt;&lt;/div&gt;
+&lt;div style=&quot;text-align: center&quot;&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div style=&quot;text-align: center&quot;&gt;&lt;img src=&quot;../images/w600_6262c5107b4a390992ca27750ba3bce5.jpg&quot; style=&quot;height: auto;&quot;&gt;&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;&lt;b&gt;STAGE 4.0&lt;/b&gt;&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;Now that I had dimensions from stage 3.1 I could try and come up with a box that would fit it. I wanted something wooden, but it turns out that finding a large wooden box in Ottawa is kinda hard. I ended up going with the largest one that they had at Michael&#39;s and painting Tardis blue.&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;A few months earlier I had given my girlfriend a key in order to get her excited. I needed some way to attach a latch to the box. I was super concerned that I wouldn&#39;t be able to find something that would work, but I got lucky and they had one that worked perfectly at the hardware store.&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;I also wanted to use some of the design files I had gotten from Fused Elements, so I decided to engrave them with the laser cutter on the lid of stage 4. It turned out really well, although I did have to come up with a way to have the lid stay flat while still attached to the base.&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div style=&quot;text-align: center&quot;&gt;&lt;img src=&quot;../images/w600_7bcb84ebfb49b98f24ec537ddc7622b9.jpg&quot; style=&quot;height: auto;&quot;&gt;&lt;/div&gt;
+&lt;div style=&quot;text-align: center&quot;&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div style=&quot;text-align: center&quot;&gt;&lt;img src=&quot;../images/w600_168a2ed90c6dc2a8a0deb5309e9fc97a.jpg&quot; style=&quot;height: auto;&quot;&gt;&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;I hope you dear reader might be inspired in your own proposals (if that&#39;s your thing) just as I was when I saw the CNC&#39;d Iris box.&lt;/div&gt;
+</description>
+        <pubDate>Sun, 30 Nov 2014 00:00:00 -0500</pubDate>
+        <link>http://blog.tahnok.me/post/how-to-propose-to-an-engineer.html</link>
+        <guid isPermaLink="true">http://blog.tahnok.me/post/how-to-propose-to-an-engineer.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Installing Ubuntu 14.04 on a 15&quot; late 2013 Macbook Pro (with Full Disk Encryption)</title>
+        <description>&lt;div&gt;
+&lt;img src=&quot;../images/w600_34605f2250c33f03d2938e26e91a3a02.png&quot; alt=&quot;http://www.tejasbarot.com/wp-content/uploads//eIUaGXc.png&quot; style=&quot;height: auto;&quot;&gt;&lt;br&gt;
+&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;&lt;span&gt;SO I&#39;ve been looking but I have yet to find a sufficiently detailed guide for getting Ubuntu running on a retina macbook pro, especially one that has full disk encryption enabled. Hopefully this document will help others looking to dual boot as well as serve as a reference for me in the future when I inevitably forget all of this.&lt;/span&gt;&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;
+&lt;b&gt;BEFORE YOU DO ANYTHING YOU NEED TO HAVE A BACKUP!&lt;/b&gt;&lt;br&gt;
+&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;The first step was installing a better EFI boot loader (although I&#39;m not sure if this step is strictly necessary anymore). In the past that would involve rEFIt, but it seems to have lots its maintainers. Instead I&#39;ve gone with &lt;a href=&quot;http://www.rodsbooks.com/refind/&quot;&gt;rEFInd&lt;/a&gt;. Their site is pretty 1990s, but the software itself is pretty good. I mostly just followed the instructions on their &lt;a href=&quot;http://www.rodsbooks.com/refind/installing.html&quot;&gt;installation page&lt;/a&gt; and their &lt;a href=&quot;http://www.rodsbooks.com/refind/yosemite.html&quot;&gt;page on Yosemite&lt;/a&gt;, although I did have to make a few changes so that booting wouldn&#39;t take 30 extra seconds. Note, I had to install rEFInd to my &lt;a href=&quot;https://en.wikipedia.org/wiki/EFI_System_partition&quot;&gt;ESP partition&lt;/a&gt;
+&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;ol&gt;
+&lt;li&gt;First step is to download &lt;a href=&quot;http://sourceforge.net/projects/refind/files/0.8.3/refind-bin-0.8.3.zip/download&quot;&gt;rEFInd&lt;/a&gt; (version 0.8.3 as of this article) and unzip it somewhere.&lt;/li&gt;
+&lt;li&gt;Now mount the ESP partition by making a new directory ( &lt;span style=&quot;font-family: &#39;Andale Mono&#39;;&quot;&gt;mkdir /Volumes/esp &lt;/span&gt;) and then running: &lt;span style=&quot;font-family: &#39;Andale Mono&#39;;&quot;&gt;sudo mount -t msdos /dev/disk0s1 /Volumes/esp&lt;/span&gt;
+&lt;/li&gt;
+&lt;li&gt;Next cd into the directory you unzipped rEFInd and run &lt;span style=&quot;font-family: &#39;Andale Mono&#39;;&quot;&gt;./install.sh --esp&lt;/span&gt;
+&lt;/li&gt;
+&lt;li&gt;Now edit /Volumes/esp/EFI/refind/refind.conf and uncomment the line about &lt;tt&gt;dont_scan_volumes&lt;/tt&gt; and change it to be &lt;span style=&quot;font-family: &#39;Andale Mono&#39;;&quot;&gt;dont_scan_volumes &quot;foo,bar&quot;&lt;/span&gt;
+&lt;/li&gt;
+&lt;li&gt;Next move /Volumes/esp/EFI/refind to /Volumes/esp/EFI/BOOT&lt;/li&gt;
+&lt;li&gt;Finally move /Volumes/esp/EFI/BOOT/refindx64.efi (I think) to /Volumes/esp/EFI/BOOT/bootx64.efi&lt;/li&gt;
+&lt;li&gt;REBOOT and enjoy your shiny FOSS boot manager&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;The next step is to format your hard drive so that it has 3 new partitions for Ubuntu. I like to use full disk encryption in linux too which means that I need a separate /boot partition in addition to / and swap (although frankly I&#39;m not sure I need swap when I have 16GB of RAM)&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;BE CAREFUL HERE. I managed to bork my Mac installation by trying format my disk from the ubuntu live CD. Thankfuly I had a time machine backup.&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;I ended up formatting my disk to my liking by booting in to OS X&#39;s recovery mode and creating 3 new partitions. My /boot was only 1GB, swap was 16GB and I set aside about 90GB for the main installation.&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;Next you need to format a USB stick with the ubuntu installation image. The instructions I followed are from here: &lt;a href=&quot;http://www.ubuntu.com/download/desktop/create-a-usb-stick-on-mac-osx&quot;&gt;http://www.ubuntu.com/download/desktop/create-a-usb-stick-on-mac-osx&lt;/a&gt;
+&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;Reboot with your newly formatted USB and select it from the options presented.&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;Choose &#39;Something else&#39; when asked how to install ubuntu. Click on the 1 GB partition and use it as /boot. Next choose the large partition you created for linux and choose the option &quot;use as physical volume for encryption&quot;&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;Also, make sure you choose the partition you have as /boot for the installation of the boot loader. &lt;b&gt;YOU DO NOT WANT TO LEAVE IT AT ITS DEFAULT&lt;/b&gt;
+&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;Next post I&#39;ll include information on how to configure your new dual boot computer!&lt;/div&gt;
+</description>
+        <pubDate>Sun, 23 Nov 2014 00:00:00 -0500</pubDate>
+        <link>http://blog.tahnok.me/post/installing-ubuntu-14.04-on-a-15%22-late-2013-macbook-pro-(with-full-disk-encryption).html</link>
+        <guid isPermaLink="true">http://blog.tahnok.me/post/installing-ubuntu-14.04-on-a-15%22-late-2013-macbook-pro-(with-full-disk-encryption).html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Intro to Kerbal Space Program!</title>
+        <description>&lt;div&gt;So I’ve discovered an another awesome sandbox game! I really thought I didn’t like them, but I was wrong. Trying to build space ships is fun! If you succeed, you get to go to space! If you fail things explode in amusing ways! Bonus, you’re some kind of magic god in the game so you can roll back time and make the explosion never happen!&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;My only complaint so far has been just how obscure the UI can be… obscure. You have to click or double click or right click or possibly even double right click on exactly the right part of your ship in order to get a menu to show up...&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;The best guide I’ve read so far is found here: &lt;a href=&quot;http://mykspcareer.com/2014/07/volume1/&quot;&gt;http://mykspcareer.com/2014/07/volume1/&lt;/a&gt;
+&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;The best part of this game though is just how cool I feel while playing! Who doesn’t want to feel like a rocket scientist? It feels really cool to understand how orbital mechanics work.&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;BONUS: &lt;span style=&quot;line-height: 1.45;&quot;&gt;Awesome ships I’ve made!&lt;/span&gt;
+&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;&lt;img src=&quot;../images/w600_5bdcec232177a865bf584023af10aef4.png&quot; style=&quot;width: 651px; height: auto;&quot;&gt;&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;I found it is IS possible to build a plane capable of taking off without wheels&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;
+&lt;img src=&quot;../images/w600_c7765a0ba58ea447bc8e4139ba5fd48b.png&quot; style=&quot;width: 368px; height: auto;&quot;&gt;&lt;br&gt;
+&lt;/div&gt;
+</description>
+        <pubDate>Sun, 09 Nov 2014 00:00:00 -0500</pubDate>
+        <link>http://blog.tahnok.me/post/intro-to-kerbal-space-program.html</link>
+        <guid isPermaLink="true">http://blog.tahnok.me/post/intro-to-kerbal-space-program.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Solution to 1o57&#39;s Hackaday Challenge</title>
+        <description>&lt;div&gt;So on October 6th 1o57 (who creates &lt;a href=&quot;http://blog.tahnok.me/defcon-22-badge-challenge-walkthrough&quot;&gt;the DEF CON badge challenge&lt;/a&gt;) gave a fantastic talk at the &lt;a href=&quot;http://hackaday.com/2014/10/06/hackaday-10th-anniversary-1o57-and-the-art-of-encryption/&quot;&gt;hackaday 10th anniversary&lt;/a&gt; which you should totally watch:&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;&lt;iframe width=&quot;500&quot; height=&quot;281&quot; src=&quot;http://www.youtube.com/embed/-hCL7dE-nqg?feature=oembed&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;(go ahead, I’ll wait)&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;You might have noticed some random text in the slides, but you might not have. Anyway here are the slides&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;
+&lt;blockquote class=&quot;twitter-tweet&quot;&gt;
+&lt;p&gt;&lt;a href=&quot;https://twitter.com/hackaday&quot;&gt;@hackaday&lt;/a&gt; &lt;a href=&quot;http://t.co/YNNoeJDeSU&quot;&gt;pic.twitter.com/YNNoeJDeSU&lt;/a&gt;&lt;/p&gt;— LosT/李智上 (@1o57) &lt;a href=&quot;https://twitter.com/1o57/status/518582899558215680&quot;&gt;October 5, 2014&lt;/a&gt;
+&lt;/blockquote&gt;
+&lt;script async src=&quot;//platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+&lt;/div&gt;
+&lt;div&gt;
+&lt;blockquote class=&quot;twitter-tweet&quot;&gt;
+&lt;p&gt;&lt;a href=&quot;https://twitter.com/hackaday&quot;&gt;@hackaday&lt;/a&gt; &lt;a href=&quot;http://t.co/YNNoeJDeSU&quot;&gt;pic.twitter.com/YNNoeJDeSU&lt;/a&gt;&lt;/p&gt;— LosT/李智上 (@1o57) &lt;a href=&quot;https://twitter.com/1o57/status/518582899558215680&quot;&gt;October 5, 2014&lt;/a&gt;
+&lt;/blockquote&gt;
+&lt;script async src=&quot;//platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+&lt;div&gt;
+&lt;blockquote class=&quot;twitter-tweet&quot;&gt;
+&lt;p&gt;&lt;a href=&quot;https://twitter.com/hackaday&quot;&gt;@hackaday&lt;/a&gt; &lt;a href=&quot;http://t.co/ss3WEzndR9&quot;&gt;pic.twitter.com/ss3WEzndR9&lt;/a&gt;&lt;/p&gt;— LosT/李智上 (@1o57) &lt;a href=&quot;https://twitter.com/1o57/status/518582806134267904&quot;&gt;October 5, 2014&lt;/a&gt;
+&lt;/blockquote&gt;
+&lt;script async src=&quot;//platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+&lt;/div&gt;
+&lt;div&gt;
+&lt;blockquote class=&quot;twitter-tweet&quot;&gt;
+&lt;p&gt;&lt;a href=&quot;https://twitter.com/hackaday&quot;&gt;@hackaday&lt;/a&gt; &lt;a href=&quot;http://t.co/NVxwlBEe2y&quot;&gt;pic.twitter.com/NVxwlBEe2y&lt;/a&gt;&lt;/p&gt;— LosT/李智上 (@1o57) &lt;a href=&quot;https://twitter.com/1o57/status/518582628450959362&quot;&gt;October 5, 2014&lt;/a&gt;
+&lt;/blockquote&gt;
+&lt;script async src=&quot;//platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+&lt;/div&gt;
+&lt;div&gt;
+&lt;blockquote class=&quot;twitter-tweet&quot;&gt;
+&lt;p&gt;&lt;a href=&quot;https://twitter.com/hackaday&quot;&gt;@hackaday&lt;/a&gt; &lt;a href=&quot;http://t.co/oE64HPUqtx&quot;&gt;pic.twitter.com/oE64HPUqtx&lt;/a&gt;&lt;/p&gt;— LosT/李智上 (@1o57) &lt;a href=&quot;https://twitter.com/1o57/status/518582497672589312&quot;&gt;October 5, 2014&lt;/a&gt;
+&lt;/blockquote&gt;
+&lt;script async src=&quot;//platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+&lt;/div&gt;
+&lt;div&gt;
+&lt;blockquote class=&quot;twitter-tweet&quot;&gt;
+&lt;p&gt;&lt;a href=&quot;https://twitter.com/hackaday&quot;&gt;@hackaday&lt;/a&gt; &lt;a href=&quot;http://t.co/LMXhiJj5mu&quot;&gt;pic.twitter.com/LMXhiJj5mu&lt;/a&gt;&lt;/p&gt;— LosT/李智上 (@1o57) &lt;a href=&quot;https://twitter.com/1o57/status/518582419717226496&quot;&gt;October 5, 2014&lt;/a&gt;
+&lt;/blockquote&gt;
+&lt;script async src=&quot;//platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+&lt;/div&gt;
+&lt;div&gt;
+&lt;blockquote class=&quot;twitter-tweet&quot;&gt;
+&lt;p&gt;&lt;a href=&quot;https://twitter.com/hackaday&quot;&gt;@hackaday&lt;/a&gt; &lt;a href=&quot;http://t.co/Tb42KBb8bl&quot;&gt;pic.twitter.com/Tb42KBb8bl&lt;/a&gt;&lt;/p&gt;— LosT/李智上 (@1o57) &lt;a href=&quot;https://twitter.com/1o57/status/518582291027595264&quot;&gt;October 5, 2014&lt;/a&gt;
+&lt;/blockquote&gt;
+&lt;script async src=&quot;//platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+&lt;/div&gt;
+&lt;div&gt;
+&lt;blockquote class=&quot;twitter-tweet&quot;&gt;
+&lt;p&gt;&lt;a href=&quot;https://twitter.com/hackaday&quot;&gt;@hackaday&lt;/a&gt; &lt;a href=&quot;http://t.co/UhXCk0tyLX&quot;&gt;pic.twitter.com/UhXCk0tyLX&lt;/a&gt;&lt;/p&gt;— LosT/李智上 (@1o57) &lt;a href=&quot;https://twitter.com/1o57/status/518582190322356226&quot;&gt;October 5, 2014&lt;/a&gt;
+&lt;/blockquote&gt;
+&lt;script async src=&quot;//platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+&lt;/div&gt;
+&lt;div&gt;
+&lt;blockquote class=&quot;twitter-tweet&quot;&gt;
+&lt;p&gt;&lt;a href=&quot;https://twitter.com/hackaday&quot;&gt;@hackaday&lt;/a&gt; &lt;a href=&quot;http://t.co/bIDNsV3D5g&quot;&gt;pic.twitter.com/bIDNsV3D5g&lt;/a&gt;&lt;/p&gt;— LosT/李智上 (@1o57) &lt;a href=&quot;https://twitter.com/1o57/status/518581972914819072&quot;&gt;October 5, 2014&lt;/a&gt;
+&lt;/blockquote&gt;
+&lt;script async src=&quot;//platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div&gt;
+&lt;blockquote class=&quot;twitter-tweet&quot;&gt;
+&lt;p&gt;&lt;a href=&quot;https://twitter.com/hackaday&quot;&gt;@hackaday&lt;/a&gt; &lt;a href=&quot;http://t.co/zqarmBmwNd&quot;&gt;pic.twitter.com/zqarmBmwNd&lt;/a&gt;&lt;/p&gt;— LosT/李智上 (@1o57) &lt;a href=&quot;https://twitter.com/1o57/status/518581836297936897&quot;&gt;October 5, 2014&lt;/a&gt;
+&lt;/blockquote&gt;
+&lt;script async src=&quot;//platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;And here is a copy of all the letters on each of the slides&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;DO
+&lt;div&gt;XIYL&lt;/div&gt;
+&lt;div&gt;DCYV&lt;/div&gt;
+&lt;div&gt;DKIK&lt;/div&gt;
+&lt;div&gt;NKUM&lt;/div&gt;
+&lt;div&gt;KRYD&lt;/div&gt;
+&lt;div&gt;NBYG&lt;/div&gt;
+&lt;div&gt;ONYM&lt;/div&gt;
+&lt;/div&gt;
+&lt;div&gt;NXOC&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;on one line:&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;DOXIYLDCYVDKIKNKUMKRYDNBYGONYMNXOC&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;Hrmmm, well the first thing you might try is a Caesar cipher. In the video you’ll notice that 1o57 repeatedly mentions that it’s Hackaday’s TENTH anniversary, so we should try decrypting the above string with a key of 10. (here’s &lt;a href=&quot;http://web.forret.com/tools/rot13.asp?rot=10&amp;amp;cipher=DOXIYLDCYVDKIKNKUMKRYDNBYGONYMNXOC&amp;amp;dir=decrypt&quot;&gt;a tool do to that&lt;/a&gt;)&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;TENYOBTSOLTAYADAKCAHOTDROWEDOCDNES&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;(side note: I cheated on this step by using an automated caesar cipher breaker)&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;Hrmmm that still looks like nonsense, but it does start with the word ten, so we’re probably close...&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;Wait a second! The string is backwards! It’s not ten it’s net!&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;SENDCODEWORDTOHACKADAYATLOSTBOYNET&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;or cleaned up&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;Send codeword to hackaday@lostboy.net&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;Ok, well now we know where to send the codewords. The only unsolved part of the puzzle is this last slide&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;
+&lt;blockquote class=&quot;twitter-tweet&quot;&gt;
+&lt;p&gt;&lt;a href=&quot;https://twitter.com/hackaday&quot;&gt;@hackaday&lt;/a&gt; &lt;a href=&quot;http://t.co/01Magsvu1u&quot;&gt;pic.twitter.com/01Magsvu1u&lt;/a&gt;&lt;/p&gt;— LosT/李智上 (@1o57) &lt;a href=&quot;https://twitter.com/1o57/status/518581720312856577&quot;&gt;October 5, 2014&lt;/a&gt;
+&lt;/blockquote&gt;
+&lt;script async src=&quot;//platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;&lt;img src=&quot;../images/w600_9f8bf4c63dee3f082eb17cc37a1f4292.png&quot; style=&quot;width: 872px; height: auto;&quot;&gt;&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;WTF are those things?! Now fans of Sherlock Holmes may recognize these, but at the time I did not, so I went to my best friend Google to try and figure it out. I tried lots of search terms like “stickman code&quot; (and variants on that) and “semaphore&quot; (since I thought maybe the positions on the flags was significant), until I came across this page:&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;http://www.geocachingtoolbox.com/index.php?lang=en&amp;amp;page=dancingMen&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;which features a code called the Dancing Men!&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;This code comes from a Sherlock Holmes novel called &lt;a href=&quot;https://en.wikipedia.org/wiki/The_Adventure_of_the_Dancing_Men&quot;&gt;The Adventure of the Dancing Men&lt;/a&gt;
+&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;
+&lt;img src=&quot;../images/w600_2aa8c86d7c01e076f23d0d3b19718c10.png&quot; style=&quot;width: 825px; height: auto;&quot;&gt;&lt;br&gt;
+&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;And we can use the above image to decrypt the band, which decrypts to:&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;codeword psychobilly ciphers&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;Thanks for the fun puzzle 1o57!&lt;/div&gt;
+</description>
+        <pubDate>Fri, 24 Oct 2014 00:00:00 -0400</pubDate>
+        <link>http://blog.tahnok.me/post/solution-to-1o57's-hackaday-challenge.html</link>
+        <guid isPermaLink="true">http://blog.tahnok.me/post/solution-to-1o57's-hackaday-challenge.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>NIXIE TUBES!!</title>
+        <description>&lt;div&gt;So approximately 2000 years ago I got a set of 6 nixie tubes as a gift. WTF is a nixie tube you ask? This is a nixie tube:&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;&lt;img src=&quot;../images/w600_85f1d5be037e617d9641ca65c119a813.jpg&quot; alt=&quot;File:ZM1210-operating edit2.jpg&quot; height=&quot;600&quot; width=&quot;187&quot; style=&quot;height:auto;&quot;&gt;&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;It’s an device for displaying all ten digits (0 through 9) using “glow discharge&quot; (that thing that makes old incandescent lightbulb works), while looking really really cool.&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;The tubes I have are IN-17s and they operate at &lt;b&gt;180V&lt;/b&gt;. That is a lot of volts and it was pretty scary for me putting the circuit together since I’ve never worked with such high voltages. Fortunately, these works at relatively low amperages so I only have to worry about pain, not death.&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;Now, you might be wondering what I need to drive these things. The answer would be a &lt;font face=&quot;Arial&quot;&gt;&lt;b&gt;Russian K155NA1 Driver Chip&lt;/b&gt;, which is basically a high voltage &lt;a href=&quot;https://en.wikipedia.org/wiki/Binary-coded_decimal&quot;&gt;Binary-Coded Decimal&lt;/a&gt; decoder and a circuit to step up wall wart DC voltage (9V at 1a) to 180V. Thankfully &lt;a href=&quot;http://www.robotpirate.com/&quot;&gt;a nice person&lt;/a&gt; on the internet made an arduino shield to do all this called the &lt;a href=&quot;http://arduinix.com/&quot;&gt;ArduiNIX&lt;/a&gt; &lt;/font&gt;
+&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;Here’s my completed display:&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;&lt;img src=&quot;../images/w600_2dacf7a38ca97348b6cc9b433a8b493f.jpg&quot; style=&quot;height:auto;&quot; width=&quot;475&quot;&gt;&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;I’m still trying to understand how the circuit works. There are 20 pins and 4 grounds, so I can apparently control a total of 80 digits. I’m only using 60 digits in this setup (10 digits per tube times 6 tubes), but I’m still pretty lost when reading the &lt;a href=&quot;http://arduinix.com/Main/Code/ANX-6Tube-Clock-Crossfade.txt&quot;&gt;demo code&lt;/a&gt;
+&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;
+&lt;div&gt;My current understanding is that I have 2 BCDs which I can control with 8 pins (4 each, which makes sense since 2^4 = 16 &amp;gt; 10 digits), and I can control the 4 anode (aka ground) pins. From the code it seems I have to display 2 digits at a time, but I’m not at all clear how the digits are split up. That will be the subject for my next post!&lt;/div&gt;
+</description>
+        <pubDate>Thu, 09 Oct 2014 00:00:00 -0400</pubDate>
+        <link>http://blog.tahnok.me/post/nixie-tubes.html</link>
+        <guid isPermaLink="true">http://blog.tahnok.me/post/nixie-tubes.html</guid>
+        
+        
+      </item>
+    
+  </channel>
+</rss>

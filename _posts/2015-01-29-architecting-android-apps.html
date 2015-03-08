@@ -1,0 +1,17 @@
+---
+layout: post
+title: Architecting Android Apps
+---
+
+<div><br></div>
+<div>
+<img src="../images/w600_3a33d24cd59060ce1bc459492532691d.png" style="height:auto;" width="436"><br>
+</div>
+<p><br></p>
+<div><br></div>
+<div>So my first experiencing really writing code was on Shopify using Ruby on Rails. Rails adheres very strongly to the idea of Covention over Configuration. That is, frameworks should make choices about how things should be structured. For example, rails is an MVC framework which means you have models (which go in app/models), controllers (app/controllers), and views (app/views). Of course, you can mess with this but the point is that there is an expected place to put things.</div>
+<div><br></div>
+<div>Android is part of the Java ecosystem, and it doesn't seem to make any choices about how to structure... anything. This. Drives. Me. Nuts. You can put any code for anything anywhere. And there really doesn't seem to be a good reason for this. I'm currently working on Shopify for Android and our code doesn't really have a good structure at the moment. We have some folders that contain code grouped by feature, like orders and we have other folders that contain code based on function (views).</div>
+<div><br></div>
+<div>I feel that the job of a framework, (which admitedly Android... kind of is) is to make the job of a programmer easier. The hardest part of being a programmer is managing complexity. Configuration introduces compleity. Convention removes it</div>
+<p>Our team is probably going to move to something like this: <a href="https://github.com/codepath/android_guides/wiki/Organizing-your-Source-Files">https://github.com/codepath/android_guides/wiki/Organizing-your-Source-Files</a>, but it doesn't quite feels as nice as rails.</p>

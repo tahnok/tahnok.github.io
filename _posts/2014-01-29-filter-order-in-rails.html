@@ -1,0 +1,29 @@
+---
+layout: post
+title: Filter Order in Rails
+---
+
+<p>Today I learned a lot about the way that Rails handles filters, that the methods: before_filter, around_filter and after_filter</p>
+<p>I ran into a bug while working on the work to upgrade from rails 3.2 to 4.0 that I thought might be caused by a change in the way that filters are applied. Let’s see if you can guess what the following code would output.</p>
+<p><strong>Sample Controller</strong><br>
+<script src="https://gist.github.com/tahnok/8701664.js"></script> </p>
+<p>I initially thought that filters were sorted into different queues, then processed in the order:</p>
+<ol>
+<li>Around</li>
+<li>Before</li>
+<li>After</li>
+</ol>
+<p>Asking around, some people thought that the ordering was:</p>
+<ol>
+<li>Before </li>
+<li>Around</li>
+<li>After </li>
+</ol>
+<p>(although that may have been because of the way I framed the question)</p>
+<p>It turns out both are wrong.</p>
+<p>The output of that controller would be this:<br>
+<script src="https://gist.github.com/tahnok/8701702.js"></script></p>
+<p><strong>Filters are processed in the order they are defined.</strong></p>
+<p>You can see that this is the intended behaviour in this test for rails: filters_test.rb</p>
+<p>That makes a lot of sense after some thought. You’d want to be able to have some before_filters run before around_filters, but before_filters to run inside of around_filters.</p>
+<p><strong>tl;dr</strong> Filters are processed in the order they are defined</p>
