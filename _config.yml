@@ -12,3 +12,4 @@ permalink: /post/:title.html
 # Build settings
 markdown: kramdown
 destination: public_html
+exclude: deploy.sh
