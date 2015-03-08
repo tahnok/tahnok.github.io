@@ -65,10 +65,10 @@ h1, h2, h3, h4, h5, h6 {
  * Links
  */
 a {
-  color: #2a7ae2;
+  color: #FF5722;
   text-decoration: none; }
   a:visited {
-    color: #1756a9; }
+    color: #d43300; }
   a:hover {
     color: #111;
     text-decoration: underline; }
@@ -151,7 +151,7 @@ pre {
   border-bottom: 1px solid #e8e8e8;
   min-height: 56px;
   position: relative;
-  background: #2a7ae2;
+  background: #FF5722;
   font-family: "Share Tech Mono"; }
 
 .site-title {
