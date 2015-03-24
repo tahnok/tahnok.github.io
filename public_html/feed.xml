@@ -6,13 +6,13 @@
 </description>
     <link>http://blog.tahnok.me/</link>
     <atom:link href="http://blog.tahnok.me/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 22 Mar 2015 14:10:42 -0400</pubDate>
-    <lastBuildDate>Sun, 22 Mar 2015 14:10:42 -0400</lastBuildDate>
+    <pubDate>Mon, 23 Mar 2015 20:35:22 -0400</pubDate>
+    <lastBuildDate>Mon, 23 Mar 2015 20:35:22 -0400</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
     
       <item>
         <title>Migrating to jekyll for blog style outpourings</title>
-        <description>&lt;p&gt;Recently, my blog (previous) blog hosting platform decided to axe their free tier and the price they were asking was too much for me. Plus, I’d be thinking for a long time about how it would be nice to do the hosting by myself. In addition to cutting my dependence on an external service, I’d get to learning more about ops-y things in the process.&lt;/p&gt;
+        <description>&lt;p&gt;Recently, my (previous) blog hosting platform decided to axe their free tier and the price they were asking was too much for me. Plus, I’d be thinking for a long time about how it would be nice to do the hosting by myself. In addition to cutting my dependence on an external service, I’d get to learning more about ops-y things in the process.&lt;/p&gt;
 
 &lt;p&gt;My first attempt at this migration was with Octopress, which I’d dabled with a bit in the past. I quickly abandoned it though because it felt much too complicated. The default theme was split too many times, there were weird and (to me) unneeded layers of complexity.&lt;/p&gt;
 

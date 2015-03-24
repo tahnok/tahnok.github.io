@@ -4,7 +4,7 @@ title: "Migrating to jekyll for blog style outpourings"
 date: 2015-03-15 14:55:42 -0400
 ---
 
-Recently, my blog (previous) blog hosting platform decided to axe their free tier and the price they were asking was too much for me. Plus, I'd be thinking for a long time about how it would be nice to do the hosting by myself. In addition to cutting my dependence on an external service, I'd get to learning more about ops-y things in the process.
+Recently, my (previous) blog hosting platform decided to axe their free tier and the price they were asking was too much for me. Plus, I'd be thinking for a long time about how it would be nice to do the hosting by myself. In addition to cutting my dependence on an external service, I'd get to learning more about ops-y things in the process.
 
 My first attempt at this migration was with Octopress, which I'd dabled with a bit in the past. I quickly abandoned it though because it felt much too complicated. The default theme was split too many times, there were weird and (to me) unneeded layers of complexity.
 
