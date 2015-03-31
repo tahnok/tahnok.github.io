@@ -4,6 +4,7 @@ http://blog.tahnok.me/index.html
 http://blog.tahnok.me/css/main.css
 http://blog.tahnok.me/sitemap.txt
 
+http://blog.tahnok.me/post/dabbling-with-kernel-hacking.html
 http://blog.tahnok.me/post/migrating-to-jekyll-for-blog-style-outpourings.html
 http://blog.tahnok.me/post/making-a-clock.html
 http://blog.tahnok.me/post/how-to-read-a-texbook.html

@@ -6,9 +6,37 @@
 </description>
     <link>http://blog.tahnok.me/</link>
     <atom:link href="http://blog.tahnok.me/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 23 Mar 2015 20:35:22 -0400</pubDate>
-    <lastBuildDate>Mon, 23 Mar 2015 20:35:22 -0400</lastBuildDate>
+    <pubDate>Mon, 30 Mar 2015 21:09:25 -0400</pubDate>
+    <lastBuildDate>Mon, 30 Mar 2015 21:09:25 -0400</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
+    
+      <item>
+        <title>Dabbling with KERNEL HACKING</title>
+        <description>&lt;p&gt;&lt;a href=&quot;https://upload.wikimedia.org/wikipedia/commons/8/86/Eudyptula_minor_-Canberra_Zoo,_Australia-8b.jpg&quot;&gt;&lt;img src=&quot;/images/eudyptula.jpg&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;So I have this fascination with understanding how things work and it has had the unfourunate of becoming interested in &lt;strong&gt;THE LINUX KERNEL&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;I’ve seen some cool (and excited) posts from &lt;a href=&quot;http://jvns.ca/blog/2014/09/18/you-can-be-a-kernel-hacker/&quot;&gt;Julia&lt;/a&gt; &lt;a href=&quot;http://jvns.ca/blog/2013/10/08/day-6-i-wrote-a-rootkit/&quot;&gt;Evans&lt;/a&gt; &lt;a href=&quot;http://jvns.ca/blog/2013/10/07/day-5-i-wrote-a-kernel-module/&quot;&gt;about&lt;/a&gt; &lt;a href=&quot;http://jvns.ca/blog/2014/01/04/4-paths-to-being-a-kernel-hacker/&quot;&gt;the&lt;/a&gt; &lt;a href=&quot;I ran out of links&quot;&gt;topic&lt;/a&gt;! It got me excited, but more importantly it made the topic seems significantly less scary and approachable. I’ve been trying to learn C for a while now because so much important computer code is written in it.&lt;/p&gt;
+
+&lt;p&gt;To that end, one of the blog posts linked above mentioned the &lt;a href=&quot;http://eudyptula-challenge.org/&quot;&gt;EUDYPTULA CHALLENGE&lt;/a&gt; which sounds exciting! (side note: &lt;a href=&quot;https://en.wikipedia.org/wiki/Eudyptula&quot;&gt;eudpytpula&lt;/a&gt; is a GENUS of penguins) The gist of the challenge is that you are presented with a series of tasks that teach you more and more about kernels.&lt;/p&gt;
+
+&lt;p&gt;I’ve completed task 1! I would share the code with you but I’ve taken a VOW OF SILENCE so that each new recruit can work through the tasks on their own. Instead I will share some of the useful kernel resources I’ve found so far.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.tldp.org/LDP/lkmpg/2.6/html/&quot;&gt;The Linux Kernel Module Programming Guide&lt;/a&gt;: Pretty good guide to kernel modules, although it is for a much older kernel. Maybe that will be an issue at one point?&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://lxr.free-electrons.com/source/&quot;&gt;Linux Cross Reference&lt;/a&gt; pretty useful so far&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The biggest challenge I’ve faced so far has been getting Thunderbird to send email in a format that’s comprehensible to the little script that is is the Eudpyptula. Turns out email is a crufty old protocol.&lt;/p&gt;
+
+&lt;p&gt;Soon, I shall be MASTER OF THE LINUX KERNEL (I hope)&lt;/p&gt;
+</description>
+        <pubDate>Mon, 30 Mar 2015 20:14:26 -0400</pubDate>
+        <link>http://blog.tahnok.me/post/dabbling-with-kernel-hacking.html</link>
+        <guid isPermaLink="true">http://blog.tahnok.me/post/dabbling-with-kernel-hacking.html</guid>
+        
+        
+      </item>
     
       <item>
         <title>Migrating to jekyll for blog style outpourings</title>
@@ -435,148 +463,6 @@
         <pubDate>Sun, 09 Nov 2014 00:00:00 -0500</pubDate>
         <link>http://blog.tahnok.me/post/intro-to-kerbal-space-program.html</link>
         <guid isPermaLink="true">http://blog.tahnok.me/post/intro-to-kerbal-space-program.html</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>Solution to 1o57&#39;s Hackaday Challenge</title>
-        <description>&lt;div&gt;So on October 6th 1o57 (who creates &lt;a href=&quot;http://blog.tahnok.me/defcon-22-badge-challenge-walkthrough&quot;&gt;the DEF CON badge challenge&lt;/a&gt;) gave a fantastic talk at the &lt;a href=&quot;http://hackaday.com/2014/10/06/hackaday-10th-anniversary-1o57-and-the-art-of-encryption/&quot;&gt;hackaday 10th anniversary&lt;/a&gt; which you should totally watch:&lt;/div&gt;
-&lt;div&gt;&lt;br&gt;&lt;/div&gt;
-&lt;div&gt;&lt;iframe width=&quot;500&quot; height=&quot;281&quot; src=&quot;http://www.youtube.com/embed/-hCL7dE-nqg?feature=oembed&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;&lt;/div&gt;
-&lt;div&gt;&lt;br&gt;&lt;/div&gt;
-&lt;div&gt;(go ahead, I’ll wait)&lt;/div&gt;
-&lt;div&gt;&lt;br&gt;&lt;/div&gt;
-&lt;div&gt;You might have noticed some random text in the slides, but you might not have. Anyway here are the slides&lt;/div&gt;
-&lt;div&gt;&lt;br&gt;&lt;/div&gt;
-&lt;div&gt;
-&lt;blockquote class=&quot;twitter-tweet&quot;&gt;
-&lt;p&gt;&lt;a href=&quot;https://twitter.com/hackaday&quot;&gt;@hackaday&lt;/a&gt; &lt;a href=&quot;http://t.co/YNNoeJDeSU&quot;&gt;pic.twitter.com/YNNoeJDeSU&lt;/a&gt;&lt;/p&gt;— LosT/李智上 (@1o57) &lt;a href=&quot;https://twitter.com/1o57/status/518582899558215680&quot;&gt;October 5, 2014&lt;/a&gt;
-&lt;/blockquote&gt;
-&lt;script async src=&quot;//platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
-&lt;/div&gt;
-&lt;div&gt;
-&lt;blockquote class=&quot;twitter-tweet&quot;&gt;
-&lt;p&gt;&lt;a href=&quot;https://twitter.com/hackaday&quot;&gt;@hackaday&lt;/a&gt; &lt;a href=&quot;http://t.co/YNNoeJDeSU&quot;&gt;pic.twitter.com/YNNoeJDeSU&lt;/a&gt;&lt;/p&gt;— LosT/李智上 (@1o57) &lt;a href=&quot;https://twitter.com/1o57/status/518582899558215680&quot;&gt;October 5, 2014&lt;/a&gt;
-&lt;/blockquote&gt;
-&lt;script async src=&quot;//platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
-&lt;div&gt;
-&lt;blockquote class=&quot;twitter-tweet&quot;&gt;
-&lt;p&gt;&lt;a href=&quot;https://twitter.com/hackaday&quot;&gt;@hackaday&lt;/a&gt; &lt;a href=&quot;http://t.co/ss3WEzndR9&quot;&gt;pic.twitter.com/ss3WEzndR9&lt;/a&gt;&lt;/p&gt;— LosT/李智上 (@1o57) &lt;a href=&quot;https://twitter.com/1o57/status/518582806134267904&quot;&gt;October 5, 2014&lt;/a&gt;
-&lt;/blockquote&gt;
-&lt;script async src=&quot;//platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
-&lt;/div&gt;
-&lt;div&gt;
-&lt;blockquote class=&quot;twitter-tweet&quot;&gt;
-&lt;p&gt;&lt;a href=&quot;https://twitter.com/hackaday&quot;&gt;@hackaday&lt;/a&gt; &lt;a href=&quot;http://t.co/NVxwlBEe2y&quot;&gt;pic.twitter.com/NVxwlBEe2y&lt;/a&gt;&lt;/p&gt;— LosT/李智上 (@1o57) &lt;a href=&quot;https://twitter.com/1o57/status/518582628450959362&quot;&gt;October 5, 2014&lt;/a&gt;
-&lt;/blockquote&gt;
-&lt;script async src=&quot;//platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
-&lt;/div&gt;
-&lt;div&gt;
-&lt;blockquote class=&quot;twitter-tweet&quot;&gt;
-&lt;p&gt;&lt;a href=&quot;https://twitter.com/hackaday&quot;&gt;@hackaday&lt;/a&gt; &lt;a href=&quot;http://t.co/oE64HPUqtx&quot;&gt;pic.twitter.com/oE64HPUqtx&lt;/a&gt;&lt;/p&gt;— LosT/李智上 (@1o57) &lt;a href=&quot;https://twitter.com/1o57/status/518582497672589312&quot;&gt;October 5, 2014&lt;/a&gt;
-&lt;/blockquote&gt;
-&lt;script async src=&quot;//platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
-&lt;/div&gt;
-&lt;div&gt;
-&lt;blockquote class=&quot;twitter-tweet&quot;&gt;
-&lt;p&gt;&lt;a href=&quot;https://twitter.com/hackaday&quot;&gt;@hackaday&lt;/a&gt; &lt;a href=&quot;http://t.co/LMXhiJj5mu&quot;&gt;pic.twitter.com/LMXhiJj5mu&lt;/a&gt;&lt;/p&gt;— LosT/李智上 (@1o57) &lt;a href=&quot;https://twitter.com/1o57/status/518582419717226496&quot;&gt;October 5, 2014&lt;/a&gt;
-&lt;/blockquote&gt;
-&lt;script async src=&quot;//platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
-&lt;/div&gt;
-&lt;div&gt;
-&lt;blockquote class=&quot;twitter-tweet&quot;&gt;
-&lt;p&gt;&lt;a href=&quot;https://twitter.com/hackaday&quot;&gt;@hackaday&lt;/a&gt; &lt;a href=&quot;http://t.co/Tb42KBb8bl&quot;&gt;pic.twitter.com/Tb42KBb8bl&lt;/a&gt;&lt;/p&gt;— LosT/李智上 (@1o57) &lt;a href=&quot;https://twitter.com/1o57/status/518582291027595264&quot;&gt;October 5, 2014&lt;/a&gt;
-&lt;/blockquote&gt;
-&lt;script async src=&quot;//platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
-&lt;/div&gt;
-&lt;div&gt;
-&lt;blockquote class=&quot;twitter-tweet&quot;&gt;
-&lt;p&gt;&lt;a href=&quot;https://twitter.com/hackaday&quot;&gt;@hackaday&lt;/a&gt; &lt;a href=&quot;http://t.co/UhXCk0tyLX&quot;&gt;pic.twitter.com/UhXCk0tyLX&lt;/a&gt;&lt;/p&gt;— LosT/李智上 (@1o57) &lt;a href=&quot;https://twitter.com/1o57/status/518582190322356226&quot;&gt;October 5, 2014&lt;/a&gt;
-&lt;/blockquote&gt;
-&lt;script async src=&quot;//platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
-&lt;/div&gt;
-&lt;div&gt;
-&lt;blockquote class=&quot;twitter-tweet&quot;&gt;
-&lt;p&gt;&lt;a href=&quot;https://twitter.com/hackaday&quot;&gt;@hackaday&lt;/a&gt; &lt;a href=&quot;http://t.co/bIDNsV3D5g&quot;&gt;pic.twitter.com/bIDNsV3D5g&lt;/a&gt;&lt;/p&gt;— LosT/李智上 (@1o57) &lt;a href=&quot;https://twitter.com/1o57/status/518581972914819072&quot;&gt;October 5, 2014&lt;/a&gt;
-&lt;/blockquote&gt;
-&lt;script async src=&quot;//platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div&gt;
-&lt;blockquote class=&quot;twitter-tweet&quot;&gt;
-&lt;p&gt;&lt;a href=&quot;https://twitter.com/hackaday&quot;&gt;@hackaday&lt;/a&gt; &lt;a href=&quot;http://t.co/zqarmBmwNd&quot;&gt;pic.twitter.com/zqarmBmwNd&lt;/a&gt;&lt;/p&gt;— LosT/李智上 (@1o57) &lt;a href=&quot;https://twitter.com/1o57/status/518581836297936897&quot;&gt;October 5, 2014&lt;/a&gt;
-&lt;/blockquote&gt;
-&lt;script async src=&quot;//platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
-&lt;/div&gt;
-&lt;div&gt;&lt;br&gt;&lt;/div&gt;
-&lt;div&gt;And here is a copy of all the letters on each of the slides&lt;/div&gt;
-&lt;div&gt;&lt;br&gt;&lt;/div&gt;
-&lt;div&gt;DO
-&lt;div&gt;XIYL&lt;/div&gt;
-&lt;div&gt;DCYV&lt;/div&gt;
-&lt;div&gt;DKIK&lt;/div&gt;
-&lt;div&gt;NKUM&lt;/div&gt;
-&lt;div&gt;KRYD&lt;/div&gt;
-&lt;div&gt;NBYG&lt;/div&gt;
-&lt;div&gt;ONYM&lt;/div&gt;
-&lt;/div&gt;
-&lt;div&gt;NXOC&lt;/div&gt;
-&lt;div&gt;&lt;br&gt;&lt;/div&gt;
-&lt;div&gt;on one line:&lt;/div&gt;
-&lt;div&gt;&lt;br&gt;&lt;/div&gt;
-&lt;div&gt;DOXIYLDCYVDKIKNKUMKRYDNBYGONYMNXOC&lt;/div&gt;
-&lt;div&gt;&lt;br&gt;&lt;/div&gt;
-&lt;div&gt;Hrmmm, well the first thing you might try is a Caesar cipher. In the video you’ll notice that 1o57 repeatedly mentions that it’s Hackaday’s TENTH anniversary, so we should try decrypting the above string with a key of 10. (here’s &lt;a href=&quot;http://web.forret.com/tools/rot13.asp?rot=10&amp;amp;cipher=DOXIYLDCYVDKIKNKUMKRYDNBYGONYMNXOC&amp;amp;dir=decrypt&quot;&gt;a tool do to that&lt;/a&gt;)&lt;/div&gt;
-&lt;div&gt;&lt;br&gt;&lt;/div&gt;
-&lt;div&gt;TENYOBTSOLTAYADAKCAHOTDROWEDOCDNES&lt;/div&gt;
-&lt;div&gt;&lt;br&gt;&lt;/div&gt;
-&lt;div&gt;(side note: I cheated on this step by using an automated caesar cipher breaker)&lt;/div&gt;
-&lt;div&gt;&lt;br&gt;&lt;/div&gt;
-&lt;div&gt;Hrmmm that still looks like nonsense, but it does start with the word ten, so we’re probably close...&lt;/div&gt;
-&lt;div&gt;&lt;br&gt;&lt;/div&gt;
-&lt;div&gt;Wait a second! The string is backwards! It’s not ten it’s net!&lt;/div&gt;
-&lt;div&gt;&lt;br&gt;&lt;/div&gt;
-&lt;div&gt;SENDCODEWORDTOHACKADAYATLOSTBOYNET&lt;/div&gt;
-&lt;div&gt;&lt;br&gt;&lt;/div&gt;
-&lt;div&gt;or cleaned up&lt;/div&gt;
-&lt;div&gt;&lt;br&gt;&lt;/div&gt;
-&lt;div&gt;Send codeword to hackaday@lostboy.net&lt;/div&gt;
-&lt;div&gt;&lt;br&gt;&lt;/div&gt;
-&lt;div&gt;Ok, well now we know where to send the codewords. The only unsolved part of the puzzle is this last slide&lt;/div&gt;
-&lt;div&gt;&lt;br&gt;&lt;/div&gt;
-&lt;div&gt;
-&lt;blockquote class=&quot;twitter-tweet&quot;&gt;
-&lt;p&gt;&lt;a href=&quot;https://twitter.com/hackaday&quot;&gt;@hackaday&lt;/a&gt; &lt;a href=&quot;http://t.co/01Magsvu1u&quot;&gt;pic.twitter.com/01Magsvu1u&lt;/a&gt;&lt;/p&gt;— LosT/李智上 (@1o57) &lt;a href=&quot;https://twitter.com/1o57/status/518581720312856577&quot;&gt;October 5, 2014&lt;/a&gt;
-&lt;/blockquote&gt;
-&lt;script async src=&quot;//platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
-&lt;/div&gt;
-&lt;div&gt;&lt;br&gt;&lt;/div&gt;
-&lt;div&gt;&lt;br&gt;&lt;/div&gt;
-&lt;div&gt;&lt;img src=&quot;../images/w600_9f8bf4c63dee3f082eb17cc37a1f4292.png&quot; style=&quot;width: 872px; height: auto;&quot;&gt;&lt;/div&gt;
-&lt;div&gt;&lt;br&gt;&lt;/div&gt;
-&lt;div&gt;WTF are those things?! Now fans of Sherlock Holmes may recognize these, but at the time I did not, so I went to my best friend Google to try and figure it out. I tried lots of search terms like “stickman code&quot; (and variants on that) and “semaphore&quot; (since I thought maybe the positions on the flags was significant), until I came across this page:&lt;/div&gt;
-&lt;div&gt;&lt;br&gt;&lt;/div&gt;
-&lt;div&gt;http://www.geocachingtoolbox.com/index.php?lang=en&amp;amp;page=dancingMen&lt;/div&gt;
-&lt;div&gt;&lt;br&gt;&lt;/div&gt;
-&lt;div&gt;which features a code called the Dancing Men!&lt;/div&gt;
-&lt;div&gt;&lt;br&gt;&lt;/div&gt;
-&lt;div&gt;This code comes from a Sherlock Holmes novel called &lt;a href=&quot;https://en.wikipedia.org/wiki/The_Adventure_of_the_Dancing_Men&quot;&gt;The Adventure of the Dancing Men&lt;/a&gt;
-&lt;/div&gt;
-&lt;div&gt;&lt;br&gt;&lt;/div&gt;
-&lt;div&gt;
-&lt;img src=&quot;../images/w600_2aa8c86d7c01e076f23d0d3b19718c10.png&quot; style=&quot;width: 825px; height: auto;&quot;&gt;&lt;br&gt;
-&lt;/div&gt;
-&lt;div&gt;&lt;br&gt;&lt;/div&gt;
-&lt;div&gt;And we can use the above image to decrypt the band, which decrypts to:&lt;/div&gt;
-&lt;div&gt;&lt;br&gt;&lt;/div&gt;
-&lt;div&gt;codeword psychobilly ciphers&lt;/div&gt;
-&lt;div&gt;&lt;br&gt;&lt;/div&gt;
-&lt;div&gt;Thanks for the fun puzzle 1o57!&lt;/div&gt;
-</description>
-        <pubDate>Fri, 24 Oct 2014 00:00:00 -0400</pubDate>
-        <link>http://blog.tahnok.me/post/solution-to-1o57's-hackaday-challenge.html</link>
-        <guid isPermaLink="true">http://blog.tahnok.me/post/solution-to-1o57's-hackaday-challenge.html</guid>
         
         
       </item>
