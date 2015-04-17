@@ -4,6 +4,7 @@ http://blog.tahnok.me/index.html
 http://blog.tahnok.me/css/main.css
 http://blog.tahnok.me/sitemap.txt
 
+http://blog.tahnok.me/post/homestuck-or-why-fandoms-are-fun.html
 http://blog.tahnok.me/post/dabbling-with-kernel-hacking.html
 http://blog.tahnok.me/post/migrating-to-jekyll-for-blog-style-outpourings.html
 http://blog.tahnok.me/post/making-a-clock.html
@@ -18,6 +19,7 @@ http://blog.tahnok.me/post/solution-to-1o57's-hackaday-challenge.html
 http://blog.tahnok.me/post/nixie-tubes.html
 http://blog.tahnok.me/post/shell-shocked.html
 http://blog.tahnok.me/post/make-something-(or-how-i-learned-to-stop-worrying-and-love-making-things).html
+http://blog.tahnok.me/post/defcon-22.html
 http://blog.tahnok.me/post/defcon-22-badge-challenge-walkthrough.html
 http://blog.tahnok.me/post/laser-cut-dominion-playing-field.html
 http://blog.tahnok.me/post/a-noob's-attempt-at-the-2014-def-con-ctf-qualifiers.html

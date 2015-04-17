@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>DEFCON 22 Badge Challenge Walkthrough</title>
-  <meta name="description" content="Last week I was lucky enough to attend DEF CON for the first time and it did not disappoint. I've been out of commission for a few days with the con plague, ...">
+  <meta name="description" content="">
 
   <link rel="stylesheet" href="/css/main.css">
   <link rel="canonical" href="http://blog.tahnok.me/post/defcon-22-badge-challenge-walkthrough.html">
@@ -76,54 +76,907 @@
   </header>
 
   <article class="post-content">
-    <p><img src="../images/w600_b7504d23e0b7ac4c424ee7e2d4c7ccba.jpg" style="height: auto;"><br>
-Last week I was lucky enough to attend DEF CON for the first time and it did not disappoint. I've been out of commission for a few days with the con plague, but I'm feeling well enough now to try some blogging.</p>
-<p>This isn't the first write up to appear for the badge challenge. There's the <a href="http://elegin.com/dc22/">winning team's write up</a>, and runner up <a href="http://potatohatsecurity.tumblr.com/post/94565729529/defcon-22-badge-challenge-walkthrough">team potatoe sec's</a> write up.</p>
-<p>Why am I writing another one? Mostly it's because I wanted to make sure I really understood the challenge and it's solution. Additionally, I've noticed that the other two are either missing steps, or contain mistakes.</p>
-<p>Let's start with some background (you can skip this if you know about the badge challenge). DEFCON is a hacker conference, and hackers love puzzles. As a result, for the past 5 years (I think) <a href="https://twitter.com/1o57">1o57</a> has created a series of mind bending puzzles centered around the badges that DEFCON attendees get. It's designed to be solved in 3 days and force people to interact and talk since there are multiple different types of badges.</p>
-<p>My interest in the badge challenge first got piqued when I read through a DC21 walkthrough by <a href="http://elegin.com/dc21/">last year's winning team</a>. I didn't have a team or the willingness to miss all the other things going at DEFCON, so most of this walk through is based off of the two guides I mentioned above and a taxi ride with a member of the runner up team on the way to the airport, and the fine folks who hung around room 1057.</p>
-<p>So, what follows is as legible and clear a walkthrough as I can manage. Please leave comments if you spot any mistakes, or feel I've explained something using an identity like 2+2=5.</p>
-<p>If you want to follow along at home, you can download <a href="https://dl.dropboxusercontent.com/u/9393938/dc22-badge.zip">this archive</a> which contains as much of the badge challenge materials as I could manage to gather together. I'm still missing good photos of the front and back of all the badges, so if you have a one, please send it my way.</p>
+    <p><img src="../images/w600_b7504d23e0b7ac4c424ee7e2d4c7ccba.jpg" alt="" /></p>
+
+<p>Last week I was lucky enough to attend DEF CON for the first time and it did not disappoint. I’ve been out of commission for a few days with the con plague, but I’m feeling well enough now to try some blogging.</p>
+
+<p>This isn’t the first write up to appear for the badge challenge. There’s the <a href="http://elegin.com/dc22/">winning team’s write up</a>, and runner up <a href="http://potatohatsecurity.tumblr.com/post/94565729529/defcon-22-badge-challenge-walkthrough">team potatoe sec’s</a> write up.</p>
+
+<p>Why am I writing another one? Mostly it’s because I wanted to make sure I really understood the challenge and it’s solution. Additionally, I’ve noticed that the other two are either missing steps, or contain mistakes.</p>
+
+<p>Let’s start with some background (you can skip this if you know about the badge challenge). DEFCON is a hacker conference, and hackers love puzzles. As a result, for the past 5 years (I think) <a href="https://twitter.com/1o57">1o57</a> has created a series of mind bending puzzles centered around the badges that DEFCON attendees get. It’s designed to be solved in 3 days and force people to interact and talk since there are multiple different types of badges.</p>
+
+<p>My interest in the badge challenge first got piqued when I read through a DC21 walkthrough by <a href="http://elegin.com/dc21/">last year’s winning team</a>. I didn’t have a team or the willingness to miss all the other things going at DEFCON, so most of this walk through is based off of the two guides I mentioned above and a taxi ride with a member of the runner up team on the way to the airport, and the fine folks who hung around room 1057.</p>
+
+<p>So, what follows is as legible and clear a walkthrough as I can manage. Please leave comments if you spot any mistakes, or feel I’ve explained something using an identity like 2+2=5.</p>
+
+<p>If you want to follow along at home, you can download <a href="https://dl.dropboxusercontent.com/u/9393938/dc22-badge.zip">this archive</a> which contains as much of the badge challenge materials as I could manage to gather together. I’m still missing good photos of the front and back of all the badges, so if you have a one, please send it my way.</p>
+
 <p>Final note: unless otherwise noted, all materials that follow (include the text) is released under a <a href="https://creativecommons.org/licenses/by/4.0/">creative commons attribution license</a></p>
-<h1>Lanyards</h1>
-<p><img src="../images/w600_4e3fcbe36a0e25335a584131b800e7f9.jpg" style="height: auto;"><br>
-(source: me)</p>
+
+<h1 id="lanyards">Lanyards</h1>
+
+<p><img src="../images/w600_4e3fcbe36a0e25335a584131b800e7f9.jpg" style="height: auto;" /></p>
+
+<p>(source: me)</p>
+
 <p>This is the lanyard. There are 3 important parts to it.</p>
-<p>First, there's the Chinese numbers on the left, which you can read with this handy chart:</p>
-<p>一      1<br>
-二      2<br>
-三      3<br>
-四      4<br>
-五      5<br>
-六      6<br>
-七      7<br>
-八      8<br>
-九      9<br>
-十      10</p>
+
+<p>First, there’s the Chinese numbers on the left, which you can read with this handy chart:</p>
+
+<pre><code>一      1
+二      2
+三      3
+四      4
+五      5
+六      6
+七      7
+八      8
+九      9
+十      10
+</code></pre>
+
 <p>Then, here are the weird symbols in the middle. Those are 4 digit numbers written using the Cistercian cipher from <a href="https://en.wikipedia.org/wiki/The_Ciphers_of_the_Monks">The Ciphers of the Monks</a>. You can decode them with:</p>
-<p><img src="../images/w600_8961555d5c208beae2f558ecc3b78756.png" style="height: auto;"><br>
-(source: <a href="http://www.davidaking.org/Ciphers.htm">The Ciphers of the Monks</a>)</p>
+
+<p><img src="../images/w600_8961555d5c208beae2f558ecc3b78756.png" style="height: auto;" /></p>
+
+<p>(source: <a href="http://www.davidaking.org/Ciphers.htm">The Ciphers of the Monks</a>)</p>
+
 <p>The last part is a Korean word, saying either vertical or horizontal</p>
+
 <p>수직 (sujig): vertical</p>
+
 <p>수평 (supyeong): horizontal</p>
+
 <p>Big thanks to 1o57, who showed up at one point with a full set of EIGHT lanyards, pictured below</p>
-<p><img src="../images/w600_3bc1fe47e97da94a9d767b55aef501bb.jpg" style="height: auto;"><br>
-(source: me)</p>
+
+<p><img src="../images/w600_3bc1fe47e97da94a9d767b55aef501bb.jpg" style="height: auto;" /></p>
+
+<p>(source: me)</p>
+
 <p>It was pretty tough trying to gather all of them. Initially, the total number of lanyards was unclear.</p>
-<p>We had a hell of a time trying to gather all of the lanyards before 1o57, since we assumed the numerals were unique and didn't look for the other 4 and we thought there might be a lanyard with a Chinese 1 or 3. Also, we thought there might even be 9 lanyards, since there were 3 "suits" in the DEFCON iconography: (the happy skull and cross-bones, the rotary dial and the floppy disk).</p>
-<p>Anyway, how do you decode these?? It turns out the Cistercian numbers are all in the range of upper case decimal ASCII, but without an ordering it's gibberish.</p>
+
+<p>We had a hell of a time trying to gather all of the lanyards before 1o57, since we assumed the numerals were unique and didn’t look for the other 4 and we thought there might be a lanyard with a Chinese 1 or 3. Also, we thought there might even be 9 lanyards, since there were 3 “suits” in the DEFCON iconography: (the happy skull and cross-bones, the rotary dial and the floppy disk).</p>
+
+<p>Anyway, how do you decode these?? It turns out the Cistercian numbers are all in the range of upper case decimal ASCII, but without an ordering it’s gibberish.</p>
+
 <p>First, you have to divide the lanyards into vertical and horizontal.</p>
+
 <p>At one point LoST mentioned that he really loved weaving potholders as a kid, so clearly the lanyards need to be woven together in some fashion.</p>
+
 <p>Next, it turns out that all of the lanyards are less than 15, so they can be written in binary using only 4 bits.</p>
+
 <p>Horizontal</p>
+
 <pre><code> 3 | 0 0 1 1
  4 | 0 1 0 0
  4 | 0 1 0 0
  9 | 1 0 0 1
 </code></pre>
+
 <p>Vertical</p>
+
 <pre><code> 5 10 11 14
- </code></pre>
+ ---------------
+ 1  0  1  0
+ 0  1  1  0
+ 1  0  0  1
+ 0  1  1  1
+</code></pre>
+
+<p>Finally, you might also have noticed that two of the lanyards start with the encoded version for 1057.</p>
+
+<p>Now, you can combine all of this information to form the solution.</p>
+
+<p>The Chinese numbers can be arranged in such a way that it forms a grid of all 1s, indicating which square on which lanyard should be read to form the final message.</p>
+
+<p>The ordering starts with 11 on top of the 4 lanyard with 1057 on it.</p>
+
+<p>From there, there is always only one lanyard that can be placed such that the grid of all 1s is formed.</p>
+
+<p>Here’s the final weave:</p>
+
+<p><img src="../images/w600_4ef366522f250e3e089ce13e1c7e8c44.jpg" alt="" /></p>
+
+<p>(source: me)</p>
+
+<p>Reading off the numbers and converting to ASCII you get:</p>
+
+<pre><code> 1057DONTMISSTHEPOINTINCURIOUSCODES
+</code></pre>
+
+<p>or</p>
+
+<pre><code> 1057 DONT MISS THE POINT IN CURIOUS CODES
+</code></pre>
+
+<p>There are 2 things you need to solve this puzzle:</p>
+
+<ol>
+  <li>1o57 told us to take this literally. EXTREMELY LITERALLY</li>
+  <li>There are a whole bunch of new TLDs that got released recently…</li>
+</ol>
+
+<p>The solution is curious.codes, which leads to the following url:</p>
+
+<p><a href="http://curious.codes/">http://curious.codes/</a></p>
+
+<p>Which contains this link:</p>
+
+<p><a href="http://curious.codes/NukeNukeMickeyLover">Did you get Nuke Nuke Mickey Lover yet?</a></p>
+
+<p>Running file on it reveals that it’s a rar archive.</p>
+
+<p>When you try to open it, you are asked for a password.</p>
+
+<h2 id="program-code">Program Code</h2>
+
+<p><img src="../images/w600_7d4ff5d7051d7b624a4620bbee4f38cb.jpg" alt="" /></p>
+
+<p>(source: me)</p>
+
+<p>In the DEFCON program under the section by 1o57, there’s a series of numbers transcribed below:</p>
+
+<pre><code>07-21-18-03-18-05-05-22-01-03-14-20-18-06
+10-22-25-25-21-18-25-03-12-02-08-19-22-01
+17-12-02-08-05-16-14-25-25-22-01-20-15-08
+07-17-02-01-07-15-18-17-08-03-18-17-16-08
+07-17-02-10-01-07-21-18-10-02-02-17-06-07
+21-18-12-15-18-18-05-17-02-06-10-57-10-57
+</code></pre>
+
+<p>Notice that all of the numbers are less than 26 (with the exception of 1o57’s signature at the end), so it’s time to convert these numbers to letters (1 -&gt; a, 2 -&gt; b, etc…), which results in:</p>
+
+<pre><code> gurcreevacntrfjvyyuryclbhsvaqlbhepnyyvatohgqbagorqhcrqphgqbjagurjbbqfgurlorreqbfj
+</code></pre>
+
+<p>The thing I learned doing the challenges: Always try <a href="http://web.forret.com/tools/rot13.asp">rot13</a>.</p>
+
+<pre><code> THEPERRINPAGESWILLHELPYOUFINDYOURCALLINGBUTDONTBEDUPEDCUTDOWNTHEWOODSTHEYBEERDOS
+</code></pre>
+
+<p>or</p>
+
+<p>the perrin pages will help you find your calling but dont be duped cut down the woods they be erdos</p>
+
+<p>Above some of page numbers in the program, there are numbers written. Here is the whole set:</p>
+
+<p>number: 32 35 31 41 53 45 41 43 52 45 45 4D 41 54 45 21 21
+page:    2  3  5  7 10 12 16 17 22 29 33 34 36 39 46 51 56</p>
+
+<p>A bit of googling reveals a few things. There are  <a href="https://en.wikipedia.org/wiki/Perrin_number">Perrin Numbers</a>, which is a sequence defined by a recursive relation. The first few I grabbed from <a href="https://oeis.org/A001608">The Online Encyclopedia of Integer Sequences</a> (yes there is apparently such a thing)</p>
+
+<pre><code> 3, 0, 2, 3, 2, 5, 5, 7, 10, 12, 17, 22, 29, 39, 51, 68
+</code></pre>
+
+<p>There are also things called <a href="https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93Woods_number">Erdos-Woods numbers</a>. Again from <a href="https://oeis.org/A059756">OEIS A059756</a>:</p>
+
+<pre><code> 16, 22, 34, 36, 46, 56
+</code></pre>
+
+<p>Let’s start by reducing the numbers to just Perrin numbers</p>
+
+<pre><code>number: 32 35 31 41 53 45 43 52 45 54 45 21
+page:    2  3  5  7 10 12 17 22 29 39 46 51
+</code></pre>
+
+<p>Next, let’s ‘cut down the woods’ by removing the Erdos Woods Numbers that aren’t also Perrin numbers (‘don’t be duped’). NOTE: This bit seems to have been missed by a the 2 other write-ups</p>
+
+<pre><code> 16, 34, 36, 46, 56
+</code></pre>
+
+<p>.</p>
+
+<pre><code>number: 32 35 31 41 53 45 43 52 45 54 21
+page:    2  3  5  7 10 12 17 22 29 39 51
+</code></pre>
+
+<p>How do we decode 32 35 31 41 53 45 43 52 45 54 21? Well we saw earlier that one of the superscripts was 4D, so let’s go with <a href="http://www.asciitohex.com/">ASCII Hex</a></p>
+
+<pre><code> 251ASECRET!
+</code></pre>
+
+<p>Hey, that’s a phone number (the hint being calling)</p>
+
+<p>251-273-2738</p>
+
+<p>If you call it, it will ring and ring and eventually you’ll get a recording of a piano, which you can listen to below:</p>
+
+<p><a href="https://dl.dropboxusercontent.com/u/9393938/Piano.wav">piano.wav</a></p>
+
+<p>Transcribing the notes we get:</p>
+
+<pre><code>DGGBGBGGDGBDGDGBDDDBDGEGDGDGDBDDDBGDGBDDGEDGGDGBGDDDDBDDDDDBGGGGGBDDGGGEDGGDGBGGGBGDBGDGBGDBDGBDDGBGGGGBGDBGE
+</code></pre>
+
+<p>Hrmmm, not many Bs or Es… Let’s try removing those to see what it looks like</p>
+
+<pre><code>DGG G GGDG DGDG DDD DG GDGDGD DDD GDG DDG DGGDG GDDDD DDDDD GGGGG DDGGG DGGDG GGG GD GDG GD DG DDG GGGG GD G
+</code></pre>
+
+<p>Since there’s only 2 letters it’s either binary or morse code. Let’s see what it looks like if the Ds are dashes and Gs are dots</p>
+
+<pre><code>-.. . ..-. -.-. --- -. .-.-.- --- .-. --. -..-. .---- ----- ..... --... -..-. ... .- .-. .- -. --. .... .- .
+</code></pre>
+
+<p><img src="../images/w600_a29666610e75a4a870a8b583ab99896c.png" alt="" /></p>
+
+<p>(source <a href="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/International_Morse_Code.svg">wikipedia</a>)</p>
+
+<p>Putting that string into a <a href="http://morsecode.scphillips.com/jtranslator.html">morse code translator</a></p>
+
+<p>We get:</p>
+
+<pre><code> DEFCON.ORG/1057/SARANGHAE
+</code></pre>
+
+<p>SarangHae is Korean for I love you, so fixing the capitlization we get</p>
+
+<p>https://www.defcon.org/1057/SarangHae/</p>
+
+<p>Which reads:</p>
+
+<pre><code>Who we gave free love to
+
+at
+
+1o57
+
+Are you being served?
+</code></pre>
+
+<p>Alright, we have to pause on this track for now since we don’t know “Who we gave free love to” (googling reveals nothing), although <a href="https://en.wikipedia.org/wiki/Are_You_Being_Served%3F">Are you being served</a> is apparently a british TV Show.</p>
+
+<p>This looks like it might be an email address though: SOMETHINGGOESHERE@1o57.uk</p>
+
+<h1 id="badges">Badges</h1>
+
+<p>There are quite a few cool things about the badge. It’s a fully programmable propeller including an astounding array of through holes for attaching your own electronics to. It also has a microusb port so it’s pretty easy to program from any computer.</p>
+
+<p>According to the <a href="http://forums.parallax.com/showthread.php/156782-DEFCON-22-Badge-Code-Schematics-and-Information-Here!">parallax forums</a> there are 15 types of badges: 1 uber, 1 press, 1 speaker, 1 vendor, 1 goon, 1 contest, 1 artist and 8 human badges.</p>
+
+<p>The differences between the human badges seem to be the following:</p>
+
+<ol>
+  <li>Different styles of writing Human across the bottom</li>
+  <li>The pattern of pads just above the 8 LEDs</li>
+  <li>The symbol and numbers on the back</li>
+</ol>
+
+<h2 id="badge-pads">Badge Pads</h2>
+
+<p>One of the other weird features of the badges is that there are 2 different types of pads: circular and square. These are a binary encoding, where the circular pads are zeros and the square pads are ones. Writing this out from top to bottom and left to right gives us the following:</p>
+
+<pre><code>0110
+0101
+0111
+0110
+0110
+0110
+0110
+0101
+0111
+0111
+0100
+0110
+1000
+0101
+1000
+0011
+</code></pre>
+
+<p>Which we can turn into the following numbers</p>
+
+<pre><code>6
+5
+7
+6
+6
+6
+6
+5
+7
+7
+4
+6
+8
+5
+8
+3
+</code></pre>
+
+<p>Grouped in twos</p>
+
+<pre><code> 65 76 66 65 77 46 85 83
+</code></pre>
+
+<p>and converted into ASCII (base 10) gives us:</p>
+
+<pre><code> ALBAM.US
+</code></pre>
+
+<p>http://albam.us/</p>
+
+<p>Which contains a bunch of weird looking text</p>
+
+<pre><code> Bsz zfw vbffn up cbei dt la xvf op wtpskcuujjo? Rdjuk cybet uf
+ evlc dbfovozivnj?
+
+ T'fm mzu pqp ie zh b mduknz svnlfu...rivp D'm wpymjih ugalreye J
+ npdgoidpm uidob qa flyhz mduknz wfcxt, mdlv uzxktff (svxi-tvr!) ryx tvyevpgy Z'x
+ vbdf gvggier fjlz J tci dzlf ju do rivie. Yix xcbk yvs ksuu poivt aueys xpme? Zv
+ MERWFZ ive da iudmys...J ptlcglp suwf op kjdnb zz ju zjxjo tzxyt ji b iqr bvqisf D gvgg
+ lzvy nznfch vgrth...
+</code></pre>
+
+<p>This looks pretty garbled and it’s not a simple rot13 either. We will come back to this later once we have the key</p>
+
+<h2 id="badge-output">Badge Output</h2>
+
+<p>You can plug the DEFCON 22 badges into a computer and connect to it as a serial terminal. An easy way to do this is to install the <a href="http://forums.parallax.com/showthread.php/153921-Open-Propeller-Project-3-Propeller-IDE-V0.1-Package-Available?p=1283880&amp;viewfull=1#post1283880">PropellerIDE</a>. You can also connect to it using screen (or with busybox microcom I think). The baud rate for the connection is 57600</p>
+
+<p>When you first connect the badge spits out a lot of nonsense like this:</p>
+
+<pre><code>                MARRY AND REPRODUCE
+                  NO IMAGINATION
+      MARRY AND REPRODUCE
+                NO IMAGINATION
+                WATCH TV
+                    NO INDEPENDENT THOUGHT
+                  MARRY AND REPRODUCE
+              WORK EIGHT HOURS
+                EAT
+                NO INDEPENDENT THOUGHT
+    NO INDEPENDENT THOUGHT
+      EAT
+              BUY
+            WORK EIGHT HOURS
+            MARRY AND REPRODUCE
+            BUY
+              OBEY
+            CONFORM
+                WATCH TV
+    CONSUME
+                      DO NOT QUESTION AUTHORITY
+MARRY AND REPRODUCE
+              MARRY AND REPRODUCE
+              BUY
+  CONSUME
+                        NO INDEPENDENT THOUGHT
+  STAY ASLEEP
+    OBEY
+                      CONFORM
+  WATCH TV
+    EAT
+              NO INDEPENDENT THOUGHT
+WATCH TV
+                NO IMAGINATION
+                        CONSUME
+                  CONSUME
+CONSUME
+                        EAT
+                        BUY
+CONSUME
+                    BUY
+                    NO IMAGINATION
+                DO NOT QUESTION AUTHORITY
+                  DO NOT QUESTION AUTHORITY
+                EAT
+  NO INDEPENDENT THOUGHT
+                  WORK EIGHT HOURS
+          NO IMAGINATION
+WORK EIGHT HOURS
+                      CONFORM
+      SUBMIT
+      DO NOT QUESTION AUTHORITY
+                    BUY
+  SUBMIT
+                      OBEY
+                        DO NOT QUESTION AUTHORITY
+      STAY ASLEEP
+                      CONFORM
+                    NO INDEPENDENT THOUGHT
+SUBMIT
+        WATCH TV
+          MARRY AND REPRODUCE
+        CONSUME
+            EAT
+      MARRY AND REPRODUCE
+  MARRY AND REPRODUCE
+                  CONSUME
+    STAY ASLEEP
+    CONSUME
+          STAY ASLEEP
+              BUY
+      NO IMAGINATION
+EAT
+                        SUBMIT
+                MARRY AND REPRODUCE
+                    SUBMIT
+</code></pre>
+
+<p>All of these are references to a movie called <a href="http://www.imdb.com/title/tt0096256/">They Live</a> but there’s nothing particularly interesting in this output. The REALLY interesting stuff happens when you push the buttons on the badge.</p>
+
+<p>What buttons you ask? Well the E F C O in DEFCON along the bottom of the badge are capacitive buttons! Here’s the output for various combinations of button pushes</p>
+
+<p>Pushing the C (0010)</p>
+
+<pre><code>WELCOME TO DEFCON TWENTY TWO
+
+COME AND PLAY A GAME WITH ME
+</code></pre>
+
+<p>Pushing the O (0001)</p>
+
+<pre><code>WHERE TO BEGIN I KNOW FIND HAROLD
+</code></pre>
+
+<p>Pushing the F and O (0101)</p>
+
+<pre><code>DEFCON DOT ORG SLASH ONE ZERO FIVE SEVEN SLASH I WONDER WHAT GOES HERE
+</code></pre>
+
+<p>Pushing the F C and O (0111)</p>
+
+<pre><code>TRY THE FIRST HALF OF HIS PHONE NUMBER FOLLOWED BY HIS LAST NAME THEN THE SECOND HALF OF HIS NUMBER
+</code></pre>
+
+<p>Pushing the E (1000)</p>
+
+<pre><code>ALBERT MIGHT BE ON THE PHONE WITH HAROLD SO IF ITS BUSY TRY BACK
+</code></pre>
+
+<p>Pushing the E and O (1001)</p>
+
+<pre><code>WHITE LINES IN THE MIDDLE OF THE ROAD THATS THE WORST PLACE TO DRIVE
+</code></pre>
+
+<p>We need to find a Harold so we can use his phone number to build a url. <a href="https://twitter.com/1o57/status/497892280838025216">1o57 tweeted</a> a pretty huge hint about this part of the challenge:</p>
+
+<p>[twitter url=”https://twitter.com/1o57/status/497892280838025216”]</p>
+
+<pre><code>Major hint- this is Defcon 22- 22 is a Smith number.
+</code></pre>
+
+<p>Some googling reveals that a <a href="https://en.wikipedia.org/wiki/Smith_number">Smith Number</a> is a number where the sum of the digits are the equal to the sum of the digits of it’s prime factors. They were discovered by Albert Wilansky who noticed that his brother in law Harold Smith had a phone number with this property. Sounds promising!</p>
+
+<p>His phone number from Wikipedia is 493-7775. Since there are a few possible ways to assemble this, you have to try a few URLs before you succeed with 493SMITH7773 resulting in:</p>
+
+<p>https://www.defcon.org/1057/493SMITH7775/</p>
+
+<p>There’s a few import things about this page. First the poem:</p>
+
+<pre><code> Why be
+ ye searchin' answers here?
+ Oh are
+ ye 1o57? The question
+ queue be
+ long...be ye not in despair,
+ em for
+ keepin' ye from spinnin' yer wheels they be.
+</code></pre>
+
+<p>Every second line can be written as letters</p>
+
+<pre><code> YB
+ OR
+ QB
+ M4
+</code></pre>
+
+<p>The second thing we have from this page is found in the source code as a comment</p>
+
+<pre><code> YQESMJDOJOTM
+</code></pre>
+
+<p>This is a dead end for now, but don’t worry we will come back to it.</p>
+
+<h2 id="badge-serial-numbers">Badge Serial Numbers</h2>
+
+<p>Sadly, I don’t have pictures of the back of all of the badges, but here is mine:</p>
+
+<p><img src="../images/human1.jpg" alt="" /></p>
+
+<p>(source: me)</p>
+
+<p>As you can see in the top right corner there’s a symbol. It’s either a Chinese or a Korean cardinal symbol. Here’s a table from <a href="http://potatohatsecurity.tumblr.com/post/94565729529/defcon-22-badge-challenge-walkthrough">Team PotatoSec</a></p>
+
+<pre><code>Badge          Serial_1     Serial_2     Direction    Language
+Human          55586753     01458934     West         Chinese
+Human          25348567     02933985     East         Chinese
+Human          30303031     38563748     South        Chinese
+Human          56456387     01924834     North        Chinese
+Human          32439751     50932487     North        Korean
+Human          77798753     00478041     West         Korean
+Human          81303557     85345360     South        Korean
+Human          05978344     85758673     East         Korean
+Artist         94841634     88172253     South        Chinese
+Contest        09856563     23454311     East         Chinese
+Vendor         05729856     57380999     North        Korean
+Speaker        31337017     34029545     South        Chinese
+Goon           94841634     88172253     South        Chinese
+Press          06060606     00000000     South        Korean
+Uber           37584205     23785634     North/South  Korean
+</code></pre>
+
+<p>We have to stop here again, because we don’t yet know what to do with these.</p>
+
+<h1 id="xxx-codes">X.XX Codes</h1>
+
+<p>At the conference, there were 2 large standing maps containing a series of numbers, and one large floor sticker also containing similar looking numbers. They were all in red, had a single Korean character above them and mostly followed the format of XX.XX</p>
+
+<p><img src="../images/w600_8cef57dfb2f38c4389cc3eb31c21fcba.jpg" alt="" /></p>
+
+<p>(source: me)</p>
+
+<pre><code>전
+1.23
+2.23
+3.23
+3.13
+3.22
+2.22
+0.00
+6.22
+3.01
+1.02
+0.20
+0.03
+0.10
+</code></pre>
+
+<p><img src="../images/w600_00f11ac70670518cf849c18b46145cf9.jpg" alt="" /></p>
+
+<p>(source: me)</p>
+
+<pre><code>화
+0.12
+0.01
+0.20
+6.23
+3.02
+4.01
+8.01
+6.02
+3.12
+9.02
+5.22
+4.02
+2.11
+</code></pre>
+
+<p><img src="../images/w600_8cbabbc137de18db80124d4066d50cb9.jpg" alt="" /></p>
+
+<p>(source: me)</p>
+
+<pre><code>기
+1.13
+6.12
+5.23
+9.12
+5.11
+6.13
+12.02
+4.23
+4.13
+1.11
+15.02
+9.22
+8.22
+</code></pre>
+
+<p>It turns out that the letters above spell telephone in Korean</p>
+
+<p>Telephone: 전화기 (jeonhwa)</p>
+
+<p>Now, in order to decode this mess, we first have to consider a phone keypad.</p>
+
+<p><img src="../images/telephone_keypad.png" alt="" /></p>
+
+<p>(source <a href="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Telephone-keypad2.svg">wikipedia</a>)</p>
+
+<p>Now, all the numbers directly to the right are between 0 and 2, and all of the final digits are between 0 and 3. And we have a 3 by 4 grid… It’s a coordinate system for sure. Now the logical numbering would be from top to bottom and left to right… but that’s wrong. Here’s the numbered grid</p>
+
+<p><img src="../images/w600_5eb228bfc9a0c6b6878b8f939f1d8831.png" alt="" /></p>
+
+<p>(source: me and wikipedia)</p>
+
+<p>The numbers to the left of the dot indicate how many times you should “press” the number, just like texting on a dumbphone.</p>
+
+<p>Now the numbers decode to the following:</p>
+
+<pre><code> 전 = DEFCON*ORG#10
+ 화 = 57#FISSILINGU
+ 기 = ALELUCIDATION
+</code></pre>
+
+<p>giving us DEFCON*ORG#1057#FISSILINGUALELUCIDATION</p>
+
+<p>cleaned up and capitalized properly</p>
+
+<p>https://www.defcon.org/1057/FissilingualElucidation/</p>
+
+<p>Which contains</p>
+
+<pre><code>Here, I wrote you a poem:
+lorem ip
+Lorem ipsum dolor si
+Lorem ipsum do
+Lorem ipsum dolor s
+lorem ipsum ama
+Lorem ipsum dolor sit amet
+Lorem ipsum dolor sit ame
+
+Lorem ipsum dolor sit
+lorem ipsum ips
+lorem ipsum lor
+lorem ipsum lo
+lorem ipsum lorem
+lorem ipsum amat
+Lorem Ipsum
+</code></pre>
+
+<p>So the key for this <strong>was</strong> to run the poem through google translate, which through some fluke or possibly easter egg would translate to this:</p>
+
+<pre><code>Let's see if
+We give
+Pussycat Dolls
+The Free Love
+It can be used
+Our goal is to ame
+
+Our goal is to
+vehicle dimensions
+Free of pain
+China, elsewhere
+Free Internet
+China loves
+NATO
+</code></pre>
+
+<p>Sadly, this no longer works for me (<a href="http://krebsonsecurity.com/2014/08/lorem-ipsum-of-good-evil-google-china/">and others it seems</a>, so big thanks once again to <a href="http://potatohatsecurity.tumblr.com/post/94565729529/defcon-22-badge-challenge-walkthrough">Team PotatoSec for their write up</a></p>
+
+<p>Anyway, with this information we can now complete the email address from earlier! Free love is is given to Pussycat Dolls</p>
+
+<h1 id="email-to-pussycatdolls1o57uk">Email to pussycatdolls@1o57.uk</h1>
+
+<pre><code> To: Manfred Manx &lt;f.alt.alt@gmail.com&gt;
+ From: "1o57" &lt;pussycatdolls@1o57.uk&gt;
+ Subject: Can you feel the love tonight?
+ DEFCON.ORG/1057/ WHO DOES CHINA LOVE + Mickey's Key
+</code></pre>
+
+<p>Ok, well we don’t have Mickey’s Key yet, but the poem tells us that China loves NATO. Let’s continue on until we find Mickey’s key.</p>
+
+<h1 id="cd">CD</h1>
+
+<p>On the CD there’s a picture of a <a href="https://en.wikipedia.org/wiki/Cryptex">Cryptex</a> which contains an awful lot of letters and numbers… Perfect for use as key material! Here’s a picture</p>
+
+<p><img src="../images/cryptex.jpg" alt="" /></p>
+
+<p>(source: <a href="https://twitter.com/1o57/">1o57</a> I think)</p>
+
+<p>And here’s the whole thing transcribed</p>
+
+<pre><code>CIZDRURREGUI
+DVTQIMUFNXNV
+QOHULDILKCFO
+PG2LTGEWPZRH
+KNRIGZWIOTIK
+BBVB4RCVARLU
+YQESMJDOJOTM
+</code></pre>
+
+<p>HEY! That’s last line is the same as the one from 493SMITH7775 page!</p>
+
+<p>It turns out that BBVB4RCVARLU is the passphrase for the block of text we saw earlier</p>
+
+<pre><code>Bsz zfw vbffn up cbei dt la xvf op wtpskcuujjo? Rdjuk cybet uf
+evlc dbfovozivnj?
+
+T'fm mzu pqp ie zh b mduknz svnlfu...rivp D'm wpymjih ugalreye J
+npdgoidpm uidob qa flyhz mduknz wfcxt, mdlv uzxktff (svxi-tvr!) ryx tvyevpgy Z'x
+vbdf gvggier fjlz J tci dzlf ju do rivie. Yix xcbk yvs ksuu poivt aueys xpme? Zv
+MERWFZ ive da iudmys...J ptlcglp suwf op kjdnb zz ju zjxjo tzxyt ji b iqr bvqisf D gvgg
+lzvy nznfch vgrth...
+</code></pre>
+
+<p>One of the other teams thought this was an OTP, but in fact it’s just a straight up <a href="https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher">Vigenere Cipher</a> which we can decode with <a href="http://rumkin.com/tools/cipher/vigenere.php">this handy tool</a></p>
+
+<p>The decrypted text using a key of BBVB4RCVARLU results in</p>
+
+<pre><code>Are you about to hang it up due to frustration? About ready to
+call shenanigans?
+
+I'll let you in on a little secret...when I'm feeling deflated I
+sometimes think of funny little words, like sextile (rawr-rar!) and suddenly I'm
+back feeling like I can dial it in again. Now what was that other funny word? It
+REALLY had my number...I usually have to think of it eight times in a row before I feel
+like myself again...
+</code></pre>
+
+<p>So, some googling leads us to discover that a <a href="https://en.wikipedia.org/wiki/Sextile">Sextile</a> looks a lot like an asterix! And there’s a reference to the word dial, so we’re looking for a funny word relating to telephones and dialpads or something.</p>
+
+<p>That word is <a href="https://en.wiktionary.org/wiki/octothorpe">Octothorp</a>, but what to do with it? Well the poem does mention rar, so it’s got to be the password to the rar file from earlier. There’s also a reference to the number 8, which leads us to a password of</p>
+
+<pre><code>OCTOTHORPOCTOTHORPOCTOTHORPOCTOTHORPOCTOTHORPOCTOTHORPOCTOTHORPOCTOTHORP
+</code></pre>
+
+<p>Time to decrypt that RAR! This gives us a folder containing 2 files. A copy of a song called <a href="https://en.wikipedia.org/wiki/Ostrich_%28Crack_the_Sky_album%29">The Box by Ostritch</a> and this image</p>
+
+<p><img src="../images/nukenukemickeylover.jpg" alt="" /></p>
+
+<p>(source <a href="https://twitter.com/1o57/">1o57</a>)</p>
+
+<p>Well, that’s a pretty funny picture of <a href="https://en.wikipedia.org/wiki/Kim_Jong-un">Kim Jong-un</a> but notice that he has Mickey on his belly. Somehow this image will help us create Mickey’s key.</p>
+
+<p>From earlier, we have a bunch of badges with North written in Korean and South written in Korean, which is probably why there’s a picture of the leader of North Korea and <a href="https://www.youtube.com/watch?v=9bZkp7q19f0">Psy</a> who’s from South Korea.</p>
+
+<p>The epsilon symbol indicates that the serial numbers should be summed and the grumpy cat indicates we should concatenate those two in order to get the key. (Completely obvious I know)</p>
+
+<p>The sum of the North Korean serials is:</p>
+
+<p>32439751 + 50932487 + 05729856 + 57380999 = 146483093</p>
+
+<p>The sum of the South Korean serials is:</p>
+
+<p>81303557 + 85345360 + 06060606 + 00000000 = 172709523</p>
+
+<p>To create Mickey’s key: 146483093172709523</p>
+
+<h1 id="final-puzzle">Final Puzzle</h1>
+
+<p>With the Mickey’s key (146483093172709523) and the answer to who China love’s (NATO) we can now finish the URL from earlier</p>
+
+<p>DEFCON.ORG/1057/ WHO DOES CHINA LOVE + Mickey’s Key</p>
+
+<p>= DEFCON.ORG/1057/NATO146483093172709523</p>
+
+<p>https://www.defcon.org/1057/NATO146483093172709523</p>
+
+<p>Well the page is called Almost There!, so we must be close! On that page there’s a silly moon gif and this:</p>
+
+<p><img src="../images/ogham_message.jpg" alt="" /></p>
+
+<p>(source <a href="https://twitter.com/1o57/">1o57</a>)</p>
+
+<p>Now this turns out to be written in a language called <a href="https://en.wikipedia.org/wiki/Ogham">Ogham</a></p>
+
+<p><img src="../images/ogham_decoder.png" alt="" /></p>
+
+<p>(source: (source <a href="https://en.wikipedia.org/wiki/Ogham">wikipedia</a>)</p>
+
+<p>Which gives us the following translation:</p>
+
+<pre><code>I OFT CORRECT NGOUR GRAMMER
+OR TELL NGOU TO NEE A NGSNGCHIATRIST
+BUT THE FILEN ASSIFTNG TO NGIERCE
+THE LAFD THAT CRAFEN FEST UNGOF
+MIGHT LEAD NGOU TO DINCOER
+FAME OS THE MOOF AT CODES THAT ARE CURIOUS
+</code></pre>
+
+<p>Alright, time to clean that up. There are a few substitutions we need to make</p>
+
+<p>NG -&gt; Y</p>
+
+<p>N  -&gt; S</p>
+
+<p>S  -&gt; F</p>
+
+<p>F  -&gt; N</p>
+
+<p>Y  -&gt; P</p>
+
+<p>But only sometimes, and sometimes more than once. For example I had to replace the 3 S’s in ASSISTNG, and then replace the 3rd F with an N. EDIT: turns out I transcribed the ogham wrong. Thanks Chris in the comments.</p>
+
+<p>Also, Ogham doesn’t contain a letter for W, so we have to add it where it’s missing.</p>
+
+<p>Here’s there cleaned up version:</p>
+
+<pre><code>I WONT CORRECT YOUR GRAMMER
+OR TELL YOU TO SEE A PSYCHIATRIST
+BUT THE NILES AFFINTY TO PIERCE
+THE LAND THAT CRANES NEST UPON
+MIGHT LEAD YOU TO DISCOVER THE
+NAME OF THE MOON AT CODES THAT ARE CURIOUS
+</code></pre>
+
+<p>There are a few references here that need to be gathered together to make sense. If you google niles pierce and crane, you get to a page about <a href="https://en.wikipedia.org/wiki/David_Hyde_Pierce">David Hyge Pierce</a> who played a psychiatrist on <a href="https://en.wikipedia.org/wiki/Frasier">Frasier</a>, so clearly we’re on the right track. A search for moon on that wikipedia page reveals that Niles’ wife in the show is <a href="https://en.wikipedia.org/wiki/Daphne_Moon">Daphne Moon</a>.</p>
+
+<p>The line about “name of the moon at codes that are curious” seems to indicate an email address for the curious.codes domain.</p>
+
+<p>“Name of the moon” hints that we want the actress that plays Moon who is <a href="https://en.wikipedia.org/wiki/Jane_Leeves">Jane Leeves</a></p>
+
+<p>Now to send an email to:</p>
+
+<p>janeleeves@curious.codes</p>
+
+<h1 id="the-end">THE END?</h1>
+
+<p>You will get a reply</p>
+
+<pre><code>To: Manfred Manx &lt;f.alt.alt@gmail.com&gt;
+From: "1o57" &lt;janeleeves@curious.codes&gt;
+Subject: The end of the journey
+
++++
+Well done!
+
+Find 1o57, and hand him a note- written on blue paper....
+
+On the note must be your name(s)  / team name - and this phrase:
+
+perfer et obdura; dolor hic tibi proderit olim
+
+Congratulations, you have earned a spot ... but I've said too much...
+
+Include an email :)
+
+----
+</code></pre>
+
+<p>Wooo! That’s the end! I hope you enjoyed the ride. If you’re the curious type (which I have no doubt is the case if you’ve made it this far), the latin translates to “Be patient and tough; someday this pain will be useful to you”</p>
+
+<p>I’ve got to thank 1o57 for putting together this puzzle, <a href="http://elegin.com/dc22/">Elegin</a> and <a href="http://potatohatsecurity.tumblr.com/post/94565729529/defcon-22-badge-challenge-walkthrough">Team PotatoSec</a> without their guides I wouldn’t have been able to put this guide together.</p>
+
+<h1 id="appendix">Appendix</h1>
+
+<h2 id="dead-ends">Dead ends</h2>
+
+<p>So there are a lot of dead ends in this quest. There were quite a few references to <a href="https://en.wikipedia.org/wiki/The_Last_Dragon">The Last Dragon</a> which didn’t lead anywhere.</p>
+
+<p>There were lots of images included all over the place that didn’t lead anywhere (the mighty boosh moon, the popcorn gif, the lost boys movie poster)</p>
+
+<p>There’s the song file that was included in the RAR archive.</p>
+
+<p>If you go to https://www.defcon.org/1057/ directly, you’ll notice at the bottom that there’s some hidden text that reads “ Did you try 1057 yet?”</p>
+
+<p>https://www.defcon.org/1057/1057/ seems to just be taunting you.</p>
+
+<p>There also seems to be some variations in the style of pads on the front of the badges.</p>
+
+<p>The badges include an IR transmitter and receiver, and goon badges can control the human badges. Likewise, the uber badge can <a href="https://www.youtube.com/watch?v=63K2S_hhFxk">control all the other badges</a>. Some folks on reddit <a href="http://www.reddit.com/r/Defcon/comments/2cwgnr/badge_hacking/cjke1eb">decoded the meaning of the flashing</a></p>
+
+<p>The floor decal includes some bumps and such, but I don’t think it will decode to anything.</p>
+
+<p>What’s the reference to “WHITE LINES IN THE MIDDLE OF THE ROAD THATS THE WORST PLACE TO DRIVE” in the badge?</p>
+
+<p>There’s references to a bunch of different names and types in the badge firmware code:</p>
+
+<pre><code>RayNelson
+Test4
+Greets
+Detective
+Scientist
+Diver
+Driver
+Politician
+Test3
+Football
+Mystery
+</code></pre>
+
+<p>These are just some of the dead ends I saw while putting this together.</p>
+
+<h2 id="links">LINKS</h2>
+
+<ul>
+  <li>http://elegin.com/dc22/</li>
+  <li>http://potatohatsecurity.tumblr.com/post/94565729529/defcon-22-badge-challenge-walkthrough</li>
+  <li>
+    <p>http://www.reddit.com/r/Defcon/comments/2cwgnr/badge_hacking/</p>
+  </li>
+  <li>http://albam.us/</li>
+  <li>https://www.defcon.org/1057/FissilingualElucidation/</li>
+  <li>https://www.defcon.org/1057/SarangHae/</li>
+  <li>https://www.defcon.org/1057/493SMITH7775/</li>
+  <li>https://www.defcon.org/1057/NATO146483093172709523</li>
+  <li>http://curious.codes/</li>
+</ul>
+
+<p>This work is licensed under a <a href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a></p>
+
   </article>
 
 </div>
