@@ -74,6 +74,52 @@
   
   <div class="post-container">
     <header class="post-header">
+      <h1 class="post-title"><a href="/post/building-a-watch-part-1.html">Building a Watch: Part 1</a></h1>
+      <p class="post-meta">May 1, 2015</p>
+    </header>
+
+    <article class="post-content">
+      <p>I want to build myself a watch.</p>
+
+<p>One of my goals this year is to learn more electronics, and the best way I’ve found to learn is often to have a project. For example, the <a href="http://blog.tahnok.me/post/how-to-propose-to-an-engineer">heart box</a> taught me a bunch about laser cutting and tolerances. I think a watch will be a good project because:</p>
+
+<ul>
+  <li>I currently don’t have one, but I want one</li>
+  <li>It has interesting size constraints (imposing limits is fun!)</li>
+  <li>It’ll be battery powered</li>
+  <li>Lots of room for improvements</li>
+</ul>
+
+<p>Bonus: It looks like I will probably have to make a circuit board for this! I have 0 clue on how to go about doing that yet, but this should give me a pretty good excuse.</p>
+
+<h2 id="feature-wish-list">Feature Wish List</h2>
+
+<p>I want the watch to have normal watch functions like keeping the time, having alarms and preferrably a stopwatch / timer mode.
+It would also be really cool if I could make it silent, since beeping is pretty annoying. Instead, I think I should incorporate a vibration motor.</p>
+
+<p>Eventually, I would like to have it connect to my phone / computer so it will need to have bluetooth at some point.</p>
+
+<p>Finally, it needs to look good. That means, it can’t be a 20cm tall monstrosity covered in electrical tape.</p>
+
+<h2 id="potential-parts">Potential Parts</h2>
+
+<p>I’m not entirely sure which parts I will choose yet. I’ve been drawing heavily from <a href="http://oswatch.org/">The open source watch</a> to see how such a thing <em>can</em> be made. They use a <a href="https://www.microduino.cc/module/view?id=53d7037cb6c69d00003ede53">microduino core+</a> which is really cool and super tiny! I have the most experience with Arduino (and thus AVR) chips so I will probably stick with that, although now that I think about it, it might be cool to use a Propeller because it can multi-task. The other option is to use something like the Trinket Pro (since it has a nice battery board addon) but it may prove to be too big.</p>
+
+<p>Next, I have to choose a display. After lots of googling I found the <a href="https://www.adafruit.com/product/1393">Sharp Memory Display</a> which is a cool mix of e-ink and LCD. (fun fact: it’s the <a href="https://www.ifixit.com/Teardown/Pebble+Teardown/13319">display in the pebble</a>). I don’t care much about color, so I think I will go with it despite the memory restrictions it will impose on the build.</p>
+
+<p>I don’t yet know what battery I will use, probably something from Adafruit. I’m trying to choose between a 150 mAh and a 500 mAh one.</p>
+
+<p>I <em>think</em> I need an RTC module, but it’s possible that I can get away with keeping track of time without it, and just relying on paired phone to deliver accurate time.</p>
+
+<h2 id="next-steps">Next Steps</h2>
+
+<p>I think I will order a bunch of parts to bread board this out. I need to test a bunch of things like power draw. Also probalby lots of yelling at my computer when I can’t figure out how to build a bread board.</p>
+
+    </article>
+  </div>
+  
+  <div class="post-container">
+    <header class="post-header">
       <h1 class="post-title"><a href="/post/homestuck-or-why-fandoms-are-fun.html">HOMESTUCK or why fandoms are fun!</a></h1>
       <p class="post-meta">Apr 14, 2015</p>
     </header>

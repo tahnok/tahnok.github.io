@@ -6,9 +6,54 @@
 </description>
     <link>http://blog.tahnok.me/</link>
     <atom:link href="http://blog.tahnok.me/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 16 Apr 2015 21:46:46 -0400</pubDate>
-    <lastBuildDate>Thu, 16 Apr 2015 21:46:46 -0400</lastBuildDate>
+    <pubDate>Sat, 02 May 2015 17:10:21 -0400</pubDate>
+    <lastBuildDate>Sat, 02 May 2015 17:10:21 -0400</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
+    
+      <item>
+        <title>Building a Watch: Part 1</title>
+        <description>&lt;p&gt;I want to build myself a watch.&lt;/p&gt;
+
+&lt;p&gt;One of my goals this year is to learn more electronics, and the best way I’ve found to learn is often to have a project. For example, the &lt;a href=&quot;http://blog.tahnok.me/post/how-to-propose-to-an-engineer&quot;&gt;heart box&lt;/a&gt; taught me a bunch about laser cutting and tolerances. I think a watch will be a good project because:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;I currently don’t have one, but I want one&lt;/li&gt;
+  &lt;li&gt;It has interesting size constraints (imposing limits is fun!)&lt;/li&gt;
+  &lt;li&gt;It’ll be battery powered&lt;/li&gt;
+  &lt;li&gt;Lots of room for improvements&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Bonus: It looks like I will probably have to make a circuit board for this! I have 0 clue on how to go about doing that yet, but this should give me a pretty good excuse.&lt;/p&gt;
+
+&lt;h2 id=&quot;feature-wish-list&quot;&gt;Feature Wish List&lt;/h2&gt;
+
+&lt;p&gt;I want the watch to have normal watch functions like keeping the time, having alarms and preferrably a stopwatch / timer mode.
+It would also be really cool if I could make it silent, since beeping is pretty annoying. Instead, I think I should incorporate a vibration motor.&lt;/p&gt;
+
+&lt;p&gt;Eventually, I would like to have it connect to my phone / computer so it will need to have bluetooth at some point.&lt;/p&gt;
+
+&lt;p&gt;Finally, it needs to look good. That means, it can’t be a 20cm tall monstrosity covered in electrical tape.&lt;/p&gt;
+
+&lt;h2 id=&quot;potential-parts&quot;&gt;Potential Parts&lt;/h2&gt;
+
+&lt;p&gt;I’m not entirely sure which parts I will choose yet. I’ve been drawing heavily from &lt;a href=&quot;http://oswatch.org/&quot;&gt;The open source watch&lt;/a&gt; to see how such a thing &lt;em&gt;can&lt;/em&gt; be made. They use a &lt;a href=&quot;https://www.microduino.cc/module/view?id=53d7037cb6c69d00003ede53&quot;&gt;microduino core+&lt;/a&gt; which is really cool and super tiny! I have the most experience with Arduino (and thus AVR) chips so I will probably stick with that, although now that I think about it, it might be cool to use a Propeller because it can multi-task. The other option is to use something like the Trinket Pro (since it has a nice battery board addon) but it may prove to be too big.&lt;/p&gt;
+
+&lt;p&gt;Next, I have to choose a display. After lots of googling I found the &lt;a href=&quot;https://www.adafruit.com/product/1393&quot;&gt;Sharp Memory Display&lt;/a&gt; which is a cool mix of e-ink and LCD. (fun fact: it’s the &lt;a href=&quot;https://www.ifixit.com/Teardown/Pebble+Teardown/13319&quot;&gt;display in the pebble&lt;/a&gt;). I don’t care much about color, so I think I will go with it despite the memory restrictions it will impose on the build.&lt;/p&gt;
+
+&lt;p&gt;I don’t yet know what battery I will use, probably something from Adafruit. I’m trying to choose between a 150 mAh and a 500 mAh one.&lt;/p&gt;
+
+&lt;p&gt;I &lt;em&gt;think&lt;/em&gt; I need an RTC module, but it’s possible that I can get away with keeping track of time without it, and just relying on paired phone to deliver accurate time.&lt;/p&gt;
+
+&lt;h2 id=&quot;next-steps&quot;&gt;Next Steps&lt;/h2&gt;
+
+&lt;p&gt;I think I will order a bunch of parts to bread board this out. I need to test a bunch of things like power draw. Also probalby lots of yelling at my computer when I can’t figure out how to build a bread board.&lt;/p&gt;
+</description>
+        <pubDate>Fri, 01 May 2015 20:35:30 -0400</pubDate>
+        <link>http://blog.tahnok.me/post/building-a-watch-part-1.html</link>
+        <guid isPermaLink="true">http://blog.tahnok.me/post/building-a-watch-part-1.html</guid>
+        
+        
+      </item>
     
       <item>
         <title>HOMESTUCK or why fandoms are fun!</title>
@@ -404,59 +449,6 @@
         <pubDate>Sun, 30 Nov 2014 00:00:00 -0500</pubDate>
         <link>http://blog.tahnok.me/post/how-to-propose-to-an-engineer.html</link>
         <guid isPermaLink="true">http://blog.tahnok.me/post/how-to-propose-to-an-engineer.html</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>Installing Ubuntu 14.04 on a 15&quot; late 2013 Macbook Pro (with Full Disk Encryption)</title>
-        <description>&lt;div&gt;
-&lt;img src=&quot;../images/w600_34605f2250c33f03d2938e26e91a3a02.png&quot; alt=&quot;http://www.tejasbarot.com/wp-content/uploads//eIUaGXc.png&quot; style=&quot;height: auto;&quot;&gt;&lt;br&gt;
-&lt;/div&gt;
-&lt;div&gt;&lt;br&gt;&lt;/div&gt;
-&lt;div&gt;&lt;span&gt;SO I&#39;ve been looking but I have yet to find a sufficiently detailed guide for getting Ubuntu running on a retina macbook pro, especially one that has full disk encryption enabled. Hopefully this document will help others looking to dual boot as well as serve as a reference for me in the future when I inevitably forget all of this.&lt;/span&gt;&lt;/div&gt;
-&lt;div&gt;&lt;br&gt;&lt;/div&gt;
-&lt;div&gt;
-&lt;b&gt;BEFORE YOU DO ANYTHING YOU NEED TO HAVE A BACKUP!&lt;/b&gt;&lt;br&gt;
-&lt;/div&gt;
-&lt;div&gt;&lt;br&gt;&lt;/div&gt;
-&lt;div&gt;The first step was installing a better EFI boot loader (although I&#39;m not sure if this step is strictly necessary anymore). In the past that would involve rEFIt, but it seems to have lots its maintainers. Instead I&#39;ve gone with &lt;a href=&quot;http://www.rodsbooks.com/refind/&quot;&gt;rEFInd&lt;/a&gt;. Their site is pretty 1990s, but the software itself is pretty good. I mostly just followed the instructions on their &lt;a href=&quot;http://www.rodsbooks.com/refind/installing.html&quot;&gt;installation page&lt;/a&gt; and their &lt;a href=&quot;http://www.rodsbooks.com/refind/yosemite.html&quot;&gt;page on Yosemite&lt;/a&gt;, although I did have to make a few changes so that booting wouldn&#39;t take 30 extra seconds. Note, I had to install rEFInd to my &lt;a href=&quot;https://en.wikipedia.org/wiki/EFI_System_partition&quot;&gt;ESP partition&lt;/a&gt;
-&lt;/div&gt;
-&lt;div&gt;&lt;br&gt;&lt;/div&gt;
-&lt;ol&gt;
-&lt;li&gt;First step is to download &lt;a href=&quot;http://sourceforge.net/projects/refind/files/0.8.3/refind-bin-0.8.3.zip/download&quot;&gt;rEFInd&lt;/a&gt; (version 0.8.3 as of this article) and unzip it somewhere.&lt;/li&gt;
-&lt;li&gt;Now mount the ESP partition by making a new directory ( &lt;span style=&quot;font-family: &#39;Andale Mono&#39;;&quot;&gt;mkdir /Volumes/esp &lt;/span&gt;) and then running: &lt;span style=&quot;font-family: &#39;Andale Mono&#39;;&quot;&gt;sudo mount -t msdos /dev/disk0s1 /Volumes/esp&lt;/span&gt;
-&lt;/li&gt;
-&lt;li&gt;Next cd into the directory you unzipped rEFInd and run &lt;span style=&quot;font-family: &#39;Andale Mono&#39;;&quot;&gt;./install.sh --esp&lt;/span&gt;
-&lt;/li&gt;
-&lt;li&gt;Now edit /Volumes/esp/EFI/refind/refind.conf and uncomment the line about &lt;tt&gt;dont_scan_volumes&lt;/tt&gt; and change it to be &lt;span style=&quot;font-family: &#39;Andale Mono&#39;;&quot;&gt;dont_scan_volumes &quot;foo,bar&quot;&lt;/span&gt;
-&lt;/li&gt;
-&lt;li&gt;Next move /Volumes/esp/EFI/refind to /Volumes/esp/EFI/BOOT&lt;/li&gt;
-&lt;li&gt;Finally move /Volumes/esp/EFI/BOOT/refindx64.efi (I think) to /Volumes/esp/EFI/BOOT/bootx64.efi&lt;/li&gt;
-&lt;li&gt;REBOOT and enjoy your shiny FOSS boot manager&lt;/li&gt;
-&lt;/ol&gt;
-&lt;div&gt;&lt;br&gt;&lt;/div&gt;
-&lt;div&gt;The next step is to format your hard drive so that it has 3 new partitions for Ubuntu. I like to use full disk encryption in linux too which means that I need a separate /boot partition in addition to / and swap (although frankly I&#39;m not sure I need swap when I have 16GB of RAM)&lt;/div&gt;
-&lt;div&gt;&lt;br&gt;&lt;/div&gt;
-&lt;div&gt;BE CAREFUL HERE. I managed to bork my Mac installation by trying format my disk from the ubuntu live CD. Thankfuly I had a time machine backup.&lt;/div&gt;
-&lt;div&gt;&lt;br&gt;&lt;/div&gt;
-&lt;div&gt;I ended up formatting my disk to my liking by booting in to OS X&#39;s recovery mode and creating 3 new partitions. My /boot was only 1GB, swap was 16GB and I set aside about 90GB for the main installation.&lt;/div&gt;
-&lt;div&gt;&lt;br&gt;&lt;/div&gt;
-&lt;div&gt;Next you need to format a USB stick with the ubuntu installation image. The instructions I followed are from here: &lt;a href=&quot;http://www.ubuntu.com/download/desktop/create-a-usb-stick-on-mac-osx&quot;&gt;http://www.ubuntu.com/download/desktop/create-a-usb-stick-on-mac-osx&lt;/a&gt;
-&lt;/div&gt;
-&lt;div&gt;&lt;br&gt;&lt;/div&gt;
-&lt;div&gt;Reboot with your newly formatted USB and select it from the options presented.&lt;/div&gt;
-&lt;div&gt;&lt;br&gt;&lt;/div&gt;
-&lt;div&gt;Choose &#39;Something else&#39; when asked how to install ubuntu. Click on the 1 GB partition and use it as /boot. Next choose the large partition you created for linux and choose the option &quot;use as physical volume for encryption&quot;&lt;/div&gt;
-&lt;div&gt;&lt;br&gt;&lt;/div&gt;
-&lt;div&gt;Also, make sure you choose the partition you have as /boot for the installation of the boot loader. &lt;b&gt;YOU DO NOT WANT TO LEAVE IT AT ITS DEFAULT&lt;/b&gt;
-&lt;/div&gt;
-&lt;div&gt;&lt;br&gt;&lt;/div&gt;
-&lt;div&gt;Next post I&#39;ll include information on how to configure your new dual boot computer!&lt;/div&gt;
-</description>
-        <pubDate>Sun, 23 Nov 2014 00:00:00 -0500</pubDate>
-        <link>http://blog.tahnok.me/post/installing-ubuntu-14.04-on-a-15%22-late-2013-macbook-pro-(with-full-disk-encryption).html</link>
-        <guid isPermaLink="true">http://blog.tahnok.me/post/installing-ubuntu-14.04-on-a-15%22-late-2013-macbook-pro-(with-full-disk-encryption).html</guid>
         
         
       </item>
