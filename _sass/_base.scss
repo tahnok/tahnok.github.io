@@ -202,3 +202,12 @@ pre {
         }
     }
 }
+
+table, td {
+  padding: 10px;
+  border: 1px solid black;
+}
+
+tr:nth-child(2n) {
+  background-color: $grey-color-light;
+}

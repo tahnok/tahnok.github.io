@@ -143,6 +143,13 @@ pre {
   .icon > svg path {
     fill: #828282; }
 
+table, td {
+  padding: 10px;
+  border: 1px solid black; }
+
+tr:nth-child(2n) {
+  background-color: #e8e8e8; }
+
 /**
  * Site header
  */
