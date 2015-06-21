@@ -79,22 +79,61 @@
     </header>
 
     <article class="post-content">
-      <p>So I got something REALLY COOL this week in a purple envelope. That’s right I got 3 PCBs that I designed myself from Oshpark</p>
+      <p>So I got something REALLY COOL this week in a purple envelope.
+That’s right I got 3 PCBs that I designed myself from Oshpark</p>
 
 <p><img src="../images/first_pcbs.jpg" alt="" /></p>
 
 <p>Aww yiss!</p>
 
 <p>Now of course, it’s actually a really simple board that I could have done without, but the point was mostly to learn how to use Eagle,
-and a PCB manufacturing service like Oshpark.</p>
+and a PCB manufacturing service like <a href="https://oshpark.com/">OSH park</a>.</p>
 
-<p>Oshpark is pretty cool, my 3 little boards only cost 5$. Basically, they provide PCB manufacutring services for small runs of things.</p>
+<p>WTF is OSH park you ask?
+It’s a PCB manufacturing service that caters to small runs.
+They get away with this by collecting submissions from lots of people and then putting all of them together on one big panel.
+It’s also pretty cheap, my boards only cost my 5$.
+Also note the sweet purple colour (that’s called the solder mask)</p>
 
-<p>The software I chose to use was Eagle, which has a free to use (not a Free as in open source though) version available that has some limitations, but I haven’t run into any of them. I considered using the open source Kicad, but I found some better tutorials for Eagle (more on that later) and my local makerspace has quite a few advanced Eagle users.</p>
+<p>The software I chose to use was Eagle, which has a free to use (not a Free as in open source though) version available.
+The pro version costs many dollars, and the free version has some limitations, but I haven’t run into any of them.
+I considered using the open source <a href="http://www.kicad-pcb.org/display/KICAD/KiCad+EDA+Software+Suite">Kicad</a>, but I found some better tutorials for Eagle (more on that later) and my local makerspace has quite a few advanced Eagle users.</p>
 
-<p>PCB design software is one of those things that is very clearly designed for engineers, by engineers. The UI in Eagle is weird and complicated, but of course it has advanced scripting capabilities!</p>
+<p>I have to give most of the credit for my amazing board design to <a href="http://sparkfun.com/">Sparkfun</a> because it was their tutorials which taught me everything I know (not that much tbh). They have a large number of random <a href="https://learn.sparkfun.com/tutorials/tags/eagle">tutorials with the eagle tag</a>, and I followed three in particular:</p>
 
-<p>I wasn’t sure where to start at first, but Sparkfun has a series of REALLY amazing tutorials where you walk through the process of making a really simple arduino board.</p>
+<ol>
+  <li><a href="https://learn.sparkfun.com/tutorials/how-to-install-and-setup-eagle">How to setup and install eagle</a>: more than just set up, it also does a good job giving an overview of some of the pieces of eagle</li>
+  <li><a href="https://learn.sparkfun.com/tutorials/using-eagle-schematic">Using Eagle: Schematic</a>: teaches you how to make a schematic</li>
+  <li><a href="https://learn.sparkfun.com/tutorials/using-eagle-board-layout">Using Eagle: Board Layout</a>: this one teaches you how to turn a schematic into a board layout</li>
+</ol>
+
+<p>At the end of them, you’ll have a very basic arduino board all laid out and (almost) ready to ship to OSH park.</p>
+
+<p>The tl;dr of those tutorials is this: Eagle is designed around 2 “views” schematic and layout.
+First you create a schematic which shows which parts your project uses and how they connect.
+Next you create a layout where you must place all your components and wires on the actual pcb.</p>
+
+<p>The final step is sending the board off to the “fab”.
+They seem to expect to receive everything as “gerber” files, which are basically instructions as to what should be done for each “layer” of the pcb.
+The sparkfun tutorial I walked through covered this a bit, but when I went to upload to OSH park I was missing certain pieces.
+Thankfully OSH park can handle a eagle layout files automatically.</p>
+
+<p>My first board is called <strong>ESPOWER</strong> <a href="https://github.com/tahnok/espower">eagle source files on github</a> and it’s really really (really) simple.</p>
+
+<p><img src="../images/first_pcb_schematic.png" alt="" /></p>
+
+<p>It contains:</p>
+
+<ul>
+  <li>a barrel jack for power on the left</li>
+  <li>a 4x2 set of standard 0.100” headers (like those found on an arduino) to connect to an ESP8266</li>
+  <li>a 4x1 set of headers for connecting to the ESP8266 over serial</li>
+</ul>
+
+<p>That’s all.
+My only goal is to be able to power an ESP8266 (this 3$ wifi enabled micro controlled) from a standard wallwart for a top secret project I am working on.
+I don’t actually know if I’ve succeeded in making a functioning board yet…
+I am still waiting on the parts to populate the board to arrive, but I’ve certainly learned a bunch in the process.</p>
 
     </article>
   </div>

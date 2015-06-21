@@ -6,28 +6,67 @@
 </description>
     <link>http://blog.tahnok.me/</link>
     <atom:link href="http://blog.tahnok.me/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 20 Jun 2015 22:09:54 -0400</pubDate>
-    <lastBuildDate>Sat, 20 Jun 2015 22:09:54 -0400</lastBuildDate>
+    <pubDate>Sun, 21 Jun 2015 11:24:49 -0400</pubDate>
+    <lastBuildDate>Sun, 21 Jun 2015 11:24:49 -0400</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
     
       <item>
         <title>making PCB (not PCP)</title>
-        <description>&lt;p&gt;So I got something REALLY COOL this week in a purple envelope. That’s right I got 3 PCBs that I designed myself from Oshpark&lt;/p&gt;
+        <description>&lt;p&gt;So I got something REALLY COOL this week in a purple envelope.
+That’s right I got 3 PCBs that I designed myself from Oshpark&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;../images/first_pcbs.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Aww yiss!&lt;/p&gt;
 
 &lt;p&gt;Now of course, it’s actually a really simple board that I could have done without, but the point was mostly to learn how to use Eagle,
-and a PCB manufacturing service like Oshpark.&lt;/p&gt;
+and a PCB manufacturing service like &lt;a href=&quot;https://oshpark.com/&quot;&gt;OSH park&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;Oshpark is pretty cool, my 3 little boards only cost 5$. Basically, they provide PCB manufacutring services for small runs of things.&lt;/p&gt;
+&lt;p&gt;WTF is OSH park you ask?
+It’s a PCB manufacturing service that caters to small runs.
+They get away with this by collecting submissions from lots of people and then putting all of them together on one big panel.
+It’s also pretty cheap, my boards only cost my 5$.
+Also note the sweet purple colour (that’s called the solder mask)&lt;/p&gt;
 
-&lt;p&gt;The software I chose to use was Eagle, which has a free to use (not a Free as in open source though) version available that has some limitations, but I haven’t run into any of them. I considered using the open source Kicad, but I found some better tutorials for Eagle (more on that later) and my local makerspace has quite a few advanced Eagle users.&lt;/p&gt;
+&lt;p&gt;The software I chose to use was Eagle, which has a free to use (not a Free as in open source though) version available.
+The pro version costs many dollars, and the free version has some limitations, but I haven’t run into any of them.
+I considered using the open source &lt;a href=&quot;http://www.kicad-pcb.org/display/KICAD/KiCad+EDA+Software+Suite&quot;&gt;Kicad&lt;/a&gt;, but I found some better tutorials for Eagle (more on that later) and my local makerspace has quite a few advanced Eagle users.&lt;/p&gt;
 
-&lt;p&gt;PCB design software is one of those things that is very clearly designed for engineers, by engineers. The UI in Eagle is weird and complicated, but of course it has advanced scripting capabilities!&lt;/p&gt;
+&lt;p&gt;I have to give most of the credit for my amazing board design to &lt;a href=&quot;http://sparkfun.com/&quot;&gt;Sparkfun&lt;/a&gt; because it was their tutorials which taught me everything I know (not that much tbh). They have a large number of random &lt;a href=&quot;https://learn.sparkfun.com/tutorials/tags/eagle&quot;&gt;tutorials with the eagle tag&lt;/a&gt;, and I followed three in particular:&lt;/p&gt;
 
-&lt;p&gt;I wasn’t sure where to start at first, but Sparkfun has a series of REALLY amazing tutorials where you walk through the process of making a really simple arduino board.&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://learn.sparkfun.com/tutorials/how-to-install-and-setup-eagle&quot;&gt;How to setup and install eagle&lt;/a&gt;: more than just set up, it also does a good job giving an overview of some of the pieces of eagle&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://learn.sparkfun.com/tutorials/using-eagle-schematic&quot;&gt;Using Eagle: Schematic&lt;/a&gt;: teaches you how to make a schematic&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://learn.sparkfun.com/tutorials/using-eagle-board-layout&quot;&gt;Using Eagle: Board Layout&lt;/a&gt;: this one teaches you how to turn a schematic into a board layout&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;At the end of them, you’ll have a very basic arduino board all laid out and (almost) ready to ship to OSH park.&lt;/p&gt;
+
+&lt;p&gt;The tl;dr of those tutorials is this: Eagle is designed around 2 “views” schematic and layout.
+First you create a schematic which shows which parts your project uses and how they connect.
+Next you create a layout where you must place all your components and wires on the actual pcb.&lt;/p&gt;
+
+&lt;p&gt;The final step is sending the board off to the “fab”.
+They seem to expect to receive everything as “gerber” files, which are basically instructions as to what should be done for each “layer” of the pcb.
+The sparkfun tutorial I walked through covered this a bit, but when I went to upload to OSH park I was missing certain pieces.
+Thankfully OSH park can handle a eagle layout files automatically.&lt;/p&gt;
+
+&lt;p&gt;My first board is called &lt;strong&gt;ESPOWER&lt;/strong&gt; &lt;a href=&quot;https://github.com/tahnok/espower&quot;&gt;eagle source files on github&lt;/a&gt; and it’s really really (really) simple.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../images/first_pcb_schematic.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;It contains:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;a barrel jack for power on the left&lt;/li&gt;
+  &lt;li&gt;a 4x2 set of standard 0.100” headers (like those found on an arduino) to connect to an ESP8266&lt;/li&gt;
+  &lt;li&gt;a 4x1 set of headers for connecting to the ESP8266 over serial&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;That’s all.
+My only goal is to be able to power an ESP8266 (this 3$ wifi enabled micro controlled) from a standard wallwart for a top secret project I am working on.
+I don’t actually know if I’ve succeeded in making a functioning board yet…
+I am still waiting on the parts to populate the board to arrive, but I’ve certainly learned a bunch in the process.&lt;/p&gt;
 </description>
         <pubDate>Sat, 20 Jun 2015 21:16:34 -0400</pubDate>
         <link>http://blog.tahnok.me/post/making-pcb-not-pcp.html</link>
@@ -373,11 +412,11 @@ It would also be really cool if I could make it silent, since beeping is pretty 
       <item>
         <title>Making a clock</title>
         <description>&lt;p&gt;Approximately 2 years ago I ordered an &lt;a href=&quot;https://www.sparkfun.com/products/10160&quot;&gt;RTC clock module&lt;/a&gt; from Sparkfun with the intention of building a clock of some kind.&lt;/p&gt;
-&lt;p&gt;FINALLY, I've gotten around to hooking everything up! Here's a picture of my amazing setup (if you wiring things for a living, please don't kill me)&lt;/p&gt;
+&lt;p&gt;FINALLY, I&#39;ve gotten around to hooking everything up! Here&#39;s a picture of my amazing setup (if you wiring things for a living, please don&#39;t kill me)&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;../images/w600_0af6afc4018ec642790f0fcba6b248dd.jpg&quot; width=&quot;581&quot; style=&quot;height:auto;&quot;&gt;&lt;img src=&quot;../images/w600_1dac1694da3c5fc7a23fa730ec211b3e.jpg&quot; width=&quot;581&quot; style=&quot;height:auto;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;The goal is to help my wake up in the morning by turning on a SAD lamp. If you've ever seen one of these faux sunlight lamps before you will wonder why I'm doing this. If you have seen one of these, you'll understand because these things are REALLY FREAKING BRIGHT.&lt;/p&gt;
+&lt;p&gt;The goal is to help my wake up in the morning by turning on a SAD lamp. If you&#39;ve ever seen one of these faux sunlight lamps before you will wonder why I&#39;m doing this. If you have seen one of these, you&#39;ll understand because these things are REALLY FREAKING BRIGHT.&lt;/p&gt;
 &lt;h2&gt;PARTS&lt;/h2&gt;
-&lt;p&gt;Here's the part list&lt;/p&gt;
+&lt;p&gt;Here&#39;s the part list&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Arduino Uno&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/10160&quot;&gt;DeadOn RTC&lt;/a&gt;&lt;/li&gt;
@@ -385,17 +424,17 @@ It would also be really cool if I could make it silent, since beeping is pretty 
 &lt;li&gt;&lt;a href=&quot;https://www.adafruit.com/products/399&quot;&gt;RGB LCD 16x2&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://www.adafruit.com/products/268&quot;&gt;Powerswitch Tail&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Getting all these parts together was actually surprisingly difficult. I ordered the RTC, but I didn't order a battery since I thought I could find one locally. I was wrong, so I ordered one online. Don't do that unless you have lots of time to wait. It took like 2 months to ship that tiny coin cell battery across the border to me here in Canada since it has lithium in it.&lt;/p&gt;
+&lt;p&gt;Getting all these parts together was actually surprisingly difficult. I ordered the RTC, but I didn&#39;t order a battery since I thought I could find one locally. I was wrong, so I ordered one online. Don&#39;t do that unless you have lots of time to wait. It took like 2 months to ship that tiny coin cell battery across the border to me here in Canada since it has lithium in it.&lt;/p&gt;
 &lt;p&gt;The RGB LCD was actually part of a kit from Adafruit which is all supposed to be controllable over I2C. I assembled almost all of the kit successfully, but the last piece I put on backwards. And of course, it was the 40pin chip which has proven to be resistant to my efforts to desolder it. &lt;em&gt;sigh&lt;/em&gt;. Thankfully I was able to salvage the LCD part.&lt;/p&gt;
 &lt;h2&gt;ASSEMBLY&lt;/h2&gt;
-&lt;p&gt;So the first thing I tried to do was get the the RTC module working. This proved to be quite frustrating. I wired everything up, but I was getting garbage data back from the module. It was counting up (sorta), but random extra bits were getting set and unset. So it would go 0:0:59, 0:1:0, 1:1:1, 0:1:2. WTF. Eventually it turned out that the problem was the way I was grounding the module. I'm not entirely sure what was happening, but eventually I got the right wire connected to the ground on the arduino, bypassing the breadboard.&lt;/p&gt;
+&lt;p&gt;So the first thing I tried to do was get the the RTC module working. This proved to be quite frustrating. I wired everything up, but I was getting garbage data back from the module. It was counting up (sorta), but random extra bits were getting set and unset. So it would go 0:0:59, 0:1:0, 1:1:1, 0:1:2. WTF. Eventually it turned out that the problem was the way I was grounding the module. I&#39;m not entirely sure what was happening, but eventually I got the right wire connected to the ground on the arduino, bypassing the breadboard.&lt;/p&gt;
 &lt;p&gt;Everything else was relatively easy to set up. Adafruit has an excellent guide on their &lt;a href=&quot;https://learn.adafruit.com/character-lcds/wiring-a-character-lcd&quot;&gt;LCD Shield&lt;/a&gt;. The powerswitch tail  is controlled by setting a single pin high or low.&lt;/p&gt;
 &lt;h2&gt;CODE&lt;/h2&gt;
-&lt;p&gt;Here's the whole thing below. Most of the code for interacting over SPI to the RTC module is from &lt;a href=&quot;https://github.com/sparkfun/DeadOn_RTC/blob/v1.1/Libraries/DeadOn_RTC/examples/set_and_read_time/set_and_read_time.ino&quot;&gt;Sparkfun&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Here&#39;s the whole thing below. Most of the code for interacting over SPI to the RTC module is from &lt;a href=&quot;https://github.com/sparkfun/DeadOn_RTC/blob/v1.1/Libraries/DeadOn_RTC/examples/set_and_read_time/set_and_read_time.ino&quot;&gt;Sparkfun&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;
 &lt;script src=&quot;https://gist.github.com/c2e2afb76edde4905fcc.js&quot;&gt; &lt;/script&gt;
 &lt;/p&gt;
-&lt;p&gt;I had some fun messing around with sprinf (it's like printf, but it fills a char array!) You can set the alarm time by modifying the values in the Alarm int array.&lt;/p&gt;
+&lt;p&gt;I had some fun messing around with sprinf (it&#39;s like printf, but it fills a char array!) You can set the alarm time by modifying the values in the Alarm int array.&lt;/p&gt;
 &lt;h2&gt;BUGS&lt;/h2&gt;
 &lt;p&gt;For some reason there are 2 garbage characters left on the LCD after the end of my screen. I &quot;fixed&quot; this by just appending more space characters than will fit in a 16 char line.&lt;/p&gt;
 &lt;h2&gt;FUTURE WORK&lt;/h2&gt;
@@ -411,12 +450,12 @@ It would also be really cool if I could make it silent, since beeping is pretty 
       <item>
         <title>How to read a texbook</title>
         <description>&lt;p&gt;&lt;img src=&quot;../images/w600_1d3087794299ca75d555e85d7c8ce1bf.jpg&quot; border=&quot;0&quot; width=&quot;236&quot; style=&quot;height:auto;&quot;&gt;&lt;img src=&quot;../images/w600_7d5fb7a62ced7936b1df39191d17ddea.jpg&quot; style=&quot;height: auto;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;So I really like learning things. It was one of my favourite parts of university (and high school before that), so I was really missing it when I started working. I tried for a while to read things when I felt the urge, but this rarely happened. I tried enrolling in a cousera course, but it felt a bit too much like the shitty parts of school, namely I can't move at my own pace.&lt;/p&gt;
-&lt;p&gt;My current system involves &lt;a href=&quot;https://www.beeminder.com/overview&quot;&gt;BEEMINDER&lt;/a&gt; which is a pretty amazing tool for people like me who suck at motivating themselves. The basic idea is that you commit to some goal and beeminder makes sure that you reach it by forcing you to do a minimum amount of your goal everyday. You can do more than your goal and let it ride for a few days, but eventually you'll have to do work. If you fail, you have to pay beeminder money.&lt;/p&gt;
+&lt;p&gt;So I really like learning things. It was one of my favourite parts of university (and high school before that), so I was really missing it when I started working. I tried for a while to read things when I felt the urge, but this rarely happened. I tried enrolling in a cousera course, but it felt a bit too much like the shitty parts of school, namely I can&#39;t move at my own pace.&lt;/p&gt;
+&lt;p&gt;My current system involves &lt;a href=&quot;https://www.beeminder.com/overview&quot;&gt;BEEMINDER&lt;/a&gt; which is a pretty amazing tool for people like me who suck at motivating themselves. The basic idea is that you commit to some goal and beeminder makes sure that you reach it by forcing you to do a minimum amount of your goal everyday. You can do more than your goal and let it ride for a few days, but eventually you&#39;ll have to do work. If you fail, you have to pay beeminder money.&lt;/p&gt;
 &lt;p&gt;I use it to make sure I do an hour a week worth of reading / working of each of my texbooks. Currently I am reading the &lt;a href=&quot;https://mitpress.mit.edu/sicp/full-text/book/book.html&quot;&gt;Structure and Interpretation of Programming Languages&lt;/a&gt; (available as a &lt;a href=&quot;https://github.com/sarabander/sicp-pdf&quot;&gt;PDF&lt;/a&gt; and the &lt;a href=&quot;http://cm.bell-labs.com/cm/cs/cbook/&quot;&gt;The C Programming Language&lt;/a&gt;. I wanted to make sure that I really got the fundamentals of computers. C and Scheme are both early programming languages with very different philosophies. (I know that just made some of you feel old)&lt;/p&gt;
-&lt;p&gt;As I go through these books, I am working through the exercises (You can follow my progress &lt;a href=&quot;https://github.com/tahnok/c-book&quot;&gt;here&lt;/a&gt; and &lt;a href=&quot;https://github.com/tahnok/sicp&quot;&gt;here&lt;/a&gt;). Writing actual code feels like the most important part of my attempts to learn so far. It's not enough (for me at least) to just read the information. I need to process it somehow, but I find working without direction (or feedback) tough. Thankfully you can find solutions to both SICP and the C programming language book on the web.&lt;/p&gt;
+&lt;p&gt;As I go through these books, I am working through the exercises (You can follow my progress &lt;a href=&quot;https://github.com/tahnok/c-book&quot;&gt;here&lt;/a&gt; and &lt;a href=&quot;https://github.com/tahnok/sicp&quot;&gt;here&lt;/a&gt;). Writing actual code feels like the most important part of my attempts to learn so far. It&#39;s not enough (for me at least) to just read the information. I need to process it somehow, but I find working without direction (or feedback) tough. Thankfully you can find solutions to both SICP and the C programming language book on the web.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;../images/w600_355cd2bd4717ead88e1b3b3a5d6865b2.jpg&quot; style=&quot;max-width: 260px; max-height: 343px; top: 0px; left: 0px; height: auto;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;So far I've only finished one book this way is &lt;a href=&quot;http://www.nostarch.com/hacking2.htm&quot;&gt;Hacking: the Art of Exploitation&lt;/a&gt; which I highly recommend, even if you don't want to hack anything.&lt;/p&gt;
+&lt;p&gt;So far I&#39;ve only finished one book this way is &lt;a href=&quot;http://www.nostarch.com/hacking2.htm&quot;&gt;Hacking: the Art of Exploitation&lt;/a&gt; which I highly recommend, even if you don&#39;t want to hack anything.&lt;/p&gt;
 </description>
         <pubDate>Fri, 13 Feb 2015 00:00:00 -0500</pubDate>
         <link>http://blog.tahnok.me/post/how-to-read-a-texbook.html</link>
@@ -435,10 +474,10 @@ It would also be really cool if I could make it silent, since beeping is pretty 
 &lt;div&gt;&lt;br&gt;&lt;/div&gt;
 &lt;div&gt;So my first experiencing really writing code was on Shopify using Ruby on Rails. Rails adheres very strongly to the idea of Covention over Configuration. That is, frameworks should make choices about how things should be structured. For example, rails is an MVC framework which means you have models (which go in app/models), controllers (app/controllers), and views (app/views). Of course, you can mess with this but the point is that there is an expected place to put things.&lt;/div&gt;
 &lt;div&gt;&lt;br&gt;&lt;/div&gt;
-&lt;div&gt;Android is part of the Java ecosystem, and it doesn't seem to make any choices about how to structure... anything. This. Drives. Me. Nuts. You can put any code for anything anywhere. And there really doesn't seem to be a good reason for this. I'm currently working on Shopify for Android and our code doesn't really have a good structure at the moment. We have some folders that contain code grouped by feature, like orders and we have other folders that contain code based on function (views).&lt;/div&gt;
+&lt;div&gt;Android is part of the Java ecosystem, and it doesn&#39;t seem to make any choices about how to structure... anything. This. Drives. Me. Nuts. You can put any code for anything anywhere. And there really doesn&#39;t seem to be a good reason for this. I&#39;m currently working on Shopify for Android and our code doesn&#39;t really have a good structure at the moment. We have some folders that contain code grouped by feature, like orders and we have other folders that contain code based on function (views).&lt;/div&gt;
 &lt;div&gt;&lt;br&gt;&lt;/div&gt;
 &lt;div&gt;I feel that the job of a framework, (which admitedly Android... kind of is) is to make the job of a programmer easier. The hardest part of being a programmer is managing complexity. Configuration introduces compleity. Convention removes it&lt;/div&gt;
-&lt;p&gt;Our team is probably going to move to something like this: &lt;a href=&quot;https://github.com/codepath/android_guides/wiki/Organizing-your-Source-Files&quot;&gt;https://github.com/codepath/android_guides/wiki/Organizing-your-Source-Files&lt;/a&gt;, but it doesn't quite feels as nice as rails.&lt;/p&gt;
+&lt;p&gt;Our team is probably going to move to something like this: &lt;a href=&quot;https://github.com/codepath/android_guides/wiki/Organizing-your-Source-Files&quot;&gt;https://github.com/codepath/android_guides/wiki/Organizing-your-Source-Files&lt;/a&gt;, but it doesn&#39;t quite feels as nice as rails.&lt;/p&gt;
 </description>
         <pubDate>Thu, 29 Jan 2015 00:00:00 -0500</pubDate>
         <link>http://blog.tahnok.me/post/architecting-android-apps.html</link>
@@ -460,7 +499,7 @@ It would also be really cool if I could make it silent, since beeping is pretty 
 &lt;div&gt;&lt;br&gt;&lt;/div&gt;
 &lt;div&gt;&lt;b&gt;First time DM&lt;/b&gt;&lt;/div&gt;
 &lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;
-&lt;div&gt;I'm really glad the characters were pre-made. The rules are complicated enough for a first time group without having to deal with making a characters.&lt;b&gt;&lt;br&gt;&lt;/b&gt;
+&lt;div&gt;I&#39;m really glad the characters were pre-made. The rules are complicated enough for a first time group without having to deal with making a characters.&lt;b&gt;&lt;br&gt;&lt;/b&gt;
 &lt;/div&gt;
 &lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;
 &lt;div&gt;The campaign book was very helpful to me as a DM. I was really worried I would be able to improvise fast enough or well enough to keep the game flowing, but that turned out to be a bit of an over reaction.&lt;/div&gt;
