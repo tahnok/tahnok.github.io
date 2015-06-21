@@ -6,9 +6,35 @@
 </description>
     <link>http://blog.tahnok.me/</link>
     <atom:link href="http://blog.tahnok.me/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 04 Jun 2015 21:57:33 -0400</pubDate>
-    <lastBuildDate>Thu, 04 Jun 2015 21:57:33 -0400</lastBuildDate>
+    <pubDate>Sat, 20 Jun 2015 22:09:54 -0400</pubDate>
+    <lastBuildDate>Sat, 20 Jun 2015 22:09:54 -0400</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
+    
+      <item>
+        <title>making PCB (not PCP)</title>
+        <description>&lt;p&gt;So I got something REALLY COOL this week in a purple envelope. That’s right I got 3 PCBs that I designed myself from Oshpark&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../images/first_pcbs.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Aww yiss!&lt;/p&gt;
+
+&lt;p&gt;Now of course, it’s actually a really simple board that I could have done without, but the point was mostly to learn how to use Eagle,
+and a PCB manufacturing service like Oshpark.&lt;/p&gt;
+
+&lt;p&gt;Oshpark is pretty cool, my 3 little boards only cost 5$. Basically, they provide PCB manufacutring services for small runs of things.&lt;/p&gt;
+
+&lt;p&gt;The software I chose to use was Eagle, which has a free to use (not a Free as in open source though) version available that has some limitations, but I haven’t run into any of them. I considered using the open source Kicad, but I found some better tutorials for Eagle (more on that later) and my local makerspace has quite a few advanced Eagle users.&lt;/p&gt;
+
+&lt;p&gt;PCB design software is one of those things that is very clearly designed for engineers, by engineers. The UI in Eagle is weird and complicated, but of course it has advanced scripting capabilities!&lt;/p&gt;
+
+&lt;p&gt;I wasn’t sure where to start at first, but Sparkfun has a series of REALLY amazing tutorials where you walk through the process of making a really simple arduino board.&lt;/p&gt;
+</description>
+        <pubDate>Sat, 20 Jun 2015 21:16:34 -0400</pubDate>
+        <link>http://blog.tahnok.me/post/making-pcb-not-pcp.html</link>
+        <guid isPermaLink="true">http://blog.tahnok.me/post/making-pcb-not-pcp.html</guid>
+        
+        
+      </item>
     
       <item>
         <title>Blueboxer: phone phreaking for phun</title>
@@ -347,11 +373,11 @@ It would also be really cool if I could make it silent, since beeping is pretty 
       <item>
         <title>Making a clock</title>
         <description>&lt;p&gt;Approximately 2 years ago I ordered an &lt;a href=&quot;https://www.sparkfun.com/products/10160&quot;&gt;RTC clock module&lt;/a&gt; from Sparkfun with the intention of building a clock of some kind.&lt;/p&gt;
-&lt;p&gt;FINALLY, I&#39;ve gotten around to hooking everything up! Here&#39;s a picture of my amazing setup (if you wiring things for a living, please don&#39;t kill me)&lt;/p&gt;
+&lt;p&gt;FINALLY, I've gotten around to hooking everything up! Here's a picture of my amazing setup (if you wiring things for a living, please don't kill me)&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;../images/w600_0af6afc4018ec642790f0fcba6b248dd.jpg&quot; width=&quot;581&quot; style=&quot;height:auto;&quot;&gt;&lt;img src=&quot;../images/w600_1dac1694da3c5fc7a23fa730ec211b3e.jpg&quot; width=&quot;581&quot; style=&quot;height:auto;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;The goal is to help my wake up in the morning by turning on a SAD lamp. If you&#39;ve ever seen one of these faux sunlight lamps before you will wonder why I&#39;m doing this. If you have seen one of these, you&#39;ll understand because these things are REALLY FREAKING BRIGHT.&lt;/p&gt;
+&lt;p&gt;The goal is to help my wake up in the morning by turning on a SAD lamp. If you've ever seen one of these faux sunlight lamps before you will wonder why I'm doing this. If you have seen one of these, you'll understand because these things are REALLY FREAKING BRIGHT.&lt;/p&gt;
 &lt;h2&gt;PARTS&lt;/h2&gt;
-&lt;p&gt;Here&#39;s the part list&lt;/p&gt;
+&lt;p&gt;Here's the part list&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Arduino Uno&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/10160&quot;&gt;DeadOn RTC&lt;/a&gt;&lt;/li&gt;
@@ -359,17 +385,17 @@ It would also be really cool if I could make it silent, since beeping is pretty 
 &lt;li&gt;&lt;a href=&quot;https://www.adafruit.com/products/399&quot;&gt;RGB LCD 16x2&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://www.adafruit.com/products/268&quot;&gt;Powerswitch Tail&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Getting all these parts together was actually surprisingly difficult. I ordered the RTC, but I didn&#39;t order a battery since I thought I could find one locally. I was wrong, so I ordered one online. Don&#39;t do that unless you have lots of time to wait. It took like 2 months to ship that tiny coin cell battery across the border to me here in Canada since it has lithium in it.&lt;/p&gt;
+&lt;p&gt;Getting all these parts together was actually surprisingly difficult. I ordered the RTC, but I didn't order a battery since I thought I could find one locally. I was wrong, so I ordered one online. Don't do that unless you have lots of time to wait. It took like 2 months to ship that tiny coin cell battery across the border to me here in Canada since it has lithium in it.&lt;/p&gt;
 &lt;p&gt;The RGB LCD was actually part of a kit from Adafruit which is all supposed to be controllable over I2C. I assembled almost all of the kit successfully, but the last piece I put on backwards. And of course, it was the 40pin chip which has proven to be resistant to my efforts to desolder it. &lt;em&gt;sigh&lt;/em&gt;. Thankfully I was able to salvage the LCD part.&lt;/p&gt;
 &lt;h2&gt;ASSEMBLY&lt;/h2&gt;
-&lt;p&gt;So the first thing I tried to do was get the the RTC module working. This proved to be quite frustrating. I wired everything up, but I was getting garbage data back from the module. It was counting up (sorta), but random extra bits were getting set and unset. So it would go 0:0:59, 0:1:0, 1:1:1, 0:1:2. WTF. Eventually it turned out that the problem was the way I was grounding the module. I&#39;m not entirely sure what was happening, but eventually I got the right wire connected to the ground on the arduino, bypassing the breadboard.&lt;/p&gt;
+&lt;p&gt;So the first thing I tried to do was get the the RTC module working. This proved to be quite frustrating. I wired everything up, but I was getting garbage data back from the module. It was counting up (sorta), but random extra bits were getting set and unset. So it would go 0:0:59, 0:1:0, 1:1:1, 0:1:2. WTF. Eventually it turned out that the problem was the way I was grounding the module. I'm not entirely sure what was happening, but eventually I got the right wire connected to the ground on the arduino, bypassing the breadboard.&lt;/p&gt;
 &lt;p&gt;Everything else was relatively easy to set up. Adafruit has an excellent guide on their &lt;a href=&quot;https://learn.adafruit.com/character-lcds/wiring-a-character-lcd&quot;&gt;LCD Shield&lt;/a&gt;. The powerswitch tail  is controlled by setting a single pin high or low.&lt;/p&gt;
 &lt;h2&gt;CODE&lt;/h2&gt;
-&lt;p&gt;Here&#39;s the whole thing below. Most of the code for interacting over SPI to the RTC module is from &lt;a href=&quot;https://github.com/sparkfun/DeadOn_RTC/blob/v1.1/Libraries/DeadOn_RTC/examples/set_and_read_time/set_and_read_time.ino&quot;&gt;Sparkfun&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Here's the whole thing below. Most of the code for interacting over SPI to the RTC module is from &lt;a href=&quot;https://github.com/sparkfun/DeadOn_RTC/blob/v1.1/Libraries/DeadOn_RTC/examples/set_and_read_time/set_and_read_time.ino&quot;&gt;Sparkfun&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;
 &lt;script src=&quot;https://gist.github.com/c2e2afb76edde4905fcc.js&quot;&gt; &lt;/script&gt;
 &lt;/p&gt;
-&lt;p&gt;I had some fun messing around with sprinf (it&#39;s like printf, but it fills a char array!) You can set the alarm time by modifying the values in the Alarm int array.&lt;/p&gt;
+&lt;p&gt;I had some fun messing around with sprinf (it's like printf, but it fills a char array!) You can set the alarm time by modifying the values in the Alarm int array.&lt;/p&gt;
 &lt;h2&gt;BUGS&lt;/h2&gt;
 &lt;p&gt;For some reason there are 2 garbage characters left on the LCD after the end of my screen. I &quot;fixed&quot; this by just appending more space characters than will fit in a 16 char line.&lt;/p&gt;
 &lt;h2&gt;FUTURE WORK&lt;/h2&gt;
@@ -385,12 +411,12 @@ It would also be really cool if I could make it silent, since beeping is pretty 
       <item>
         <title>How to read a texbook</title>
         <description>&lt;p&gt;&lt;img src=&quot;../images/w600_1d3087794299ca75d555e85d7c8ce1bf.jpg&quot; border=&quot;0&quot; width=&quot;236&quot; style=&quot;height:auto;&quot;&gt;&lt;img src=&quot;../images/w600_7d5fb7a62ced7936b1df39191d17ddea.jpg&quot; style=&quot;height: auto;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;So I really like learning things. It was one of my favourite parts of university (and high school before that), so I was really missing it when I started working. I tried for a while to read things when I felt the urge, but this rarely happened. I tried enrolling in a cousera course, but it felt a bit too much like the shitty parts of school, namely I can&#39;t move at my own pace.&lt;/p&gt;
-&lt;p&gt;My current system involves &lt;a href=&quot;https://www.beeminder.com/overview&quot;&gt;BEEMINDER&lt;/a&gt; which is a pretty amazing tool for people like me who suck at motivating themselves. The basic idea is that you commit to some goal and beeminder makes sure that you reach it by forcing you to do a minimum amount of your goal everyday. You can do more than your goal and let it ride for a few days, but eventually you&#39;ll have to do work. If you fail, you have to pay beeminder money.&lt;/p&gt;
+&lt;p&gt;So I really like learning things. It was one of my favourite parts of university (and high school before that), so I was really missing it when I started working. I tried for a while to read things when I felt the urge, but this rarely happened. I tried enrolling in a cousera course, but it felt a bit too much like the shitty parts of school, namely I can't move at my own pace.&lt;/p&gt;
+&lt;p&gt;My current system involves &lt;a href=&quot;https://www.beeminder.com/overview&quot;&gt;BEEMINDER&lt;/a&gt; which is a pretty amazing tool for people like me who suck at motivating themselves. The basic idea is that you commit to some goal and beeminder makes sure that you reach it by forcing you to do a minimum amount of your goal everyday. You can do more than your goal and let it ride for a few days, but eventually you'll have to do work. If you fail, you have to pay beeminder money.&lt;/p&gt;
 &lt;p&gt;I use it to make sure I do an hour a week worth of reading / working of each of my texbooks. Currently I am reading the &lt;a href=&quot;https://mitpress.mit.edu/sicp/full-text/book/book.html&quot;&gt;Structure and Interpretation of Programming Languages&lt;/a&gt; (available as a &lt;a href=&quot;https://github.com/sarabander/sicp-pdf&quot;&gt;PDF&lt;/a&gt; and the &lt;a href=&quot;http://cm.bell-labs.com/cm/cs/cbook/&quot;&gt;The C Programming Language&lt;/a&gt;. I wanted to make sure that I really got the fundamentals of computers. C and Scheme are both early programming languages with very different philosophies. (I know that just made some of you feel old)&lt;/p&gt;
-&lt;p&gt;As I go through these books, I am working through the exercises (You can follow my progress &lt;a href=&quot;https://github.com/tahnok/c-book&quot;&gt;here&lt;/a&gt; and &lt;a href=&quot;https://github.com/tahnok/sicp&quot;&gt;here&lt;/a&gt;). Writing actual code feels like the most important part of my attempts to learn so far. It&#39;s not enough (for me at least) to just read the information. I need to process it somehow, but I find working without direction (or feedback) tough. Thankfully you can find solutions to both SICP and the C programming language book on the web.&lt;/p&gt;
+&lt;p&gt;As I go through these books, I am working through the exercises (You can follow my progress &lt;a href=&quot;https://github.com/tahnok/c-book&quot;&gt;here&lt;/a&gt; and &lt;a href=&quot;https://github.com/tahnok/sicp&quot;&gt;here&lt;/a&gt;). Writing actual code feels like the most important part of my attempts to learn so far. It's not enough (for me at least) to just read the information. I need to process it somehow, but I find working without direction (or feedback) tough. Thankfully you can find solutions to both SICP and the C programming language book on the web.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;../images/w600_355cd2bd4717ead88e1b3b3a5d6865b2.jpg&quot; style=&quot;max-width: 260px; max-height: 343px; top: 0px; left: 0px; height: auto;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;So far I&#39;ve only finished one book this way is &lt;a href=&quot;http://www.nostarch.com/hacking2.htm&quot;&gt;Hacking: the Art of Exploitation&lt;/a&gt; which I highly recommend, even if you don&#39;t want to hack anything.&lt;/p&gt;
+&lt;p&gt;So far I've only finished one book this way is &lt;a href=&quot;http://www.nostarch.com/hacking2.htm&quot;&gt;Hacking: the Art of Exploitation&lt;/a&gt; which I highly recommend, even if you don't want to hack anything.&lt;/p&gt;
 </description>
         <pubDate>Fri, 13 Feb 2015 00:00:00 -0500</pubDate>
         <link>http://blog.tahnok.me/post/how-to-read-a-texbook.html</link>
@@ -409,10 +435,10 @@ It would also be really cool if I could make it silent, since beeping is pretty 
 &lt;div&gt;&lt;br&gt;&lt;/div&gt;
 &lt;div&gt;So my first experiencing really writing code was on Shopify using Ruby on Rails. Rails adheres very strongly to the idea of Covention over Configuration. That is, frameworks should make choices about how things should be structured. For example, rails is an MVC framework which means you have models (which go in app/models), controllers (app/controllers), and views (app/views). Of course, you can mess with this but the point is that there is an expected place to put things.&lt;/div&gt;
 &lt;div&gt;&lt;br&gt;&lt;/div&gt;
-&lt;div&gt;Android is part of the Java ecosystem, and it doesn&#39;t seem to make any choices about how to structure... anything. This. Drives. Me. Nuts. You can put any code for anything anywhere. And there really doesn&#39;t seem to be a good reason for this. I&#39;m currently working on Shopify for Android and our code doesn&#39;t really have a good structure at the moment. We have some folders that contain code grouped by feature, like orders and we have other folders that contain code based on function (views).&lt;/div&gt;
+&lt;div&gt;Android is part of the Java ecosystem, and it doesn't seem to make any choices about how to structure... anything. This. Drives. Me. Nuts. You can put any code for anything anywhere. And there really doesn't seem to be a good reason for this. I'm currently working on Shopify for Android and our code doesn't really have a good structure at the moment. We have some folders that contain code grouped by feature, like orders and we have other folders that contain code based on function (views).&lt;/div&gt;
 &lt;div&gt;&lt;br&gt;&lt;/div&gt;
 &lt;div&gt;I feel that the job of a framework, (which admitedly Android... kind of is) is to make the job of a programmer easier. The hardest part of being a programmer is managing complexity. Configuration introduces compleity. Convention removes it&lt;/div&gt;
-&lt;p&gt;Our team is probably going to move to something like this: &lt;a href=&quot;https://github.com/codepath/android_guides/wiki/Organizing-your-Source-Files&quot;&gt;https://github.com/codepath/android_guides/wiki/Organizing-your-Source-Files&lt;/a&gt;, but it doesn&#39;t quite feels as nice as rails.&lt;/p&gt;
+&lt;p&gt;Our team is probably going to move to something like this: &lt;a href=&quot;https://github.com/codepath/android_guides/wiki/Organizing-your-Source-Files&quot;&gt;https://github.com/codepath/android_guides/wiki/Organizing-your-Source-Files&lt;/a&gt;, but it doesn't quite feels as nice as rails.&lt;/p&gt;
 </description>
         <pubDate>Thu, 29 Jan 2015 00:00:00 -0500</pubDate>
         <link>http://blog.tahnok.me/post/architecting-android-apps.html</link>
@@ -434,7 +460,7 @@ It would also be really cool if I could make it silent, since beeping is pretty 
 &lt;div&gt;&lt;br&gt;&lt;/div&gt;
 &lt;div&gt;&lt;b&gt;First time DM&lt;/b&gt;&lt;/div&gt;
 &lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;
-&lt;div&gt;I&#39;m really glad the characters were pre-made. The rules are complicated enough for a first time group without having to deal with making a characters.&lt;b&gt;&lt;br&gt;&lt;/b&gt;
+&lt;div&gt;I'm really glad the characters were pre-made. The rules are complicated enough for a first time group without having to deal with making a characters.&lt;b&gt;&lt;br&gt;&lt;/b&gt;
 &lt;/div&gt;
 &lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;
 &lt;div&gt;The campaign book was very helpful to me as a DM. I was really worried I would be able to improvise fast enough or well enough to keep the game flowing, but that turned out to be a bit of an over reaction.&lt;/div&gt;
@@ -446,66 +472,6 @@ It would also be really cool if I could make it silent, since beeping is pretty 
         <pubDate>Sun, 18 Jan 2015 00:00:00 -0500</pubDate>
         <link>http://blog.tahnok.me/post/my-first-experience-being-a-dungeon-master.html</link>
         <guid isPermaLink="true">http://blog.tahnok.me/post/my-first-experience-being-a-dungeon-master.html</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>Book Recommendations from 2014</title>
-        <description>&lt;div&gt;Since I enjoy reading and I enjoy hearing about what others are reading, I figured I should probably put up a list somewhere of the books that I enjoyed reading during 2014. If you have any recommendations, please post them in the comments! One can never have too many books on one&#39;s list of books to read.&lt;/div&gt;
-&lt;div&gt;&lt;br&gt;&lt;/div&gt;
-&lt;div&gt;&lt;b&gt;The Martian&lt;/b&gt;&lt;/div&gt;
-&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;
-&lt;div&gt;
-&lt;img src=&quot;../images/w600_f30aa7388f00b48324af45078f04b13d.jpg&quot; alt=&quot;The Martian 2014.jpg&quot; height=&quot;304&quot; width=&quot;200&quot; style=&quot;height: auto;&quot;&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;
-&lt;/div&gt;
-&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;
-&lt;div&gt;If you have to read one book from my list, I recommend it be this one. It only took me 2 days (and 2 rather sleepless nights) to get through it. It&#39;s a fantastic thriller and as a bonus you get to learn about Mars since most of the science is accurate. The book is about the first manned mission to Mars, and as you might imagine Something Goes Wrong.&lt;/div&gt;
-&lt;div&gt;&lt;br&gt;&lt;/div&gt;
-&lt;div&gt;&lt;b&gt;The Laundry Files (Series)&lt;/b&gt;&lt;/div&gt;
-&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;
-&lt;div&gt;
-&lt;img src=&quot;../images/w600_827adaa3db6d4b2669781c7c5956fb99.jpg&quot; alt=&quot;TAA-cover.jpg&quot; height=&quot;340&quot; width=&quot;220&quot; style=&quot;height: auto;&quot;&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;
-&lt;/div&gt;
-&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;
-&lt;div&gt;This series is so freakin&#39; good. It&#39;s basically James Bond + Lovecraftian Horrors + Comedy and it&#39;s pure gold. You follow around Bob Oliver Francis Howard (aka &lt;a href=&quot;https://en.wikipedia.org/wiki/Bastard_Operator_From_Hell&quot;&gt;B.O.F.H&lt;/a&gt;) who lives in a world where the right piece of code can be used to summon Eldritch horrors from the deep. But of course there&#39;s a government agency tasked with protecting us all from having our brains eaten out.&lt;/div&gt;
-&lt;div&gt;&lt;br&gt;&lt;/div&gt;
-&lt;div&gt;&lt;b&gt;The Coming Swarm&lt;/b&gt;&lt;/div&gt;
-&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;
-&lt;div&gt;
-&lt;img src=&quot;../images/w600_d3f79b12cfd5015c00a451a456671796.jpg&quot; style=&quot;max-width: 231px; max-height: 346px; top: 0px; left: 0px; height: auto;&quot;&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;
-&lt;/div&gt;
-&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;
-&lt;div&gt;I&#39;m not finished this one yet, but it&#39;s been a very interesting read so far. The author make a compelling argument that DDoS actions should be considered a political act just like a sit in or a blockade.&lt;/div&gt;
-&lt;div&gt;&lt;br&gt;&lt;/div&gt;
-&lt;div&gt;&lt;b&gt;The Girl With the Dragon Tattoo&lt;/b&gt;&lt;/div&gt;
-&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;
-&lt;div&gt;
-&lt;img src=&quot;../images/w600_c69e304b967f30414d494548b51138ca.jpg&quot; height=&quot;530&quot; width=&quot;299&quot; style=&quot;height: auto;&quot;&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;
-&lt;/div&gt;
-&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;
-&lt;div&gt;This book was very slow to start, but it quickly got hard to put down. There are some pretty disturbing scenes, so if that&#39;s not your thing I don&#39;t recommend it. If you can stomach it though, it&#39;s a pretty good read with lots of really good twists.&lt;/div&gt;
-&lt;div&gt;&lt;br&gt;&lt;/div&gt;
-&lt;div&gt;&lt;b&gt;Sufrace Detail&lt;/b&gt;&lt;/div&gt;
-&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;
-&lt;div&gt;
-&lt;img src=&quot;../images/w600_b4c00f22e47a2e5c36f52fe867d05d11.jpg&quot; alt=&quot;Bankssurfacedetailcover.jpg&quot; height=&quot;308&quot; width=&quot;200&quot; style=&quot;height: auto;&quot;&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;
-&lt;/div&gt;
-&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;
-&lt;div&gt;I love Iain M Banks. All of The Culture novels are fantastic, and this one is no exception. The plots are too numerous to list, but one of the fascinating ideas in this book is that of a Virtual Hell. If you suppose that minds can be simulated and run on computers, there&#39;s no reason why you couldn&#39;t digitize someone&#39;s mind before they die and then upload it to a virtual hell if they had failed to live a good life. If you&#39;ve read any of other culture novels, you&#39;ll enjoy getting a look at what a Mind with some severe psychopathic tendencies looks like and how it can exist in the Culture.&lt;/div&gt;
-&lt;div&gt;&lt;br&gt;&lt;/div&gt;
-&lt;div&gt;&lt;b&gt;Count Zero&lt;/b&gt;&lt;/div&gt;
-&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;
-&lt;div&gt;
-&lt;img src=&quot;../images/w600_1436e5f7333df36818fe62d452aa8185.jpg&quot; alt=&quot;CountZero(1stEd).jpg&quot; height=&quot;339&quot; width=&quot;200&quot; style=&quot;height: auto;&quot;&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;
-&lt;/div&gt;
-&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;
-&lt;div&gt;This is a sequel (kind of) to Neuromancer, but all of the characters are different. I found this book much easier to follow compared to Neuromancer, but Gibson still writes in a way that I find very difficult to follow. My friend said it best when he described it as &quot;poetry&quot;&lt;/div&gt;
-&lt;div&gt;&lt;br&gt;&lt;/div&gt;
-</description>
-        <pubDate>Mon, 29 Dec 2014 00:00:00 -0500</pubDate>
-        <link>http://blog.tahnok.me/post/book-recommendations-from-2014.html</link>
-        <guid isPermaLink="true">http://blog.tahnok.me/post/book-recommendations-from-2014.html</guid>
         
         
       </item>
