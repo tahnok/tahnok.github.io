@@ -74,6 +74,199 @@
   
   <div class="post-container">
     <header class="post-header">
+      <h1 class="post-title"><a href="/post/chameleon-scarf.html">Chameleon Scarf</a></h1>
+      <p class="post-meta">Sep 27, 2015</p>
+    </header>
+
+    <article class="post-content">
+      <p><img src="../images/scraf_5.jpg" alt="" /></p>
+
+<p>This weekend Danielle and I have been working on building a scarf with LEDs in it that will match whatever colour you place against it.
+That’s right, it’s a CHAMELON SCARF.
+Here are the steps</p>
+
+<h1 id="step-0-get-inspired">Step 0: GET INSPIRED!</h1>
+
+<p>I was stumbling through the <a href="https://learn.adafruit.com/">Adafruit Learning Site</a> and I found this:</p>
+
+<p><img src="https://learn.adafruit.com/system/guides/images/000/000/280/medium800/chameleon-scarf-adafruit-thumb.jpg?1396719510" alt="" /></p>
+
+<p>ZOMG! It’s so cool! BONUS: I had all the parts just lying around at home…</p>
+
+<h1 id="step-1-gather-materials">Step 1: Gather materials</h1>
+
+<p>You will need the following:</p>
+
+<ul>
+  <li>Adafruit Flora</li>
+  <li>Sewable Neopixels</li>
+  <li>Steel thread</li>
+  <li>Conductive Fabric</li>
+  <li>Adafruit Color Sensor (TCS34725)</li>
+  <li>Clear nail polish</li>
+  <li>Fabric for a scarf</li>
+</ul>
+
+<p>You can get most of this in a single pack from Adafruit here: https://www.adafruit.com/products/1458</p>
+
+<p><img src="../images/scarf_2.jpg" alt="" /></p>
+
+<h1 id="step-2-get-sewing">Step 2: Get Sewing</h1>
+
+<p>Here’s the basic circuit diagram</p>
+
+<p><img src="../images/scarf_7.jpg" alt="" /></p>
+
+<p>We decided to go with more of a banada style scarf versus a proper loop.</p>
+
+<p><img src="../images/scarf_1.jpg" alt="" /></p>
+
+<p>The data lines for the neo pixels are actually strips of conductive fabric, rather than steel thread.</p>
+
+<h1 id="step-3-solder">Step 3: Solder!</h1>
+
+<p>I really liked the idea of using fabric snaps as shown here: https://learn.adafruit.com/flora-snaps/overview</p>
+
+<p>It’s actually pretty easy to solder, although the first few times I had too much solder on the snap and they didn’t fit well
+I even put some solder on the other half of the snaps to I could easily add and remove the colour sensor</p>
+
+<h1 id="step-4-debug">Step 4: Debug</h1>
+
+<p>Check ALL the wires.</p>
+
+<p>Do it again.</p>
+
+<h1 id="step-5-code">Step 5: Code</h1>
+
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cp">#include &lt;Wire.h&gt;</span>
+<span class="cp">#include &quot;Adafruit_TCS34725.h&quot;</span>
+<span class="cp">#include &lt;Adafruit_NeoPixel.h&gt;</span>
+
+<span class="c1">// Parameter 1 = number of pixels in strip</span>
+<span class="c1">// Parameter 2 = pin number (most are valid)</span>
+<span class="c1">// Parameter 3 = pixel type flags, add together as needed:</span>
+<span class="c1">//   NEO_RGB     Pixels are wired for RGB bitstream</span>
+<span class="c1">//   NEO_GRB     Pixels are wired for GRB bitstream</span>
+<span class="c1">//   NEO_KHZ400  400 KHz bitstream (e.g. FLORA pixels)</span>
+<span class="c1">//   NEO_KHZ800  800 KHz bitstream (e.g. High Density LED strip)</span>
+
+<span class="n">Adafruit_NeoPixel</span> <span class="n">strip</span> <span class="o">=</span> <span class="n">Adafruit_NeoPixel</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">NEO_GRB</span> <span class="o">+</span> <span class="n">NEO_KHZ800</span><span class="p">);</span>
+
+<span class="n">Adafruit_NeoPixel</span> <span class="n">onboard</span> <span class="o">=</span> <span class="n">Adafruit_NeoPixel</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="n">NEO_RGB</span> <span class="o">+</span> <span class="n">NEO_KHZ400</span><span class="p">);</span>
+
+
+<span class="c1">// our RGB -&gt; eye-recognized gamma color</span>
+<span class="n">byte</span> <span class="n">gammatable</span><span class="p">[</span><span class="mi">256</span><span class="p">];</span>
+
+
+<span class="n">Adafruit_TCS34725</span> <span class="n">tcs</span> <span class="o">=</span> <span class="n">Adafruit_TCS34725</span><span class="p">(</span><span class="n">TCS34725_INTEGRATIONTIME_50MS</span><span class="p">,</span> <span class="n">TCS34725_GAIN_4X</span><span class="p">);</span>
+
+<span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">9600</span><span class="p">);</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Color View Test!&quot;</span><span class="p">);</span>
+
+  <span class="n">strip</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+  <span class="n">strip</span><span class="p">.</span><span class="n">show</span><span class="p">();</span> <span class="c1">// Initialize all pixels to &#39;off&#39;</span>
+  <span class="n">onboard</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+  <span class="n">onboard</span><span class="p">.</span><span class="n">show</span><span class="p">();</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">tcs</span><span class="p">.</span><span class="n">begin</span><span class="p">())</span> <span class="p">{</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Found sensor&quot;</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">&quot;No TCS34725 found ... check your connections&quot;</span><span class="p">);</span>
+    <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// halt!</span>
+      <span class="n">error</span><span class="p">();</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+
+  <span class="c1">// thanks PhilB for this gamma table!</span>
+  <span class="c1">// it helps convert RGB colors to what humans see</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">256</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">float</span> <span class="n">x</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+    <span class="n">x</span> <span class="o">/=</span> <span class="mi">255</span><span class="p">;</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">pow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">);</span>
+    <span class="n">x</span> <span class="o">*=</span> <span class="mi">255</span><span class="p">;</span>
+
+    <span class="n">gammatable</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+    <span class="c1">//Serial.println(gammatable[i]);</span>
+  <span class="p">}</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//this sequence flashes the first pixel three times as a countdown to the color reading.</span>
+    <span class="n">strip</span><span class="p">.</span><span class="n">setPixelColor</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">strip</span><span class="p">.</span><span class="n">Color</span><span class="p">(</span><span class="mi">188</span><span class="p">,</span> <span class="mi">188</span><span class="p">,</span> <span class="mi">188</span><span class="p">));</span> <span class="c1">//white, but dimmer-- 255 for all three values makes it blinding!</span>
+    <span class="n">strip</span><span class="p">.</span><span class="n">show</span><span class="p">();</span>
+    <span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+    <span class="n">strip</span><span class="p">.</span><span class="n">setPixelColor</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">strip</span><span class="p">.</span><span class="n">Color</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
+    <span class="n">strip</span><span class="p">.</span><span class="n">show</span><span class="p">();</span>
+    <span class="n">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kt">uint16_t</span> <span class="n">clear</span><span class="p">,</span> <span class="n">red</span><span class="p">,</span> <span class="n">green</span><span class="p">,</span> <span class="n">blue</span><span class="p">;</span>
+
+  <span class="n">tcs</span><span class="p">.</span><span class="n">setInterrupt</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>      <span class="c1">// turn on LED</span>
+
+  <span class="n">delay</span><span class="p">(</span><span class="mi">60</span><span class="p">);</span>  <span class="c1">// takes 50ms to read</span>
+
+  <span class="n">tcs</span><span class="p">.</span><span class="n">getRawData</span><span class="p">(</span><span class="o">&amp;</span><span class="n">red</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">green</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">blue</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">clear</span><span class="p">);</span>
+
+  <span class="n">tcs</span><span class="p">.</span><span class="n">setInterrupt</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>  <span class="c1">// turn off LED</span>
+
+  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;C:</span><span class="se">\t</span><span class="s">&quot;</span><span class="p">);</span> <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">clear</span><span class="p">);</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s">R:</span><span class="se">\t</span><span class="s">&quot;</span><span class="p">);</span> <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">red</span><span class="p">);</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s">G:</span><span class="se">\t</span><span class="s">&quot;</span><span class="p">);</span> <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">green</span><span class="p">);</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s">B:</span><span class="se">\t</span><span class="s">&quot;</span><span class="p">);</span> <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">blue</span><span class="p">);</span>
+
+  <span class="c1">// Figure out some basic hex code for visualization</span>
+  <span class="kt">uint32_t</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">red</span><span class="p">;</span>
+  <span class="n">sum</span> <span class="o">+=</span> <span class="n">green</span><span class="p">;</span>
+  <span class="n">sum</span> <span class="o">+=</span> <span class="n">blue</span><span class="p">;</span>
+  <span class="n">sum</span> <span class="o">+=</span> <span class="n">clear</span><span class="p">;</span>
+  <span class="kt">float</span> <span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">;</span>
+  <span class="n">r</span> <span class="o">=</span> <span class="n">red</span><span class="p">;</span> <span class="n">r</span> <span class="o">/=</span> <span class="n">sum</span><span class="p">;</span>
+  <span class="n">g</span> <span class="o">=</span> <span class="n">green</span><span class="p">;</span> <span class="n">g</span> <span class="o">/=</span> <span class="n">sum</span><span class="p">;</span>
+  <span class="n">b</span> <span class="o">=</span> <span class="n">blue</span><span class="p">;</span> <span class="n">b</span> <span class="o">/=</span> <span class="n">sum</span><span class="p">;</span>
+  <span class="n">r</span> <span class="o">*=</span> <span class="mi">256</span><span class="p">;</span> <span class="n">g</span> <span class="o">*=</span> <span class="mi">256</span><span class="p">;</span> <span class="n">b</span> <span class="o">*=</span> <span class="mi">256</span><span class="p">;</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s">&quot;</span><span class="p">);</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">r</span><span class="p">,</span> <span class="n">HEX</span><span class="p">);</span> <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">g</span><span class="p">,</span> <span class="n">HEX</span><span class="p">);</span> <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">b</span><span class="p">,</span> <span class="n">HEX</span><span class="p">);</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">();</span>
+
+  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">r</span> <span class="p">);</span> <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot; &quot;</span><span class="p">);</span> <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">g</span><span class="p">);</span> <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot; &quot;</span><span class="p">);</span>  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">b</span> <span class="p">);</span>
+  <span class="n">colorWipe</span><span class="p">(</span><span class="n">strip</span><span class="p">.</span><span class="n">Color</span><span class="p">(</span><span class="n">gammatable</span><span class="p">[(</span><span class="kt">int</span><span class="p">)</span><span class="n">r</span><span class="p">],</span> <span class="n">gammatable</span><span class="p">[(</span><span class="kt">int</span><span class="p">)</span><span class="n">g</span><span class="p">],</span> <span class="n">gammatable</span><span class="p">[(</span><span class="kt">int</span><span class="p">)</span><span class="n">b</span><span class="p">]),</span> <span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Fill the dots one after the other with a color</span>
+<span class="kt">void</span> <span class="nf">colorWipe</span><span class="p">(</span><span class="kt">uint32_t</span> <span class="n">c</span><span class="p">,</span> <span class="kt">uint8_t</span> <span class="n">wait</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kt">uint16_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">strip</span><span class="p">.</span><span class="n">numPixels</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">strip</span><span class="p">.</span><span class="n">setPixelColor</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">c</span><span class="p">);</span>
+    <span class="n">strip</span><span class="p">.</span><span class="n">show</span><span class="p">();</span>
+    <span class="n">delay</span><span class="p">(</span><span class="n">wait</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
+
+  <span class="c1">//loop is empty because it only takes the color reading once on power up! Turn the scarf off and on again to change the color.</span>
+
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">error</span><span class="p">()</span> <span class="p">{</span>
+
+  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">&quot; :(&quot;</span><span class="p">);</span>
+  <span class="n">onboard</span><span class="p">.</span><span class="n">setPixelColor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">strip</span><span class="p">.</span><span class="n">Color</span><span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
+  <span class="n">onboard</span><span class="p">.</span><span class="n">show</span><span class="p">();</span>
+  <span class="n">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+  <span class="n">onboard</span><span class="p">.</span><span class="n">setPixelColor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+  <span class="n">onboard</span><span class="p">.</span><span class="n">show</span><span class="p">();</span>
+  <span class="n">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+<span class="p">}</span></code></pre></div>
+
+
+    </article>
+  </div>
+  
+  <div class="post-container">
+    <header class="post-header">
       <h1 class="post-title"><a href="/post/making-pcb-not-pcp.html">making PCB (not PCP)</a></h1>
       <p class="post-meta">Jun 20, 2015</p>
     </header>

@@ -4,6 +4,7 @@ http://blog.tahnok.me/index.html
 http://blog.tahnok.me/css/main.css
 http://blog.tahnok.me/sitemap.txt
 
+http://blog.tahnok.me/post/chameleon-scarf.html
 http://blog.tahnok.me/post/making-pcb-not-pcp.html
 http://blog.tahnok.me/post/blueboxer-phone-phreaking-for-phun.html
 http://blog.tahnok.me/post/building-a-watch-part-1.html
