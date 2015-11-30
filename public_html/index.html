@@ -74,6 +74,478 @@
   
   <div class="post-container">
     <header class="post-header">
+      <h1 class="post-title"><a href="/post/makerfaire-ottawa-rule-110.html">Makerfaire Ottawa: Rule 110</a></h1>
+      <p class="post-meta">Nov 11, 2015</p>
+    </header>
+
+    <article class="post-content">
+      <p>Wooohoo! I can now officially cross something off my bucket list:</p>
+
+<ul>
+  <li>run marathon</li>
+  <li>
+    <strike>present project at Makerfaire</strike>
+  </li>
+  <li>world domination?</li>
+</ul>
+
+<p>So, what was my project? Here’s a pic of it</p>
+
+<p><img src="../images/rule110_at_table.jpg" alt="my project set up at makerfaire" /></p>
+
+<p>What do you mean you don’t know what is from that?</p>
+
+<p>WELL.</p>
+
+<p>What I built was basically part art, part math and part eletronics.
+I hooked up an RGB LED Matrix (specifically <a href="https://www.adafruit.com/products/2277">this one from adafruit</a>) to an Arduino Mega along with 32 switches.
+(Note to future self: don’t ever try and wire up 32 switches.)
+These switches provided the starting row for generating a pattern on the led matrix based on <a href="https://en.wikipedia.org/wiki/Rule_110">rule 110</a>: a 1 dimensional cellular automaton that generates a pattern like this:</p>
+
+<p><img src="../images/rule110.png" alt="rule 110 pattern" />
+(from <a href="https://twitter.com/rule110_bot">@rule110_bot</a>)</p>
+
+<p>but on an RGB LED Matrix, so it looks more like</p>
+
+<p><img src="../images/adafruit-panel.jpg" alt="RGB panel product shot" /></p>
+
+<h2 id="why">Why??</h2>
+
+<p>This all started out when I came across this fabulous kickstarter: <a href="https://www.kickstarter.com/projects/fbz/knityak-custom-mathematical-knit-scarves">KnitYak: Custom mathematical knit scarves</a> by <a href="https://twitter.com/fbz">fbz</a>, which was for rule 110 scarfs.
+I was immediatly struck by how beautiful the pattern was, and intriguied by the fact that it was being generated algorithmically.
+After reading several wikipedia articles, my interest in the pattern had only grown further.
+I ended up writing <a href="https://github.com/tahnok/rule110">a ruby implementation</a> of rule 110 that could output patterns to your terminal, and then to pngs, and then finally to <a href="https://twitter.com/rule110_bot">twitter</a>.</p>
+
+<p>But it was hard to mess around with the starting row and explore the patterns that got generated. I wanted something you could interact with, so when I saw that the Ottawa Makerfaire was looking for projects I figured it would be a perfect oppurtunity to force myself to build something and to have something interactive for attendees to play with.</p>
+
+<h2 id="hardware">Hardware</h2>
+
+<p><img src="../images/rule110_table.jpg" alt="me being creepy" /></p>
+
+<p><img src="../images/rule110_ratsnest.jpg" alt="my rats nest of a project" /></p>
+
+<p>Here’s what inside:</p>
+
+<ul>
+  <li>Arduino Mega</li>
+  <li>64x32 RGB LED matrix</li>
+  <li>Shift Registers (SN74HC165N) x 6</li>
+  <li>Rocker switches x 32</li>
+  <li>8 position rotary switches x 2</li>
+  <li>10K resistors x (lots)</li>
+</ul>
+
+<p>The arduino mega is the brains of this particular operations.
+I needed to use it over an uno because of the higher clock speed.
+Turns out you need a fair bit of horse power to drive 2048 RGB LEDs.
+Who would have thunk?</p>
+
+<h3 id="rgb-led-matrix">RGB LED Matrix</h3>
+
+<p>How do you actually drive 2048 LEDs?</p>
+
+<p>Basically, you can’t have all those LEDs on at the same time (because power draw), so the LED matrix only turns 2 (out of 32) rows on at a time.
+In order to select which row you want to light up, you use the 4 address select pins to select one of 16 pairs of rows.</p>
+
+<p>Once you have a row selected, you need to fill it with colour.
+You can set the colour of 2 pixels at a time using 2 sets of Red, Green and Blue pins.
+When your desired colours are chosen you “shift” in the data, using the clock pin.
+This way you can fill an entire row of pixels by setting the colour, then clocking in order to set the next pixel.
+Finally, you toggle the latch pin, which shows the entire row of pixels.
+If you do this FAST enough (like 200Hz aka 1 row every 5ms), the display looks to be continuously on to us puny humans.</p>
+
+<p>I tried to write my own driver for the display in C for the Propeller, but I had some serious flickering issues that I wasn’t able to fix…
+Given that I didn’t want to give everyone at makerfaire a headache / induce seizures I chose to use this library <a href="https://github.com/adafruit/RGB-matrix-Panel/">from Adafruit</a>.
+It’s a very interesting read because they do some neat things like <a href="https://github.com/adafruit/RGB-matrix-Panel/blob/master/RGBmatrixPanel.cpp#L541">unrolling loops</a> and using Binary Coded Modulation (like PWM) in order to give a greater color depth than the 3 bit color you start with.</p>
+
+<h3 id="shift-registers">Shift Registers</h3>
+
+<p><img src="../images/rule110_shiftregisters.jpg" alt="shift registers in situe" /></p>
+
+<p>I ended up using 6 <a href="https://en.wikipedia.org/wiki/Shift_register">shift register</a> for input in this project.
+Why?
+Well it means that I could use 4 pins to read 32 switches (aka 32 bits of data) all in one go.
+That feat is accomplished with 4 shift register daisy chained together.
+Each input pin on each of the shift registers has a pull down resistor in order to deal with electrical gremlins, and also to make my assembly time much much longer.</p>
+
+<p>I also used 2 shift registers to read the state of the two knobs I have for selecting colours.
+Those knobs have 8 pins to indicate which position the knob is in currently.</p>
+
+<h2 id="software">Software</h2>
+
+<p>My code can be found below:</p>
+
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cp">#include &lt;Adafruit_GFX.h&gt;   </span><span class="c1">// Core graphics library</span>
+<span class="cp">#include &lt;RGBmatrixPanel.h&gt; </span><span class="c1">// Hardware-specific library</span>
+
+<span class="cp">#define OE   9</span>
+<span class="cp">#define LAT 10</span>
+<span class="cp">#define CLK 11</span>
+<span class="cp">#define A   A0</span>
+<span class="cp">#define B   A1</span>
+<span class="cp">#define C   A2</span>
+<span class="cp">#define D   A3</span>
+
+<span class="n">RGBmatrixPanel</span> <span class="nf">matrix</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">CLK</span><span class="p">,</span> <span class="n">LAT</span><span class="p">,</span> <span class="n">OE</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="mi">64</span><span class="p">);</span>
+
+<span class="k">const</span> <span class="kt">int</span> <span class="n">data_pin</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span> <span class="c1">//  SER_OUT (serial data out)</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">shld_pin</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span> <span class="c1">// SH/!LD (shift or active low load)</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">clk_pin</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span> <span class="c1">//  CLK (the clock that times the shifting)</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">ce_pin</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span> <span class="c1">//  !CE (clock enable, active low)</span>
+
+<span class="k">const</span> <span class="kt">int</span> <span class="n">data_pin_2</span> <span class="o">=</span> <span class="mi">48</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">ce_pin_2</span> <span class="o">=</span> <span class="mi">46</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">shld_pin_2</span> <span class="o">=</span> <span class="mi">47</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">clk_pin_2</span> <span class="o">=</span> <span class="mi">49</span><span class="p">;</span>
+
+<span class="n">byte</span> <span class="n">incoming1</span><span class="p">;</span>
+<span class="n">byte</span> <span class="n">incoming2</span><span class="p">;</span>
+<span class="n">byte</span> <span class="n">incoming3</span><span class="p">;</span>
+<span class="n">byte</span> <span class="n">incoming4</span><span class="p">;</span>
+
+<span class="n">byte</span> <span class="n">colour1</span><span class="p">;</span>
+<span class="n">byte</span> <span class="n">colour2</span><span class="p">;</span>
+
+
+<span class="c1">//int start[] = { 0, 1, 0, 0, 1, 0, 1, 0,</span>
+<span class="c1">//                0, 0, 1, 0, 1, 1, 0, 1,</span>
+<span class="c1">//                1, 1, 1, 0, 0, 1, 1, 1,</span>
+<span class="c1">//                0, 1, 0, 1, 1, 0, 0, 1</span>
+<span class="c1">//              };</span>
+<span class="kt">int</span> <span class="n">start</span><span class="p">[</span><span class="mi">32</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+
+<span class="kt">int</span><span class="o">*</span> <span class="n">row1</span><span class="p">;</span>
+<span class="kt">int</span><span class="o">*</span> <span class="n">row2</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
+
+  <span class="c1">//shift registers for buttons</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">9600</span><span class="p">);</span>
+
+  <span class="c1">// Initialize each digital pin to either output or input</span>
+  <span class="c1">// We are commanding the shift register with each pin with the exception of the serial</span>
+  <span class="c1">// data we get back on the data_pin line.</span>
+  <span class="n">pinMode</span><span class="p">(</span><span class="n">shld_pin</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+  <span class="n">pinMode</span><span class="p">(</span><span class="n">ce_pin</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+  <span class="n">pinMode</span><span class="p">(</span><span class="n">clk_pin</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+  <span class="n">pinMode</span><span class="p">(</span><span class="n">data_pin</span><span class="p">,</span> <span class="n">INPUT</span><span class="p">);</span>
+  <span class="n">pinMode</span><span class="p">(</span><span class="n">shld_pin_2</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+  <span class="n">pinMode</span><span class="p">(</span><span class="n">ce_pin_2</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+  <span class="n">pinMode</span><span class="p">(</span><span class="n">clk_pin_2</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+  <span class="n">pinMode</span><span class="p">(</span><span class="n">data_pin_2</span><span class="p">,</span> <span class="n">INPUT</span><span class="p">);</span>
+
+  <span class="c1">// Required initial states of these two pins according to the datasheet timing diagram</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">clk_pin</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">shld_pin</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">clk_pin_2</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">shld_pin_2</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
+
+  <span class="n">read_shift_regs</span><span class="p">();</span>
+  <span class="n">read_color_shift_regs</span><span class="p">();</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">&quot;colours: &quot;</span><span class="p">);</span>
+  <span class="n">print_byte</span><span class="p">(</span><span class="n">colour1</span><span class="p">);</span>
+  <span class="n">print_byte</span><span class="p">(</span><span class="n">colour2</span><span class="p">);</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">transform</span><span class="p">(</span><span class="n">colour1</span><span class="p">));</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">transform</span><span class="p">(</span><span class="n">colour2</span><span class="p">));</span>
+  <span class="n">fill_starting_row</span><span class="p">();</span>
+
+  <span class="c1">//matrix</span>
+  <span class="n">matrix</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+  <span class="n">matrix</span><span class="p">.</span><span class="n">fillScreen</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="n">row1</span> <span class="o">=</span> <span class="n">start</span><span class="p">;</span>
+  <span class="n">displayRow</span><span class="p">(</span><span class="n">row1</span><span class="p">);</span>
+  <span class="n">row2</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span> <span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="o">*</span> <span class="mi">32</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">64</span><span class="p">;</span> <span class="n">x</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span><span class="o">*</span> <span class="n">row</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">apply_rule</span><span class="p">(</span><span class="n">row2</span><span class="p">,</span> <span class="n">row1</span><span class="p">);</span>
+      <span class="n">row</span> <span class="o">=</span> <span class="n">row2</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="n">apply_rule</span><span class="p">(</span><span class="n">row1</span><span class="p">,</span> <span class="n">row2</span><span class="p">);</span>
+      <span class="n">row</span> <span class="o">=</span> <span class="n">row1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="c1">//    j = (j + 1) % 24;</span>
+    <span class="c1">//    Serial.print(x);</span>
+    <span class="c1">//    Serial.print(&quot;:  &quot;);</span>
+    <span class="c1">//    displayRow(row);</span>
+    <span class="c1">//    Serial.print(&quot;row1 &quot;);</span>
+    <span class="c1">//    displayRow(row1);</span>
+    <span class="c1">//    Serial.print(&quot;row2 &quot;);</span>
+    <span class="c1">//    displayRow(row2);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="mi">32</span><span class="p">;</span> <span class="n">y</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">y</span><span class="p">])</span> <span class="p">{</span>
+        <span class="n">matrix</span><span class="p">.</span><span class="n">drawPixel</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">transform</span><span class="p">(</span><span class="n">colour1</span><span class="p">));</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">matrix</span><span class="p">.</span><span class="n">drawPixel</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">transform</span><span class="p">(</span><span class="n">colour2</span><span class="p">));</span>
+      <span class="p">}</span>
+
+    <span class="p">}</span>
+    <span class="n">delay</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">for</span> <span class="p">(;;);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">apply_rule</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="mi">32</span><span class="p">],</span> <span class="kt">int</span> <span class="n">b</span><span class="p">[</span><span class="mi">32</span><span class="p">])</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">32</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">31</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span> <span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">a</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span> <span class="o">||</span>
+           <span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span> <span class="o">||</span>
+           <span class="p">(</span><span class="o">!</span><span class="n">a</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span> <span class="o">||</span>
+           <span class="p">(</span><span class="o">!</span><span class="n">a</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">a</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span> <span class="o">||</span>
+           <span class="p">(</span><span class="o">!</span><span class="n">a</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+         <span class="p">)</span> <span class="p">{</span>
+        <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+
+  <span class="p">}</span>
+  <span class="c1">//  return b;</span>
+<span class="p">}</span>
+
+
+<span class="c1">// Input a value 0 to 24 to get a color value.</span>
+<span class="c1">// The colours are a transition r - g - b - back to r.</span>
+<span class="kt">uint16_t</span> <span class="nf">Wheel</span><span class="p">(</span><span class="n">byte</span> <span class="n">WheelPos</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">WheelPos</span> <span class="o">&lt;</span> <span class="mi">8</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">matrix</span><span class="p">.</span><span class="n">Color333</span><span class="p">(</span><span class="mi">7</span> <span class="o">-</span> <span class="n">WheelPos</span><span class="p">,</span> <span class="n">WheelPos</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">WheelPos</span> <span class="o">&lt;</span> <span class="mi">16</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">WheelPos</span> <span class="o">-=</span> <span class="mi">8</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">matrix</span><span class="p">.</span><span class="n">Color333</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">7</span> <span class="o">-</span> <span class="n">WheelPos</span><span class="p">,</span> <span class="n">WheelPos</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="n">WheelPos</span> <span class="o">-=</span> <span class="mi">16</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">matrix</span><span class="p">.</span><span class="n">Color333</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">WheelPos</span><span class="p">,</span> <span class="mi">7</span> <span class="o">-</span> <span class="n">WheelPos</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">byte</span> <span class="nf">read_shift_regs</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="n">byte</span> <span class="n">the_shifted</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>  <span class="c1">// An 8 bit number to carry each bit value of A-H</span>
+
+  <span class="c1">// Trigger loading the state of the A-H data lines into the shift register</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">shld_pin</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+  <span class="n">delayMicroseconds</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span> <span class="c1">// Requires a delay here according to the datasheet timing diagram</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">shld_pin</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
+  <span class="n">delayMicroseconds</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+
+  <span class="c1">// Required initial states of these two pins according to the datasheet timing diagram</span>
+  <span class="n">pinMode</span><span class="p">(</span><span class="n">clk_pin</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+  <span class="n">pinMode</span><span class="p">(</span><span class="n">data_pin</span><span class="p">,</span> <span class="n">INPUT</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">clk_pin</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">ce_pin</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span> <span class="c1">// Enable the clock</span>
+
+  <span class="c1">// Get the A-H values</span>
+  <span class="c1">//the_shifted = shiftIn(data_pin, clk_pin, MSBFIRST);</span>
+  <span class="n">incoming1</span> <span class="o">=</span> <span class="n">shiftIn</span><span class="p">(</span><span class="n">data_pin</span><span class="p">,</span> <span class="n">clk_pin</span><span class="p">,</span> <span class="n">MSBFIRST</span><span class="p">);</span>
+  <span class="n">incoming2</span> <span class="o">=</span> <span class="n">shiftIn</span><span class="p">(</span><span class="n">data_pin</span><span class="p">,</span> <span class="n">clk_pin</span><span class="p">,</span> <span class="n">MSBFIRST</span><span class="p">);</span>
+  <span class="n">incoming3</span> <span class="o">=</span> <span class="n">shiftIn</span><span class="p">(</span><span class="n">data_pin</span><span class="p">,</span> <span class="n">clk_pin</span><span class="p">,</span> <span class="n">MSBFIRST</span><span class="p">);</span>
+  <span class="n">incoming4</span> <span class="o">=</span> <span class="n">shiftIn</span><span class="p">(</span><span class="n">data_pin</span><span class="p">,</span> <span class="n">clk_pin</span><span class="p">,</span> <span class="n">MSBFIRST</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">ce_pin</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span> <span class="c1">// Disable the clock</span>
+
+  <span class="k">return</span> <span class="n">the_shifted</span><span class="p">;</span>
+
+<span class="p">}</span>
+
+<span class="n">byte</span> <span class="nf">read_color_shift_regs</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="n">byte</span> <span class="n">the_shifted</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>  <span class="c1">// An 8 bit number to carry each bit value of A-H</span>
+
+  <span class="c1">// Trigger loading the state of the A-H data lines into the shift register</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">shld_pin_2</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+  <span class="n">delayMicroseconds</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span> <span class="c1">// Requires a delay here according to the datasheet timing diagram</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">shld_pin_2</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
+  <span class="n">delayMicroseconds</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+
+  <span class="c1">// Required initial states of these two pins according to the datasheet timing diagram</span>
+  <span class="n">pinMode</span><span class="p">(</span><span class="n">clk_pin_2</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+  <span class="n">pinMode</span><span class="p">(</span><span class="n">data_pin_2</span><span class="p">,</span> <span class="n">INPUT</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">clk_pin_2</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">ce_pin_2</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span> <span class="c1">// Enable the clock</span>
+
+  <span class="c1">// Get the A-H values</span>
+  <span class="c1">//the_shifted = shiftIn(data_pin, clk_pin, MSBFIRST);</span>
+  <span class="n">colour1</span> <span class="o">=</span> <span class="n">shiftIn</span><span class="p">(</span><span class="n">data_pin_2</span><span class="p">,</span> <span class="n">clk_pin_2</span><span class="p">,</span> <span class="n">MSBFIRST</span><span class="p">);</span>
+  <span class="n">colour2</span> <span class="o">=</span> <span class="n">shiftIn</span><span class="p">(</span><span class="n">data_pin_2</span><span class="p">,</span> <span class="n">clk_pin_2</span><span class="p">,</span> <span class="n">MSBFIRST</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">ce_pin_2</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span> <span class="c1">// Disable the clock</span>
+
+  <span class="k">return</span> <span class="n">the_shifted</span><span class="p">;</span>
+
+<span class="p">}</span>
+
+<span class="c1">// A function that prints all the 1&#39;s and 0&#39;s of a byte, so 8 bits +or- 2</span>
+<span class="kt">void</span> <span class="nf">print_byte</span><span class="p">(</span><span class="n">byte</span> <span class="n">val</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">byte</span> <span class="n">i</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="n">byte</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">7</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">val</span> <span class="o">&gt;&gt;</span> <span class="n">i</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">,</span> <span class="n">BIN</span><span class="p">);</span> <span class="c1">// Magic bit shift, if you care look up the &lt;&lt;, &gt;&gt;, and &amp; operators</span>
+  <span class="p">}</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span> <span class="c1">// Go to the next line, do not collect $200</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">fill_starting_row</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="n">byte</span> <span class="n">data</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">8</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">incoming1</span> <span class="o">&gt;&gt;</span> <span class="n">i</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">thang</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">data</span><span class="p">);</span>
+    <span class="n">start</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">16</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">incoming2</span> <span class="o">&gt;&gt;</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">8</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">thang</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">data</span><span class="p">);</span>
+    <span class="n">start</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">16</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">24</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="o">!</span><span class="p">(</span><span class="n">incoming3</span> <span class="o">&gt;&gt;</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">16</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">thang</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">data</span><span class="p">);</span>
+    <span class="n">start</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">24</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">32</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="o">!</span><span class="p">(</span><span class="n">incoming4</span> <span class="o">&gt;&gt;</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">24</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">thang</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">data</span><span class="p">);</span>
+    <span class="n">start</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">thang</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">byte</span> <span class="n">thing</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">//  Serial.print(i);</span>
+  <span class="c1">//  Serial.print(&quot; : &quot;);</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">thing</span><span class="p">,</span> <span class="n">BIN</span><span class="p">);</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot; &quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">displayRow</span><span class="p">(</span><span class="kt">int</span> <span class="n">b</span><span class="p">[</span><span class="mi">32</span><span class="p">])</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="mi">32</span><span class="p">;</span> <span class="n">a</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">thang</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">[</span><span class="n">a</span><span class="p">]);</span>
+  <span class="p">}</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">uint16_t</span> <span class="nf">transform</span><span class="p">(</span><span class="n">byte</span> <span class="n">input</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">//    return matrix.Color333(7 - WheelPos, WheelPos, 0);</span>
+  <span class="k">switch</span> <span class="p">(</span><span class="n">input</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="mi">1</span><span class="o">:</span>
+      <span class="k">return</span> <span class="n">Wheel</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="k">case</span> <span class="mi">2</span><span class="o">:</span>
+      <span class="k">return</span> <span class="n">Wheel</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+    <span class="k">case</span> <span class="mi">4</span><span class="o">:</span>
+      <span class="k">return</span> <span class="n">Wheel</span><span class="p">(</span><span class="mi">6</span><span class="p">);</span>
+    <span class="k">case</span> <span class="mi">8</span><span class="o">:</span>
+      <span class="k">return</span> <span class="n">Wheel</span><span class="p">(</span><span class="mi">9</span><span class="p">);</span>
+    <span class="k">case</span> <span class="mi">16</span><span class="o">:</span>
+      <span class="k">return</span> <span class="n">Wheel</span><span class="p">(</span><span class="mi">12</span><span class="p">);</span>
+    <span class="k">case</span> <span class="mi">32</span><span class="o">:</span>
+      <span class="k">return</span> <span class="n">Wheel</span><span class="p">(</span><span class="mi">15</span><span class="p">);</span>
+    <span class="k">case</span> <span class="mi">64</span><span class="o">:</span>
+      <span class="k">return</span> <span class="n">Wheel</span><span class="p">(</span><span class="mi">18</span><span class="p">);</span>
+    <span class="k">case</span> <span class="mi">128</span><span class="o">:</span>
+      <span class="k">return</span> <span class="n">Wheel</span><span class="p">(</span><span class="mi">21</span><span class="p">);</span>
+    <span class="k">default</span><span class="o">:</span>
+      <span class="k">return</span> <span class="n">Wheel</span><span class="p">(</span><span class="mi">24</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+
+<p>It’s pretty bad because I wrote it the night before (as is my tradition for any large project)</p>
+
+<p>Writing this was a fun excersise to see how well I understand arrays / pointers in C.
+It turns out I still don’t grok them, but with sufficient sacrifices to Malloc (all praise to It), I managed to get things working.</p>
+
+<h2 id="math">Math</h2>
+
+<p>So, what the heck is the pattern I’m using anyway?</p>
+
+<p>Basically, each pixel/cell (I’m going to call them cells from now on), except for the first row of dots, is set to one of two colors based on the 3 cells above it according to the following table:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"> </th>
+      <th style="text-align: center"> </th>
+      <th style="text-align: center"> </th>
+      <th style="text-align: center"> </th>
+      <th style="text-align: center"> </th>
+      <th style="text-align: center"> </th>
+      <th style="text-align: center"> </th>
+      <th style="text-align: center"> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">111</td>
+      <td style="text-align: center">110</td>
+      <td style="text-align: center">101</td>
+      <td style="text-align: center">100</td>
+      <td style="text-align: center">011</td>
+      <td style="text-align: center">010</td>
+      <td style="text-align: center">001</td>
+      <td style="text-align: center">000</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">0</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Where 1 is an “alive” cell and 0 is a “dead” cell.
+The name comes from the fact that writing out 01101110 in decimal is 110, and there are other rules like <a href="https://en.wikipedia.org/wiki/Rule_30">rule 30</a> and <a href="https://en.wikipedia.org/wiki/Rule_184">rule 184</a>.</p>
+
+<p>If our alive colour was red, and our dead colour was blue, then a cell who had a red pixel up and to the left, another red pixel directly above, and a blue pixel above and to the right, then it would be alive and thus red.
+In my project colours of the alive and dead cells are set using the 2 knobs.</p>
+
+<p>Mind blowing fact: Rule 110 is <em>TURING COMPLETE</em></p>
+
+<p><img src="https://31.media.tumblr.com/tumblr_ma9tsfZn4d1rq1co5o1_500.gif" alt="tatooed man holding hedgehog" />
+(number 1 result on google image search for turing complete, filtered by gifs)</p>
+
+<p>For those of you with minds still unblown, I am going to assume it’s because you aren’t familiar with turing completeness yet.
+Basically, if a problem or program can be computed it can be run on a machine that is turing complete.
+That means if I had enough time (and enough will) I would program a pattern into a rule 110 system that couple compute prime numbers, or play minecraft.</p>
+
+<h2 id="reactions">Reactions</h2>
+
+<p>There were so many different reactions to my project.
+Kids were immediately interested in playing with the buttons and the knobs.
+Adults I had to cajole and encourage, which I think is a bit sad.
+If this massive bank of switches wasn’t supposed to be touched, don’t you think I would have indicated that some way?</p>
+
+<p>I could also tell immediately the people that wanted to figure out the pattern.
+The first thing they would do after reseting the display for the first time, was to change a few switches and see what changed.
+Then they would set all the switches to one position (up or down) and try that.
+Then they would change just one switch.
+The entire project was worth it for the looks on people’s faces when they learned something new, either than confirmed some expectation, or suprised them</p>
+
+<h2 id="conclusions">Conclusions</h2>
+
+<p>All in all, it was totally a good idea for me to apply to makerfaire. This is one of the largest electronics projects I’ve yet completed, and I doubt I would have done it without the thought of an empty table. I guess I should start thinking about next year…</p>
+
+    </article>
+  </div>
+  
+  <div class="post-container">
+    <header class="post-header">
       <h1 class="post-title"><a href="/post/chameleon-scarf.html">Chameleon Scarf</a></h1>
       <p class="post-meta">Sep 27, 2015</p>
     </header>
@@ -698,7 +1170,8 @@ It would also be really cool if I could make it silent, since beeping is pretty 
 <h2>CODE</h2>
 <p>Here's the whole thing below. Most of the code for interacting over SPI to the RTC module is from <a href="https://github.com/sparkfun/DeadOn_RTC/blob/v1.1/Libraries/DeadOn_RTC/examples/set_and_read_time/set_and_read_time.ino">Sparkfun</a>.</p>
 <p>
-<script src="https://gist.github.com/c2e2afb76edde4905fcc.js"> </script>
+<noscript><pre>400: Invalid request
+</pre></noscript><script src="https://gist.github.com/c2e2afb76edde4905fcc.js"> </script>
 </p>
 <p>I had some fun messing around with sprinf (it's like printf, but it fills a char array!) You can set the alarm time by modifying the values in the Alarm int array.</p>
 <h2>BUGS</h2>

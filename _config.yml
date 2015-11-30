@@ -8,6 +8,7 @@ url: "http://blog.tahnok.me" # the base hostname & protocol for your site
 twitter_username: tahnok
 github_username:  tahnok
 permalink: /post/:title.html
+code_dir: code_source
 
 # Build settings
 markdown: kramdown
@@ -16,3 +17,6 @@ exclude:
   - deploy.sh
   - Rakefile
 
+# gems:
+#   - jekyll-gist
+#   - jekyll-code-example-tag
