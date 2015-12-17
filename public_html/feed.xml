@@ -6,9 +6,112 @@
 </description>
     <link>http://blog.tahnok.me/</link>
     <atom:link href="http://blog.tahnok.me/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 29 Nov 2015 19:13:48 -0500</pubDate>
-    <lastBuildDate>Sun, 29 Nov 2015 19:13:48 -0500</lastBuildDate>
+    <pubDate>Wed, 16 Dec 2015 21:38:39 -0500</pubDate>
+    <lastBuildDate>Wed, 16 Dec 2015 21:38:39 -0500</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
+    
+      <item>
+        <title>BLUEBRIM: RGB lights on a hat with bonus bluetooth</title>
+        <description>&lt;p&gt;I recently needed to look swanky for a 1920s themed Holiday/Christmas party and I asked myself: What’s the swankiest?&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../images/bluebrim_thinking.gif&quot; alt=&quot;gif of me thinking then light going off&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Of course! RGD LEDs on a hat! Controlled by Bluetooth! I shall call it… Project BLUE BRIM (because code names are awesome)&lt;/p&gt;
+
+&lt;h2 id=&quot;hardware&quot;&gt;Hardware&lt;/h2&gt;
+
+&lt;p&gt;A trip to the second hand store and a pair of sciscorrs to remove an unwanted bow later, I had myself a pin stripe hat like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../images/bluebrim_nolights.png&quot; alt=&quot;My hat before I started&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;next I had to acquire the rest of my materials as follows:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;1 &lt;a href=&quot;https://www.adafruit.com/products/659&quot;&gt;Adafruit Flora&lt;/a&gt; at room temperature&lt;/li&gt;
+  &lt;li&gt;1 &lt;a href=&quot;https://www.adafruit.com/products/2487&quot;&gt;Flora Bluefruit LE Module&lt;/a&gt; sifted&lt;/li&gt;
+  &lt;li&gt;a &lt;a href=&quot;https://www.adafruit.com/products/1376&quot;&gt;34 Neopixel long strip&lt;/a&gt; lightly buttered and cut down to size&lt;/li&gt;
+  &lt;li&gt;1 Lithium Ion Batter at 3.7v. I went with this &lt;a href=&quot;https://www.adafruit.com/products/328&quot;&gt;2500mAh model&lt;/a&gt;, but it’s a bit… overkill&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Assembly is relatively straightforward. The circuit diagram looks like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../images/bluebrim_circuitdiagram.jpg&quot; alt=&quot;Hand-drawn bespoke circuit diagram&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Basically, the Bluetooth module is connected to the serial pins on the Flora.
+Next, the Neopixel strip connected by attaching D6 to DIN, and VBATT to VIN (and GND to GND)&lt;/p&gt;
+
+&lt;p&gt;All soldered together it looks like this&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../images/bluebrim_hatinside.jpg&quot; alt=&quot;Inside of the hat&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I attached the LEDs to the hat by cutting a small whole with a sharp knife at the back of the hat large enough to fit the connectors.
+I then used the adhesive backing on the strip to attach it to the hat, and it seems to be holding well.
+On the top of the hat, I folded a few small strips of Gorilla tape in on itself and stuck those on the back of the flora and the ble module.
+Finally, I slipped the battery into the small inner brim, and taped it to the back side of the hat.
+When put together like this, it was actually really comfortable to wear.
+It’s a bit off balance, so I wouldn’t recommend trying any hat tricks.&lt;/p&gt;
+
+&lt;h2 id=&quot;software&quot;&gt;Software&lt;/h2&gt;
+
+&lt;p&gt;Writing the software for the hat was actually my favourite part.
+Step 1 was getting the bluetooth stuff wired up.
+Just like my &lt;a href=&quot;http://blog.tahnok.me/post/makerfaire-ottawa-rule-110&quot;&gt;last project&lt;/a&gt; I tried to write my own bluetooth socket reading &lt;a href=&quot;https://github.com/tahnok/BlueBrim/commit/dd293916fff1c27bf15fd0662f389c0247ae8b09&quot;&gt;from scratch&lt;/a&gt; but it was a bit too hacky for my liking.
+Instead, I used the packet parser that &lt;a href=&quot;https://github.com/adafruit/Adafruit_BluefruitLE_nRF51/blob/master/examples/neopixel_picker/packetParser.cpp&quot;&gt;adafruit provides&lt;/a&gt;, but I made sure to study the source closely to try and pick up some tricks for next time.
+Basically, it looks like using a few nested loops and a timeout is the way to go.&lt;/p&gt;
+
+&lt;p&gt;The next bit was my favourite favourite part: MAKING PRETTY LIGHT PATTERNS!&lt;/p&gt;
+
+&lt;p&gt;Since I was going to use the &lt;a href=&quot;https://play.google.com/store/apps/details?id=com.adafruit.bluefruit.le.connect&quot;&gt;Adafruit Bluefruit LE Connect App&lt;/a&gt; and they have a neat control pad with 8 buttons, I figured I would need 8 patterns.
+Because there were 2 sections, I decided that 4 patterns would be multi colour, and 4 patterns would use the current colour chosen with the colour picker part of the app.&lt;/p&gt;
+
+&lt;p&gt;The 4 multicolour patterns are:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/tahnok/BlueBrim/blob/master/colors.cpp#L41&quot;&gt;SPARKLE&lt;/a&gt; which has a single randomly coloured pixel.
+It looks like this:&lt;/p&gt;
+
+&lt;video loop=&quot;&quot; muted=&quot;&quot; width=&quot;75%&quot; controls=&quot;&quot; src=&quot;../images/bluebrim_sparkle.mp4&quot;&gt;&lt;/video&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/tahnok/BlueBrim/blob/master/colors.cpp#L47&quot;&gt;CYCLE&lt;/a&gt; which fades through 256 colours, with the whole strip lit with one colour at a time.&lt;/p&gt;
+
+&lt;video loop=&quot;&quot; muted=&quot;&quot; width=&quot;75%&quot; controls=&quot;&quot; src=&quot;../images/bluebrim_cycle.mp4&quot;&gt;&lt;/video&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/tahnok/BlueBrim/blob/master/colors.cpp#L55&quot;&gt;RAINBOW&lt;/a&gt; which has a continuously changing section of rainbow, where each pixel is a different colour&lt;/p&gt;
+
+&lt;video loop=&quot;&quot; muted=&quot;&quot; width=&quot;75%&quot; controls=&quot;&quot; src=&quot;../images/bluebrim_rainbow.mp4&quot;&gt;&lt;/video&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/tahnok/BlueBrim/blob/master/colors.cpp#L62&quot;&gt;PARTY&lt;/a&gt; where each pixel is a random colour&lt;/p&gt;
+
+&lt;video loop=&quot;&quot; muted=&quot;&quot; width=&quot;75%&quot; controls=&quot;&quot; src=&quot;../images/bluebrim_party.mp4&quot;&gt;&lt;/video&gt;
+
+&lt;p&gt;The 4 single colour patterns are:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/tahnok/BlueBrim/blob/master/colors.cpp#L70&quot;&gt;CYLON&lt;/a&gt; (or KITT depending on how old you are) has one pixel sliding back and forth across the front of the hat&lt;/p&gt;
+
+&lt;video loop=&quot;&quot; muted=&quot;&quot; width=&quot;75%&quot; controls=&quot;&quot; src=&quot;../images/bluebrim_cylon.mp4&quot;&gt;&lt;/video&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/tahnok/BlueBrim/blob/master/colors.cpp#L84&quot;&gt;SOLID&lt;/a&gt; it’s a solid colour. What more do you want?&lt;/p&gt;
+
+&lt;video loop=&quot;&quot; muted=&quot;&quot; width=&quot;75%&quot; controls=&quot;&quot; src=&quot;../images/bluebrim_solid.mp4&quot;&gt;&lt;/video&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/tahnok/BlueBrim/blob/master/colors.cpp#L91&quot;&gt;PULSE&lt;/a&gt; slowly changes the brightness from nothing, to full brightness, back down to nothing again&lt;/p&gt;
+
+&lt;video loop=&quot;&quot; muted=&quot;&quot; width=&quot;75%&quot; controls=&quot;&quot; src=&quot;../images/bluebrim_pulse.mp4&quot;&gt;&lt;/video&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/tahnok/BlueBrim/blob/master/colors.cpp#L106&quot;&gt;TWIST&lt;/a&gt; has a single pixel spinning around and around (and around (and around))&lt;/p&gt;
+
+&lt;video loop=&quot;&quot; muted=&quot;&quot; width=&quot;75%&quot; controls=&quot;&quot; src=&quot;../images/bluebrim_twist.mp4&quot;&gt;&lt;/video&gt;
+
+&lt;p&gt;You can see my source code in it’s entireity on my &lt;a href=&quot;https://github.com/tahnok/BlueBrim&quot;&gt;BlueBrim repo on Github&lt;/a&gt;, which uses some fancy multi file arduino to make it a bit easier to read.
+I hope you learned something reading this, as a thank you here is a picture of my dog wearing the miniature version of this&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../images/bluebrim_ada_hat.jpg&quot; alt=&quot;ada wearing a pretty hat&quot; /&gt;&lt;/p&gt;
+</description>
+        <pubDate>Mon, 14 Dec 2015 19:08:35 -0500</pubDate>
+        <link>http://blog.tahnok.me/post/bluebrim-rgb-lights-on-a-hat-with-bonus-bluetooth.html</link>
+        <guid isPermaLink="true">http://blog.tahnok.me/post/bluebrim-rgb-lights-on-a-hat-with-bonus-bluetooth.html</guid>
+        
+        
+      </item>
     
       <item>
         <title>Makerfaire Ottawa: Rule 110</title>
@@ -1107,23 +1210,6 @@ It would also be really cool if I could make it silent, since beeping is pretty 
         <pubDate>Sat, 28 Feb 2015 00:00:00 -0500</pubDate>
         <link>http://blog.tahnok.me/post/making-a-clock.html</link>
         <guid isPermaLink="true">http://blog.tahnok.me/post/making-a-clock.html</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>How to read a texbook</title>
-        <description>&lt;p&gt;&lt;img src=&quot;../images/w600_1d3087794299ca75d555e85d7c8ce1bf.jpg&quot; border=&quot;0&quot; width=&quot;236&quot; style=&quot;height:auto;&quot;&gt;&lt;img src=&quot;../images/w600_7d5fb7a62ced7936b1df39191d17ddea.jpg&quot; style=&quot;height: auto;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;So I really like learning things. It was one of my favourite parts of university (and high school before that), so I was really missing it when I started working. I tried for a while to read things when I felt the urge, but this rarely happened. I tried enrolling in a cousera course, but it felt a bit too much like the shitty parts of school, namely I can&#39;t move at my own pace.&lt;/p&gt;
-&lt;p&gt;My current system involves &lt;a href=&quot;https://www.beeminder.com/overview&quot;&gt;BEEMINDER&lt;/a&gt; which is a pretty amazing tool for people like me who suck at motivating themselves. The basic idea is that you commit to some goal and beeminder makes sure that you reach it by forcing you to do a minimum amount of your goal everyday. You can do more than your goal and let it ride for a few days, but eventually you&#39;ll have to do work. If you fail, you have to pay beeminder money.&lt;/p&gt;
-&lt;p&gt;I use it to make sure I do an hour a week worth of reading / working of each of my texbooks. Currently I am reading the &lt;a href=&quot;https://mitpress.mit.edu/sicp/full-text/book/book.html&quot;&gt;Structure and Interpretation of Programming Languages&lt;/a&gt; (available as a &lt;a href=&quot;https://github.com/sarabander/sicp-pdf&quot;&gt;PDF&lt;/a&gt; and the &lt;a href=&quot;http://cm.bell-labs.com/cm/cs/cbook/&quot;&gt;The C Programming Language&lt;/a&gt;. I wanted to make sure that I really got the fundamentals of computers. C and Scheme are both early programming languages with very different philosophies. (I know that just made some of you feel old)&lt;/p&gt;
-&lt;p&gt;As I go through these books, I am working through the exercises (You can follow my progress &lt;a href=&quot;https://github.com/tahnok/c-book&quot;&gt;here&lt;/a&gt; and &lt;a href=&quot;https://github.com/tahnok/sicp&quot;&gt;here&lt;/a&gt;). Writing actual code feels like the most important part of my attempts to learn so far. It&#39;s not enough (for me at least) to just read the information. I need to process it somehow, but I find working without direction (or feedback) tough. Thankfully you can find solutions to both SICP and the C programming language book on the web.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;../images/w600_355cd2bd4717ead88e1b3b3a5d6865b2.jpg&quot; style=&quot;max-width: 260px; max-height: 343px; top: 0px; left: 0px; height: auto;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;So far I&#39;ve only finished one book this way is &lt;a href=&quot;http://www.nostarch.com/hacking2.htm&quot;&gt;Hacking: the Art of Exploitation&lt;/a&gt; which I highly recommend, even if you don&#39;t want to hack anything.&lt;/p&gt;
-</description>
-        <pubDate>Fri, 13 Feb 2015 00:00:00 -0500</pubDate>
-        <link>http://blog.tahnok.me/post/how-to-read-a-texbook.html</link>
-        <guid isPermaLink="true">http://blog.tahnok.me/post/how-to-read-a-texbook.html</guid>
         
         
       </item>
