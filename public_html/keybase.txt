@@ -1,0 +1,68 @@
+==================================================================
+https://keybase.io/tahnok
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://blog.tahnok.me
+  * I am tahnok (https://keybase.io/tahnok) on keybase.
+  * I have a public key with fingerprint 55D2 E1EC 0FE1 A5F2 1229  525E D994 0D11 BE0B 2E72
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "eldest_kid": "01017f14e49cd12288f4c2c53a19ff67465583d1e1255829fe2ff61fec03bfdc722e0a",
+            "fingerprint": "55d2e1ec0fe1a5f21229525ed9940d11be0b2e72",
+            "host": "keybase.io",
+            "key_id": "d9940d11be0b2e72",
+            "kid": "01017f14e49cd12288f4c2c53a19ff67465583d1e1255829fe2ff61fec03bfdc722e0a",
+            "uid": "28fe85c7cacf1275586690f717281419",
+            "username": "tahnok"
+        },
+        "service": {
+            "hostname": "blog.tahnok.me",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1452994778,
+    "expire_in": 157680000,
+    "prev": "84d35c73c756270f79fd440e725fcf8946d739dbab93cd373fbf3caf0f0f01db",
+    "seqno": 3,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: GnuPG v2
+
+owGtUktoE0EYTmqtrVp8IY20oq5WFELcmd3N7AZEKSqiFw/SohDi7s5MuiRm42ab
+KBoftYJiffdBK4rgoa2pj4Pg41BaFSEGRQRfbbUKRRTaakGoYkVna715dOYwM/98
+3zf/9zGni6e4Ct2vG4rndM3wWe7cJ81V2fplfC+nmXgPF9jLRcjEQqKYJOxQxMBc
+gOMBDxAFIhEVHQMIZZmKOtQlQQUKpX4k+iVJFjAgALINVCiBrAwo0XlBo1hHEBJe
+5bwcNWJhYsUtI2YzWUnCkAAGogSoEoVMWZGgRLCiiDwGQCO8BgmCjFhtJhwGa05T
+E8RnmKzGDqGJ9v6B/89910zIQZkSWdKRruoUQMQofr/CUwQQlIEIFAeYIFZM3UkY
+2larY2aES3s5VksaOnFidXxM3mtRM+z7A/KxgpeLW6Zt6maU3VXbdjzgUO09cQeb
+IlpoUiWkGTHMYmSEJLEShhnjAoAhddtwZIEoQRYHQrKXI7vjhkVChoOQkF/m2XCe
+IUkmKYtYYF6EKh1JfoiYDYViUeRZfhLVqayIfowEBWuqpgg6FpBANSroKuWdCbDG
+OcZ2xUwuILA+1TDTTBjhmGrXWIRLTz/mLst3uQtdBVPzKltH813Ti2b//XUViwpd
+d4ebB++eMlcfHptfpGQWLgm2z/wOvp64hisjyZtcx6ma+pGTBVW35hVsuLMzU/Hx
+3IJpwbF0tmS2/bTledvgpo6NQij8yHNj/vnQoqNZPDU4txz1vGs4O74tlLse7eLv
+dbQ8U24fqTtRog98rj1zbPmZoG9F3/rju+tTNzxLF8KKnt5vr9r2RUvzPO/7LkRG
+l2rBVRs+9GTHry5D91O5n95upbM282vGofVbyj3pvgc/1v0Ye/Lm4eLuF3WRg2sv
+dOYb9ZdqX/Rv7X0ZSW3vH256PLSvdGZqzbzsnIbGHZtzweZ2eu5y/KIneWBlWSa/
+NNt0ZaR2aIvakn6LB0obZ+13/wY=
+=y9qP
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/tahnok
+
+==================================================================
+
