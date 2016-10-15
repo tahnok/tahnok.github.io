@@ -6,9 +6,44 @@
 </description>
     <link>http://blog.tahnok.me/</link>
     <atom:link href="http://blog.tahnok.me/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 22 Jul 2016 10:33:00 -0400</pubDate>
-    <lastBuildDate>Fri, 22 Jul 2016 10:33:00 -0400</lastBuildDate>
+    <pubDate>Sat, 15 Oct 2016 01:57:54 -0400</pubDate>
+    <lastBuildDate>Sat, 15 Oct 2016 01:57:54 -0400</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
+    
+      <item>
+        <title>Rule 110 Part 2: Now with Wearables!</title>
+        <description>&lt;p&gt;So tomorrow (I guess later today technically) is &lt;a href=&quot;http://makerfaireottawa.com/&quot;&gt;makerfaire&lt;/a&gt;! Yay!&lt;/p&gt;
+
+&lt;p&gt;I wanted to share some of the links to stuff for my project for people interested in learning more.&lt;/p&gt;
+
+&lt;h1 id=&quot;rule-110&quot;&gt;Rule 110&lt;/h1&gt;
+
+&lt;p&gt;The &lt;a href=&quot;https://en.wikipedia.org/wiki/Rule_110&quot;&gt;Wikipedia Page&lt;/a&gt; on Rule110 is &lt;em&gt;really&lt;/em&gt; good if you want to learn more&lt;/p&gt;
+
+&lt;h1 id=&quot;the-dress&quot;&gt;The Dress&lt;/h1&gt;
+
+&lt;p&gt;First off, here is the code running on the dress: &lt;a href=&quot;https://github.com/tahnok/rule110_dress&quot;&gt;https://github.com/tahnok/rule110_dress&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;And here’s the install link for the app to control the dress: &lt;a href=&quot;https://play.google.com/store/apps/details?id=me.tahnok.bluefruit.le.connect&quot;&gt;https://play.google.com/store/apps/details?id=me.tahnok.bluefruit.le.connect&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../images/rule110_control_qr.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The source code for that app is over here: &lt;a href=&quot;https://github.com/tahnok/Bluefruit_LE_Connect_Android&quot;&gt;https://github.com/tahnok/Bluefruit_LE_Connect_Android&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;the-hat&quot;&gt;The Hat&lt;/h1&gt;
+
+&lt;p&gt;Code for the hat is here: &lt;a href=&quot;https://github.com/tahnok/BlueBrim&quot;&gt;https://github.com/tahnok/BlueBrim&lt;/a&gt;, and my build notes / guide is &lt;a href=&quot;http://blog.tahnok.me/post/bluebrim-rgb-lights-on-a-hat-with-bonus-bluetooth.html&quot;&gt;the post before this one&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;the-weird-interactive-piece-thing&quot;&gt;The Weird Interactive Piece Thing&lt;/h1&gt;
+
+&lt;p&gt;I also have a &lt;a href=&quot;http://blog.tahnok.me/post/makerfaire-ottawa-rule-110.html&quot;&gt;post about last year&lt;/a&gt;. Source code is not in git (sorry)&lt;/p&gt;
+</description>
+        <pubDate>Sat, 15 Oct 2016 01:42:34 -0400</pubDate>
+        <link>http://blog.tahnok.me/post/rule-110-part-2-now-with-wearables.html</link>
+        <guid isPermaLink="true">http://blog.tahnok.me/post/rule-110-part-2-now-with-wearables.html</guid>
+        
+        
+      </item>
     
       <item>
         <title>BLUEBRIM: RGB lights on a hat with bonus bluetooth</title>
@@ -1171,45 +1206,6 @@ It would also be really cool if I could make it silent, since beeping is pretty 
         <pubDate>Sun, 15 Mar 2015 14:55:42 -0400</pubDate>
         <link>http://blog.tahnok.me/post/migrating-to-jekyll-for-blog-style-outpourings.html</link>
         <guid isPermaLink="true">http://blog.tahnok.me/post/migrating-to-jekyll-for-blog-style-outpourings.html</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>Making a clock</title>
-        <description>&lt;p&gt;Approximately 2 years ago I ordered an &lt;a href=&quot;https://www.sparkfun.com/products/10160&quot;&gt;RTC clock module&lt;/a&gt; from Sparkfun with the intention of building a clock of some kind.&lt;/p&gt;
-&lt;p&gt;FINALLY, I&#39;ve gotten around to hooking everything up! Here&#39;s a picture of my amazing setup (if you wiring things for a living, please don&#39;t kill me)&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;../images/w600_0af6afc4018ec642790f0fcba6b248dd.jpg&quot; width=&quot;581&quot; style=&quot;height:auto;&quot;&gt;&lt;img src=&quot;../images/w600_1dac1694da3c5fc7a23fa730ec211b3e.jpg&quot; width=&quot;581&quot; style=&quot;height:auto;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;The goal is to help my wake up in the morning by turning on a SAD lamp. If you&#39;ve ever seen one of these faux sunlight lamps before you will wonder why I&#39;m doing this. If you have seen one of these, you&#39;ll understand because these things are REALLY FREAKING BRIGHT.&lt;/p&gt;
-&lt;h2&gt;PARTS&lt;/h2&gt;
-&lt;p&gt;Here&#39;s the part list&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Arduino Uno&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/10160&quot;&gt;DeadOn RTC&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/337&quot;&gt;Coin cell battery&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://www.adafruit.com/products/399&quot;&gt;RGB LCD 16x2&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://www.adafruit.com/products/268&quot;&gt;Powerswitch Tail&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Getting all these parts together was actually surprisingly difficult. I ordered the RTC, but I didn&#39;t order a battery since I thought I could find one locally. I was wrong, so I ordered one online. Don&#39;t do that unless you have lots of time to wait. It took like 2 months to ship that tiny coin cell battery across the border to me here in Canada since it has lithium in it.&lt;/p&gt;
-&lt;p&gt;The RGB LCD was actually part of a kit from Adafruit which is all supposed to be controllable over I2C. I assembled almost all of the kit successfully, but the last piece I put on backwards. And of course, it was the 40pin chip which has proven to be resistant to my efforts to desolder it. &lt;em&gt;sigh&lt;/em&gt;. Thankfully I was able to salvage the LCD part.&lt;/p&gt;
-&lt;h2&gt;ASSEMBLY&lt;/h2&gt;
-&lt;p&gt;So the first thing I tried to do was get the the RTC module working. This proved to be quite frustrating. I wired everything up, but I was getting garbage data back from the module. It was counting up (sorta), but random extra bits were getting set and unset. So it would go 0:0:59, 0:1:0, 1:1:1, 0:1:2. WTF. Eventually it turned out that the problem was the way I was grounding the module. I&#39;m not entirely sure what was happening, but eventually I got the right wire connected to the ground on the arduino, bypassing the breadboard.&lt;/p&gt;
-&lt;p&gt;Everything else was relatively easy to set up. Adafruit has an excellent guide on their &lt;a href=&quot;https://learn.adafruit.com/character-lcds/wiring-a-character-lcd&quot;&gt;LCD Shield&lt;/a&gt;. The powerswitch tail  is controlled by setting a single pin high or low.&lt;/p&gt;
-&lt;h2&gt;CODE&lt;/h2&gt;
-&lt;p&gt;Here&#39;s the whole thing below. Most of the code for interacting over SPI to the RTC module is from &lt;a href=&quot;https://github.com/sparkfun/DeadOn_RTC/blob/v1.1/Libraries/DeadOn_RTC/examples/set_and_read_time/set_and_read_time.ino&quot;&gt;Sparkfun&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;
-&lt;noscript&gt;&lt;pre&gt;400: Invalid request
-&lt;/pre&gt;&lt;/noscript&gt;&lt;script src=&quot;https://gist.github.com/c2e2afb76edde4905fcc.js&quot;&gt; &lt;/script&gt;
-&lt;/p&gt;
-&lt;p&gt;I had some fun messing around with sprinf (it&#39;s like printf, but it fills a char array!) You can set the alarm time by modifying the values in the Alarm int array.&lt;/p&gt;
-&lt;h2&gt;BUGS&lt;/h2&gt;
-&lt;p&gt;For some reason there are 2 garbage characters left on the LCD after the end of my screen. I &quot;fixed&quot; this by just appending more space characters than will fit in a 16 char line.&lt;/p&gt;
-&lt;h2&gt;FUTURE WORK&lt;/h2&gt;
-&lt;p&gt;It would be nice to have multiple alarm&lt;/p&gt;
-</description>
-        <pubDate>Sat, 28 Feb 2015 00:00:00 -0500</pubDate>
-        <link>http://blog.tahnok.me/post/making-a-clock.html</link>
-        <guid isPermaLink="true">http://blog.tahnok.me/post/making-a-clock.html</guid>
         
         
       </item>
