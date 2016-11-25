@@ -6,9 +6,50 @@
 </description>
     <link>http://blog.tahnok.me/</link>
     <atom:link href="http://blog.tahnok.me/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 24 Nov 2016 21:36:11 -0500</pubDate>
-    <lastBuildDate>Thu, 24 Nov 2016 21:36:11 -0500</lastBuildDate>
+    <pubDate>Fri, 25 Nov 2016 09:43:32 -0500</pubDate>
+    <lastBuildDate>Fri, 25 Nov 2016 09:43:32 -0500</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
+    
+      <item>
+        <title>Helical and monopole antennas</title>
+        <description>&lt;p&gt;Today’s reseach: helical and monopole antennas!&lt;/p&gt;
+
+&lt;p&gt;One of the things you can do with radios (and without needing a license) is receiving NOAA weather satelite images!
+Yes, that’s right, you can LISTEN TO SPACE MACHINES. Another way to look at it is free selfies!&lt;/p&gt;
+
+&lt;p&gt;Anyway I was reading this article (&lt;a href=&quot;http://www.alternet.us.com/?p=1461&quot;&gt;Helical Quad Antenna for Weather Satellites&lt;/a&gt;) which walks through the process of building a better antenna for receiving these satellites.
+These NOAA satellites transmit in the VHF (~140MHz / 2m) range so the antenna is tuned for that.
+From a quick skim through it seems a bit more involved than what I need in my exploratory phase but the author does mention that they started with “a 1/4 wave whip with a 4-wire ground plane” so I started looking into that.&lt;/p&gt;
+
+&lt;p&gt;This led me to the wikipedia article on &lt;a href=&quot;https://en.wikipedia.org/wiki/Whip_antenna&quot;&gt;Whip antennas&lt;/a&gt; which led me to the wikipedia article on &lt;a href=&quot;https://en.wikipedia.org/wiki/Monopole_antenna&quot;&gt;Monopole antennas&lt;/a&gt; which [ERR: WIKIPEDIA ARTICLE RECURSION LIMIT REACHED]&lt;/p&gt;
+
+&lt;p&gt;Reading through that article led quite a few things to click in my head.
+One thing that I hadn’t quite grokked properly was the relation between the 2 connection points on radio connectors like SMA and the parts of antenna.
+A monopole antenna has one of the connectors attached to the thing that most people think of as the antenna.
+That is, the long wirey sticky-outy bit.
+The other connection is either attached to the ground of whatever the circuit is (as in a cellphone) OR earth ground via some spike or something OR to a “ground plane”.
+A ground plane can consist of some kind of solid metal or mesh sheet.
+It can also consist of a another series of wires, which is what the “4-wire ground plane” was referring to earlier.&lt;/p&gt;
+
+&lt;p&gt;Next up I was reading about &lt;a href=&quot;https://en.wikipedia.org/wiki/Helical_antenna&quot;&gt;Helical antennas&lt;/a&gt;.
+These ones look much goofier. For example:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Hammer_Ace_SATCOM_Antenna.jpg/640px-Hammer_Ace_SATCOM_Antenna.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Helical antennas have 2 modes.
+If the circumference of the helix is a lot less than the wavelenght you want to tune to, it acts just like a monopole (sort of).
+If the circumference is close to the wavelenth you can send/receive &lt;em&gt;polarized&lt;/em&gt; waves.
+I don’t quite know exactly what that means, but I do know that satelittes transmit polarized signals and that you need a polarized antenna to pick them up properly.&lt;/p&gt;
+
+&lt;p&gt;Now, for my purposes I care less about getting a great signal and a lot more about just getting a signal.
+I think I will spend some time looking into building myself a 2m/VHF/140MHz monopole.&lt;/p&gt;
+</description>
+        <pubDate>Fri, 25 Nov 2016 09:19:06 -0500</pubDate>
+        <link>http://blog.tahnok.me/post/helical-and-monopole-antennas.html</link>
+        <guid isPermaLink="true">http://blog.tahnok.me/post/helical-and-monopole-antennas.html</guid>
+        
+        
+      </item>
     
       <item>
         <title>Antenna building research: bazookas</title>
@@ -1152,34 +1193,6 @@ It would also be really cool if I could make it silent, since beeping is pretty 
         <pubDate>Tue, 14 Apr 2015 18:05:02 -0400</pubDate>
         <link>http://blog.tahnok.me/post/homestuck-or-why-fandoms-are-fun.html</link>
         <guid isPermaLink="true">http://blog.tahnok.me/post/homestuck-or-why-fandoms-are-fun.html</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>Dabbling with KERNEL HACKING</title>
-        <description>&lt;p&gt;&lt;a href=&quot;https://upload.wikimedia.org/wikipedia/commons/8/86/Eudyptula_minor_-Canberra_Zoo,_Australia-8b.jpg&quot;&gt;&lt;img src=&quot;/images/eudyptula.jpg&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;So I have this fascination with understanding how things work and it has had the unfourunate of becoming interested in &lt;strong&gt;THE LINUX KERNEL&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;I’ve seen some cool (and excited) posts from &lt;a href=&quot;http://jvns.ca/blog/2014/09/18/you-can-be-a-kernel-hacker/&quot;&gt;Julia&lt;/a&gt; &lt;a href=&quot;http://jvns.ca/blog/2013/10/08/day-6-i-wrote-a-rootkit/&quot;&gt;Evans&lt;/a&gt; &lt;a href=&quot;http://jvns.ca/blog/2013/10/07/day-5-i-wrote-a-kernel-module/&quot;&gt;about&lt;/a&gt; &lt;a href=&quot;http://jvns.ca/blog/2014/01/04/4-paths-to-being-a-kernel-hacker/&quot;&gt;the&lt;/a&gt; &lt;a href=&quot;I ran out of links&quot;&gt;topic&lt;/a&gt;! It got me excited, but more importantly it made the topic seems significantly less scary and approachable. I’ve been trying to learn C for a while now because so much important computer code is written in it.&lt;/p&gt;
-
-&lt;p&gt;To that end, one of the blog posts linked above mentioned the &lt;a href=&quot;http://eudyptula-challenge.org/&quot;&gt;EUDYPTULA CHALLENGE&lt;/a&gt; which sounds exciting! (side note: &lt;a href=&quot;https://en.wikipedia.org/wiki/Eudyptula&quot;&gt;eudpytpula&lt;/a&gt; is a GENUS of penguins) The gist of the challenge is that you are presented with a series of tasks that teach you more and more about kernels.&lt;/p&gt;
-
-&lt;p&gt;I’ve completed task 1! I would share the code with you but I’ve taken a VOW OF SILENCE so that each new recruit can work through the tasks on their own. Instead I will share some of the useful kernel resources I’ve found so far.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.tldp.org/LDP/lkmpg/2.6/html/&quot;&gt;The Linux Kernel Module Programming Guide&lt;/a&gt;: Pretty good guide to kernel modules, although it is for a much older kernel. Maybe that will be an issue at one point?&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://lxr.free-electrons.com/source/&quot;&gt;Linux Cross Reference&lt;/a&gt; pretty useful so far&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The biggest challenge I’ve faced so far has been getting Thunderbird to send email in a format that’s comprehensible to the little script that is is the Eudpyptula. Turns out email is a crufty old protocol.&lt;/p&gt;
-
-&lt;p&gt;Soon, I shall be MASTER OF THE LINUX KERNEL (I hope)&lt;/p&gt;
-</description>
-        <pubDate>Mon, 30 Mar 2015 20:14:26 -0400</pubDate>
-        <link>http://blog.tahnok.me/post/dabbling-with-kernel-hacking.html</link>
-        <guid isPermaLink="true">http://blog.tahnok.me/post/dabbling-with-kernel-hacking.html</guid>
         
         
       </item>
