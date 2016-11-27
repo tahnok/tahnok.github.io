@@ -6,9 +6,37 @@
 </description>
     <link>http://blog.tahnok.me/</link>
     <atom:link href="http://blog.tahnok.me/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 26 Nov 2016 22:31:10 -0500</pubDate>
-    <lastBuildDate>Sat, 26 Nov 2016 22:31:10 -0500</lastBuildDate>
+    <pubDate>Sat, 26 Nov 2016 22:55:27 -0500</pubDate>
+    <lastBuildDate>Sat, 26 Nov 2016 22:55:27 -0500</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
+    
+      <item>
+        <title>CJU Antenna</title>
+        <description>&lt;p&gt;Ok, I know I just posted about Moxon antennas, but doing an image search for moxon antennas led me to the CJU antenna.&lt;/p&gt;
+
+&lt;p&gt;Apparently CJU stands for Canary Jail Umbrella because the author of the article who made it popular constructed it out of the tubing used in canary cages (or jails) and wire from a broken antenna.
+It’s designed for use talking to satellites which I am interested in, and it’s very small and looks pretty easy to build.&lt;/p&gt;
+
+&lt;p&gt;I think it’s a 2 element yagi optimized for 70cm/UHF, and it’s also known as an &lt;a href=&quot;http://www.ea4cax.com/paginaea4cyq/Antenaioio/ioioingles.pdf&quot;&gt;IOio&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;It’s constructed with a rectangle of wire, and a length of wire mounted to a small boom.
+The rectangular element is driven, and the length of wire is the parasitic/reflector element.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;LINKS&lt;/em&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.ea4cax.com/paginaea4cyq/cju/cjuingles.pdf&quot;&gt;THE ‘CJU’ ANTENNA&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.transmission1.net/viewtopic.php?t=17914#p147086&quot;&gt;CJU Antenna&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.ravingaboutradio.com/CJU-70cm-Antenna-Quick-and-Simple&quot;&gt;CJU 70cm Antenna Quick and Simple&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.amsat.org/?page_id=2144&quot;&gt;Station and Operating Hints&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sat, 26 Nov 2016 22:48:50 -0500</pubDate>
+        <link>http://blog.tahnok.me/post/cju-antenna.html</link>
+        <guid isPermaLink="true">http://blog.tahnok.me/post/cju-antenna.html</guid>
+        
+        
+      </item>
     
       <item>
         <title>Moxon antennas</title>
@@ -1150,51 +1178,6 @@ Here is a &lt;a href=&quot;https://github.com/tahnok/Blueboxer/tree/master/app/s
         <pubDate>Thu, 04 Jun 2015 18:32:30 -0400</pubDate>
         <link>http://blog.tahnok.me/post/blueboxer-phone-phreaking-for-phun.html</link>
         <guid isPermaLink="true">http://blog.tahnok.me/post/blueboxer-phone-phreaking-for-phun.html</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>Building a Watch: Part 1</title>
-        <description>&lt;p&gt;I want to build myself a watch.&lt;/p&gt;
-
-&lt;p&gt;One of my goals this year is to learn more electronics, and the best way I’ve found to learn is often to have a project. For example, the &lt;a href=&quot;http://blog.tahnok.me/post/how-to-propose-to-an-engineer&quot;&gt;heart box&lt;/a&gt; taught me a bunch about laser cutting and tolerances. I think a watch will be a good project because:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;I currently don’t have one, but I want one&lt;/li&gt;
-  &lt;li&gt;It has interesting size constraints (imposing limits is fun!)&lt;/li&gt;
-  &lt;li&gt;It’ll be battery powered&lt;/li&gt;
-  &lt;li&gt;Lots of room for improvements&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Bonus: It looks like I will probably have to make a circuit board for this! I have 0 clue on how to go about doing that yet, but this should give me a pretty good excuse.&lt;/p&gt;
-
-&lt;h2 id=&quot;feature-wish-list&quot;&gt;Feature Wish List&lt;/h2&gt;
-
-&lt;p&gt;I want the watch to have normal watch functions like keeping the time, having alarms and preferrably a stopwatch / timer mode.
-It would also be really cool if I could make it silent, since beeping is pretty annoying. Instead, I think I should incorporate a vibration motor.&lt;/p&gt;
-
-&lt;p&gt;Eventually, I would like to have it connect to my phone / computer so it will need to have bluetooth at some point.&lt;/p&gt;
-
-&lt;p&gt;Finally, it needs to look good. That means, it can’t be a 20cm tall monstrosity covered in electrical tape.&lt;/p&gt;
-
-&lt;h2 id=&quot;potential-parts&quot;&gt;Potential Parts&lt;/h2&gt;
-
-&lt;p&gt;I’m not entirely sure which parts I will choose yet. I’ve been drawing heavily from &lt;a href=&quot;http://oswatch.org/&quot;&gt;The open source watch&lt;/a&gt; to see how such a thing &lt;em&gt;can&lt;/em&gt; be made. They use a &lt;a href=&quot;https://www.microduino.cc/module/view?id=53d7037cb6c69d00003ede53&quot;&gt;microduino core+&lt;/a&gt; which is really cool and super tiny! I have the most experience with Arduino (and thus AVR) chips so I will probably stick with that, although now that I think about it, it might be cool to use a Propeller because it can multi-task. The other option is to use something like the Trinket Pro (since it has a nice battery board addon) but it may prove to be too big.&lt;/p&gt;
-
-&lt;p&gt;Next, I have to choose a display. After lots of googling I found the &lt;a href=&quot;https://www.adafruit.com/product/1393&quot;&gt;Sharp Memory Display&lt;/a&gt; which is a cool mix of e-ink and LCD. (fun fact: it’s the &lt;a href=&quot;https://www.ifixit.com/Teardown/Pebble+Teardown/13319&quot;&gt;display in the pebble&lt;/a&gt;). I don’t care much about color, so I think I will go with it despite the memory restrictions it will impose on the build.&lt;/p&gt;
-
-&lt;p&gt;I don’t yet know what battery I will use, probably something from Adafruit. I’m trying to choose between a 150 mAh and a 500 mAh one.&lt;/p&gt;
-
-&lt;p&gt;I &lt;em&gt;think&lt;/em&gt; I need an RTC module, but it’s possible that I can get away with keeping track of time without it, and just relying on paired phone to deliver accurate time.&lt;/p&gt;
-
-&lt;h2 id=&quot;next-steps&quot;&gt;Next Steps&lt;/h2&gt;
-
-&lt;p&gt;I think I will order a bunch of parts to bread board this out. I need to test a bunch of things like power draw. Also probalby lots of yelling at my computer when I can’t figure out how to build a bread board.&lt;/p&gt;
-</description>
-        <pubDate>Fri, 01 May 2015 20:35:30 -0400</pubDate>
-        <link>http://blog.tahnok.me/post/building-a-watch-part-1.html</link>
-        <guid isPermaLink="true">http://blog.tahnok.me/post/building-a-watch-part-1.html</guid>
         
         
       </item>
