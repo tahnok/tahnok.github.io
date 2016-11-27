@@ -16,6 +16,7 @@ It's also a directional antenna, which means that it has better reception when i
 If I can find a good souce of solid copper wires, then I'm definetly going to consider making this antenna.
 
 *Links*
+
  - [WB5CXC 2 Meter Vertical Moxon](http://www.moxonantennaproject.com/wb5cxc/wb5cxc.htm)
  - [IZ8HHQ'S 2M MOXON](http://www.moxonantennaproject.com/iz8hhq/IZ8HHQ.htm)
  - [EP3PK'S 2 Meter UN Moxon](http://www.moxonantennaproject.com/EP3PK/ep3pk.htm)

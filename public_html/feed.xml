@@ -6,8 +6,8 @@
 </description>
     <link>http://blog.tahnok.me/</link>
     <atom:link href="http://blog.tahnok.me/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 26 Nov 2016 22:55:27 -0500</pubDate>
-    <lastBuildDate>Sat, 26 Nov 2016 22:55:27 -0500</lastBuildDate>
+    <pubDate>Sat, 26 Nov 2016 22:58:51 -0500</pubDate>
+    <lastBuildDate>Sat, 26 Nov 2016 22:58:51 -0500</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
     
       <item>
@@ -51,10 +51,13 @@ It’s also a directional antenna, which means that it has better reception when
 
 &lt;p&gt;If I can find a good souce of solid copper wires, then I’m definetly going to consider making this antenna.&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;Links&lt;/em&gt;
- - &lt;a href=&quot;http://www.moxonantennaproject.com/wb5cxc/wb5cxc.htm&quot;&gt;WB5CXC 2 Meter Vertical Moxon&lt;/a&gt;
- - &lt;a href=&quot;http://www.moxonantennaproject.com/iz8hhq/IZ8HHQ.htm&quot;&gt;IZ8HHQ’S 2M MOXON&lt;/a&gt;
- - &lt;a href=&quot;http://www.moxonantennaproject.com/EP3PK/ep3pk.htm&quot;&gt;EP3PK’S 2 Meter UN Moxon&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Links&lt;/em&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.moxonantennaproject.com/wb5cxc/wb5cxc.htm&quot;&gt;WB5CXC 2 Meter Vertical Moxon&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.moxonantennaproject.com/iz8hhq/IZ8HHQ.htm&quot;&gt;IZ8HHQ’S 2M MOXON&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.moxonantennaproject.com/EP3PK/ep3pk.htm&quot;&gt;EP3PK’S 2 Meter UN Moxon&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 </description>
         <pubDate>Sat, 26 Nov 2016 22:11:00 -0500</pubDate>
         <link>http://blog.tahnok.me/post/moxon-antennas.html</link>
