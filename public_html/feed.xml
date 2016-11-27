@@ -6,9 +6,34 @@
 </description>
     <link>http://blog.tahnok.me/</link>
     <atom:link href="http://blog.tahnok.me/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 25 Nov 2016 09:43:32 -0500</pubDate>
-    <lastBuildDate>Fri, 25 Nov 2016 09:43:32 -0500</lastBuildDate>
+    <pubDate>Sat, 26 Nov 2016 22:31:10 -0500</pubDate>
+    <lastBuildDate>Sat, 26 Nov 2016 22:31:10 -0500</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
+    
+      <item>
+        <title>Moxon antennas</title>
+        <description>&lt;p&gt;In my search for easy to build antennas I can use in the VHF/UHF frequency range I have stumbled across &lt;a href=&quot;http://www.moxonantennaproject.com/&quot;&gt;the moxon antenna&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The antenna was mentioned in passing in Groundwave, the &lt;a href=&quot;http://www.oarc.net/newsletter/&quot;&gt;OARC’s newsletter&lt;/a&gt;.
+It looks like the antenna can be constructed with 2 pieces of wire cut to appropriate lengths for your wave length.
+The wires are laid out in a rectangle with a small gap between them.
+Only one of the antennas is “active”, which is to say only one wire has feedline attached to it.
+The other wire is “parasitic”, meaning that it’s important for magical RF reasons (waves hands mysteriously).
+It’s also a directional antenna, which means that it has better reception when it’s “pointed” at the source&lt;/p&gt;
+
+&lt;p&gt;If I can find a good souce of solid copper wires, then I’m definetly going to consider making this antenna.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Links&lt;/em&gt;
+ - &lt;a href=&quot;http://www.moxonantennaproject.com/wb5cxc/wb5cxc.htm&quot;&gt;WB5CXC 2 Meter Vertical Moxon&lt;/a&gt;
+ - &lt;a href=&quot;http://www.moxonantennaproject.com/iz8hhq/IZ8HHQ.htm&quot;&gt;IZ8HHQ’S 2M MOXON&lt;/a&gt;
+ - &lt;a href=&quot;http://www.moxonantennaproject.com/EP3PK/ep3pk.htm&quot;&gt;EP3PK’S 2 Meter UN Moxon&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Sat, 26 Nov 2016 22:11:00 -0500</pubDate>
+        <link>http://blog.tahnok.me/post/moxon-antennas.html</link>
+        <guid isPermaLink="true">http://blog.tahnok.me/post/moxon-antennas.html</guid>
+        
+        
+      </item>
     
       <item>
         <title>Helical and monopole antennas</title>
@@ -1170,29 +1195,6 @@ It would also be really cool if I could make it silent, since beeping is pretty 
         <pubDate>Fri, 01 May 2015 20:35:30 -0400</pubDate>
         <link>http://blog.tahnok.me/post/building-a-watch-part-1.html</link>
         <guid isPermaLink="true">http://blog.tahnok.me/post/building-a-watch-part-1.html</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>HOMESTUCK or why fandoms are fun!</title>
-        <description>&lt;p&gt;&lt;img src=&quot;http://cdn.mspaintadventures.com/storyfiles/hs2/00001.gif&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;So recently I’ve been reading through a webcomic called Homestuck, which I totally recommend if and only if you have a lot of free time and enjoy silly computer jokes. Sadly it’s a bit tricky to get into. Also it’s stupendously long like &lt;a href=&quot;http://readmspa.org/stats/&quot;&gt;“251% the size of the Lord of the Rings”&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;TIPS ON GETTING STARTED:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Click on http://www.mspaintadventures.com/?s=6&lt;/li&gt;
-  &lt;li&gt;Ignore some of the weird bits like that the fact the website is called MS paint adventure. The author (andrew hussie) has a few other comics&lt;/li&gt;
-  &lt;li&gt;keep going&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Part of the fun is the jokes/puns, but also the crazily complicated plot. Like, it’s sufficiently weird and wonky that I have to consult the &lt;a href=&quot;http://mspaintadventures.wikia.com/wiki/Homestuck&quot;&gt;extensively curated fan wiki&lt;/a&gt; on a fairly regular basis.&lt;/p&gt;
-</description>
-        <pubDate>Tue, 14 Apr 2015 18:05:02 -0400</pubDate>
-        <link>http://blog.tahnok.me/post/homestuck-or-why-fandoms-are-fun.html</link>
-        <guid isPermaLink="true">http://blog.tahnok.me/post/homestuck-or-why-fandoms-are-fun.html</guid>
         
         
       </item>

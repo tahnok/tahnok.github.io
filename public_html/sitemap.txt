@@ -4,6 +4,7 @@ http://blog.tahnok.me/index.html
 http://blog.tahnok.me/css/main.css
 http://blog.tahnok.me/sitemap.txt
 
+http://blog.tahnok.me/post/moxon-antennas.html
 http://blog.tahnok.me/post/helical-and-monopole-antennas.html
 http://blog.tahnok.me/post/antenna-building-research.html
 http://blog.tahnok.me/post/rule-110-part-2-now-with-wearables.html
