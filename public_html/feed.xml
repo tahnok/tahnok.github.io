@@ -6,9 +6,70 @@
 </description>
     <link>http://blog.tahnok.me/</link>
     <atom:link href="http://blog.tahnok.me/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 26 Nov 2016 22:58:51 -0500</pubDate>
-    <lastBuildDate>Sat, 26 Nov 2016 22:58:51 -0500</lastBuildDate>
+    <pubDate>Mon, 10 Apr 2017 11:47:30 -0400</pubDate>
+    <lastBuildDate>Mon, 10 Apr 2017 11:47:30 -0400</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
+    
+      <item>
+        <title>plans for a NOAA weather satellite antenna</title>
+        <description>&lt;p&gt;One of the things I &lt;em&gt;really&lt;/em&gt; want to do with ham radio is listen to SPACE MACHINES (a.k.a satellites).
+Technically you don’t need a ham radio license to do this, but I only learned about it after getting mine.&lt;/p&gt;
+
+&lt;p&gt;Some of the most interesting looking satellites that anyone can receive are NOAA weather satelittes.
+These satellites continuously transmit LIVE IMAGES OF THE EARTH.
+As far as I can tell there are 3 in orbit: NOAA-15, NOAA-18 and NOAA-19.
+All three of these broadcast black and white images of the globe using &lt;a href=&quot;https://en.wikipedia.org/wiki/Automatic_picture_transmission&quot;&gt;Automatic Picture Transmission&lt;/a&gt;.
+They transmit on frequencies around 137 MHz, which can be received using the dirt cheap RTL-SDR.
+The transmissions can (apparently) be decoded with &lt;a href=&quot;www.wxtoimg.com&quot;&gt;wxtoimg&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The only thing that I am currently missing is some kind of antenna.&lt;/p&gt;
+
+&lt;p&gt;I’ve done a bunch of research to determine what kind antennas are suitable and I’ve come up with a (not very) short list:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;QFH (Quadrifilar helicoidal antenna) or Helical Quad
+    &lt;ul&gt;
+      &lt;li&gt;https://umarca.blogspot.ca/2013/05/project-8-turnstile-antenna-for-weather.html&lt;/li&gt;
+      &lt;li&gt;http://jcoppens.com/ant/qfh/calc.en.php&lt;/li&gt;
+      &lt;li&gt;http://www.housedillon.com/?p=1461&lt;/li&gt;
+      &lt;li&gt;http://www.instructables.com/id/NOAA-Satellite-Signals-with-a-PVC-QFH-Antenna-and-/&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Cross Dipole or Turnstile
+    &lt;ul&gt;
+      &lt;li&gt;http://www.thornett.net/Rosliston_Archive_2009-11/html/cross_dipole_antenna.html&lt;/li&gt;
+      &lt;li&gt;https://imgur.com/a/qczZW&lt;/li&gt;
+      &lt;li&gt;https://www.digitalham.co.uk/turnstile-antenna/&lt;/li&gt;
+      &lt;li&gt;https://umarca.blogspot.ca/2013/05/project-8-turnstile-antenna-for-weather.html&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;IOio
+    &lt;ul&gt;
+      &lt;li&gt;http://www.ea4cax.com/paginaea4cyq/Antenaioio/ioioingles.pdf&lt;/li&gt;
+      &lt;li&gt;http://www.kj6akq.com/blog/2010/02/building-an-ioio-satellite-antenna/&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Yaggi-Uda
+    &lt;ul&gt;
+      &lt;li&gt;http://ve2zaz.net/Arrow_Ant/Arrow_Style_Ant.htm&lt;/li&gt;
+      &lt;li&gt;http://www.fredspinner.com/W0FMS/CheapYagi/vjbcy.html&lt;/li&gt;
+      &lt;li&gt;https://web.archive.org/web/20110102162129/http://www.amsat.org/amsat-new/information/faqs/crow/JulAug06AmsatJournal.pdf (444MHz)&lt;/li&gt;
+      &lt;li&gt;https://web.archive.org/web/20110102161932/http://www.amsat.org/amsat-new/information/faqs/crow/SepOct06AmsatJournal.pdf (146MHz)&lt;/li&gt;
+      &lt;li&gt;http://neodux.com/?view=story.php&amp;amp;post_id=451&lt;/li&gt;
+      &lt;li&gt;http://makezine.com/projects/make-24/homemade-yagi-antenna/&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I’ve been working on the cross dipole since it seems to be the simplest to construct and deploy.
+Will probably end up building a Yaggi-uda at some point as well for dat sweet gain, but it’s too directional if I want to set up a NOAA reception station permananently somewhere.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 10 Apr 2017 20:26:24 -0400</pubDate>
+        <link>http://blog.tahnok.me/post/plans-for-a-noaa-weather-satellite-antenna.html</link>
+        <guid isPermaLink="true">http://blog.tahnok.me/post/plans-for-a-noaa-weather-satellite-antenna.html</guid>
+        
+        
+      </item>
     
       <item>
         <title>CJU Antenna</title>
@@ -1003,184 +1064,6 @@ I am still waiting on the parts to populate the board to arrive, but I’ve cert
         <pubDate>Sat, 20 Jun 2015 21:16:34 -0400</pubDate>
         <link>http://blog.tahnok.me/post/making-pcb-not-pcp.html</link>
         <guid isPermaLink="true">http://blog.tahnok.me/post/making-pcb-not-pcp.html</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>Blueboxer: phone phreaking for phun</title>
-        <description>&lt;p&gt;&lt;img src=&quot;../images/blueboxer.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;I’ve recently becoming super interested in &lt;a href=&quot;https://en.wikipedia.org/wiki/Blue_box&quot;&gt;Blue boxes&lt;/a&gt;. No, I don’t mean Tardises (Tardii? Tardeese?) I mean one of the primary tools of Phone Phreaks during the 70s, 80s and early 90s. Apparently they became quiet popular after an &lt;a href=&quot;http://www.lospadres.info/thorg/lbb.html&quot;&gt;article in Esquire&lt;/a&gt; in 1971.&lt;/p&gt;
-
-&lt;p&gt;Blue boxes worked because the telephone companies made a huge mistake and used in-band control signals. That is to say, all the messages that accounting or routing offices used to talk to one and other were transmitted in the same band (and in the same way) as people’s voices. This meant that people could trick telephone equipment by pretending to be other phone equipment. Most famously, you could play a tone at 2600Hz and trick the receiving end of a phone call into thinking you had hung up without actually hanging up. This left the caller able to make new calls, while the billing system thought the original call was still going on. If you called a 1-800 (or some other toll free number) that meant you could talk for free!&lt;/p&gt;
-
-&lt;p&gt;These days signaling of this sort happens out of band, so the study and use of blue boxes these days is mostly academic / nostalgic. Although, I did recently find &lt;a href=&quot;http://www.projectmf.org/&quot;&gt;Project MF&lt;/a&gt; which is a VOIP recreation of the old phone networks. If only I had a blue box…&lt;/p&gt;
-
-&lt;p&gt;Which brings me to the main point of this blog post. I’ve started &lt;a href=&quot;https://github.com/tahnok/Blueboxer&quot;&gt;building a software blue box for android&lt;/a&gt;. I think it might be broken right no, but it’s been an interesting excuse to learn RxJava and to have an excuse to learn exactly how blueboxes worked.&lt;/p&gt;
-
-&lt;p&gt;It turns out that the tones you need to mess with the system are called &lt;strong&gt;Operator Dialed Multi Frequency (MF) Tones&lt;/strong&gt;, or just MF tones. As you might guess, they are made up of multiple frequencies, specificially 2 tones that are either 700Hz, 900Hz, 1100Hz, 1300Hz, 1500Hz or 1700Hz. Here’s a table (from wikipedia that breaks down the combinations)&lt;/p&gt;
-
-&lt;table class=&quot;wikitable&quot;&gt;
-&lt;tbody&gt;&lt;tr&gt;
-&lt;td colspan=&quot;7&quot; align=&quot;center&quot;&gt;Operator (blue box) dialed MF tones&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;th align=&quot;center&quot;&gt;Code&lt;/th&gt;
-&lt;th align=&quot;center&quot;&gt;700&amp;nbsp;Hz&lt;/th&gt;
-&lt;th align=&quot;center&quot;&gt;900&amp;nbsp;Hz&lt;/th&gt;
-&lt;th align=&quot;center&quot;&gt;1100&amp;nbsp;Hz&lt;/th&gt;
-&lt;th align=&quot;center&quot;&gt;1300&amp;nbsp;Hz&lt;/th&gt;
-&lt;th align=&quot;center&quot;&gt;1500&amp;nbsp;Hz&lt;/th&gt;
-&lt;th align=&quot;center&quot;&gt;1700&amp;nbsp;Hz&lt;/th&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&quot;center&quot;&gt;&lt;b&gt;1&lt;/b&gt;&lt;/td&gt;
-&lt;td align=&quot;center&quot;&gt;X&lt;/td&gt;
-&lt;td align=&quot;center&quot;&gt;X&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&quot;center&quot;&gt;&lt;b&gt;2&lt;/b&gt;&lt;/td&gt;
-&lt;td align=&quot;center&quot;&gt;X&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td align=&quot;center&quot;&gt;X&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&quot;center&quot;&gt;&lt;b&gt;3&lt;/b&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td align=&quot;center&quot;&gt;X&lt;/td&gt;
-&lt;td align=&quot;center&quot;&gt;X&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&quot;center&quot;&gt;&lt;b&gt;4&lt;/b&gt;&lt;/td&gt;
-&lt;td align=&quot;center&quot;&gt;X&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td align=&quot;center&quot;&gt;X&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&quot;center&quot;&gt;&lt;b&gt;5&lt;/b&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td align=&quot;center&quot;&gt;X&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td align=&quot;center&quot;&gt;X&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&quot;center&quot;&gt;&lt;b&gt;6&lt;/b&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td align=&quot;center&quot;&gt;X&lt;/td&gt;
-&lt;td align=&quot;center&quot;&gt;X&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&quot;center&quot;&gt;&lt;b&gt;7&lt;/b&gt;&lt;/td&gt;
-&lt;td align=&quot;center&quot;&gt;X&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td align=&quot;center&quot;&gt;X&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&quot;center&quot;&gt;&lt;b&gt;8&lt;/b&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td align=&quot;center&quot;&gt;X&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td align=&quot;center&quot;&gt;X&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&quot;center&quot;&gt;&lt;b&gt;9&lt;/b&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td align=&quot;center&quot;&gt;X&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td align=&quot;center&quot;&gt;X&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&quot;center&quot;&gt;&lt;b&gt;0&lt;/b&gt;/10&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td align=&quot;center&quot;&gt;X&lt;/td&gt;
-&lt;td align=&quot;center&quot;&gt;X&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&quot;center&quot;&gt;11/ST3&lt;/td&gt;
-&lt;td align=&quot;center&quot;&gt;X&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td align=&quot;center&quot;&gt;X&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&quot;center&quot;&gt;12/ST2&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td align=&quot;center&quot;&gt;X&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td align=&quot;center&quot;&gt;X&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&quot;center&quot;&gt;&lt;b&gt;KP&lt;/b&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td align=&quot;center&quot;&gt;X&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td align=&quot;center&quot;&gt;X&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&quot;center&quot;&gt;KP2&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td align=&quot;center&quot;&gt;X&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td align=&quot;center&quot;&gt;X&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&quot;center&quot;&gt;&lt;b&gt;ST&lt;/b&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td align=&quot;center&quot;&gt;X&lt;/td&gt;
-&lt;td align=&quot;center&quot;&gt;X&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
-
-&lt;p&gt;I was unable to find a set of tones for this anywhere on the web, so I whipped up my own using Audacity.
-Here is a &lt;a href=&quot;https://github.com/tahnok/Blueboxer/tree/master/app/src/main/res/raw&quot;&gt;set of 60ms long MF tones in ogg format&lt;/a&gt;, or &lt;a href=&quot;https://github.com/tahnok/Blueboxer/tree/master/raw_tones&quot;&gt;the raw audacity projects&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Soon I will publish the app on the play store (and probably F-Droid as well), and I’ll have to see if it works with Project MF&lt;/p&gt;
-
-&lt;p&gt;ps If you are looking for more retro fun times check out &lt;a href=&quot;http://telehack.com/&quot;&gt;Telehack&lt;/a&gt;&lt;/p&gt;
-</description>
-        <pubDate>Thu, 04 Jun 2015 18:32:30 -0400</pubDate>
-        <link>http://blog.tahnok.me/post/blueboxer-phone-phreaking-for-phun.html</link>
-        <guid isPermaLink="true">http://blog.tahnok.me/post/blueboxer-phone-phreaking-for-phun.html</guid>
         
         
       </item>

@@ -4,6 +4,7 @@ http://blog.tahnok.me/index.html
 http://blog.tahnok.me/css/main.css
 http://blog.tahnok.me/sitemap.txt
 
+http://blog.tahnok.me/post/plans-for-a-noaa-weather-satellite-antenna.html
 http://blog.tahnok.me/post/cju-antenna.html
 http://blog.tahnok.me/post/moxon-antennas.html
 http://blog.tahnok.me/post/helical-and-monopole-antennas.html
