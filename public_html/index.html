@@ -74,6 +74,62 @@
   
   <div class="post-container">
     <header class="post-header">
+      <h1 class="post-title"><a href="/post/project-cerulean-box.html">project CERULEAN BOX</a></h1>
+      <p class="post-meta">Jul 4, 2018</p>
+    </header>
+
+    <article class="post-content">
+      <p>I found a way to combine a bunch of things I have wanted to learn together into one project!</p>
+
+<p>For a while, I have been fascinated with phone phreaking, and specifically the mythical BLUE BOX.
+Lots of myths and history surounding it.
+I think I can probably still play with it on <a href="http://www.projectmf.org/">Project MF</a>, but we will see.</p>
+
+<p>It seems like a great way to learn more electronics stuff, and some radio adjacent stuff too.
+I’ll need to figure out how to generate waves at specfic frequencies and how to combine them.</p>
+
+<p>I happen to have bought an stm32 f3 discovery that seems like a good platform for this.
+I think it’s fast enough to bit bang out a wave at 2600Hz?
+Guess I will find out!</p>
+
+<p>I also want to do this in rust.
+The f3 also seems to have decent rust support.
+See the <a href="https://docs.rs/f3/0.6.1/f3/">f3 crate</a> and <a href="https://japaric.github.io/discovery/">discovery</a></p>
+
+<p>I wanted to write up some quick notes of things I learned getting <a href="https://github.com/tahnok/cerulean_box">cerulean box</a> blinking.</p>
+
+<p>Step 1 was to create a new rust project and add the f3 dependency. After that, I copied the <a href="https://docs.rs/f3/0.6.1/f3/examples/_03_blinky/index.html">blinky.rs</a> to my project as <code>main.rs</code></p>
+
+<p>Next I had to add a few more dependencies, <code>cortex-m</code>, <code>cortex-m-rt</code> and <code>panic-semihosting</code>.
+This was enough to get rust complaining about an <code>eh_personality</code>.
+No idea what that was, but I made it go away by copy the contents of the f3 project’s <a href="https://github.com/tahnok/cerulean_box/blob/de742b6a597fae6d8a96af6cb5bcddff1af15a99/.cargo/config">.cargo/config</a>.
+As far as I can tell, this species the target architecture as being <code>thumbv7em-none-eabihf</code> which is ARM (thumbv7 specificall), with no OS and support for hard float.</p>
+
+<p>That was enough to get things compiling, but then gdb would start…
+In the f3 example, I was able to type continue but all gdb could do was disassemble main.
+It turns out I also needed to copy <a href="https://github.com/tahnok/cerulean_box/blob/de742b6a597fae6d8a96af6cb5bcddff1af15a99/.gdbinit">.gdbinit</a>.
+I believe this works because I have <code>set auto-load safe-path /</code> in <code>~/.gdbinit</code>.</p>
+
+<p>After that, I get blinky leds!</p>
+
+<p><img src="https://media.giphy.com/media/3oz8xRF0v9WMAUVLNK/giphy.gif" alt="" /></p>
+
+<h2 id="next-steps">Next steps</h2>
+
+<p>There’s a few things I want to do next.
+I need to actually twiddle a pin at a given frequency.
+That means learning how timers work probably, maybe interupts if I want to be able to other things.</p>
+
+<p>I also need to figure how this semihosting thing. I think that’s so I can run the code from my laptop, and get error messages, strack traces and breakpoints which seem useful, but… I don’t know how to turn it off.
+How to I make a binary I can flash onto the f3 directly?</p>
+
+<p>Adventures for next time!</p>
+
+    </article>
+  </div>
+  
+  <div class="post-container">
+    <header class="post-header">
       <h1 class="post-title"><a href="/post/plans-for-a-noaa-weather-satellite-antenna.html">plans for a NOAA weather satellite antenna</a></h1>
       <p class="post-meta">Apr 10, 2017</p>
     </header>

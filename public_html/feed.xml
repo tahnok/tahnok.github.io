@@ -6,9 +6,64 @@
 </description>
     <link>http://blog.tahnok.me/</link>
     <atom:link href="http://blog.tahnok.me/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 04 Jul 2018 21:52:59 -0400</pubDate>
-    <lastBuildDate>Wed, 04 Jul 2018 21:52:59 -0400</lastBuildDate>
+    <pubDate>Wed, 04 Jul 2018 22:15:24 -0400</pubDate>
+    <lastBuildDate>Wed, 04 Jul 2018 22:15:24 -0400</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
+    
+      <item>
+        <title>project CERULEAN BOX</title>
+        <description>&lt;p&gt;I found a way to combine a bunch of things I have wanted to learn together into one project!&lt;/p&gt;
+
+&lt;p&gt;For a while, I have been fascinated with phone phreaking, and specifically the mythical BLUE BOX.
+Lots of myths and history surounding it.
+I think I can probably still play with it on &lt;a href=&quot;http://www.projectmf.org/&quot;&gt;Project MF&lt;/a&gt;, but we will see.&lt;/p&gt;
+
+&lt;p&gt;It seems like a great way to learn more electronics stuff, and some radio adjacent stuff too.
+I’ll need to figure out how to generate waves at specfic frequencies and how to combine them.&lt;/p&gt;
+
+&lt;p&gt;I happen to have bought an stm32 f3 discovery that seems like a good platform for this.
+I think it’s fast enough to bit bang out a wave at 2600Hz?
+Guess I will find out!&lt;/p&gt;
+
+&lt;p&gt;I also want to do this in rust.
+The f3 also seems to have decent rust support.
+See the &lt;a href=&quot;https://docs.rs/f3/0.6.1/f3/&quot;&gt;f3 crate&lt;/a&gt; and &lt;a href=&quot;https://japaric.github.io/discovery/&quot;&gt;discovery&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I wanted to write up some quick notes of things I learned getting &lt;a href=&quot;https://github.com/tahnok/cerulean_box&quot;&gt;cerulean box&lt;/a&gt; blinking.&lt;/p&gt;
+
+&lt;p&gt;Step 1 was to create a new rust project and add the f3 dependency. After that, I copied the &lt;a href=&quot;https://docs.rs/f3/0.6.1/f3/examples/_03_blinky/index.html&quot;&gt;blinky.rs&lt;/a&gt; to my project as &lt;code&gt;main.rs&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Next I had to add a few more dependencies, &lt;code&gt;cortex-m&lt;/code&gt;, &lt;code&gt;cortex-m-rt&lt;/code&gt; and &lt;code&gt;panic-semihosting&lt;/code&gt;.
+This was enough to get rust complaining about an &lt;code&gt;eh_personality&lt;/code&gt;.
+No idea what that was, but I made it go away by copy the contents of the f3 project’s &lt;a href=&quot;https://github.com/tahnok/cerulean_box/blob/de742b6a597fae6d8a96af6cb5bcddff1af15a99/.cargo/config&quot;&gt;.cargo/config&lt;/a&gt;.
+As far as I can tell, this species the target architecture as being &lt;code&gt;thumbv7em-none-eabihf&lt;/code&gt; which is ARM (thumbv7 specificall), with no OS and support for hard float.&lt;/p&gt;
+
+&lt;p&gt;That was enough to get things compiling, but then gdb would start…
+In the f3 example, I was able to type continue but all gdb could do was disassemble main.
+It turns out I also needed to copy &lt;a href=&quot;https://github.com/tahnok/cerulean_box/blob/de742b6a597fae6d8a96af6cb5bcddff1af15a99/.gdbinit&quot;&gt;.gdbinit&lt;/a&gt;.
+I believe this works because I have &lt;code&gt;set auto-load safe-path /&lt;/code&gt; in &lt;code&gt;~/.gdbinit&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;After that, I get blinky leds!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://media.giphy.com/media/3oz8xRF0v9WMAUVLNK/giphy.gif&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;next-steps&quot;&gt;Next steps&lt;/h2&gt;
+
+&lt;p&gt;There’s a few things I want to do next.
+I need to actually twiddle a pin at a given frequency.
+That means learning how timers work probably, maybe interupts if I want to be able to other things.&lt;/p&gt;
+
+&lt;p&gt;I also need to figure how this semihosting thing. I think that’s so I can run the code from my laptop, and get error messages, strack traces and breakpoints which seem useful, but… I don’t know how to turn it off.
+How to I make a binary I can flash onto the f3 directly?&lt;/p&gt;
+
+&lt;p&gt;Adventures for next time!&lt;/p&gt;
+</description>
+        <pubDate>Wed, 04 Jul 2018 21:56:54 -0400</pubDate>
+        <link>http://blog.tahnok.me/post/project-cerulean-box.html</link>
+        <guid isPermaLink="true">http://blog.tahnok.me/post/project-cerulean-box.html</guid>
+        
+        
+      </item>
     
       <item>
         <title>plans for a NOAA weather satellite antenna</title>
@@ -999,71 +1054,6 @@ I even put some solder on the other half of the snaps to I could easily add and 
         <pubDate>Sun, 27 Sep 2015 18:28:01 -0400</pubDate>
         <link>http://blog.tahnok.me/post/chameleon-scarf.html</link>
         <guid isPermaLink="true">http://blog.tahnok.me/post/chameleon-scarf.html</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>making PCB (not PCP)</title>
-        <description>&lt;p&gt;So I got something REALLY COOL this week in a purple envelope.
-That’s right I got 3 PCBs that I designed myself from Oshpark&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;../images/first_pcbs.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Aww yiss!&lt;/p&gt;
-
-&lt;p&gt;Now of course, it’s actually a really simple board that I could have done without, but the point was mostly to learn how to use Eagle,
-and a PCB manufacturing service like &lt;a href=&quot;https://oshpark.com/&quot;&gt;OSH park&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;WTF is OSH park you ask?
-It’s a PCB manufacturing service that caters to small runs.
-They get away with this by collecting submissions from lots of people and then putting all of them together on one big panel.
-It’s also pretty cheap, my boards only cost my 5$.
-Also note the sweet purple colour (that’s called the solder mask)&lt;/p&gt;
-
-&lt;p&gt;The software I chose to use was Eagle, which has a free to use (not a Free as in open source though) version available.
-The pro version costs many dollars, and the free version has some limitations, but I haven’t run into any of them.
-I considered using the open source &lt;a href=&quot;http://www.kicad-pcb.org/display/KICAD/KiCad+EDA+Software+Suite&quot;&gt;Kicad&lt;/a&gt;, but I found some better tutorials for Eagle (more on that later) and my local makerspace has quite a few advanced Eagle users.&lt;/p&gt;
-
-&lt;p&gt;I have to give most of the credit for my amazing board design to &lt;a href=&quot;http://sparkfun.com/&quot;&gt;Sparkfun&lt;/a&gt; because it was their tutorials which taught me everything I know (not that much tbh). They have a large number of random &lt;a href=&quot;https://learn.sparkfun.com/tutorials/tags/eagle&quot;&gt;tutorials with the eagle tag&lt;/a&gt;, and I followed three in particular:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;https://learn.sparkfun.com/tutorials/how-to-install-and-setup-eagle&quot;&gt;How to setup and install eagle&lt;/a&gt;: more than just set up, it also does a good job giving an overview of some of the pieces of eagle&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://learn.sparkfun.com/tutorials/using-eagle-schematic&quot;&gt;Using Eagle: Schematic&lt;/a&gt;: teaches you how to make a schematic&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://learn.sparkfun.com/tutorials/using-eagle-board-layout&quot;&gt;Using Eagle: Board Layout&lt;/a&gt;: this one teaches you how to turn a schematic into a board layout&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;At the end of them, you’ll have a very basic arduino board all laid out and (almost) ready to ship to OSH park.&lt;/p&gt;
-
-&lt;p&gt;The tl;dr of those tutorials is this: Eagle is designed around 2 “views” schematic and layout.
-First you create a schematic which shows which parts your project uses and how they connect.
-Next you create a layout where you must place all your components and wires on the actual pcb.&lt;/p&gt;
-
-&lt;p&gt;The final step is sending the board off to the “fab”.
-They seem to expect to receive everything as “gerber” files, which are basically instructions as to what should be done for each “layer” of the pcb.
-The sparkfun tutorial I walked through covered this a bit, but when I went to upload to OSH park I was missing certain pieces.
-Thankfully OSH park can handle a eagle layout files automatically.&lt;/p&gt;
-
-&lt;p&gt;My first board is called &lt;strong&gt;ESPOWER&lt;/strong&gt; &lt;a href=&quot;https://github.com/tahnok/espower&quot;&gt;eagle source files on github&lt;/a&gt; and it’s really really (really) simple.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;../images/first_pcb_schematic.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;It contains:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;a barrel jack for power on the left&lt;/li&gt;
-  &lt;li&gt;a 4x2 set of standard 0.100” headers (like those found on an arduino) to connect to an ESP8266&lt;/li&gt;
-  &lt;li&gt;a 4x1 set of headers for connecting to the ESP8266 over serial&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;That’s all.
-My only goal is to be able to power an ESP8266 (this 3$ wifi enabled micro controlled) from a standard wallwart for a top secret project I am working on.
-I don’t actually know if I’ve succeeded in making a functioning board yet…
-I am still waiting on the parts to populate the board to arrive, but I’ve certainly learned a bunch in the process.&lt;/p&gt;
-</description>
-        <pubDate>Sat, 20 Jun 2015 21:16:34 -0400</pubDate>
-        <link>http://blog.tahnok.me/post/making-pcb-not-pcp.html</link>
-        <guid isPermaLink="true">http://blog.tahnok.me/post/making-pcb-not-pcp.html</guid>
         
         
       </item>
