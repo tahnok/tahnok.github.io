@@ -67,7 +67,7 @@ GEM
     stringex (2.6.1)
     toml (0.1.2)
       parslet (~> 1.5.0)
-    yajl-ruby (1.2.1)
+    yajl-ruby (1.2.3)
 
 PLATFORMS
   ruby
@@ -78,4 +78,4 @@ DEPENDENCIES
   stringex
 
 BUNDLED WITH
-   1.12.5
+   1.16.1
