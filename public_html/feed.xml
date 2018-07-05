@@ -4,10 +4,10 @@
     <title>(Fake) Markov Chains</title>
     <description>WARNING: The content contained herein may or may not be sensical. Side effects may include laughter, anger, shallow thoughts, deep thoughts and blindness. Reader discretion is advised
 </description>
-    <link>http://blog.tahnok.me/</link>
-    <atom:link href="http://blog.tahnok.me/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 04 Jul 2018 22:15:24 -0400</pubDate>
-    <lastBuildDate>Wed, 04 Jul 2018 22:15:24 -0400</lastBuildDate>
+    <link>https://blog.tahnok.me/</link>
+    <atom:link href="https://blog.tahnok.me/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Wed, 04 Jul 2018 22:19:01 -0400</pubDate>
+    <lastBuildDate>Wed, 04 Jul 2018 22:19:01 -0400</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
     
       <item>
@@ -59,8 +59,8 @@ How to I make a binary I can flash onto the f3 directly?&lt;/p&gt;
 &lt;p&gt;Adventures for next time!&lt;/p&gt;
 </description>
         <pubDate>Wed, 04 Jul 2018 21:56:54 -0400</pubDate>
-        <link>http://blog.tahnok.me/post/project-cerulean-box.html</link>
-        <guid isPermaLink="true">http://blog.tahnok.me/post/project-cerulean-box.html</guid>
+        <link>https://blog.tahnok.me/post/project-cerulean-box.html</link>
+        <guid isPermaLink="true">https://blog.tahnok.me/post/project-cerulean-box.html</guid>
         
         
       </item>
@@ -120,8 +120,8 @@ The transmissions can (apparently) be decoded with &lt;a href=&quot;www.wxtoimg.
 Will probably end up building a Yaggi-uda at some point as well for dat sweet gain, but it’s too directional if I want to set up a NOAA reception station permananently somewhere.&lt;/p&gt;
 </description>
         <pubDate>Mon, 10 Apr 2017 19:26:24 -0500</pubDate>
-        <link>http://blog.tahnok.me/post/plans-for-a-noaa-weather-satellite-antenna.html</link>
-        <guid isPermaLink="true">http://blog.tahnok.me/post/plans-for-a-noaa-weather-satellite-antenna.html</guid>
+        <link>https://blog.tahnok.me/post/plans-for-a-noaa-weather-satellite-antenna.html</link>
+        <guid isPermaLink="true">https://blog.tahnok.me/post/plans-for-a-noaa-weather-satellite-antenna.html</guid>
         
         
       </item>
@@ -148,8 +148,8 @@ The rectangular element is driven, and the length of wire is the parasitic/refle
 &lt;/ul&gt;
 </description>
         <pubDate>Sat, 26 Nov 2016 22:48:50 -0500</pubDate>
-        <link>http://blog.tahnok.me/post/cju-antenna.html</link>
-        <guid isPermaLink="true">http://blog.tahnok.me/post/cju-antenna.html</guid>
+        <link>https://blog.tahnok.me/post/cju-antenna.html</link>
+        <guid isPermaLink="true">https://blog.tahnok.me/post/cju-antenna.html</guid>
         
         
       </item>
@@ -176,8 +176,8 @@ It’s also a directional antenna, which means that it has better reception when
 &lt;/ul&gt;
 </description>
         <pubDate>Sat, 26 Nov 2016 22:11:00 -0500</pubDate>
-        <link>http://blog.tahnok.me/post/moxon-antennas.html</link>
-        <guid isPermaLink="true">http://blog.tahnok.me/post/moxon-antennas.html</guid>
+        <link>https://blog.tahnok.me/post/moxon-antennas.html</link>
+        <guid isPermaLink="true">https://blog.tahnok.me/post/moxon-antennas.html</guid>
         
         
       </item>
@@ -217,8 +217,8 @@ I don’t quite know exactly what that means, but I do know that satelittes tran
 I think I will spend some time looking into building myself a 2m/VHF/140MHz monopole.&lt;/p&gt;
 </description>
         <pubDate>Fri, 25 Nov 2016 09:19:06 -0500</pubDate>
-        <link>http://blog.tahnok.me/post/helical-and-monopole-antennas.html</link>
-        <guid isPermaLink="true">http://blog.tahnok.me/post/helical-and-monopole-antennas.html</guid>
+        <link>https://blog.tahnok.me/post/helical-and-monopole-antennas.html</link>
+        <guid isPermaLink="true">https://blog.tahnok.me/post/helical-and-monopole-antennas.html</guid>
         
         
       </item>
@@ -251,8 +251,8 @@ Do something funky at the ends of the antennas (??)&lt;/p&gt;
 
 </description>
         <pubDate>Thu, 24 Nov 2016 09:58:35 -0500</pubDate>
-        <link>http://blog.tahnok.me/post/antenna-building-research.html</link>
-        <guid isPermaLink="true">http://blog.tahnok.me/post/antenna-building-research.html</guid>
+        <link>https://blog.tahnok.me/post/antenna-building-research.html</link>
+        <guid isPermaLink="true">https://blog.tahnok.me/post/antenna-building-research.html</guid>
         
         
       </item>
@@ -286,8 +286,8 @@ Do something funky at the ends of the antennas (??)&lt;/p&gt;
 &lt;p&gt;I also have a &lt;a href=&quot;http://blog.tahnok.me/post/makerfaire-ottawa-rule-110.html&quot;&gt;post about last year&lt;/a&gt;. Source code is not in git (sorry)&lt;/p&gt;
 </description>
         <pubDate>Sat, 15 Oct 2016 01:42:34 -0400</pubDate>
-        <link>http://blog.tahnok.me/post/rule-110-part-2-now-with-wearables.html</link>
-        <guid isPermaLink="true">http://blog.tahnok.me/post/rule-110-part-2-now-with-wearables.html</guid>
+        <link>https://blog.tahnok.me/post/rule-110-part-2-now-with-wearables.html</link>
+        <guid isPermaLink="true">https://blog.tahnok.me/post/rule-110-part-2-now-with-wearables.html</guid>
         
         
       </item>
@@ -389,8 +389,8 @@ I hope you learned something reading this, as a thank you here is a picture of m
 &lt;p&gt;&lt;img src=&quot;../images/bluebrim_ada_hat.jpg&quot; alt=&quot;ada wearing a pretty hat&quot; /&gt;&lt;/p&gt;
 </description>
         <pubDate>Mon, 14 Dec 2015 19:08:35 -0500</pubDate>
-        <link>http://blog.tahnok.me/post/bluebrim-rgb-lights-on-a-hat-with-bonus-bluetooth.html</link>
-        <guid isPermaLink="true">http://blog.tahnok.me/post/bluebrim-rgb-lights-on-a-hat-with-bonus-bluetooth.html</guid>
+        <link>https://blog.tahnok.me/post/bluebrim-rgb-lights-on-a-hat-with-bonus-bluetooth.html</link>
+        <guid isPermaLink="true">https://blog.tahnok.me/post/bluebrim-rgb-lights-on-a-hat-with-bonus-bluetooth.html</guid>
         
         
       </item>
@@ -860,8 +860,8 @@ The entire project was worth it for the looks on people’s faces when they lear
 &lt;p&gt;All in all, it was totally a good idea for me to apply to makerfaire. This is one of the largest electronics projects I’ve yet completed, and I doubt I would have done it without the thought of an empty table. I guess I should start thinking about next year…&lt;/p&gt;
 </description>
         <pubDate>Wed, 11 Nov 2015 19:36:32 -0500</pubDate>
-        <link>http://blog.tahnok.me/post/makerfaire-ottawa-rule-110.html</link>
-        <guid isPermaLink="true">http://blog.tahnok.me/post/makerfaire-ottawa-rule-110.html</guid>
+        <link>https://blog.tahnok.me/post/makerfaire-ottawa-rule-110.html</link>
+        <guid isPermaLink="true">https://blog.tahnok.me/post/makerfaire-ottawa-rule-110.html</guid>
         
         
       </item>
@@ -1052,8 +1052,8 @@ I even put some solder on the other half of the snaps to I could easily add and 
 
 </description>
         <pubDate>Sun, 27 Sep 2015 18:28:01 -0400</pubDate>
-        <link>http://blog.tahnok.me/post/chameleon-scarf.html</link>
-        <guid isPermaLink="true">http://blog.tahnok.me/post/chameleon-scarf.html</guid>
+        <link>https://blog.tahnok.me/post/chameleon-scarf.html</link>
+        <guid isPermaLink="true">https://blog.tahnok.me/post/chameleon-scarf.html</guid>
         
         
       </item>
