@@ -63,6 +63,32 @@
   
   <div class="post-container">
     <header class="post-header">
+      <h1 class="post-title"><a href="/post/toggling-pins-in-rust.html">toggling pins in rust</a></h1>
+      <p class="post-meta">Jul 8, 2018</p>
+    </header>
+
+    <article class="post-content">
+      <p>My first goal after getting someone elses good compiling, was to toggle a pin on my own.
+I think for my first attempt to generate a frequency, I will just turn a pin on and off at a given rate.</p>
+
+<p>My target frequency is 2600Hz, and if I want to generate a square wave (which I get by turning things on and off) I need to toggle the pin at twice that frequency.
+So with a target frequency of 5200Hz, I can now figure out the period which is 0.000192308 seconds or 192 microseconds.</p>
+
+<p>Now that I knew how long a delay to use, I needed to figure out how to actually toggle a pin…
+I struggled with the docs a fair amount here.
+The example code uses an LED type so I looked at <a href="https://docs.rs/f3/0.6.1/src/f3/led.rs.html#167-169">the source code</a>.
+I should have just tried that code directly, but I checked the docs first and got very confused.
+The LED uses a <a href="https://docs.rs/stm32f30x-hal/0.2.0/stm32f30x_hal/gpio/gpioe/struct.PEx.html">PEx type</a> which implements <a href="https://docs.rs/embedded-hal/0.2.0/embedded_hal/digital/trait.OutputPin.html">OutputPin</a> but somehow I missed that.
+Instead, I was looking at the <a href="https://docs.rs/stm32f30x-hal/0.2.0/stm32f30x_hal/gpio/struct.Output.html">Output</a> type which didn’t seem to have any methods associated with it…</p>
+
+<p>Anyway, the end result is that if you have an <code>OutputPin</code> you can call <code>set_high</code> and <code>set_low</code>.
+OutputPin comes from <a href="https://docs.rs/embedded-hal/0.2.1/embedded_hal/">embedded_hal</a> which should theoretically work on all embedded rust targets!</p>
+
+    </article>
+  </div>
+  
+  <div class="post-container">
+    <header class="post-header">
       <h1 class="post-title"><a href="/post/project-cerulean-box.html">project CERULEAN BOX</a></h1>
       <p class="post-meta">Jul 4, 2018</p>
     </header>

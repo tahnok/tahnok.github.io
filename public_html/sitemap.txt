@@ -4,6 +4,7 @@ https://blog.tahnok.me/index.html
 https://blog.tahnok.me/css/main.css
 https://blog.tahnok.me/sitemap.txt
 
+https://blog.tahnok.me/post/toggling-pins-in-rust.html
 https://blog.tahnok.me/post/project-cerulean-box.html
 https://blog.tahnok.me/post/plans-for-a-noaa-weather-satellite-antenna.html
 https://blog.tahnok.me/post/cju-antenna.html
