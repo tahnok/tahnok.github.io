@@ -1,16 +1,19 @@
 ---
 layout: post
-title: "pics from space: n00b's guide to receive NOAA weather satellites"
+title: "Pictures from Space: a n00b's guide to receiving images from NOAA weather satellites"
 date: 2018-07-31 23:47:25 +0000
 ---
 
-It's been a dream of mine for a while to receive images from space.
+It had been a dream of mine for a while to receive images from space.
+I forget where I learned that you could do that, but it sounded so cool I knew I wanted to try.
 Around 2 years ago, I finally succeeded in getting images from the NOAA APT weather satellites, but I hadn't gotten around writing up how I did that until now.
 
 My initial research led to lots of confusing information on many different topics.
+What images were being broadcast and how?
 What kind of antenna did I absolutely need?
-How did I get the software?
+How did I get the software and configure it?
 Which were the satellites and how did I figure out when they were overhead?
+Hopefully this post will explain what you need to know and what gear you will need.
 
 There are 2 things you need to acquire:
 
@@ -19,12 +22,24 @@ There are 2 things you need to acquire:
 
 And 3 things you need to know:
 
- 3. How to figure out when a satellite can be heard
+ 3. How to figure out when you can receive an image from a satellite
  4. How to set up your receiver properly
  5. How to decode the image you receive
 
 
 I'm gonna focus on the cheapest / easiest setup possible because that worked for me.
+
+## Background: what is being transmitted and by whom?
+
+![Artistic rendering of a NOAA satellite](https://upload.wikimedia.org/wikipedia/commons/c/c0/NOAA-M-01.jpg)
+
+Before we jump into the details of how to receive the images, we should first talk about who is broadcasting the images and how they are encoded.
+
+The National Oceanic and Atmostpheric Association (NOAA) of the USA has several satellites in orbit to help them map weather.
+Three of these satellites ([NOAA-15](https://en.wikipedia.org/wiki/NOAA-15), [NOAA-18](https://en.wikipedia.org/wiki/NOAA-18) and [NOAA-19](https://en.wikipedia.org/wiki/NOAA-18)) are of interest to us because they broadcast images using [Automatic Picture Transmission](https://en.wikipedia.org/wiki/Automatic_picture_transmission) at a frequency of 137 MHz.
+Building an antenna for this frequency #TODO
+
+These satellites are in a sun-synchronous orbit so they are always looking at the earth with the same amount of light
 
 ## Receiver: RTL-SDR
 
