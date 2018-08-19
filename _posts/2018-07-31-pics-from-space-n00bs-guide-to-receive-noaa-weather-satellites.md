@@ -37,49 +37,64 @@ Before we jump into the details of how to receive the images, we should first ta
 
 The National Oceanic and Atmostpheric Association (NOAA) of the USA has several satellites in orbit to help them map weather.
 Three of these satellites ([NOAA-15](https://en.wikipedia.org/wiki/NOAA-15), [NOAA-18](https://en.wikipedia.org/wiki/NOAA-18) and [NOAA-19](https://en.wikipedia.org/wiki/NOAA-18)) are of interest to us because they broadcast images using [Automatic Picture Transmission](https://en.wikipedia.org/wiki/Automatic_picture_transmission) at a frequency of 137 MHz.
-Building an antenna for this frequency #TODO
 
-These satellites are in a sun-synchronous orbit so they are always looking at the earth with the same amount of light
+Why are they of interest?
 
-## Receiver: RTL-SDR
+ 1. 137 MHz antennas are pretty easy to build
+ 2. 137 MHz receivers are really cheap
+ 3. APT is an old protocol and there are lots of tools to decode it
+
+These satellites are in a sun-synchronous orbit so they are always looking at the earth with the same amount of light.
+They aren't geostationary (unlike satelitte TV satelittes) which means they aren't always in view.
+
+## Setup
+
+### Receiver: RTL-SDR
 
 For the receiver I am using an RTL-SDR.
 This is a device initially intended to receive European TV, but some clever hackers figured out how to turn it into a receiver across a huge range of frequencies.
 Importantly for us it can receive ~137 MHz really well, and they are SUPER cheap.
 You have a few choices for suppliers.
 
-You can search ebay / amazon / aliexpress / adafruit.
+You can search ebay /
+[amazon](https://www.amazon.com/NooElec-NESDR-Mini-RTL2832-Antenna/dp/B00P2UOU72/) /
+[aliexpress](https://www.aliexpress.com/item/USB-2-0-Software-Radio-DVB-T-RTL2832U-R820T2-SDR-Digital-TV-Receiver-Stick/32506410349.html?spm=2114.search0104.3.1.4baa4658RQzNvA&ws_ab_test=searchweb0_0,searchweb201602_1_10152_10151_10065_10344_10130_10068_10547_10342_10343_10340_10548_10341_10696_10084_10083_10618_10139_10307_10059_100031_10103_10624_10623_10622_10621_10620,searchweb201603_55,ppcSwitch_5&algo_expid=34c8a973-1c12-475a-a4c5-51d2d38d9ac9-0&algo_pvid=34c8a973-1c12-475a-a4c5-51d2d38d9ac9&priceBeautifyAB=0) /
+[adafruit](https://www.adafruit.com/product/1497) for either RTL-SDR or RTL2832U
+
 This is your cheapest option, but the devices you will get here have 2 drawbacks.
 First, they need to be frequency corrected.
+This just means that if you tell the software to tune to 137 MHz, it will tune to a slightly different frequency.
 I'll mention how to do this when we get to the software section, but it's pretty easy.
+
 Second, you need an adapter / pigtail to connect these to an antenna.
-These have a weird mini MCX connector that isn't standard.
+These have a weird mini MCX connector that isn't standard for radio gear.
 Most antennas for commercial / ham use have an SMA, BNC or UHF connector.
-The same sites above will also stock pigtails / adapters.
+Thankfully, you can buy MCX to whatever connectors on ebay / amazon / aliexpress / adafruit as well.
+Just search MCX to SMA or MCX to BNC.
 
-Your other option is one of the redesigned / upgraded models.
-I bought one from rtl-sdr.com because it has an SMA connector.
-rtl-sdr.com also offers a package that include an antenna that works.
+Your other option is one of the redesigned / upgraded RTL-SDRs.
+I bought one from rtl-sdr.com (a terrible name, but easy to remember the address) because it has an SMA connector and doesn't need to be calibrated.
+Here's a link to the rtl-sdr.com store and choose the one with the dipole antenna kit: https://www.rtl-sdr.com/buy-rtl-sdr-dvb-t-dongles/
 
-rtl-sdr.com store (choose the one with the dipole antenna kit): https://www.rtl-sdr.com/buy-rtl-sdr-dvb-t-dongles/
-
-## Antenna: Dipole
+### Antenna: Dipole
 
 There are plenty of better antennas for receiving satellites.
-If you have looked into this, you will hear mention of [the QFH or the double cross dipole](https://www.youtube.com/watch?v=cjClTnZ4Xh4).
+If you have looked into weather satellite antennas, you will hear mention of [the QFH or the double cross dipole](https://www.youtube.com/watch?v=cjClTnZ4Xh4).
 These are better, but hard to make in terms of skill and in terms of gear required.
 
 Instead, I have had great luck with the simplest antenna: the dipole.
 
 Any dipole designed for 2m / 144 MHz should work, but if you are making your own you should tune it for 137MHz.
 
-### Bunny ears
+#### Bunny ears
 
-One way to make a dipole is to find a pair of old TV bunny ears, or buy one.
-That's what I have done recently with the rtl-sdr.com package mentioned above.
+One way to make a dipole is to acquire a pair of old TV bunny ears.
+That's what I have done with the rtl-sdr.com package mentioned above.
 If you can extend each side to be 52cm, you should be good to go.
 
-### Homemade dipole
+#TODO insert picture
+
+#### Homemade dipole
 
 For my first attempt, I built my own antenna.
 I did this by buying a length of the thinnest brass rod I could find that would support it's own weight.
@@ -89,18 +104,23 @@ I calculated this number using this [online dipole calculator](http://www.kwarc.
 Next, I soldered a bit of wire to both pieces.
 Then I got a T-joint made of PVC and tapped these pieces so they were parallel to each other.
 
-Finally, I connected the bits of wire to one of these [screw terminal BNC connectors]() that I got from Aliexpress.
+Finally, I connected the bits of wire to one of these [screw terminal BNC connectors](https://www.aliexpress.com/item/1-Set-CAT5-To-BNC-Video-And-Power-Balun-Transceiver-Connectors-Male-Female-BNC-Connector-Terminal/32813038993.html) that I got from Aliexpress.
 This is probably the most weird / hard to find part of this build.
 I've been thinking of other ways to do this, but so far ordering this and waiting the 35-50 days requried to get something from China is the easiest and the cheapest.
 
-#TODO section on a pole, or pointing
+Feel free to use a different connector like SMA if that makes it easier to connect it to your RTL-SDR though.
 
-## Finding passes: ISS Tracker
 
-My first attempts for figuring out when a satellite was hearable because it was overhead (a pass), I used [wxtoimg](https://web.archive.org/web/20171226033343/http://www.wxtoimg.com:80/downloads/).
+### Finding passes: ISS Tracker
+
+For my first attempts for figuring out when a satellite was overhead (a pass) and thus hearable, I used [wxtoimg](https://web.archive.org/web/20171226033343/http://www.wxtoimg.com:80/downloads/).
 We will need this software later, but if you configure your ground station location (options -> ground station location), you can see a list of passes by going to file -> satellite pass list...
 
-That worked OK, but I have found something better, if less free: [ISS Detector]()
+![wxtoimg satellite pass list location in menu](../images/wxtoimg-menu-pass.png)
+
+![wxtoimg satellite pass list](../images/wxtoimg-passlist.png)
+
+That worked OK, but I have found something better, if less free, the [ISS Detector Android app](https://play.google.com/store/apps/details?id=com.runar.issdetector)
 
 It's poorly named, and a bit clunky to set up but it works really well.
 It buzzes when a pass is about to happen.
@@ -113,13 +133,15 @@ Next, go to filters and turn on amateur radio satellites and select the followin
  - NOAA-18
  - NOAA-19
 
-These are the only operational NOAA satellites that are transmitting images.
+When you see a good pass (that is something with an elevation over 30 degress, but higher is better) it's time to find a good spot.
 
-When you see a good pass (that is something with an elevation over 30 degress, but the higher the better) it's time to find a good spot.
+#TODO picture of ISS tracker
 
-I've found open parks are really good, but any spot with a clear view of the sky that's well away from any buildings will work.
+I've found parks or open are really good, but any spot with a clear view of the sky that's well away from any buildings will work.
 
-## Receiving software: SDRSharp
+#TODO picture of field
+
+### Receiving software: SDRSharp
 
 Now that you have an antenna and a receiver, it's time to you know... receive.
 
@@ -138,16 +160,17 @@ You can tune to that frequency at the top of SDRsharp
 Once you have the frequency selected, it's time to choose the receiving mode.
 You want to use the WFM (wide FM) mode and you want to have a have a bandwidth of 55,000 Hz (55 KHz)
 
-#TODO picz maybe?
+#TODO picture of sdr#
 
 
-## Decoding: WXtoImg
+### Decoding: WXtoImg
 
 The satellites transmit images using an encoding called APT (Automatic Picture Transmission).
 If you listen to it, it sounds like repeating deet-deet deet-deet.
+You can hear a sample on the [Signal Identification Wiki APT page](https://www.sigidwiki.com/wiki/Automatic_Picture_Transmission_(APT))
 
 In order to decode it, I used a program called [WXtoImg](https://web.archive.org/web/20171226033343/http://www.wxtoimg.com:80/downloads/).
-The original site that hosted the program is offline at the time of me writing this (July 2018), but it's still available from archive.org
+The original site that hosted the program is offline at the time of me writing this (August 2018), but it's still available from archive.org
 
 Once you have it installed, set your ground station location (under options)
 
@@ -168,9 +191,11 @@ In WXtoImg, I changed the soundcard to use "CABLE Output" by going to options ->
  3. Launch SDRSharp and tune it to the right frequency for the satellite that will be overhead. Make sure the mode is set right (WFM with 50KHz bandwidth) and the output is set to the CABLE Input
  4. Launch WXtoImg and make sure the soundcard is set to CABLE Output
  5. Get WXtoImg to record by going to File -> Record ... -> Auto Record
- 6. Watch for the APT signal in SDRSharp. You may have to zoom, but you should see a series of several spikes
- 7. Point antenna! Try turning, tilting, or pointing the antenna so that the signal appears stronger
- 8. wait...
+ 6. Watch for the APT signal in SDRSharp. You will have to zoom in a bit, but you should see a series of several spikes
+ 7. Point your antenna! Try turning, tilting, or pointing the antenna so that the signal appears stronger
+ 8. wait... wxtoimg has a progress bar in the bottom corner. Aim for 100%, but a partial pass can still be decoded
  9. Stop WXtoImg (File -> Stop) and check out your space picture!
+
+#TODO picture of SDRSharp receiving signal, wxtoimg working
 
 #TODO put a few pictures here of final output
