@@ -135,7 +135,7 @@ Next, go to filters and turn on amateur radio satellites and select the followin
 
 When you see a good pass (that is something with an elevation over 30 degress, but higher is better) it's time to find a good spot.
 
-#TODO picture of ISS tracker
+![ISS detector showing passes](../images/iss_detector.png)
 
 I've found parks or open are really good, but any spot with a clear view of the sky that's well away from any buildings will work.
 
