@@ -1,4 +1,5 @@
 https://blog.tahnok.me/about/
+https://blog.tahnok.me/archive/
 https://blog.tahnok.me/feed.xml
 https://blog.tahnok.me/index.html
 https://blog.tahnok.me/css/main.css
