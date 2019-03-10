@@ -3,6 +3,14 @@ https://blog.tahnok.me/feed.xml
 https://blog.tahnok.me/index.html
 https://blog.tahnok.me/css/main.css
 https://blog.tahnok.me/sitemap.txt
+https://blog.tahnok.me/page2/index.html
+https://blog.tahnok.me/page3/index.html
+https://blog.tahnok.me/page4/index.html
+https://blog.tahnok.me/page5/index.html
+https://blog.tahnok.me/page6/index.html
+https://blog.tahnok.me/page7/index.html
+https://blog.tahnok.me/page8/index.html
+https://blog.tahnok.me/page9/index.html
 
 https://blog.tahnok.me/post/pics-from-space-n00bs-guide-to-receive-noaa-weather-satellites.html
 https://blog.tahnok.me/post/toggling-pins-in-rust.html

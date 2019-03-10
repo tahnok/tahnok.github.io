@@ -9,6 +9,7 @@ twitter_username: tahnok
 github_username:  tahnok
 permalink: /post/:title.html
 code_dir: code_source
+paginate: 5
 
 # Build settings
 markdown: kramdown

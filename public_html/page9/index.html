@@ -6,11 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>On Ownership</title>
-  <meta name="description" content="Recent revelations about the NSA, plus the shut down of my beloved google reader (RIP), have led me to become a lot more uncomfortable trusting my data to so...">
+  <title>(Fake) Markov Chains</title>
+  <meta name="description" content="WARNING: The content contained herein may or may not be sensical. Side effects may include laughter, anger, shallow thoughts, deep thoughts and blindness. Reader discretion is advised
+">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="https://blog.tahnok.me/post/on-ownership.html">
+  <link rel="canonical" href="https://blog.tahnok.me/page9/">
   <link rel="alternate" type="application/rss+xml" title="(Fake) Markov Chains" href="https://blog.tahnok.me/feed.xml" />
 </head>
 
@@ -73,36 +74,61 @@
 
     <div class="page-content">
       <div class="wrapper">
-        <div class="post">
+        <div class="home">
 
-  <header class="post-header">
-    <h1 class="post-title">On Ownership</h1>
-    <p class="post-meta">Oct 6, 2013</p>
-  </header>
+  
+  <div class="post-container">
+    <header class="post-header">
+      <h1 class="post-title"><a href="/post/on-ownership.html">On Ownership</a></h1>
+      <p class="post-meta">Oct 6, 2013</p>
+    </header>
 
-  <article class="post-content">
-    <p>Recent revelations about the NSA, plus the shut down of my beloved google reader (RIP), have led me to become a lot more uncomfortable trusting my data to someone who isn't me. In light of that I've switched to using <a href="http://labs.bittorrent.com/experiments/sync.html">BitTorrent Sync</a> for my inter computer file syncing instead of dropbox. Setting things up was pretty simple. I have 3 nodes most of the time (my home server, my laptop and my phone) and I'm working on getting a 4th hosted in a VPS somewhere so I have some offsite backup.<br>
+    <article class="post-content">
+      <p>Recent revelations about the NSA, plus the shut down of my beloved google reader (RIP), have led me to become a lot more uncomfortable trusting my data to someone who isn't me. In light of that I've switched to using <a href="http://labs.bittorrent.com/experiments/sync.html">BitTorrent Sync</a> for my inter computer file syncing instead of dropbox. Setting things up was pretty simple. I have 3 nodes most of the time (my home server, my laptop and my phone) and I'm working on getting a 4th hosted in a VPS somewhere so I have some offsite backup.<br>
 But the main point of this blog post is to talk about ownership. I don't like it when I don't have options as to who to trust with my data when doing something online. Email is a good example of a service that has LOTS of choices. I use gmail, but I don't have to if I don't want to. File syncing is another area that has lots of choice. I've mentioned Dropbox and Bit Torrent Sync, but there is also a ton more.<br>
 Social networking is one area that does NOT have a lot of options. I mean, yes, there are quite a few social networks, but I can't pick one and expect it to be useful unless my friends are there. This isn't the case with email (it's completely inter-operable), or file syncing (it's mostly individuals or small teams). I like the idea of diaspora and tent.io, but I'm concerned that they aren't really seeing much adoption. How come? I wish I new the answer to this. Email is basically a social network, but it is designed form the ground up to be decentralized. Facebook is the opposite of that. Was it just a matter of timing? Email was created when computers were rare, so you couldn't really trust one to be up all the time somewhere else. When facebook was launched dependable servers were not amazing. Is it just a matter of interface? A website is sort of designed to come from a single server, but there's no reason that it couldn't be like blogging.<br>
 Evernote was the cause of this post. I really really like the interface and the syncing abilities (although I REALLY wish they had a linux desktop client), but I dislike that the data has to live on Evernote's servers. I wish I could host the files on my own, or that I could encrypt my notes before they were sent to evernote. I don't mind loosing the ability to have images converted to text, and I don't think that evernote needs to index the notes to do search, since that could easily be done client side.    </p>
 
-  </article>
+    </article>
+  </div>
+  
+  <div class="post-container">
+    <header class="post-header">
+      <h1 class="post-title"><a href="/post/on-blogging.html">On Blogging</a></h1>
+      <p class="post-meta">Oct 1, 2013</p>
+    </header>
 
-</div>
-<div class="comments">
-  <div id="disqus_thread"></div>
-  <script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = 'tahnok';
+    <article class="post-content">
+      <p>﻿<br>
+So it's been quite some time since I've published anything substantive on the the web for others to read, so perhaps it is time to change that. I'd like to document my (very early) blogging setup.<br>
+For a long time now, I've been playing with places to store information. In university I used <a href="http://moinmo.in/">moin moin</a> (a wiki) to take all my class notes and the setup worked pretty well. It worked regardless of internet connection and it was really easy to share with people. I also managed to find a handy little script + exention to take notes pretty effortlessly in emacs.<br>
+But after I graduated I basically stopped using it. This was mostly due to the fact I no longer had take long form structued (and interlinked) notes.<br>
+I've also played with simplenote, but the lack of a good linux client threw me off.<br>
+At present, I am playing with evernote. I really like that they have clients for almost everything (DAMN YOU LACK OF LINUX SUPPORT!) but that is partly mitigated by two tools: <a href="http://geeknote.me/">geeknote</a>, and <a href="https://github.com/nvbn/everpad">everpad</a><br>
+Geeknote is a command line interface for evernote and everpad adds a nice little tray icon to ubuntu and the ability to search notes from the dash. Geeknote lets me write <a href="https://gist.github.com/6772263">a little script</a> to blog from the command line.<br>
+Another awesome tool for evernote I have discovered is called <a href="http://postach.io">Postach.io</a> which is allowing me to blog from evernote and the command line thanks to geeknote.<br>
+Hopefully this is the first of more posts to come on my new blog</p>
 
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    </article>
+  </div>
+  
+
+  <div class="pagination">
+    
+      <a href="/page8" class="previous">
+        Previous
+      </a>
+    
+    <span class="page_number ">
+      Page: 9 of 9
+    </span>
+    
+      <span class="next ">Next</span>
+    
+  </div>
+
+  <p class="rss-subscribe">subscribe <a href="/feed.xml">via RSS</a></p>
+
 </div>
 
       </div>

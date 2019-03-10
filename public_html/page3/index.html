@@ -6,11 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Makerfaire Ottawa: Rule 110</title>
-  <meta name="description" content="Wooohoo! I can now officially cross something off my bucket list:">
+  <title>(Fake) Markov Chains</title>
+  <meta name="description" content="WARNING: The content contained herein may or may not be sensical. Side effects may include laughter, anger, shallow thoughts, deep thoughts and blindness. Reader discretion is advised
+">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="https://blog.tahnok.me/post/makerfaire-ottawa-rule-110.html">
+  <link rel="canonical" href="https://blog.tahnok.me/page3/">
   <link rel="alternate" type="application/rss+xml" title="(Fake) Markov Chains" href="https://blog.tahnok.me/feed.xml" />
 </head>
 
@@ -73,15 +74,17 @@
 
     <div class="page-content">
       <div class="wrapper">
-        <div class="post">
+        <div class="home">
 
-  <header class="post-header">
-    <h1 class="post-title">Makerfaire Ottawa: Rule 110</h1>
-    <p class="post-meta">Nov 11, 2015</p>
-  </header>
+  
+  <div class="post-container">
+    <header class="post-header">
+      <h1 class="post-title"><a href="/post/makerfaire-ottawa-rule-110.html">Makerfaire Ottawa: Rule 110</a></h1>
+      <p class="post-meta">Nov 11, 2015</p>
+    </header>
 
-  <article class="post-content">
-    <p>Wooohoo! I can now officially cross something off my bucket list:</p>
+    <article class="post-content">
+      <p>Wooohoo! I can now officially cross something off my bucket list:</p>
 
 <ul>
   <li>run marathon</li>
@@ -543,23 +546,510 @@ The entire project was worth it for the looks on people’s faces when they lear
 
 <p>All in all, it was totally a good idea for me to apply to makerfaire. This is one of the largest electronics projects I’ve yet completed, and I doubt I would have done it without the thought of an empty table. I guess I should start thinking about next year…</p>
 
-  </article>
+    </article>
+  </div>
+  
+  <div class="post-container">
+    <header class="post-header">
+      <h1 class="post-title"><a href="/post/chameleon-scarf.html">Chameleon Scarf</a></h1>
+      <p class="post-meta">Sep 27, 2015</p>
+    </header>
 
-</div>
-<div class="comments">
-  <div id="disqus_thread"></div>
-  <script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = 'tahnok';
+    <article class="post-content">
+      <p><img src="../images/scraf_5.jpg" alt="" /></p>
 
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+<p>This weekend Danielle and I have been working on building a scarf with LEDs in it that will match whatever colour you place against it.
+That’s right, it’s a CHAMELON SCARF.
+Here are the steps</p>
+
+<h1 id="step-0-get-inspired">Step 0: GET INSPIRED!</h1>
+
+<p>I was stumbling through the <a href="https://learn.adafruit.com/">Adafruit Learning Site</a> and I found this:</p>
+
+<p><img src="https://learn.adafruit.com/system/guides/images/000/000/280/medium800/chameleon-scarf-adafruit-thumb.jpg?1396719510" alt="" /></p>
+
+<p>ZOMG! It’s so cool! BONUS: I had all the parts just lying around at home…</p>
+
+<h1 id="step-1-gather-materials">Step 1: Gather materials</h1>
+
+<p>You will need the following:</p>
+
+<ul>
+  <li>Adafruit Flora</li>
+  <li>Sewable Neopixels</li>
+  <li>Steel thread</li>
+  <li>Conductive Fabric</li>
+  <li>Adafruit Color Sensor (TCS34725)</li>
+  <li>Clear nail polish</li>
+  <li>Fabric for a scarf</li>
+</ul>
+
+<p>You can get most of this in a single pack from Adafruit here: https://www.adafruit.com/products/1458</p>
+
+<p><img src="../images/scarf_2.jpg" alt="" /></p>
+
+<h1 id="step-2-get-sewing">Step 2: Get Sewing</h1>
+
+<p>Here’s the basic circuit diagram</p>
+
+<p><img src="../images/scarf_7.jpg" alt="" /></p>
+
+<p>We decided to go with more of a banada style scarf versus a proper loop.</p>
+
+<p><img src="../images/scarf_1.jpg" alt="" /></p>
+
+<p>The data lines for the neo pixels are actually strips of conductive fabric, rather than steel thread.</p>
+
+<h1 id="step-3-solder">Step 3: Solder!</h1>
+
+<p>I really liked the idea of using fabric snaps as shown here: https://learn.adafruit.com/flora-snaps/overview</p>
+
+<p>It’s actually pretty easy to solder, although the first few times I had too much solder on the snap and they didn’t fit well
+I even put some solder on the other half of the snaps to I could easily add and remove the colour sensor</p>
+
+<h1 id="step-4-debug">Step 4: Debug</h1>
+
+<p>Check ALL the wires.</p>
+
+<p>Do it again.</p>
+
+<h1 id="step-5-code">Step 5: Code</h1>
+
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cp">#include &lt;Wire.h&gt;</span>
+<span class="cp">#include &quot;Adafruit_TCS34725.h&quot;</span>
+<span class="cp">#include &lt;Adafruit_NeoPixel.h&gt;</span>
+
+<span class="c1">// Parameter 1 = number of pixels in strip</span>
+<span class="c1">// Parameter 2 = pin number (most are valid)</span>
+<span class="c1">// Parameter 3 = pixel type flags, add together as needed:</span>
+<span class="c1">//   NEO_RGB     Pixels are wired for RGB bitstream</span>
+<span class="c1">//   NEO_GRB     Pixels are wired for GRB bitstream</span>
+<span class="c1">//   NEO_KHZ400  400 KHz bitstream (e.g. FLORA pixels)</span>
+<span class="c1">//   NEO_KHZ800  800 KHz bitstream (e.g. High Density LED strip)</span>
+
+<span class="n">Adafruit_NeoPixel</span> <span class="n">strip</span> <span class="o">=</span> <span class="n">Adafruit_NeoPixel</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">NEO_GRB</span> <span class="o">+</span> <span class="n">NEO_KHZ800</span><span class="p">);</span>
+
+<span class="n">Adafruit_NeoPixel</span> <span class="n">onboard</span> <span class="o">=</span> <span class="n">Adafruit_NeoPixel</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="n">NEO_RGB</span> <span class="o">+</span> <span class="n">NEO_KHZ400</span><span class="p">);</span>
+
+
+<span class="c1">// our RGB -&gt; eye-recognized gamma color</span>
+<span class="n">byte</span> <span class="n">gammatable</span><span class="p">[</span><span class="mi">256</span><span class="p">];</span>
+
+
+<span class="n">Adafruit_TCS34725</span> <span class="n">tcs</span> <span class="o">=</span> <span class="n">Adafruit_TCS34725</span><span class="p">(</span><span class="n">TCS34725_INTEGRATIONTIME_50MS</span><span class="p">,</span> <span class="n">TCS34725_GAIN_4X</span><span class="p">);</span>
+
+<span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">9600</span><span class="p">);</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Color View Test!&quot;</span><span class="p">);</span>
+
+  <span class="n">strip</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+  <span class="n">strip</span><span class="p">.</span><span class="n">show</span><span class="p">();</span> <span class="c1">// Initialize all pixels to &#39;off&#39;</span>
+  <span class="n">onboard</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+  <span class="n">onboard</span><span class="p">.</span><span class="n">show</span><span class="p">();</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">tcs</span><span class="p">.</span><span class="n">begin</span><span class="p">())</span> <span class="p">{</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Found sensor&quot;</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">&quot;No TCS34725 found ... check your connections&quot;</span><span class="p">);</span>
+    <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// halt!</span>
+      <span class="n">error</span><span class="p">();</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+
+  <span class="c1">// thanks PhilB for this gamma table!</span>
+  <span class="c1">// it helps convert RGB colors to what humans see</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">256</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">float</span> <span class="n">x</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+    <span class="n">x</span> <span class="o">/=</span> <span class="mi">255</span><span class="p">;</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">pow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">);</span>
+    <span class="n">x</span> <span class="o">*=</span> <span class="mi">255</span><span class="p">;</span>
+
+    <span class="n">gammatable</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+    <span class="c1">//Serial.println(gammatable[i]);</span>
+  <span class="p">}</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//this sequence flashes the first pixel three times as a countdown to the color reading.</span>
+    <span class="n">strip</span><span class="p">.</span><span class="n">setPixelColor</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">strip</span><span class="p">.</span><span class="n">Color</span><span class="p">(</span><span class="mi">188</span><span class="p">,</span> <span class="mi">188</span><span class="p">,</span> <span class="mi">188</span><span class="p">));</span> <span class="c1">//white, but dimmer-- 255 for all three values makes it blinding!</span>
+    <span class="n">strip</span><span class="p">.</span><span class="n">show</span><span class="p">();</span>
+    <span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+    <span class="n">strip</span><span class="p">.</span><span class="n">setPixelColor</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">strip</span><span class="p">.</span><span class="n">Color</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
+    <span class="n">strip</span><span class="p">.</span><span class="n">show</span><span class="p">();</span>
+    <span class="n">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kt">uint16_t</span> <span class="n">clear</span><span class="p">,</span> <span class="n">red</span><span class="p">,</span> <span class="n">green</span><span class="p">,</span> <span class="n">blue</span><span class="p">;</span>
+
+  <span class="n">tcs</span><span class="p">.</span><span class="n">setInterrupt</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>      <span class="c1">// turn on LED</span>
+
+  <span class="n">delay</span><span class="p">(</span><span class="mi">60</span><span class="p">);</span>  <span class="c1">// takes 50ms to read</span>
+
+  <span class="n">tcs</span><span class="p">.</span><span class="n">getRawData</span><span class="p">(</span><span class="o">&amp;</span><span class="n">red</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">green</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">blue</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">clear</span><span class="p">);</span>
+
+  <span class="n">tcs</span><span class="p">.</span><span class="n">setInterrupt</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>  <span class="c1">// turn off LED</span>
+
+  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;C:</span><span class="se">\t</span><span class="s">&quot;</span><span class="p">);</span> <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">clear</span><span class="p">);</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s">R:</span><span class="se">\t</span><span class="s">&quot;</span><span class="p">);</span> <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">red</span><span class="p">);</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s">G:</span><span class="se">\t</span><span class="s">&quot;</span><span class="p">);</span> <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">green</span><span class="p">);</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s">B:</span><span class="se">\t</span><span class="s">&quot;</span><span class="p">);</span> <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">blue</span><span class="p">);</span>
+
+  <span class="c1">// Figure out some basic hex code for visualization</span>
+  <span class="kt">uint32_t</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">red</span><span class="p">;</span>
+  <span class="n">sum</span> <span class="o">+=</span> <span class="n">green</span><span class="p">;</span>
+  <span class="n">sum</span> <span class="o">+=</span> <span class="n">blue</span><span class="p">;</span>
+  <span class="n">sum</span> <span class="o">+=</span> <span class="n">clear</span><span class="p">;</span>
+  <span class="kt">float</span> <span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">;</span>
+  <span class="n">r</span> <span class="o">=</span> <span class="n">red</span><span class="p">;</span> <span class="n">r</span> <span class="o">/=</span> <span class="n">sum</span><span class="p">;</span>
+  <span class="n">g</span> <span class="o">=</span> <span class="n">green</span><span class="p">;</span> <span class="n">g</span> <span class="o">/=</span> <span class="n">sum</span><span class="p">;</span>
+  <span class="n">b</span> <span class="o">=</span> <span class="n">blue</span><span class="p">;</span> <span class="n">b</span> <span class="o">/=</span> <span class="n">sum</span><span class="p">;</span>
+  <span class="n">r</span> <span class="o">*=</span> <span class="mi">256</span><span class="p">;</span> <span class="n">g</span> <span class="o">*=</span> <span class="mi">256</span><span class="p">;</span> <span class="n">b</span> <span class="o">*=</span> <span class="mi">256</span><span class="p">;</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s">&quot;</span><span class="p">);</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">r</span><span class="p">,</span> <span class="n">HEX</span><span class="p">);</span> <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">g</span><span class="p">,</span> <span class="n">HEX</span><span class="p">);</span> <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">b</span><span class="p">,</span> <span class="n">HEX</span><span class="p">);</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">();</span>
+
+  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">r</span> <span class="p">);</span> <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot; &quot;</span><span class="p">);</span> <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">g</span><span class="p">);</span> <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot; &quot;</span><span class="p">);</span>  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">b</span> <span class="p">);</span>
+  <span class="n">colorWipe</span><span class="p">(</span><span class="n">strip</span><span class="p">.</span><span class="n">Color</span><span class="p">(</span><span class="n">gammatable</span><span class="p">[(</span><span class="kt">int</span><span class="p">)</span><span class="n">r</span><span class="p">],</span> <span class="n">gammatable</span><span class="p">[(</span><span class="kt">int</span><span class="p">)</span><span class="n">g</span><span class="p">],</span> <span class="n">gammatable</span><span class="p">[(</span><span class="kt">int</span><span class="p">)</span><span class="n">b</span><span class="p">]),</span> <span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Fill the dots one after the other with a color</span>
+<span class="kt">void</span> <span class="nf">colorWipe</span><span class="p">(</span><span class="kt">uint32_t</span> <span class="n">c</span><span class="p">,</span> <span class="kt">uint8_t</span> <span class="n">wait</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kt">uint16_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">strip</span><span class="p">.</span><span class="n">numPixels</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">strip</span><span class="p">.</span><span class="n">setPixelColor</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">c</span><span class="p">);</span>
+    <span class="n">strip</span><span class="p">.</span><span class="n">show</span><span class="p">();</span>
+    <span class="n">delay</span><span class="p">(</span><span class="n">wait</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
+
+  <span class="c1">//loop is empty because it only takes the color reading once on power up! Turn the scarf off and on again to change the color.</span>
+
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">error</span><span class="p">()</span> <span class="p">{</span>
+
+  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">&quot; :(&quot;</span><span class="p">);</span>
+  <span class="n">onboard</span><span class="p">.</span><span class="n">setPixelColor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">strip</span><span class="p">.</span><span class="n">Color</span><span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
+  <span class="n">onboard</span><span class="p">.</span><span class="n">show</span><span class="p">();</span>
+  <span class="n">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+  <span class="n">onboard</span><span class="p">.</span><span class="n">setPixelColor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+  <span class="n">onboard</span><span class="p">.</span><span class="n">show</span><span class="p">();</span>
+  <span class="n">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+<span class="p">}</span></code></pre></div>
+
+
+    </article>
+  </div>
+  
+  <div class="post-container">
+    <header class="post-header">
+      <h1 class="post-title"><a href="/post/making-pcb-not-pcp.html">making PCB (not PCP)</a></h1>
+      <p class="post-meta">Jun 20, 2015</p>
+    </header>
+
+    <article class="post-content">
+      <p>So I got something REALLY COOL this week in a purple envelope.
+That’s right I got 3 PCBs that I designed myself from Oshpark</p>
+
+<p><img src="../images/first_pcbs.jpg" alt="" /></p>
+
+<p>Aww yiss!</p>
+
+<p>Now of course, it’s actually a really simple board that I could have done without, but the point was mostly to learn how to use Eagle,
+and a PCB manufacturing service like <a href="https://oshpark.com/">OSH park</a>.</p>
+
+<p>WTF is OSH park you ask?
+It’s a PCB manufacturing service that caters to small runs.
+They get away with this by collecting submissions from lots of people and then putting all of them together on one big panel.
+It’s also pretty cheap, my boards only cost my 5$.
+Also note the sweet purple colour (that’s called the solder mask)</p>
+
+<p>The software I chose to use was Eagle, which has a free to use (not a Free as in open source though) version available.
+The pro version costs many dollars, and the free version has some limitations, but I haven’t run into any of them.
+I considered using the open source <a href="http://www.kicad-pcb.org/display/KICAD/KiCad+EDA+Software+Suite">Kicad</a>, but I found some better tutorials for Eagle (more on that later) and my local makerspace has quite a few advanced Eagle users.</p>
+
+<p>I have to give most of the credit for my amazing board design to <a href="http://sparkfun.com/">Sparkfun</a> because it was their tutorials which taught me everything I know (not that much tbh). They have a large number of random <a href="https://learn.sparkfun.com/tutorials/tags/eagle">tutorials with the eagle tag</a>, and I followed three in particular:</p>
+
+<ol>
+  <li><a href="https://learn.sparkfun.com/tutorials/how-to-install-and-setup-eagle">How to setup and install eagle</a>: more than just set up, it also does a good job giving an overview of some of the pieces of eagle</li>
+  <li><a href="https://learn.sparkfun.com/tutorials/using-eagle-schematic">Using Eagle: Schematic</a>: teaches you how to make a schematic</li>
+  <li><a href="https://learn.sparkfun.com/tutorials/using-eagle-board-layout">Using Eagle: Board Layout</a>: this one teaches you how to turn a schematic into a board layout</li>
+</ol>
+
+<p>At the end of them, you’ll have a very basic arduino board all laid out and (almost) ready to ship to OSH park.</p>
+
+<p>The tl;dr of those tutorials is this: Eagle is designed around 2 “views” schematic and layout.
+First you create a schematic which shows which parts your project uses and how they connect.
+Next you create a layout where you must place all your components and wires on the actual pcb.</p>
+
+<p>The final step is sending the board off to the “fab”.
+They seem to expect to receive everything as “gerber” files, which are basically instructions as to what should be done for each “layer” of the pcb.
+The sparkfun tutorial I walked through covered this a bit, but when I went to upload to OSH park I was missing certain pieces.
+Thankfully OSH park can handle a eagle layout files automatically.</p>
+
+<p>My first board is called <strong>ESPOWER</strong> <a href="https://github.com/tahnok/espower">eagle source files on github</a> and it’s really really (really) simple.</p>
+
+<p><img src="../images/first_pcb_schematic.png" alt="" /></p>
+
+<p>It contains:</p>
+
+<ul>
+  <li>a barrel jack for power on the left</li>
+  <li>a 4x2 set of standard 0.100” headers (like those found on an arduino) to connect to an ESP8266</li>
+  <li>a 4x1 set of headers for connecting to the ESP8266 over serial</li>
+</ul>
+
+<p>That’s all.
+My only goal is to be able to power an ESP8266 (this 3$ wifi enabled micro controlled) from a standard wallwart for a top secret project I am working on.
+I don’t actually know if I’ve succeeded in making a functioning board yet…
+I am still waiting on the parts to populate the board to arrive, but I’ve certainly learned a bunch in the process.</p>
+
+    </article>
+  </div>
+  
+  <div class="post-container">
+    <header class="post-header">
+      <h1 class="post-title"><a href="/post/blueboxer-phone-phreaking-for-phun.html">Blueboxer: phone phreaking for phun</a></h1>
+      <p class="post-meta">Jun 4, 2015</p>
+    </header>
+
+    <article class="post-content">
+      <p><img src="../images/blueboxer.png" alt="" /></p>
+
+<p>I’ve recently becoming super interested in <a href="https://en.wikipedia.org/wiki/Blue_box">Blue boxes</a>. No, I don’t mean Tardises (Tardii? Tardeese?) I mean one of the primary tools of Phone Phreaks during the 70s, 80s and early 90s. Apparently they became quiet popular after an <a href="http://www.lospadres.info/thorg/lbb.html">article in Esquire</a> in 1971.</p>
+
+<p>Blue boxes worked because the telephone companies made a huge mistake and used in-band control signals. That is to say, all the messages that accounting or routing offices used to talk to one and other were transmitted in the same band (and in the same way) as people’s voices. This meant that people could trick telephone equipment by pretending to be other phone equipment. Most famously, you could play a tone at 2600Hz and trick the receiving end of a phone call into thinking you had hung up without actually hanging up. This left the caller able to make new calls, while the billing system thought the original call was still going on. If you called a 1-800 (or some other toll free number) that meant you could talk for free!</p>
+
+<p>These days signaling of this sort happens out of band, so the study and use of blue boxes these days is mostly academic / nostalgic. Although, I did recently find <a href="http://www.projectmf.org/">Project MF</a> which is a VOIP recreation of the old phone networks. If only I had a blue box…</p>
+
+<p>Which brings me to the main point of this blog post. I’ve started <a href="https://github.com/tahnok/Blueboxer">building a software blue box for android</a>. I think it might be broken right no, but it’s been an interesting excuse to learn RxJava and to have an excuse to learn exactly how blueboxes worked.</p>
+
+<p>It turns out that the tones you need to mess with the system are called <strong>Operator Dialed Multi Frequency (MF) Tones</strong>, or just MF tones. As you might guess, they are made up of multiple frequencies, specificially 2 tones that are either 700Hz, 900Hz, 1100Hz, 1300Hz, 1500Hz or 1700Hz. Here’s a table (from wikipedia that breaks down the combinations)</p>
+
+<table class="wikitable">
+<tbody><tr>
+<td colspan="7" align="center">Operator (blue box) dialed MF tones</td>
+</tr>
+<tr>
+<th align="center">Code</th>
+<th align="center">700&nbsp;Hz</th>
+<th align="center">900&nbsp;Hz</th>
+<th align="center">1100&nbsp;Hz</th>
+<th align="center">1300&nbsp;Hz</th>
+<th align="center">1500&nbsp;Hz</th>
+<th align="center">1700&nbsp;Hz</th>
+</tr>
+<tr>
+<td align="center"><b>1</b></td>
+<td align="center">X</td>
+<td align="center">X</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td align="center"><b>2</b></td>
+<td align="center">X</td>
+<td></td>
+<td align="center">X</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td align="center"><b>3</b></td>
+<td></td>
+<td align="center">X</td>
+<td align="center">X</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td align="center"><b>4</b></td>
+<td align="center">X</td>
+<td></td>
+<td></td>
+<td align="center">X</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td align="center"><b>5</b></td>
+<td></td>
+<td align="center">X</td>
+<td></td>
+<td align="center">X</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td align="center"><b>6</b></td>
+<td></td>
+<td></td>
+<td align="center">X</td>
+<td align="center">X</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td align="center"><b>7</b></td>
+<td align="center">X</td>
+<td></td>
+<td></td>
+<td></td>
+<td align="center">X</td>
+<td></td>
+</tr>
+<tr>
+<td align="center"><b>8</b></td>
+<td></td>
+<td align="center">X</td>
+<td></td>
+<td></td>
+<td align="center">X</td>
+<td></td>
+</tr>
+<tr>
+<td align="center"><b>9</b></td>
+<td></td>
+<td></td>
+<td align="center">X</td>
+<td></td>
+<td align="center">X</td>
+<td></td>
+</tr>
+<tr>
+<td align="center"><b>0</b>/10</td>
+<td></td>
+<td></td>
+<td></td>
+<td align="center">X</td>
+<td align="center">X</td>
+<td></td>
+</tr>
+<tr>
+<td align="center">11/ST3</td>
+<td align="center">X</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td align="center">X</td>
+</tr>
+<tr>
+<td align="center">12/ST2</td>
+<td></td>
+<td align="center">X</td>
+<td></td>
+<td></td>
+<td></td>
+<td align="center">X</td>
+</tr>
+<tr>
+<td align="center"><b>KP</b></td>
+<td></td>
+<td></td>
+<td align="center">X</td>
+<td></td>
+<td></td>
+<td align="center">X</td>
+</tr>
+<tr>
+<td align="center">KP2</td>
+<td></td>
+<td></td>
+<td></td>
+<td align="center">X</td>
+<td></td>
+<td align="center">X</td>
+</tr>
+<tr>
+<td align="center"><b>ST</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td align="center">X</td>
+<td align="center">X</td>
+</tr>
+</tbody></table>
+
+<p>I was unable to find a set of tones for this anywhere on the web, so I whipped up my own using Audacity.
+Here is a <a href="https://github.com/tahnok/Blueboxer/tree/master/app/src/main/res/raw">set of 60ms long MF tones in ogg format</a>, or <a href="https://github.com/tahnok/Blueboxer/tree/master/raw_tones">the raw audacity projects</a></p>
+
+<p>Soon I will publish the app on the play store (and probably F-Droid as well), and I’ll have to see if it works with Project MF</p>
+
+<p>ps If you are looking for more retro fun times check out <a href="http://telehack.com/">Telehack</a></p>
+
+    </article>
+  </div>
+  
+  <div class="post-container">
+    <header class="post-header">
+      <h1 class="post-title"><a href="/post/building-a-watch-part-1.html">Building a Watch: Part 1</a></h1>
+      <p class="post-meta">May 1, 2015</p>
+    </header>
+
+    <article class="post-content">
+      <p>I want to build myself a watch.</p>
+
+<p>One of my goals this year is to learn more electronics, and the best way I’ve found to learn is often to have a project. For example, the <a href="http://blog.tahnok.me/post/how-to-propose-to-an-engineer">heart box</a> taught me a bunch about laser cutting and tolerances. I think a watch will be a good project because:</p>
+
+<ul>
+  <li>I currently don’t have one, but I want one</li>
+  <li>It has interesting size constraints (imposing limits is fun!)</li>
+  <li>It’ll be battery powered</li>
+  <li>Lots of room for improvements</li>
+</ul>
+
+<p>Bonus: It looks like I will probably have to make a circuit board for this! I have 0 clue on how to go about doing that yet, but this should give me a pretty good excuse.</p>
+
+<h2 id="feature-wish-list">Feature Wish List</h2>
+
+<p>I want the watch to have normal watch functions like keeping the time, having alarms and preferrably a stopwatch / timer mode.
+It would also be really cool if I could make it silent, since beeping is pretty annoying. Instead, I think I should incorporate a vibration motor.</p>
+
+<p>Eventually, I would like to have it connect to my phone / computer so it will need to have bluetooth at some point.</p>
+
+<p>Finally, it needs to look good. That means, it can’t be a 20cm tall monstrosity covered in electrical tape.</p>
+
+<h2 id="potential-parts">Potential Parts</h2>
+
+<p>I’m not entirely sure which parts I will choose yet. I’ve been drawing heavily from <a href="http://oswatch.org/">The open source watch</a> to see how such a thing <em>can</em> be made. They use a <a href="https://www.microduino.cc/module/view?id=53d7037cb6c69d00003ede53">microduino core+</a> which is really cool and super tiny! I have the most experience with Arduino (and thus AVR) chips so I will probably stick with that, although now that I think about it, it might be cool to use a Propeller because it can multi-task. The other option is to use something like the Trinket Pro (since it has a nice battery board addon) but it may prove to be too big.</p>
+
+<p>Next, I have to choose a display. After lots of googling I found the <a href="https://www.adafruit.com/product/1393">Sharp Memory Display</a> which is a cool mix of e-ink and LCD. (fun fact: it’s the <a href="https://www.ifixit.com/Teardown/Pebble+Teardown/13319">display in the pebble</a>). I don’t care much about color, so I think I will go with it despite the memory restrictions it will impose on the build.</p>
+
+<p>I don’t yet know what battery I will use, probably something from Adafruit. I’m trying to choose between a 150 mAh and a 500 mAh one.</p>
+
+<p>I <em>think</em> I need an RTC module, but it’s possible that I can get away with keeping track of time without it, and just relying on paired phone to deliver accurate time.</p>
+
+<h2 id="next-steps">Next Steps</h2>
+
+<p>I think I will order a bunch of parts to bread board this out. I need to test a bunch of things like power draw. Also probalby lots of yelling at my computer when I can’t figure out how to build a bread board.</p>
+
+    </article>
+  </div>
+  
+
+  <div class="pagination">
+    
+      <a href="/page2" class="previous">
+        Previous
+      </a>
+    
+    <span class="page_number ">
+      Page: 3 of 9
+    </span>
+    
+      <a href="/page4" class="next">Next</a>
+    
+  </div>
+
+  <p class="rss-subscribe">subscribe <a href="/feed.xml">via RSS</a></p>
+
 </div>
 
       </div>
