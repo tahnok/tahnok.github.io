@@ -63,6 +63,233 @@
   
   <div class="post-container">
     <header class="post-header">
+      <h1 class="post-title"><a href="/post/pics-from-space-n00bs-guide-to-receive-noaa-weather-satellites.html">Pictures from Space: a n00b's guide to receiving images from NOAA weather satellites</a></h1>
+      <p class="post-meta">Sep 9, 2018</p>
+    </header>
+
+    <article class="post-content">
+      <p>It had been a dream of mine for a while to receive images from space.
+I forget where I learned that you could do that, but it sounded so cool I knew I wanted to try.
+Around 2 years ago, I finally succeeded in getting images from the NOAA APT weather satellites, but I hadn’t gotten around writing up how I did that until now.</p>
+
+<p>My initial research led to lots of confusing information on many different topics.
+What images were being broadcast and how?
+What kind of antenna did I absolutely need?
+How did I get the software and configure it?
+Which were the satellites and how did I figure out when they were overhead?
+Hopefully this post will explain what you need to know and what gear you will need.</p>
+
+<p>There are 2 things you need to acquire:</p>
+
+<ol>
+  <li>A receiver</li>
+  <li>An antenna</li>
+</ol>
+
+<p>And 3 things you need to know:</p>
+
+<ol>
+  <li>How to figure out when you can receive an image from a satellite</li>
+  <li>How to set up your receiver properly</li>
+  <li>How to decode the image you receive</li>
+</ol>
+
+<p>I’m gonna focus on the cheapest / easiest setup possible because that worked for me.</p>
+
+<h2 id="background-what-is-being-transmitted-and-by-whom">Background: what is being transmitted and by whom?</h2>
+
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/c/c0/NOAA-M-01.jpg" alt="Artistic rendering of a NOAA satellite" /></p>
+
+<p>Before we jump into the details of how to receive the images, we should first talk about who is broadcasting the images and how they are encoded.</p>
+
+<p>The National Oceanic and Atmostpheric Association (NOAA) of the USA has several satellites in orbit to help them map weather.
+Three of these satellites (<a href="https://en.wikipedia.org/wiki/NOAA-15">NOAA-15</a>, <a href="https://en.wikipedia.org/wiki/NOAA-18">NOAA-18</a> and <a href="https://en.wikipedia.org/wiki/NOAA-18">NOAA-19</a>) are of interest to us because they broadcast images using <a href="https://en.wikipedia.org/wiki/Automatic_picture_transmission">Automatic Picture Transmission</a> at a frequency of 137 MHz.</p>
+
+<p>Why are they of interest?</p>
+
+<ol>
+  <li>137 MHz antennas are pretty easy to build</li>
+  <li>137 MHz receivers are really cheap</li>
+  <li>APT is an old protocol and there are lots of tools to decode it</li>
+</ol>
+
+<p>These satellites are in a sun-synchronous orbit so they are always looking at the earth with the same amount of light.
+They aren’t geostationary (unlike satelitte TV satelittes) which means they aren’t always overhead.
+That just means that we need a tool to calculate when they will be overhead based on where you are.</p>
+
+<h2 id="setup">Setup</h2>
+
+<h3 id="receiver-rtl-sdr">Receiver: RTL-SDR</h3>
+
+<p>For the receiver I am using an RTL-SDR.
+This is a device initially intended to receive European TV, but some clever hackers figured out how to turn it into a receiver across a huge range of frequencies.
+Importantly for us it can receive ~137 MHz really well, and they are SUPER cheap.
+You have a few choices for suppliers.</p>
+
+<p>You can search ebay /
+<a href="https://www.amazon.com/NooElec-NESDR-Mini-RTL2832-Antenna/dp/B00P2UOU72/">amazon</a> /
+<a href="https://www.aliexpress.com/item/USB-2-0-Software-Radio-DVB-T-RTL2832U-R820T2-SDR-Digital-TV-Receiver-Stick/32506410349.html?spm=2114.search0104.3.1.4baa4658RQzNvA&amp;ws_ab_test=searchweb0_0,searchweb201602_1_10152_10151_10065_10344_10130_10068_10547_10342_10343_10340_10548_10341_10696_10084_10083_10618_10139_10307_10059_100031_10103_10624_10623_10622_10621_10620,searchweb201603_55,ppcSwitch_5&amp;algo_expid=34c8a973-1c12-475a-a4c5-51d2d38d9ac9-0&amp;algo_pvid=34c8a973-1c12-475a-a4c5-51d2d38d9ac9&amp;priceBeautifyAB=0">aliexpress</a> /
+<a href="https://www.adafruit.com/product/1497">adafruit</a> for either RTL-SDR or RTL2832U</p>
+
+<p>This is your cheapest option, but the devices you will get here have 2 drawbacks.
+First, they need to be frequency corrected.
+This just means that if you tell the software to tune to 137 MHz, it will tune to a slightly different frequency (like 137.11MHz instead of 137.10 MHz)</p>
+
+<p>Second, you need an adapter / pigtail to connect to an antenna.
+These have a weird mini MCX connector that isn’t standard for radio gear.
+Most antennas for commercial / ham use have an SMA, BNC or UHF connector.
+Thankfully, you can buy MCX to whatever connectors on ebay / amazon / aliexpress / adafruit as well.
+Just search MCX to SMA or MCX to BNC.</p>
+
+<p>Your other option is one of the redesigned / upgraded RTL-SDRs.
+I bought one from rtl-sdr.com (a terrible name, but easy to remember the address) because it has an SMA connector and doesn’t need to be calibrated.
+Here’s a link to the rtl-sdr.com store and choose the one with the dipole antenna kit: https://www.rtl-sdr.com/buy-rtl-sdr-dvb-t-dongles/</p>
+
+<h3 id="antenna-dipole">Antenna: Dipole</h3>
+
+<p>There are plenty of better antennas for receiving satellites.
+If you have looked into weather satellite antennas, you will hear mention of <a href="https://www.youtube.com/watch?v=cjClTnZ4Xh4">the QFH or the double cross dipole</a>.
+These are better, but hard to make in terms of skill and in terms of gear required.</p>
+
+<p>Instead, I have had great luck with the simplest antenna: the dipole.</p>
+
+<p>Any dipole designed for 2m / 144 MHz should work, but if you are making your own you should tune it for 137MHz.</p>
+
+<h4 id="bunny-ears">Bunny ears</h4>
+
+<p>One way to make a dipole is to acquire a pair of old TV bunny ears or a similar device.
+That’s what I have with the rtl-sdr.com package mentioned above.
+If you can extend each side to be 52cm, you should be good to go.</p>
+
+<p><img src="../images/extended_bunny_ears.jpg" alt="extended bunny ears as dipole antenna with dog" /></p>
+
+<h4 id="homemade-dipole">Homemade dipole</h4>
+
+<p>For my first attempt, I built my own antenna.
+I did this by buying a length of the thinnest brass rod I could find that would support it’s own weight.
+I cut 2 lengths to 52cm.
+I calculated this number using this <a href="http://www.kwarc.org/ant-calc.html">online dipole calculator</a></p>
+
+<p>Next, I soldered a bit of wire to both pieces.
+Then I got a T-joint made of PVC and tapped these pieces so they were parallel to each other.</p>
+
+<p>Finally, I connected the bits of wire to one of these <a href="https://www.aliexpress.com/item/1-Set-CAT5-To-BNC-Video-And-Power-Balun-Transceiver-Connectors-Male-Female-BNC-Connector-Terminal/32813038993.html">screw terminal BNC connectors</a> that I got from Aliexpress.
+This is probably the most weird / hard to find part of this build.
+I’ve been thinking of other ways to do this, but so far ordering this and waiting the 35-50 days requried to get something from China is the easiest and the cheapest.</p>
+
+<p>Feel free to use a different connector like SMA if that makes it easier to connect it to your RTL-SDR though.</p>
+
+<p><img src="../images/apt-dipole.png" alt="homebrew dipole" /></p>
+
+<p><img src="../images/dipole_close_up.jpg" alt="homebrew dipole close up" /></p>
+
+<h3 id="finding-passes-iss-tracker">Finding passes: ISS Tracker</h3>
+
+<p>For my first attempts for figuring out when a satellite was overhead (a pass) and thus hearable, I used <a href="https://web.archive.org/web/20171226033343/http://www.wxtoimg.com:80/downloads/">wxtoimg</a>.
+We will need this software later, but if you configure your ground station location (options -&gt; ground station location), you can see a list of passes by going to file -&gt; satellite pass list…</p>
+
+<p><img src="../images/wxtoimg-menu-pass.png" alt="wxtoimg satellite pass list location in menu" /></p>
+
+<p><img src="../images/wxtoimg-passlist.png" alt="wxtoimg satellite pass list" /></p>
+
+<p>That worked OK, but I have found something better, if less free, the <a href="https://play.google.com/store/apps/details?id=com.runar.issdetector">ISS Detector Android app</a></p>
+
+<p>It’s poorly named, and a bit clunky to set up but it works really well.
+It buzzes when a pass is about to happen.
+It shows you the frequency of the satellite and it shows you were it will be coming from.</p>
+
+<p>Once you have the app installed on your phone, go to the overflow menu (the vertical …) and hit extensions and buy the Amateur Radio Satellites package.
+Next, go to filters and turn on amateur radio satellites and select the following 3 satellites:</p>
+
+<ul>
+  <li>NOAA-15</li>
+  <li>NOAA-18</li>
+  <li>NOAA-19</li>
+</ul>
+
+<p>When you see a good pass (that is something with an elevation over 30 degress, but higher is better) it’s time to find a good spot.</p>
+
+<p><img src="../images/iss_detector.png" alt="ISS detector showing passes" /></p>
+
+<p>I’ve found parks or open are really good, but any spot with a clear view of the sky that’s well away from any buildings will work.</p>
+
+<h3 id="receiving-software-sdrsharp">Receiving software: SDRSharp</h3>
+
+<p>Now that you have an antenna and a receiver, it’s time to you know… receive.</p>
+
+<p>I’m using windows, so I am using <a href="https://airspy.com/download/">SDRSharp</a> (or SDR#).</p>
+
+<p>Once you have that installed, it’s time to set it up.
+I recommend following this <a href="https://web.archive.org/web/20181114212055/https://www.rtl-sdr.com/rtl-sdr-quick-start-guide/">guide from rtl-sdr.com</a> as there are is an extra file to download and a specific way to set up the drivers on windows.</p>
+
+<p>Each satellite has a different frequency</p>
+
+<ul>
+  <li>NOAA-15: 137.620 MHz</li>
+  <li>NOAA-18: 137.913 MHz</li>
+  <li>NOAA-19: 137.100 MHz</li>
+</ul>
+
+<p>You can tune to that frequency at the top of SDRsharp</p>
+
+<p>Once you have the frequency selected, it’s time to choose the receiving mode.
+You want to use the WFM (wide FM) mode and you want to have a have a bandwidth of 55,000 Hz (55 KHz)</p>
+
+<p><img src="../images/configured_sdrsharp.png" alt="SDR sharp configured and showing download" /></p>
+
+<h3 id="decoding-wxtoimg">Decoding: WXtoImg</h3>
+
+<p>The satellites transmit images using an encoding called APT (Automatic Picture Transmission).
+If you listen to it, it sounds like repeating deet-deet deet-deet.
+You can hear a sample on the <a href="https://www.sigidwiki.com/wiki/Automatic_Picture_Transmission_(APT)">Signal Identification Wiki APT page</a></p>
+
+<p>In order to decode it, I used a program called <a href="https://web.archive.org/web/20171226033343/http://www.wxtoimg.com:80/downloads/">WXtoImg</a>.
+The original site that hosted the program is offline at the time of me writing this (August 2018), but it’s still available from archive.org</p>
+
+<p>Once you have it installed, set your ground station location (under options)</p>
+
+<p>You need a way to connect the audio output of SDRSharp to WXtoImg.
+If you are lucky, your sound card has some kind of monitor or loopback interface.
+I was not lucky, so instead I used <a href="https://www.vb-audio.com/Cable/">VB-Cable Virtual Audio Device</a>.
+Once installed, this virtual cable gives you a fake output device and a fake input device that are connected.</p>
+
+<p>I changed SDRSharp to output to “[Windows Direct Sound] CABLE Input” but “[MME] Cable Input” also worked.
+(I have no idea what the difference is)</p>
+
+<p>In WXtoImg, I changed the soundcard to use “CABLE Output” by going to options -&gt; recording options -&gt; Common Recording Options</p>
+
+<h2 id="putting-it-together-receive-pictures-from-space">Putting it together: receive PICTURES FROM SPACE</h2>
+
+<ol>
+  <li>Use ISS tracker or WXtoImg to find a good pass at a time that works for you</li>
+  <li>Get your antenna out and connected to the RTL-SDR</li>
+  <li>Launch SDRSharp and tune it to the right frequency for the satellite that will be overhead. Make sure the mode is set right (WFM with 50KHz bandwidth) and the output is set to the CABLE Input</li>
+  <li>Launch WXtoImg and make sure the soundcard is set to CABLE Output</li>
+  <li>Get WXtoImg to record by going to File -&gt; Record … -&gt; Auto Record</li>
+  <li>Watch for the APT signal in SDRSharp. You will have to zoom in a bit, but you should see a series of several spikes</li>
+  <li>Point your antenna! Try turning, tilting, or pointing the antenna so that the signal appears stronger. If you hover over the signal in SDR# it will tell you what the SNR is. I have found you need at least -25db</li>
+  <li>wait… wxtoimg has a progress bar in the bottom corner. Aim for 100%, but a partial pass still works</li>
+  <li>Stop WXtoImg (File -&gt; Stop) and check out your space picture!</li>
+</ol>
+
+<p><img src="../images/wxtoimg_and_sdr.png" alt="SDR sharp and wxtoimg decoding a signal" /></p>
+
+<h2 id="results">Results</h2>
+
+<p><img src="../images/noaa15.jpg" alt="NOAA 15 pass over PEI" />
+NOAA 15</p>
+
+<p><img src="../images/noaa18.jpg" alt="NOAA 18 pass over PEI" />
+NOAA 18</p>
+
+<p><img src="../images/noaa19.jpg" alt="NOAA 19 pass over PEI" />
+NOAA 19</p>
+
+    </article>
+  </div>
+  
+  <div class="post-container">
+    <header class="post-header">
       <h1 class="post-title"><a href="/post/toggling-pins-in-rust.html">toggling pins in rust</a></h1>
       <p class="post-meta">Jul 8, 2018</p>
     </header>
