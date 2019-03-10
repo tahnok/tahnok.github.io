@@ -83,6 +83,23 @@
   
   <div class="post-container">
     <header class="post-header">
+      <h1 class="post-title"><a href="/post/why-is-minecraft-fun%3F.html">Why is Minecraft fun?</a></h1>
+      <p class="post-meta">Apr 19, 2014</p>
+    </header>
+
+    <article class="post-content">
+      <p><a href="http://postachio-images.s3-website-us-east-1.amazonaws.com/f72f124e988b45f2872e5594525091e5/78a645de933f487f8fbca820da941b17/w600_367c1d07090c721f7fcf846f5936b25a.jpg"><img src="../images/w600_367c1d07090c721f7fcf846f5936b25a.jpg"></a><br>
+When minecraft first came out, I thought I wouldn’t enjoy playing the game because I generally didn’t enjoy open ended games. I had tried playing World of Warcraft before, but the sheer number of options open to a new player put me off. When I was playing a video game, I wanted there to be a plot, with a goal or a story or something!</p>
+<p>My attidude has shifted. Now I really enjoy the lack of structure in minecraft. The fact that it’s almost entirely open ended is pretty fun because I get to decide how to play whenever I play. Do I want to build something? Do I want to mine? Do I want to <a href="https://www.youtube.com/watch?v=7sNge0Ywz-M">construct a cpu inside of my game so I can program in my program</a>? <br>
+But how do you make a game where you can do anything fun? With self imposted limit. I choose to play in survival mode rather than in creative mode. Why would I choose to make something harder? It’s because certain kinds of fun come from doing something hard. I think an integral part of play is the challenge.<br>
+Minecraft illuminates how in all games, we impose limits on our selves. There’s a greater sense of accomplishment that comes from creating something where you had to forage all the materials your self. It's harder but it's more fun.<br>
+My problem initially with minecraft was that making up your own story is hard but because it's hard it's more fun. It forces me to be more active and creative. And I like that</p>
+
+    </article>
+  </div>
+  
+  <div class="post-container">
+    <header class="post-header">
       <h1 class="post-title"><a href="/post/adventures-in-meditation.html">Adventures in meditation</a></h1>
       <p class="post-meta">Apr 5, 2014</p>
     </header>
@@ -262,31 +279,6 @@ The first time I meditated I was in high school and it was the night before a bi
 <p>You can see that this is the intended behaviour in this test for rails: filters_test.rb</p>
 <p>That makes a lot of sense after some thought. You’d want to be able to have some before_filters run before around_filters, but before_filters to run inside of around_filters.</p>
 <p><strong>tl;dr</strong> Filters are processed in the order they are defined</p>
-
-    </article>
-  </div>
-  
-  <div class="post-container">
-    <header class="post-header">
-      <h1 class="post-title"><a href="/post/hacking-the-budweiser-red-light.html">Hacking the budweiser red light</a></h1>
-      <p class="post-meta">Nov 6, 2013</p>
-    </header>
-
-    <article class="post-content">
-      <p><strong>edit</strong>: So it turns out that I found a bug in electric imp’s software. I shouldn’t have been able to register this particular imp to my own account. I will be posting an update soon on how to replace the ID chip that is included.</p>
-<p>Shopify (where I work) happens to host the store that sells the Budweiser red light. In case you are not a hockey nut, the red light is that icon flashing red light they use to mark a goal. Budweiser sells these devices you can put up that will flash whenever a team scores a goal.</p>
-<p><a href="http://postachio-images.s3-website-us-east-1.amazonaws.com/f72f124e988b45f2872e5594525091e5/936d92e927d0845b605602dada1bd94a/w600_fca884a2a78f6e87d0b8d69456e0b9be.jpg"><img src="../images/w600_fca884a2a78f6e87d0b8d69456e0b9be.jpg"></a></p>
-<p>So it turns out that hacking the budweiser red light is remarkably simple. I don’t know if this trick works if you’ve already configured your light, because I tried hacking this one before setting up the way that budweiser recommends</p>
-<p>At the heart of the red light is this little device called an electric imp. It looks like an SD card, but actually it’s a microcontroller + wifi chip. To program the electric imp you have to “blink up" which involves installing an app on your phone and using it to setup wifi and register it to your electric imp dev account.</p>
-<p><a href="http://postachio-images.s3-website-us-east-1.amazonaws.com/f72f124e988b45f2872e5594525091e5/936d92e927d0845b605602dada1bd94a/w600_bb7ce4c568ac7765927d1f0cdac8fcee.png"><img src="../images/w600_bb7ce4c568ac7765927d1f0cdac8fcee.png"></a></p>
-<p>I’m still exploring how the light works, but I got lucky and tried to toggle pin 9, which turns out is exactly the right pin to toggle! I can’t keep the light on, or turn the buzzer on myself, but setting the pin high for 2 seconds, then setting it low again causes the light to turn on and spin for a couple of seconds and buzz (unless you turned down the volume, which I did)</p>
-<p>The electric imp consists of two pieces an “Agent" which lives in the cloud and can respond to http requests and a “device" which is the actual hardware that connects to the real world.</p>
-<p>Here’s my code for the agent:</p>
-<p><script src="https://gist.github.com/tahnok/7343067.js"></script> </p>
-<p>And here’s my code for the device</p>
-<p><script src="https://gist.github.com/tahnok/7343047.js"></script></p>
-<p>I’m probably going to write a script to poke the url whenever something interesting happens, although I’m not sure what yet. I’m also not sure how sleeping on the device works… Will it keep polling forever? Do I have to wake it up?</p>
-<p>Happy hacking! </p>
 
     </article>
   </div>

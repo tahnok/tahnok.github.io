@@ -13,6 +13,7 @@ https://blog.tahnok.me/page7/index.html
 https://blog.tahnok.me/page8/index.html
 https://blog.tahnok.me/page9/index.html
 
+https://blog.tahnok.me/post/lacc-lasercut-atx-computer-case.html
 https://blog.tahnok.me/post/pics-from-space-n00bs-guide-to-receive-noaa-weather-satellites.html
 https://blog.tahnok.me/post/toggling-pins-in-rust.html
 https://blog.tahnok.me/post/project-cerulean-box.html

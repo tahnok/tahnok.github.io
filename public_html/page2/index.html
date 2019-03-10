@@ -83,6 +83,35 @@
   
   <div class="post-container">
     <header class="post-header">
+      <h1 class="post-title"><a href="/post/cju-antenna.html">CJU Antenna</a></h1>
+      <p class="post-meta">Nov 26, 2016</p>
+    </header>
+
+    <article class="post-content">
+      <p>Ok, I know I just posted about Moxon antennas, but doing an image search for moxon antennas led me to the CJU antenna.</p>
+
+<p>Apparently CJU stands for Canary Jail Umbrella because the author of the article who made it popular constructed it out of the tubing used in canary cages (or jails) and wire from a broken antenna.
+It’s designed for use talking to satellites which I am interested in, and it’s very small and looks pretty easy to build.</p>
+
+<p>I think it’s a 2 element yagi optimized for 70cm/UHF, and it’s also known as an <a href="http://www.ea4cax.com/paginaea4cyq/Antenaioio/ioioingles.pdf">IOio</a></p>
+
+<p>It’s constructed with a rectangle of wire, and a length of wire mounted to a small boom.
+The rectangular element is driven, and the length of wire is the parasitic/reflector element.</p>
+
+<p><em>LINKS</em></p>
+
+<ul>
+  <li><a href="http://www.ea4cax.com/paginaea4cyq/cju/cjuingles.pdf">THE ‘CJU’ ANTENNA</a></li>
+  <li><a href="http://www.transmission1.net/viewtopic.php?t=17914#p147086">CJU Antenna</a></li>
+  <li><a href="http://www.ravingaboutradio.com/CJU-70cm-Antenna-Quick-and-Simple">CJU 70cm Antenna Quick and Simple</a></li>
+  <li><a href="http://www.amsat.org/?page_id=2144">Station and Operating Hints</a></li>
+</ul>
+
+    </article>
+  </div>
+  
+  <div class="post-container">
+    <header class="post-header">
       <h1 class="post-title"><a href="/post/moxon-antennas.html">Moxon antennas</a></h1>
       <p class="post-meta">Nov 26, 2016</p>
     </header>
@@ -219,110 +248,6 @@ Do something funky at the ends of the antennas (??)</p>
 <h1 id="the-weird-interactive-piece-thing">The Weird Interactive Piece Thing</h1>
 
 <p>I also have a <a href="http://blog.tahnok.me/post/makerfaire-ottawa-rule-110.html">post about last year</a>. Source code is not in git (sorry)</p>
-
-    </article>
-  </div>
-  
-  <div class="post-container">
-    <header class="post-header">
-      <h1 class="post-title"><a href="/post/bluebrim-rgb-lights-on-a-hat-with-bonus-bluetooth.html">BLUEBRIM: RGB lights on a hat with bonus bluetooth</a></h1>
-      <p class="post-meta">Dec 14, 2015</p>
-    </header>
-
-    <article class="post-content">
-      <p>I recently needed to look swanky for a 1920s themed Holiday/Christmas party and I asked myself: What’s the swankiest?</p>
-
-<p><img src="../images/bluebrim_thinking.gif" alt="gif of me thinking then light going off" /></p>
-
-<p>Of course! RGD LEDs on a hat! Controlled by Bluetooth! I shall call it… Project BLUE BRIM (because code names are awesome)</p>
-
-<h2 id="hardware">Hardware</h2>
-
-<p>A trip to the second hand store and a pair of sciscorrs to remove an unwanted bow later, I had myself a pin stripe hat like this:</p>
-
-<p><img src="../images/bluebrim_nolights.png" alt="My hat before I started" /></p>
-
-<p>next I had to acquire the rest of my materials as follows:</p>
-
-<ul>
-  <li>1 <a href="https://www.adafruit.com/products/659">Adafruit Flora</a> at room temperature</li>
-  <li>1 <a href="https://www.adafruit.com/products/2487">Flora Bluefruit LE Module</a> sifted</li>
-  <li>a <a href="https://www.adafruit.com/products/1376">34 Neopixel long strip</a> lightly buttered and cut down to size</li>
-  <li>1 Lithium Ion Batter at 3.7v. I went with this <a href="https://www.adafruit.com/products/328">2500mAh model</a>, but it’s a bit… overkill</li>
-</ul>
-
-<p>Assembly is relatively straightforward. The circuit diagram looks like this:</p>
-
-<p><img src="../images/bluebrim_circuitdiagram.jpg" alt="Hand-drawn bespoke circuit diagram" /></p>
-
-<p>Basically, the Bluetooth module is connected to the serial pins on the Flora.
-Next, the Neopixel strip connected by attaching D6 to DIN, and VBATT to VIN (and GND to GND)</p>
-
-<p>All soldered together it looks like this</p>
-
-<p><img src="../images/bluebrim_hatinside.jpg" alt="Inside of the hat" /></p>
-
-<p>I attached the LEDs to the hat by cutting a small whole with a sharp knife at the back of the hat large enough to fit the connectors.
-I then used the adhesive backing on the strip to attach it to the hat, and it seems to be holding well.
-On the top of the hat, I folded a few small strips of Gorilla tape in on itself and stuck those on the back of the flora and the ble module.
-Finally, I slipped the battery into the small inner brim, and taped it to the back side of the hat.
-When put together like this, it was actually really comfortable to wear.
-It’s a bit off balance, so I wouldn’t recommend trying any hat tricks.</p>
-
-<h2 id="software">Software</h2>
-
-<p>Writing the software for the hat was actually my favourite part.
-Step 1 was getting the bluetooth stuff wired up.
-Just like my <a href="http://blog.tahnok.me/post/makerfaire-ottawa-rule-110">last project</a> I tried to write my own bluetooth socket reading <a href="https://github.com/tahnok/BlueBrim/commit/dd293916fff1c27bf15fd0662f389c0247ae8b09">from scratch</a> but it was a bit too hacky for my liking.
-Instead, I used the packet parser that <a href="https://github.com/adafruit/Adafruit_BluefruitLE_nRF51/blob/master/examples/neopixel_picker/packetParser.cpp">adafruit provides</a>, but I made sure to study the source closely to try and pick up some tricks for next time.
-Basically, it looks like using a few nested loops and a timeout is the way to go.</p>
-
-<p>The next bit was my favourite favourite part: MAKING PRETTY LIGHT PATTERNS!</p>
-
-<p>Since I was going to use the <a href="https://play.google.com/store/apps/details?id=com.adafruit.bluefruit.le.connect">Adafruit Bluefruit LE Connect App</a> and they have a neat control pad with 8 buttons, I figured I would need 8 patterns.
-Because there were 2 sections, I decided that 4 patterns would be multi colour, and 4 patterns would use the current colour chosen with the colour picker part of the app.</p>
-
-<p>The 4 multicolour patterns are:</p>
-
-<p><a href="https://github.com/tahnok/BlueBrim/blob/master/colors.cpp#L41">SPARKLE</a> which has a single randomly coloured pixel.
-It looks like this:</p>
-
-<video loop="" muted="" width="75%" controls="" src="../images/bluebrim_sparkle.mp4"></video>
-
-<p><a href="https://github.com/tahnok/BlueBrim/blob/master/colors.cpp#L47">CYCLE</a> which fades through 256 colours, with the whole strip lit with one colour at a time.</p>
-
-<video loop="" muted="" width="75%" controls="" src="../images/bluebrim_cycle.mp4"></video>
-
-<p><a href="https://github.com/tahnok/BlueBrim/blob/master/colors.cpp#L55">RAINBOW</a> which has a continuously changing section of rainbow, where each pixel is a different colour</p>
-
-<video loop="" muted="" width="75%" controls="" src="../images/bluebrim_rainbow.mp4"></video>
-
-<p><a href="https://github.com/tahnok/BlueBrim/blob/master/colors.cpp#L62">PARTY</a> where each pixel is a random colour</p>
-
-<video loop="" muted="" width="75%" controls="" src="../images/bluebrim_party.mp4"></video>
-
-<p>The 4 single colour patterns are:</p>
-
-<p><a href="https://github.com/tahnok/BlueBrim/blob/master/colors.cpp#L70">CYLON</a> (or KITT depending on how old you are) has one pixel sliding back and forth across the front of the hat</p>
-
-<video loop="" muted="" width="75%" controls="" src="../images/bluebrim_cylon.mp4"></video>
-
-<p><a href="https://github.com/tahnok/BlueBrim/blob/master/colors.cpp#L84">SOLID</a> it’s a solid colour. What more do you want?</p>
-
-<video loop="" muted="" width="75%" controls="" src="../images/bluebrim_solid.mp4"></video>
-
-<p><a href="https://github.com/tahnok/BlueBrim/blob/master/colors.cpp#L91">PULSE</a> slowly changes the brightness from nothing, to full brightness, back down to nothing again</p>
-
-<video loop="" muted="" width="75%" controls="" src="../images/bluebrim_pulse.mp4"></video>
-
-<p><a href="https://github.com/tahnok/BlueBrim/blob/master/colors.cpp#L106">TWIST</a> has a single pixel spinning around and around (and around (and around))</p>
-
-<video loop="" muted="" width="75%" controls="" src="../images/bluebrim_twist.mp4"></video>
-
-<p>You can see my source code in it’s entireity on my <a href="https://github.com/tahnok/BlueBrim">BlueBrim repo on Github</a>, which uses some fancy multi file arduino to make it a bit easier to read.
-I hope you learned something reading this, as a thank you here is a picture of my dog wearing the miniature version of this</p>
-
-<p><img src="../images/bluebrim_ada_hat.jpg" alt="ada wearing a pretty hat" /></p>
 
     </article>
   </div>

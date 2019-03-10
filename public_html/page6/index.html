@@ -83,6 +83,60 @@
   
   <div class="post-container">
     <header class="post-header">
+      <h1 class="post-title"><a href="/post/installing-ubuntu-14.04-on-a-15%22-late-2013-macbook-pro-(with-full-disk-encryption).html">Installing Ubuntu 14.04 on a 15" late 2013 Macbook Pro (with Full Disk Encryption)</a></h1>
+      <p class="post-meta">Nov 23, 2014</p>
+    </header>
+
+    <article class="post-content">
+      <div>
+<img src="../images/w600_34605f2250c33f03d2938e26e91a3a02.png" alt="http://www.tejasbarot.com/wp-content/uploads//eIUaGXc.png" style="height: auto;"><br>
+</div>
+<div><br></div>
+<div><span>SO I've been looking but I have yet to find a sufficiently detailed guide for getting Ubuntu running on a retina macbook pro, especially one that has full disk encryption enabled. Hopefully this document will help others looking to dual boot as well as serve as a reference for me in the future when I inevitably forget all of this.</span></div>
+<div><br></div>
+<div>
+<b>BEFORE YOU DO ANYTHING YOU NEED TO HAVE A BACKUP!</b><br>
+</div>
+<div><br></div>
+<div>The first step was installing a better EFI boot loader (although I'm not sure if this step is strictly necessary anymore). In the past that would involve rEFIt, but it seems to have lots its maintainers. Instead I've gone with <a href="http://www.rodsbooks.com/refind/">rEFInd</a>. Their site is pretty 1990s, but the software itself is pretty good. I mostly just followed the instructions on their <a href="http://www.rodsbooks.com/refind/installing.html">installation page</a> and their <a href="http://www.rodsbooks.com/refind/yosemite.html">page on Yosemite</a>, although I did have to make a few changes so that booting wouldn't take 30 extra seconds. Note, I had to install rEFInd to my <a href="https://en.wikipedia.org/wiki/EFI_System_partition">ESP partition</a>
+</div>
+<div><br></div>
+<ol>
+<li>First step is to download <a href="http://sourceforge.net/projects/refind/files/0.8.3/refind-bin-0.8.3.zip/download">rEFInd</a> (version 0.8.3 as of this article) and unzip it somewhere.</li>
+<li>Now mount the ESP partition by making a new directory ( <span style="font-family: 'Andale Mono';">mkdir /Volumes/esp </span>) and then running: <span style="font-family: 'Andale Mono';">sudo mount -t msdos /dev/disk0s1 /Volumes/esp</span>
+</li>
+<li>Next cd into the directory you unzipped rEFInd and run <span style="font-family: 'Andale Mono';">./install.sh --esp</span>
+</li>
+<li>Now edit /Volumes/esp/EFI/refind/refind.conf and uncomment the line about <tt>dont_scan_volumes</tt> and change it to be <span style="font-family: 'Andale Mono';">dont_scan_volumes "foo,bar"</span>
+</li>
+<li>Next move /Volumes/esp/EFI/refind to /Volumes/esp/EFI/BOOT</li>
+<li>Finally move /Volumes/esp/EFI/BOOT/refindx64.efi (I think) to /Volumes/esp/EFI/BOOT/bootx64.efi</li>
+<li>REBOOT and enjoy your shiny FOSS boot manager</li>
+</ol>
+<div><br></div>
+<div>The next step is to format your hard drive so that it has 3 new partitions for Ubuntu. I like to use full disk encryption in linux too which means that I need a separate /boot partition in addition to / and swap (although frankly I'm not sure I need swap when I have 16GB of RAM)</div>
+<div><br></div>
+<div>BE CAREFUL HERE. I managed to bork my Mac installation by trying format my disk from the ubuntu live CD. Thankfuly I had a time machine backup.</div>
+<div><br></div>
+<div>I ended up formatting my disk to my liking by booting in to OS X's recovery mode and creating 3 new partitions. My /boot was only 1GB, swap was 16GB and I set aside about 90GB for the main installation.</div>
+<div><br></div>
+<div>Next you need to format a USB stick with the ubuntu installation image. The instructions I followed are from here: <a href="http://www.ubuntu.com/download/desktop/create-a-usb-stick-on-mac-osx">http://www.ubuntu.com/download/desktop/create-a-usb-stick-on-mac-osx</a>
+</div>
+<div><br></div>
+<div>Reboot with your newly formatted USB and select it from the options presented.</div>
+<div><br></div>
+<div>Choose 'Something else' when asked how to install ubuntu. Click on the 1 GB partition and use it as /boot. Next choose the large partition you created for linux and choose the option "use as physical volume for encryption"</div>
+<div><br></div>
+<div>Also, make sure you choose the partition you have as /boot for the installation of the boot loader. <b>YOU DO NOT WANT TO LEAVE IT AT ITS DEFAULT</b>
+</div>
+<div><br></div>
+<div>Next post I'll include information on how to configure your new dual boot computer!</div>
+
+    </article>
+  </div>
+  
+  <div class="post-container">
+    <header class="post-header">
       <h1 class="post-title"><a href="/post/intro-to-kerbal-space-program.html">Intro to Kerbal Space Program!</a></h1>
       <p class="post-meta">Nov 9, 2014</p>
     </header>
@@ -362,59 +416,6 @@
 <div><br></div>
 <div>The final interesting class of attacks is with dhclient. <span style="line-height: 1.45;">Now, when you connect your computer to a network, it sends a request out to EVERY computer asking for an IP address. Normally a DHCP server would respond to this request, and this response is used to set some environment variable before a shell script is run on the requester's machine to set ip addresses and such what. The problem here is that a malicious user could respond faster than a real DHCP server with a response that contained fields which would be put into environment variables and then GAME OVER.</span>
 </div>
-</div>
-<div><br></div>
-
-    </article>
-  </div>
-  
-  <div class="post-container">
-    <header class="post-header">
-      <h1 class="post-title"><a href="/post/make-something-(or-how-i-learned-to-stop-worrying-and-love-making-things).html">Make something (or How I learned to stop worrying and love making things)</a></h1>
-      <p class="post-meta">Sep 9, 2014</p>
-    </header>
-
-    <article class="post-content">
-      <div>
-<div>I’d like to encourage all of you (myself included) to make more things. I don’t care what kinds of things you make, but make something. You can do it by yourself, or you can work with someone else, or you can make something based on someone else’s work. Here are some suggestions of things you can make:</div>
-<div><br></div>
-<ul>
-<li>A bowl of pasta with homemade sauce and meatballs</li>
-<li>A robot that you can play catch with</li>
-<li>A story about a girl and her pet rat</li>
-<li>A webpage that generates new, exciting, and sometimes nonsensical jokes about noses</li>
-<li>An edit to wikipedia about a topic that interests you</li>
-<li>A quilt for someone you care about like a pet</li>
-</ul>
-<div>I enjoy every part/phase/stage of making.</div>
-<div><br></div>
-<div>There’s the planning stage, where you try and come with ideas, turn them around in your mind and tweak them until you can bring it into the world.</div>
-<div><br></div>
-<div>There’s the scavenging phase where you find and bring together all of the pieces/thoughts/feelings you need to make the thing inside your head(s).</div>
-<div><br></div>
-<div>There’s the doing phase, where you take something like a blank page, an existing project, or a box of parts and transform it into something new/different/better/worse than it was before</div>
-<div><br></div>
-<div>And then it starts over again. The thing you’ve made eventually changes again. Sometimes it’s entropy as it falls apart. Sometimes it’s you, coming back to tweak what you’ve created because you had another idea. Sometimes it’s teeth, because you’ve baked a delicious cake and there’s no point in letting a cake go to waste.</div>
-<div><br></div>
-<div>You’ll be able to look forward to some part of the making process, or think back to the end result and it’ll make you smile or frown or both.</div>
-<div><br></div>
-<div>If you need help making things, or want to share the things you’ve made, or you’re looking for people who like making just as much as you do, you should see if there’s a hackerspace/makerspace/sewing club/quilting mafia/organic food co-op near you and you should get involved. We humans are social creatures.</div>
-<div><br></div>
-<div><br></div>
-<div>PS</div>
-<div><br></div>
-</div>
-<div>
-<span style="font-family: 'Andale Mono';"> ____   ___  _   _ _ _____   ____  _____      _      ____ ___ ____ _  __</span>
-<div><span style="font-family: 'Andale Mono';">|  _ \ / _ \| \ | ( )_   _| | __ )| ____|    / \    |  _ \_ _/ ___| |/ /</span></div>
-<div><span style="font-family: 'Andale Mono';">| | | | | | |  \| |/  | |   |  _ \|  _|     / _ \   | | | | | |   | ' /</span></div>
-<div><span style="font-family: 'Andale Mono';">| |_| | |_| | |\  |   | |   | |_) | |___   / ___ \  | |_| | | |___| . \</span></div>
-<div><span style="font-family: 'Andale Mono';">|____/ \___/|_| \_|   |_|   |____/|_____| /_/   \_\ |____/___\____|_|\_\</span></div>
-</div>
-<div><span style="font-family: 'Andale Mono';">                                                                      </span></div>
-<div><span style="font-family: 'Andale Mono';"><br></span></div>
-<div>
-<i>(This post was also sent to the listserv on 20140908)</i><br>
 </div>
 <div><br></div>
 

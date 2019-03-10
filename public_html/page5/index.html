@@ -83,6 +83,24 @@
   
   <div class="post-container">
     <header class="post-header">
+      <h1 class="post-title"><a href="/post/how-to-read-a-texbook.html">How to read a texbook</a></h1>
+      <p class="post-meta">Feb 13, 2015</p>
+    </header>
+
+    <article class="post-content">
+      <p><img src="../images/w600_1d3087794299ca75d555e85d7c8ce1bf.jpg" border="0" width="236" style="height:auto;"><img src="../images/w600_7d5fb7a62ced7936b1df39191d17ddea.jpg" style="height: auto;"></p>
+<p>So I really like learning things. It was one of my favourite parts of university (and high school before that), so I was really missing it when I started working. I tried for a while to read things when I felt the urge, but this rarely happened. I tried enrolling in a cousera course, but it felt a bit too much like the shitty parts of school, namely I can't move at my own pace.</p>
+<p>My current system involves <a href="https://www.beeminder.com/overview">BEEMINDER</a> which is a pretty amazing tool for people like me who suck at motivating themselves. The basic idea is that you commit to some goal and beeminder makes sure that you reach it by forcing you to do a minimum amount of your goal everyday. You can do more than your goal and let it ride for a few days, but eventually you'll have to do work. If you fail, you have to pay beeminder money.</p>
+<p>I use it to make sure I do an hour a week worth of reading / working of each of my texbooks. Currently I am reading the <a href="https://mitpress.mit.edu/sicp/full-text/book/book.html">Structure and Interpretation of Programming Languages</a> (available as a <a href="https://github.com/sarabander/sicp-pdf">PDF</a> and the <a href="http://cm.bell-labs.com/cm/cs/cbook/">The C Programming Language</a>. I wanted to make sure that I really got the fundamentals of computers. C and Scheme are both early programming languages with very different philosophies. (I know that just made some of you feel old)</p>
+<p>As I go through these books, I am working through the exercises (You can follow my progress <a href="https://github.com/tahnok/c-book">here</a> and <a href="https://github.com/tahnok/sicp">here</a>). Writing actual code feels like the most important part of my attempts to learn so far. It's not enough (for me at least) to just read the information. I need to process it somehow, but I find working without direction (or feedback) tough. Thankfully you can find solutions to both SICP and the C programming language book on the web.</p>
+<p><img src="../images/w600_355cd2bd4717ead88e1b3b3a5d6865b2.jpg" style="max-width: 260px; max-height: 343px; top: 0px; left: 0px; height: auto;"></p>
+<p>So far I've only finished one book this way is <a href="http://www.nostarch.com/hacking2.htm">Hacking: the Art of Exploitation</a> which I highly recommend, even if you don't want to hack anything.</p>
+
+    </article>
+  </div>
+  
+  <div class="post-container">
+    <header class="post-header">
       <h1 class="post-title"><a href="/post/architecting-android-apps.html">Architecting Android Apps</a></h1>
       <p class="post-meta">Jan 29, 2015</p>
     </header>
@@ -313,60 +331,6 @@
 <div><br></div>
 <div><br></div>
 <div>I hope you dear reader might be inspired in your own proposals (if that's your thing) just as I was when I saw the CNC'd Iris box.</div>
-
-    </article>
-  </div>
-  
-  <div class="post-container">
-    <header class="post-header">
-      <h1 class="post-title"><a href="/post/installing-ubuntu-14.04-on-a-15%22-late-2013-macbook-pro-(with-full-disk-encryption).html">Installing Ubuntu 14.04 on a 15" late 2013 Macbook Pro (with Full Disk Encryption)</a></h1>
-      <p class="post-meta">Nov 23, 2014</p>
-    </header>
-
-    <article class="post-content">
-      <div>
-<img src="../images/w600_34605f2250c33f03d2938e26e91a3a02.png" alt="http://www.tejasbarot.com/wp-content/uploads//eIUaGXc.png" style="height: auto;"><br>
-</div>
-<div><br></div>
-<div><span>SO I've been looking but I have yet to find a sufficiently detailed guide for getting Ubuntu running on a retina macbook pro, especially one that has full disk encryption enabled. Hopefully this document will help others looking to dual boot as well as serve as a reference for me in the future when I inevitably forget all of this.</span></div>
-<div><br></div>
-<div>
-<b>BEFORE YOU DO ANYTHING YOU NEED TO HAVE A BACKUP!</b><br>
-</div>
-<div><br></div>
-<div>The first step was installing a better EFI boot loader (although I'm not sure if this step is strictly necessary anymore). In the past that would involve rEFIt, but it seems to have lots its maintainers. Instead I've gone with <a href="http://www.rodsbooks.com/refind/">rEFInd</a>. Their site is pretty 1990s, but the software itself is pretty good. I mostly just followed the instructions on their <a href="http://www.rodsbooks.com/refind/installing.html">installation page</a> and their <a href="http://www.rodsbooks.com/refind/yosemite.html">page on Yosemite</a>, although I did have to make a few changes so that booting wouldn't take 30 extra seconds. Note, I had to install rEFInd to my <a href="https://en.wikipedia.org/wiki/EFI_System_partition">ESP partition</a>
-</div>
-<div><br></div>
-<ol>
-<li>First step is to download <a href="http://sourceforge.net/projects/refind/files/0.8.3/refind-bin-0.8.3.zip/download">rEFInd</a> (version 0.8.3 as of this article) and unzip it somewhere.</li>
-<li>Now mount the ESP partition by making a new directory ( <span style="font-family: 'Andale Mono';">mkdir /Volumes/esp </span>) and then running: <span style="font-family: 'Andale Mono';">sudo mount -t msdos /dev/disk0s1 /Volumes/esp</span>
-</li>
-<li>Next cd into the directory you unzipped rEFInd and run <span style="font-family: 'Andale Mono';">./install.sh --esp</span>
-</li>
-<li>Now edit /Volumes/esp/EFI/refind/refind.conf and uncomment the line about <tt>dont_scan_volumes</tt> and change it to be <span style="font-family: 'Andale Mono';">dont_scan_volumes "foo,bar"</span>
-</li>
-<li>Next move /Volumes/esp/EFI/refind to /Volumes/esp/EFI/BOOT</li>
-<li>Finally move /Volumes/esp/EFI/BOOT/refindx64.efi (I think) to /Volumes/esp/EFI/BOOT/bootx64.efi</li>
-<li>REBOOT and enjoy your shiny FOSS boot manager</li>
-</ol>
-<div><br></div>
-<div>The next step is to format your hard drive so that it has 3 new partitions for Ubuntu. I like to use full disk encryption in linux too which means that I need a separate /boot partition in addition to / and swap (although frankly I'm not sure I need swap when I have 16GB of RAM)</div>
-<div><br></div>
-<div>BE CAREFUL HERE. I managed to bork my Mac installation by trying format my disk from the ubuntu live CD. Thankfuly I had a time machine backup.</div>
-<div><br></div>
-<div>I ended up formatting my disk to my liking by booting in to OS X's recovery mode and creating 3 new partitions. My /boot was only 1GB, swap was 16GB and I set aside about 90GB for the main installation.</div>
-<div><br></div>
-<div>Next you need to format a USB stick with the ubuntu installation image. The instructions I followed are from here: <a href="http://www.ubuntu.com/download/desktop/create-a-usb-stick-on-mac-osx">http://www.ubuntu.com/download/desktop/create-a-usb-stick-on-mac-osx</a>
-</div>
-<div><br></div>
-<div>Reboot with your newly formatted USB and select it from the options presented.</div>
-<div><br></div>
-<div>Choose 'Something else' when asked how to install ubuntu. Click on the 1 GB partition and use it as /boot. Next choose the large partition you created for linux and choose the option "use as physical volume for encryption"</div>
-<div><br></div>
-<div>Also, make sure you choose the partition you have as /boot for the installation of the boot loader. <b>YOU DO NOT WANT TO LEAVE IT AT ITS DEFAULT</b>
-</div>
-<div><br></div>
-<div>Next post I'll include information on how to configure your new dual boot computer!</div>
 
     </article>
   </div>

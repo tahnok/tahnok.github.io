@@ -83,6 +83,31 @@
   
   <div class="post-container">
     <header class="post-header">
+      <h1 class="post-title"><a href="/post/hacking-the-budweiser-red-light.html">Hacking the budweiser red light</a></h1>
+      <p class="post-meta">Nov 6, 2013</p>
+    </header>
+
+    <article class="post-content">
+      <p><strong>edit</strong>: So it turns out that I found a bug in electric imp’s software. I shouldn’t have been able to register this particular imp to my own account. I will be posting an update soon on how to replace the ID chip that is included.</p>
+<p>Shopify (where I work) happens to host the store that sells the Budweiser red light. In case you are not a hockey nut, the red light is that icon flashing red light they use to mark a goal. Budweiser sells these devices you can put up that will flash whenever a team scores a goal.</p>
+<p><a href="http://postachio-images.s3-website-us-east-1.amazonaws.com/f72f124e988b45f2872e5594525091e5/936d92e927d0845b605602dada1bd94a/w600_fca884a2a78f6e87d0b8d69456e0b9be.jpg"><img src="../images/w600_fca884a2a78f6e87d0b8d69456e0b9be.jpg"></a></p>
+<p>So it turns out that hacking the budweiser red light is remarkably simple. I don’t know if this trick works if you’ve already configured your light, because I tried hacking this one before setting up the way that budweiser recommends</p>
+<p>At the heart of the red light is this little device called an electric imp. It looks like an SD card, but actually it’s a microcontroller + wifi chip. To program the electric imp you have to “blink up" which involves installing an app on your phone and using it to setup wifi and register it to your electric imp dev account.</p>
+<p><a href="http://postachio-images.s3-website-us-east-1.amazonaws.com/f72f124e988b45f2872e5594525091e5/936d92e927d0845b605602dada1bd94a/w600_bb7ce4c568ac7765927d1f0cdac8fcee.png"><img src="../images/w600_bb7ce4c568ac7765927d1f0cdac8fcee.png"></a></p>
+<p>I’m still exploring how the light works, but I got lucky and tried to toggle pin 9, which turns out is exactly the right pin to toggle! I can’t keep the light on, or turn the buzzer on myself, but setting the pin high for 2 seconds, then setting it low again causes the light to turn on and spin for a couple of seconds and buzz (unless you turned down the volume, which I did)</p>
+<p>The electric imp consists of two pieces an “Agent" which lives in the cloud and can respond to http requests and a “device" which is the actual hardware that connects to the real world.</p>
+<p>Here’s my code for the agent:</p>
+<p><script src="https://gist.github.com/tahnok/7343067.js"></script> </p>
+<p>And here’s my code for the device</p>
+<p><script src="https://gist.github.com/tahnok/7343047.js"></script></p>
+<p>I’m probably going to write a script to poke the url whenever something interesting happens, although I’m not sure what yet. I’m also not sure how sleeping on the device works… Will it keep polling forever? Do I have to wake it up?</p>
+<p>Happy hacking! </p>
+
+    </article>
+  </div>
+  
+  <div class="post-container">
+    <header class="post-header">
       <h1 class="post-title"><a href="/post/on-ownership.html">On Ownership</a></h1>
       <p class="post-meta">Oct 6, 2013</p>
     </header>
