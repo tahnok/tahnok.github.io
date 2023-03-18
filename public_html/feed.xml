@@ -6,9 +6,9 @@
 </description>
     <link>https://blog.tahnok.me/</link>
     <atom:link href="https://blog.tahnok.me/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 23 Mar 2019 12:57:47 -0400</pubDate>
-    <lastBuildDate>Sat, 23 Mar 2019 12:57:47 -0400</lastBuildDate>
-    <generator>Jekyll v2.5.3</generator>
+    <pubDate>Sat, 18 Mar 2023 17:06:00 -0400</pubDate>
+    <lastBuildDate>Sat, 18 Mar 2023 17:06:00 -0400</lastBuildDate>
+    <generator>Jekyll v3.9.3</generator>
     
       <item>
         <title>LACC: Lasercut ATX Computer Case</title>
@@ -92,7 +92,7 @@ Ollie Keattch&lt;/li&gt;
       </item>
     
       <item>
-        <title>Pictures from Space: a n00b&#39;s guide to receiving images from NOAA weather satellites</title>
+        <title>Pictures from Space: a n00b's guide to receiving images from NOAA weather satellites</title>
         <description>&lt;p&gt;It had been a dream of mine for a while to receive images from space.
 I forget where I learned that you could do that, but it sounded so cool I knew I wanted to try.
 Around 2 years ago, I finally succeeded in getting images from the NOAA APT weather satellites, but I hadn’t gotten around writing up how I did that until now.&lt;/p&gt;
@@ -332,7 +332,7 @@ I should have just tried that code directly, but I checked the docs first and go
 The LED uses a &lt;a href=&quot;https://docs.rs/stm32f30x-hal/0.2.0/stm32f30x_hal/gpio/gpioe/struct.PEx.html&quot;&gt;PEx type&lt;/a&gt; which implements &lt;a href=&quot;https://docs.rs/embedded-hal/0.2.0/embedded_hal/digital/trait.OutputPin.html&quot;&gt;OutputPin&lt;/a&gt; but somehow I missed that.
 Instead, I was looking at the &lt;a href=&quot;https://docs.rs/stm32f30x-hal/0.2.0/stm32f30x_hal/gpio/struct.Output.html&quot;&gt;Output&lt;/a&gt; type which didn’t seem to have any methods associated with it…&lt;/p&gt;
 
-&lt;p&gt;Anyway, the end result is that if you have an &lt;code&gt;OutputPin&lt;/code&gt; you can call &lt;code&gt;set_high&lt;/code&gt; and &lt;code&gt;set_low&lt;/code&gt;.
+&lt;p&gt;Anyway, the end result is that if you have an &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;OutputPin&lt;/code&gt; you can call &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;set_high&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;set_low&lt;/code&gt;.
 OutputPin comes from &lt;a href=&quot;https://docs.rs/embedded-hal/0.2.1/embedded_hal/&quot;&gt;embedded_hal&lt;/a&gt; which should theoretically work on all embedded rust targets!&lt;/p&gt;
 </description>
         <pubDate>Sun, 08 Jul 2018 12:07:44 -0400</pubDate>
@@ -363,17 +363,17 @@ See the &lt;a href=&quot;https://docs.rs/f3/0.6.1/f3/&quot;&gt;f3 crate&lt;/a&gt
 
 &lt;p&gt;I wanted to write up some quick notes of things I learned getting &lt;a href=&quot;https://github.com/tahnok/cerulean_box&quot;&gt;cerulean box&lt;/a&gt; blinking.&lt;/p&gt;
 
-&lt;p&gt;Step 1 was to create a new rust project and add the f3 dependency. After that, I copied the &lt;a href=&quot;https://docs.rs/f3/0.6.1/f3/examples/_03_blinky/index.html&quot;&gt;blinky.rs&lt;/a&gt; to my project as &lt;code&gt;main.rs&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Step 1 was to create a new rust project and add the f3 dependency. After that, I copied the &lt;a href=&quot;https://docs.rs/f3/0.6.1/f3/examples/_03_blinky/index.html&quot;&gt;blinky.rs&lt;/a&gt; to my project as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;main.rs&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;Next I had to add a few more dependencies, &lt;code&gt;cortex-m&lt;/code&gt;, &lt;code&gt;cortex-m-rt&lt;/code&gt; and &lt;code&gt;panic-semihosting&lt;/code&gt;.
-This was enough to get rust complaining about an &lt;code&gt;eh_personality&lt;/code&gt;.
+&lt;p&gt;Next I had to add a few more dependencies, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cortex-m&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cortex-m-rt&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;panic-semihosting&lt;/code&gt;.
+This was enough to get rust complaining about an &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;eh_personality&lt;/code&gt;.
 No idea what that was, but I made it go away by copy the contents of the f3 project’s &lt;a href=&quot;https://github.com/tahnok/cerulean_box/blob/de742b6a597fae6d8a96af6cb5bcddff1af15a99/.cargo/config&quot;&gt;.cargo/config&lt;/a&gt;.
-As far as I can tell, this species the target architecture as being &lt;code&gt;thumbv7em-none-eabihf&lt;/code&gt; which is ARM (thumbv7 specificall), with no OS and support for hard float.&lt;/p&gt;
+As far as I can tell, this species the target architecture as being &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;thumbv7em-none-eabihf&lt;/code&gt; which is ARM (thumbv7 specificall), with no OS and support for hard float.&lt;/p&gt;
 
 &lt;p&gt;That was enough to get things compiling, but then gdb would start…
 In the f3 example, I was able to type continue but all gdb could do was disassemble main.
 It turns out I also needed to copy &lt;a href=&quot;https://github.com/tahnok/cerulean_box/blob/de742b6a597fae6d8a96af6cb5bcddff1af15a99/.gdbinit&quot;&gt;.gdbinit&lt;/a&gt;.
-I believe this works because I have &lt;code&gt;set auto-load safe-path /&lt;/code&gt; in &lt;code&gt;~/.gdbinit&lt;/code&gt;.&lt;/p&gt;
+I believe this works because I have &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;set auto-load safe-path /&lt;/code&gt; in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;~/.gdbinit&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;After that, I get blinky leds!&lt;/p&gt;
 

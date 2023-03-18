@@ -1,17 +1,17 @@
 https://blog.tahnok.me/about/
 https://blog.tahnok.me/archive/
 https://blog.tahnok.me/feed.xml
-https://blog.tahnok.me/index.html
+https://blog.tahnok.me/
 https://blog.tahnok.me/css/main.css
 https://blog.tahnok.me/sitemap.txt
-https://blog.tahnok.me/page2/index.html
-https://blog.tahnok.me/page3/index.html
-https://blog.tahnok.me/page4/index.html
-https://blog.tahnok.me/page5/index.html
-https://blog.tahnok.me/page6/index.html
-https://blog.tahnok.me/page7/index.html
-https://blog.tahnok.me/page8/index.html
-https://blog.tahnok.me/page9/index.html
+https://blog.tahnok.me/page2/
+https://blog.tahnok.me/page3/
+https://blog.tahnok.me/page4/
+https://blog.tahnok.me/page5/
+https://blog.tahnok.me/page6/
+https://blog.tahnok.me/page7/
+https://blog.tahnok.me/page8/
+https://blog.tahnok.me/page9/
 
 https://blog.tahnok.me/post/lacc-lasercut-atx-computer-case.html
 https://blog.tahnok.me/post/pics-from-space-n00bs-guide-to-receive-noaa-weather-satellites.html
@@ -38,7 +38,7 @@ https://blog.tahnok.me/post/architecting-android-apps.html
 https://blog.tahnok.me/post/my-first-experience-being-a-dungeon-master.html
 https://blog.tahnok.me/post/book-recommendations-from-2014.html
 https://blog.tahnok.me/post/how-to-propose-to-an-engineer.html
-https://blog.tahnok.me/post/installing-ubuntu-14.04-on-a-15%22-late-2013-macbook-pro-(with-full-disk-encryption).html
+https://blog.tahnok.me/post/installing-ubuntu-14.04-on-a-15-late-2013-macbook-pro-(with-full-disk-encryption).html
 https://blog.tahnok.me/post/intro-to-kerbal-space-program.html
 https://blog.tahnok.me/post/solution-to-1o57's-hackaday-challenge.html
 https://blog.tahnok.me/post/nixie-tubes.html
@@ -48,7 +48,7 @@ https://blog.tahnok.me/post/defcon-22-badge-challenge-walkthrough.html
 https://blog.tahnok.me/post/laser-cut-dominion-playing-field.html
 https://blog.tahnok.me/post/a-noob's-attempt-at-the-2014-def-con-ctf-qualifiers.html
 https://blog.tahnok.me/post/knitting-with-paracord.html
-https://blog.tahnok.me/post/why-is-minecraft-fun%3F.html
+https://blog.tahnok.me/post/why-is-minecraft-fun.html
 https://blog.tahnok.me/post/adventures-in-meditation.html
 https://blog.tahnok.me/post/how-to-host-your-own-email-on-a-$15-a-month-vps-(part-1).html
 https://blog.tahnok.me/post/recover-password-on-a-headless-raspberry-pi.html

@@ -67,7 +67,7 @@
         
           
         
-          <a class="page-link" href="https://twitter.com/tahnok">@tahnok</a>
+          <a class="page-link" href="https://tiny.tilde.website/@tahnok">tahnok@tiny.tilde.town</a>
       </div>
     </nav>
 
@@ -193,42 +193,42 @@ It would also be really cool if I could make it silent, since beeping is pretty 
 
 <p>Instead, I chose to use the platform Octopress is based on: Jekyll. It produces a nice clean site of interlinked and static HTML pages (which should be easy to host). It consumes posts or pages in either markdown or html, so I can write a post however I want. It has a simple template system and a theme that fits in my head so I can make it look like how I want without throwing something at the wall.</p>
 
-<p>Important the old content was a bit tricky, but there’s a nice plugin someone wrote to import an rss feed into jekyll that you can find <a href="https://github.com/jekyll/jekyll-import">here</a>. Just run <code>jekyll import rss --source http://blog.domain</code></p>
+<p>Important the old content was a bit tricky, but there’s a nice plugin someone wrote to import an rss feed into jekyll that you can find <a href="https://github.com/jekyll/jekyll-import">here</a>. Just run <code class="language-plaintext highlighter-rouge">jekyll import rss --source http://blog.domain</code></p>
 
 <p>The only challenge I had was importing the images from the old site. I ended up writing a little script to grab a list of all the images, download them and then replace the src with a local reference. Here’s the source for that</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="nb">require</span> <span class="s1">&#39;nokogiri&#39;</span>
-<span class="nb">require</span> <span class="s1">&#39;net/http&#39;</span>
-<span class="nb">require</span> <span class="s1">&#39;pry&#39;</span>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="nb">require</span> <span class="s1">'nokogiri'</span>
+<span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="nb">require</span> <span class="s1">'pry'</span>
 
-<span class="no">Dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;octopress/source/_posts/*.html&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">file_name</span><span class="o">|</span>
-  <span class="n">file</span> <span class="o">=</span> <span class="no">File</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="s1">&#39;r+&#39;</span><span class="p">)</span>
-  <span class="n">post</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span>
-  <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span> <span class="o">=</span> <span class="n">post</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;---&quot;</span><span class="p">)</span>
+<span class="no">Dir</span><span class="p">.</span><span class="nf">glob</span><span class="p">(</span><span class="s2">"octopress/source/_posts/*.html"</span><span class="p">).</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">file_name</span><span class="o">|</span>
+  <span class="n">file</span> <span class="o">=</span> <span class="no">File</span><span class="p">.</span><span class="nf">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="s1">'r+'</span><span class="p">)</span>
+  <span class="n">post</span> <span class="o">=</span> <span class="n">file</span><span class="p">.</span><span class="nf">read</span>
+  <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span> <span class="o">=</span> <span class="n">post</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="s2">"---"</span><span class="p">)</span>
   <span class="n">doc</span> <span class="o">=</span> <span class="no">Nokogiri</span><span class="o">::</span><span class="no">HTML</span><span class="o">::</span><span class="n">fragment</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
 
-  <span class="n">doc</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s1">&#39;img&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">elm</span><span class="o">|</span>
-    <span class="n">img_elm</span> <span class="o">=</span> <span class="n">elm</span><span class="o">[</span><span class="s1">&#39;src&#39;</span><span class="o">]</span>
+  <span class="n">doc</span><span class="p">.</span><span class="nf">css</span><span class="p">(</span><span class="s1">'img'</span><span class="p">).</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">elm</span><span class="o">|</span>
+    <span class="n">img_elm</span> <span class="o">=</span> <span class="n">elm</span><span class="p">[</span><span class="s1">'src'</span><span class="p">]</span>
     <span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="n">img_elm</span><span class="p">)</span>
-    <span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;temp/&quot;</span> <span class="o">+</span> <span class="no">File</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">uri</span><span class="o">.</span><span class="n">to_s</span><span class="p">)</span>
-    <span class="k">if</span> <span class="no">File</span><span class="o">.</span><span class="n">exists?</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-      <span class="nb">puts</span> <span class="s2">&quot;skipping &quot;</span> <span class="o">+</span> <span class="n">filename</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="s2">"temp/"</span> <span class="o">+</span> <span class="no">File</span><span class="p">.</span><span class="nf">basename</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">to_s</span><span class="p">)</span>
+    <span class="k">if</span> <span class="no">File</span><span class="p">.</span><span class="nf">exists?</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+      <span class="nb">puts</span> <span class="s2">"skipping "</span> <span class="o">+</span> <span class="n">filename</span>
     <span class="k">else</span>
-      <span class="no">File</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">image</span><span class="o">|</span>
-        <span class="nb">puts</span> <span class="s2">&quot;downloading &quot;</span> <span class="o">+</span> <span class="n">img_elm</span>
-        <span class="n">image</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">uri</span><span class="p">))</span>
+      <span class="no">File</span><span class="p">.</span><span class="nf">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">'wb'</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">image</span><span class="o">|</span>
+        <span class="nb">puts</span> <span class="s2">"downloading "</span> <span class="o">+</span> <span class="n">img_elm</span>
+        <span class="n">image</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">uri</span><span class="p">))</span>
         <span class="nb">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
       <span class="k">end</span>
     <span class="k">end</span>
 
-    <span class="n">elm</span><span class="o">[</span><span class="s1">&#39;src&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;../images/&quot;</span> <span class="o">+</span> <span class="no">File</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">uri</span><span class="o">.</span><span class="n">to_s</span><span class="p">)</span>
+    <span class="n">elm</span><span class="p">[</span><span class="s1">'src'</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"../images/"</span> <span class="o">+</span> <span class="no">File</span><span class="p">.</span><span class="nf">basename</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">to_s</span><span class="p">)</span>
   <span class="k">end</span>
-  <span class="n">file</span><span class="o">.</span><span class="n">rewind</span>
-  <span class="n">file</span><span class="o">.</span><span class="n">truncate</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-  <span class="n">file</span><span class="o">.</span><span class="n">truncate</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-  <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="o">[</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">doc</span><span class="o">.</span><span class="n">to_html</span><span class="o">].</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;---&quot;</span><span class="p">))</span>
-  <span class="n">file</span><span class="o">.</span><span class="n">close</span>
-<span class="k">end</span></code></pre></div>
+  <span class="n">file</span><span class="p">.</span><span class="nf">rewind</span>
+  <span class="n">file</span><span class="p">.</span><span class="nf">truncate</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+  <span class="n">file</span><span class="p">.</span><span class="nf">truncate</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+  <span class="n">file</span><span class="p">.</span><span class="nf">write</span><span class="p">([</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">doc</span><span class="p">.</span><span class="nf">to_html</span><span class="p">].</span><span class="nf">join</span><span class="p">(</span><span class="s2">"---"</span><span class="p">))</span>
+  <span class="n">file</span><span class="p">.</span><span class="nf">close</span>
+<span class="k">end</span></code></pre></figure>
 
 <p>What’s cool is that code up there is hosted on my site! I had been using gists before, but that’s just one more thing that was outside of my control.</p>
 
@@ -269,8 +269,7 @@ It would also be really cool if I could make it silent, since beeping is pretty 
 <h2>CODE</h2>
 <p>Here's the whole thing below. Most of the code for interacting over SPI to the RTC module is from <a href="https://github.com/sparkfun/DeadOn_RTC/blob/v1.1/Libraries/DeadOn_RTC/examples/set_and_read_time/set_and_read_time.ino">Sparkfun</a>.</p>
 <p>
-<noscript><pre>400: Invalid request
-</pre></noscript><script src="https://gist.github.com/c2e2afb76edde4905fcc.js"> </script>
+<noscript><pre>400: Invalid request</pre></noscript><script src="https://gist.github.com/c2e2afb76edde4905fcc.js"> </script>
 </p>
 <p>I had some fun messing around with sprinf (it's like printf, but it fills a char array!) You can set the alarm time by modifying the values in the Alarm int array.</p>
 <h2>BUGS</h2>
@@ -307,8 +306,6 @@ It would also be really cool if I could make it silent, since beeping is pretty 
 
   <div class="wrapper">
 
-    <h2 class="footer-heading">(Fake) Markov Chains</h2>
-
     <div class="footer-col-wrapper">
       <div class="footer-col  footer-col-1">
         <ul class="contact-list">
@@ -319,34 +316,6 @@ It would also be really cool if I could make it silent, since beeping is pretty 
 
       <div class="footer-col  footer-col-2">
         <ul class="social-media-list">
-          
-          <li>
-            <a href="https://github.com/tahnok">
-              <span class="icon  icon--github">
-                <svg viewBox="0 0 16 16">
-                  <path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/>
-                </svg>
-              </span>
-
-              <span class="username">tahnok</span>
-            </a>
-          </li>
-          
-
-          
-          <li>
-            <a href="https://twitter.com/tahnok">
-              <span class="icon  icon--twitter">
-                <svg viewBox="0 0 16 16">
-                  <path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809
-                  c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/>
-                </svg>
-              </span>
-
-              <span class="username">tahnok</span>
-            </a>
-          </li>
-          
         </ul>
       </div>
 
